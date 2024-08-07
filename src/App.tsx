@@ -6,23 +6,25 @@ function App() {
   const [secret, setSecret] = useState("");
   const [userToken, setUserToken] = useState("");
   const [message, setMessage] = useState("");
+  const [secretError, setSecretError] = useState("");
 
   // Fetch the TOTP secret when the component mounts
   useEffect(() => {
     axios
-      .get("/api/generate")
+      .get("/api/v1/authen/totp/generate")
       .then((response) => {
         setSecret(response.data.secret);
       })
       .catch((error) => {
         console.error("Error fetching secret:", error);
+        setSecretError(error.message);
       });
   }, []);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     axios
-      .post("/api/verify", {
+      .post("/api/v1/authen/totp/verify", {
         token: userToken,
       })
       .then((response) => {
@@ -39,7 +41,7 @@ function App() {
 
   return (
     <div className="flex flex-col">
-      <h1 className="text-center font-bold text-2xl py-10">
+      <h1 className="text-center font-bold text-2xl py-10 mt-10">
         TOTP Authentication
       </h1>
 
@@ -52,7 +54,7 @@ function App() {
         </>
       ) : (
         <p className="text-center py-5 text-red-500">
-          can not get secret value
+          Error while getting secret value: {secretError}
         </p>
       )}
 
