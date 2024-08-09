@@ -1,30 +1,56 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import QRCode from "qrcode.react";
 import axios from "./api/axios";
+import { isAxiosError } from "axios";
 
 function App() {
   const [secret, setSecret] = useState("");
   const [userToken, setUserToken] = useState("");
   const [message, setMessage] = useState("");
   const [secretError, setSecretError] = useState("");
+  const userEmail = "example@example.com";
+  const controllerRef = useRef<AbortController | null>(null);
+  const color = message === "token is valid" ? "green" : "red";
 
   // Fetch the TOTP secret when the component mounts
   useEffect(() => {
+    if (controllerRef.current) {
+      controllerRef.current.abort();
+    }
+    const controller = new AbortController();
+    controllerRef.current = controller;
     axios
-      .get("/api/v1/authen/totp/generate")
+      .post("/api/v1/authen/totp/generate", {
+        "email": userEmail
+      }, {
+        signal: controller.signal
+      })
       .then((response) => {
         setSecret(response.data.secret);
+        console.log(response.data.secret);
       })
       .catch((error) => {
-        console.error("Error fetching secret:", error);
-        setSecretError(error.message);
+        if (isAxiosError(error) && error.code === 'ECONNABORTED') {
+          console.log('Request canceled');
+        } else {
+          console.error("Error fetching secret:", error);
+          setSecretError(error.message);
+        }
       });
+    return () => {
+      if (controllerRef.current) {
+        controllerRef.current.abort();
+      }
+    };
   }, []);
+
+
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     axios
       .post("/api/v1/authen/totp/verify", {
+        email: userEmail,
         token: userToken,
       })
       .then((response) => {
@@ -36,6 +62,7 @@ function App() {
       })
       .catch((error) => {
         console.error("Error verifying token:", error);
+        setMessage("Token is invalid");
       });
   };
 
@@ -47,9 +74,10 @@ function App() {
 
       {secret ? (
         <>
-          <p>Scan this QR code with your authenticator app:</p>
+          <p className="text-center">Scan this QR code with your authenticator app:</p>
           <QRCode
-            value={`otpauth://totp/MyApp:user@example.com?secret=${secret}&issuer=MyApp`}
+            className="mx-auto my-5"
+            value={`otpauth://totp/MyApp:${userEmail}?secret=${secret}&issuer=MyApp`}
           />
         </>
       ) : (
@@ -58,6 +86,7 @@ function App() {
         </p>
       )}
 
+      {<p style={{ color }} className="text-center col">{message}</p>}
       <form className="flex flex-col" onSubmit={handleSubmit}>
         <label htmlFor="userToken" className="flex justify-center py-5">
           Enter TOTP Token:
@@ -73,7 +102,6 @@ function App() {
         <button className="mx-auto w-1/3 bg-blue-600 text-white py-2 px-2 rounded-md hover:bg-gray-600" type="submit">Verify Token</button>
       </form>
 
-      {message && <p>{message}</p>}
     </div>
   );
 }
