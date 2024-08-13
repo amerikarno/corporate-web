@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import QRCode from "qrcode.react";
 import axios from "./api/axios";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const [secret, setSecret] = useState("");
@@ -21,22 +23,28 @@ function App() {
       });
   }, []);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    axios
+    let data = ""
+
+    await axios
       .post("/api/v1/authen/totp/verify", {
         token: userToken,
       })
       .then((response) => {
         if (response.status === 200) {
-          setMessage("token is valid");
-        } else {
-          setMessage("token is invalid");
-        }
+          console.log(response.data.message);
+          data = response.data.message
+        } 
       })
       .catch((error) => {
         console.error("Error verifying token:", error);
       });
+      setMessage(data);
+  };
+
+  const handleVerifyToken = () => {
+    toast.info(message, { position: "top-center" });
   };
 
   return (
@@ -47,8 +55,11 @@ function App() {
 
       {secret ? (
         <>
-          <p>Scan this QR code with your authenticator app:</p>
+          <p className="text-center py-5">
+            Scan this QR code with your authenticator app:
+          </p>
           <QRCode
+            className="flex justify-center mx-auto border-2 py-2 px-2 rounded-md border-gray-400"
             value={`otpauth://totp/MyApp:user@example.com?secret=${secret}&issuer=MyApp`}
           />
         </>
@@ -63,17 +74,23 @@ function App() {
           Enter TOTP Token:
         </label>
         <input
-        className="mx-auto w-1/3 border-2 py-2 px-2 rounded-md focus:border-blue-500 hover:border-blue-500 text-center my-5"
+          className="mx-auto w-1/3 border-2 py-2 px-2 rounded-md focus:border-blue-500 hover:border-blue-500 text-center my-5"
           id="userToken"
           type="text"
           value={userToken}
           onChange={(e) => setUserToken(e.target.value)}
           required
         />
-        <button className="mx-auto w-1/3 bg-blue-600 text-white py-2 px-2 rounded-md hover:bg-gray-600" type="submit">Verify Token</button>
+        <button
+          onClick={handleVerifyToken}
+          className="mx-auto w-1/3 bg-blue-600 text-white py-2 px-2 rounded-md hover:bg-gray-600"
+          type="submit"
+        >
+          Verify Token
+        </button>
       </form>
 
-      {message && <p>{message}</p>}
+      <ToastContainer />
     </div>
   );
 }
