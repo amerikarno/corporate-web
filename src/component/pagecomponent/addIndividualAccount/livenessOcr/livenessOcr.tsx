@@ -22,7 +22,7 @@ export default function Liveness() {
   const [isCenter, setIsCenter] = useState<boolean>(false);
   const [stream, setStream] = useState<MediaStream | null>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const canvasRef2 = useRef<HTMLCanvasElement>(null);
+  // const canvasRef2 = useRef<HTMLCanvasElement>(null);
   const [image, setImage] = useState<string | null | undefined>(null);
   const [actionMessage, setActionMessage] = useState<TActionMessage>({
     turnLeft: null,
@@ -40,6 +40,15 @@ export default function Liveness() {
   let isCapture = false;
 
   let customerCode = 90000001;
+
+  const windowWidth = window.innerWidth;
+  const windowHeight = window.innerHeight;
+  console.log("screen width height", windowWidth, windowHeight);
+
+  useEffect(() => {
+    console.log(image);
+    console.log("window.innerWidth", window.innerWidth);
+  }, [window.innerWidth]);
 
   useEffect(() => {
     const loadModels = async () => {
@@ -264,29 +273,44 @@ export default function Liveness() {
       detection: faceapi.FaceDetection;
     }>
   ) => {
-    // Resize canvas to match video dimensions
+    // Get the screen width and height
+    let screenWidth = windowWidth;
+    let screenHeight = windowHeight;
+    // const screenWidth = 640;
+    // const screenHeight = 480;
+    const aspectRatio = 4 / 3;
+    if (screenWidth > 640) {
+      screenWidth = 640;
+      screenHeight = 480;
+    } else {
+      screenHeight = screenWidth / aspectRatio;
+    }
+
+    console.log(screenWidth, screenHeight);
+
+    // Resize canvas to match screen dimensions
     if (videoRef && videoRef.current !== null && canvasRef.current !== null) {
       faceapi.matchDimensions(canvasRef.current, {
-        width: videoRef.current.videoWidth,
-        height: videoRef.current.videoHeight,
+        width: screenWidth,
+        height: screenHeight,
       });
     }
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext("2d");
 
     if (ctx && ctx !== null && canvas && canvas !== null) {
-      // เคลียร์กรอบก่อนวาดใหม่
+      // Clear the previous drawings
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      // วาดพื้นหลังสีทึบ
-      // ctx!.fillStyle = "rgba(0, 0, 0, 0.7)";
+
+      // Draw background
       ctx.fillStyle = "rgba(255,255, 255, 1.0)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      // วาดกรอบวงรีตรงกลางหน้าจอ
-      const centerX = canvas!.width / 2;
-      const centerY = canvas!.height / 2;
-      const ellipseWidth = canvas!.width * 0.15;
-      const ellipseHeight = canvas!.height * 0.3;
+      // Draw ellipse in the center of the screen
+      const centerX = screenWidth / 2;
+      const centerY = screenHeight / 2;
+      const ellipseWidth = screenWidth * 0.15;
+      const ellipseHeight = screenHeight * 0.3;
 
       const box = detections.detection.box;
       const faceCenterX = box.x + box.width / 2;
@@ -336,7 +360,7 @@ export default function Liveness() {
       // Reset composite mode to default
       ctx.globalCompositeOperation = "source-over";
 
-      // draw ellipse
+      // Draw ellipse border
       ctx.beginPath();
       ctx.ellipse(
         centerX,
@@ -401,7 +425,10 @@ export default function Liveness() {
   };
 
   const handleSubmit = async () => {
-    navigate("/create-job/added-individual-account/card-instructions");
+    navigate(
+      `${import.meta.env.BASE_URL}Authentication/signup/webcaminstructions`
+    );
+    // navigate("/create-job/added-individual-account/card-instructions");
   };
 
   if (!isModelsLoaded) {
@@ -409,38 +436,24 @@ export default function Liveness() {
   }
 
   return (
-    <div className="p-10">
-      <div className="relative">
+    <div className="w-[640px]">
+      <div className="relative w-fit h-[480px]">
         <video
           ref={videoRef}
           onPlay={handleVideoPlay}
-          style={{ display: isModelsLoaded ? "block" : "none" }}
+          className={`${isModelsLoaded ? "block" : "hidden"}`}
           width="640"
           height="480"
           autoPlay
           muted
         />
-
-        <canvas
-          ref={canvasRef}
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "640px",
-            height: "480px",
-          }}
-        />
-        <canvas
+      </div>
+      {/* <canvas
           ref={canvasRef2}
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "640px",
-            height: "480px",
-          }}
-        />
+          className="absolute top-0 left-0 w-[640px] h-[480px]"
+        /> */}
+      <div className="absolute top-0 left-0">
+        <canvas ref={canvasRef} className="" />
       </div>
 
       {isModelsLoaded && (
@@ -467,11 +480,75 @@ export default function Liveness() {
         </div>
       )} */}
 
-      {isModelsLoaded && image && (
+      {isModelsLoaded && (
         <div className="w-[640px] flex justify-center">
           <Button onClick={() => handleSubmit()}>Next</Button>
         </div>
       )}
+      {/* {isModelsLoaded && image && (
+        <div className="w-[640px] flex justify-center">
+          <Button onClick={() => handleSubmit()}>Next</Button>
+        </div>
+      )} */}
     </div>
+    // <div className="flex justify-center">
+    //   <div className="py-10">
+    //     <div className="w-[640px]">
+    //       <div className="relative w-fit h-[480px]">
+    //         <video
+    //           ref={videoRef}
+    //           onPlay={handleVideoPlay}
+    //           className={`${isModelsLoaded ? "block" : "hidden"}`}
+    //           width="640"
+    //           height="480"
+    //           autoPlay
+    //           muted
+    //         />
+    //       </div>
+    //       {/* <canvas
+    //       ref={canvasRef2}
+    //       className="absolute top-0 left-0 w-[640px] h-[480px]"
+    //     /> */}
+    //       <div className="absolute top-0 left-0">
+    //         <canvas ref={canvasRef} className="" />
+    //       </div>
+
+    //       {isModelsLoaded && (
+    //         <div className="py-10 w-[640px] flex justify-center text-green-500 text-xl font-bold">
+    //           {getMessage()}
+    //         </div>
+    //       )}
+
+    //       {isModelsLoaded && (
+    //         <div
+    //           className="py-10 w-[640px] flex justify-center"
+    //           onClick={() => takePhoto()}
+    //         >
+    //           <Camera className="w-10 h-10" />
+    //         </div>
+    //       )}
+
+    //       {/* {isModelsLoaded && image && (
+    //     <div className="w-1/2 pb-20">
+    //       <img src={image} alt="Screenshot" />
+    //       <div className="flex justify-center py-5">
+    //         <Button onClick={() => handleSubmit()}>Next</Button>
+    //       </div>
+    //     </div>
+    //   )} */}
+
+    //       {isModelsLoaded && (
+    //         <div className="w-[640px] flex justify-center">
+    //           <Button onClick={() => handleSubmit()}>Next</Button>
+    //         </div>
+    //       )}
+    //       {/* {isModelsLoaded && image && (
+    //     <div className="w-[640px] flex justify-center">
+    //       <Button onClick={() => handleSubmit()}>Next</Button>
+    //     </div>
+    //   )} */}
+    //     </div>
+    //   </div>
+    // </div>
   );
 }

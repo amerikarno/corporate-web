@@ -16,7 +16,7 @@ import png9 from "../assets/img/authentication/firbase/2.png";
 
 // brandlogo
 import dark from "../assets/img/brand-logos/desktop-dark.png";
-import logo from "../assets/logo.svg";
+// import logo from "../assets/logo.svg";
 import logoWhite from "../assets/logo_white.svg";
 // import logo from "../assets/img/brand-logos/desktop-logo.png";
 import toggledark from "../assets/img/brand-logos/toggle-dark.png";
@@ -276,6 +276,10 @@ import svg13 from "../assets/img/crypto-currencies/regular/Ripple.svg";
 import svg14 from "../assets/img/crypto-currencies/regular/IOTA.svg";
 import svg15 from "../assets/img/crypto-currencies/regular/Neo.svg";
 import svg16 from "../assets/img/crypto-currencies/square-color/Bitcoin.svg";
+import idOverlay from "../assets/img/crypto-currencies/ID_Card_overlay.svg";
+import idCard from "../assets/img/crypto-currencies/id_card.svg";
+import phoneIcon from "../assets/img/crypto-currencies/otp_phone.svg";
+import mailIcon from "../assets/img/crypto-currencies/otp_mail.svg";
 
 const ALLImages = (img: string) => {
   const i: any = {
@@ -500,13 +504,17 @@ const ALLImages = (img: string) => {
 
     gif,
     dark,
-    logo,
+    // logo,
     logoWhite,
     toggledark,
     toggledark1,
     togglelogo,
     landingbanner,
     desktoplight,
+    idOverlay,
+    phoneIcon,
+    mailIcon,
+    idCard,
   };
   return i[img];
 };

@@ -56,6 +56,8 @@ import SuitTestFatca from "./component/pagecomponent/addIndividualAccount/suitTe
 import IdentityVerification from "./component/pagecomponent/addIndividualAccount/identityVerification/identityVerification";
 import Liveness from "./component/pagecomponent/addIndividualAccount/livenessOcr/livenessOcr";
 import { OtpEmailConfirm } from "./component/pagecomponent/addIndividualAccount/otpEmailConfirm/otpEmailConfirm";
+import { CardWebcamInstructions } from "./component/pagecomponent/addIndividualAccount/livenessOcr/cardScan/webCamInstructions";
+import IDCardCapture from "./component/pagecomponent/addIndividualAccount/livenessOcr/cardScan/idCardCapture";
 
 let helmetContext = {};
 
@@ -267,20 +269,6 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
                   }Authentication/signup/suittestfatca`}
                   element={<SuitTestFatca />}
                 />
-                
-                <Route
-                  path={`${
-                    import.meta.env.BASE_URL
-                  }Authentication/signup/identityverification`}
-                  element={<IdentityVerification />}
-                />
-
-                <Route
-                  path={`${
-                    import.meta.env.BASE_URL
-                  }Authentication/signup/livenessocr`}
-                  element={<Liveness />}
-                />
 
                 <Route
                   path={`${
@@ -289,6 +277,31 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
                   element={<OtpEmailConfirm />}
                 />
 
+                <Route
+                  path={`${
+                    import.meta.env.BASE_URL
+                  }Authentication/signup/livenessocr`}
+                  element={<Liveness />}
+                />
+                <Route
+                  path={`${
+                    import.meta.env.BASE_URL
+                  }Authentication/signup/webcaminstructions`}
+                  element={<CardWebcamInstructions />}
+                />
+                <Route
+                  path={`${
+                    import.meta.env.BASE_URL
+                  }Authentication/signup/cardcapture`}
+                  element={<IDCardCapture />}
+                />
+
+                <Route
+                  path={`${
+                    import.meta.env.BASE_URL
+                  }Authentication/signup/identityverification`}
+                  element={<IdentityVerification />}
+                />
 
                 <Route
                   path={`${

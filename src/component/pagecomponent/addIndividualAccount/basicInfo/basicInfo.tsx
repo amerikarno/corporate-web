@@ -20,21 +20,12 @@ import {
 import { basicInfoSchema, TBasicInfo } from "./constant/schemas";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import PageHeader from "@/layout/layoutsection/pageHeader/pageHeader";
-import toast,{ Toaster ,ToasterProps } from 'react-hot-toast';
 
-const ErrorNotify = (): void => {
-  const options: ToasterProps = {
-    reverseOrder: false,
-  };
-  
-  toast.error("Please finish the form first,", options);
-};
 export default function BasicInfo() {
   // if (!isAllowedPage(2002)) {
   //   return <UnAuthorize />;
   // }
-  
+
   const navigate = useNavigate();
   const [radioAddressValue, setRadioAddressValue] = useState("radio-2");
   const [radioWorkValue, setRadioWorkValue] = useState("radio-5");
@@ -89,9 +80,9 @@ export default function BasicInfo() {
     }
   }, [currentOccupation]);
 
-  useEffect(()=>{
-    setAddBankValue("radio-7")
-  },[])
+  useEffect(() => {
+    setAddBankValue("radio-7");
+  }, []);
 
   const onSubmit = (data: TBasicInfo) => {
     let prebody = {
@@ -139,7 +130,7 @@ export default function BasicInfo() {
       pageID: 300,
     };
     console.log(body);
-    navigate("/create-job/added-individual-account/suittestfatca");
+    navigate(`${import.meta.env.BASE_URL}Authentication/signup/suittestfatca`);
   };
 
   const handleAddressRadioChange = (value: string) => {
@@ -157,13 +148,12 @@ export default function BasicInfo() {
   };
 
   return (
-    <div className="p-8">
-      <PageHeader currentpage="กรอกข้อมูลส่วนตัว" activepage="Basic Info" mainpage="Suite Test" />
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
-        <div className="box">
+    <div className="p-4 flex justify-center">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-8 p-4 w-1/2">
+        <Card className="">
           <CardContent>
             <div className="p-4 space-y-4">
-              <div className="box-header flex gap-2 items-center text-xl">
+              <div className="flex gap-2 items-center text-[25px]">
                 <TiHome />
                 ที่อยู่บัตรประชาชน
               </div>
@@ -172,23 +162,18 @@ export default function BasicInfo() {
                   <div className={`w-1/2`}>
                     <Input
                       type="text"
-                      placeholder="Address Number"
+                      label="Address Number"
                       id="addressNoIDCard"
                       {...register("registeredAddress.homeNumber")}
                       className={
                         "block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border border-gray-600 appearance-none dark:text-white dark:border-gray-500 dark:focus:border-gray-500 focus:outline-none focus:ring-0 focus:border-gray-600 peer"
                       }
                     />
-                    {errors.registeredAddress?.homeNumber && (
-                      <span className="text-red-500">
-                        {errors.registeredAddress?.homeNumber.message}
-                      </span>
-                    )}
                   </div>
                   <div className="w-1/2">
                     <Input
                       type="text"
-                      placeholder="Floor"
+                      label="Floor"
                       id="floorIDCard"
                       {...register("registeredAddress.villageNumber")}
                     />
@@ -203,18 +188,20 @@ export default function BasicInfo() {
                   <div className="w-1/2">
                     <Input
                       type="text"
-                      placeholder="Moo"
+                      label="Moo"
                       id="mooIDCard"
                       {...register("registeredAddress.villageName")}
                     />
                     {errors.registeredAddress?.villageName && (
-                      <span>{errors.registeredAddress?.villageName.message}</span>
+                      <span>
+                        {errors.registeredAddress?.villageName.message}
+                      </span>
                     )}
                   </div>
                   <div className="w-1/2">
                     <Input
                       type="text"
-                      placeholder="Soi"
+                      label="Soi"
                       id="soiIDCard"
                       {...register("registeredAddress.subStreetName")}
                     />
@@ -224,41 +211,34 @@ export default function BasicInfo() {
                   <div className="w-1/2">
                     <Input
                       type="text"
-                      placeholder="Road"
+                      label="Road"
                       id="roadIDCard"
                       {...register("registeredAddress.streetName")}
                     />
-                    {errors.registeredAddress?.streetName && (
-                      <span className="text-red-500">
-                        {errors.registeredAddress?.streetName.message}
-                      </span>
-                    )}
                   </div>
                   <div className="w-1/2">
                     <Input
                       type="text"
-                      placeholder="Tambon"
+                      label="Tambon"
                       id="tambonIDCard"
                       list="tambonIDCardList"
                       {...register("registeredAddress.subDistrictName")}
                     />
                     <datalist id="tambonIDCardList">
                       {geographyTypes.map((geography, index) => (
-                        <option key={index} value={geography.sub_district_name} />
+                        <option
+                          key={index}
+                          value={geography.sub_district_name}
+                        />
                       ))}
                     </datalist>
-                    {errors.registeredAddress?.subDistrictName && (
-                      <span className="text-red-500">
-                        {errors.registeredAddress?.subDistrictName.message}
-                      </span>
-                    )}
                   </div>
                 </div>
                 <div className="flex space-x-4">
                   <div className="w-1/2">
                     <Input
                       type="text"
-                      placeholder="Amphoe"
+                      label="Amphoe"
                       id="amphoeIDCard"
                       list="amphoeIDCardList"
                       {...register("registeredAddress.districtName")}
@@ -268,16 +248,11 @@ export default function BasicInfo() {
                         <option key={index} value={geography.district_name} />
                       ))}
                     </datalist>
-                    {errors.registeredAddress?.districtName && (
-                      <span className="text-red-500">
-                        {errors.registeredAddress?.districtName.message}
-                      </span>
-                    )}
                   </div>
                   <div className="w-1/2">
                     <Input
                       type="text"
-                      placeholder="Province"
+                      label="Province"
                       id="provinceIDCard"
                       list="provinceIDCardList"
                       {...register("registeredAddress.provinceName")}
@@ -287,18 +262,13 @@ export default function BasicInfo() {
                         <option key={index} value={geography.province_name} />
                       ))}
                     </datalist>
-                    {errors.registeredAddress?.provinceName && (
-                      <span className="text-red-500">
-                        {errors.registeredAddress?.provinceName.message}
-                      </span>
-                    )}
                   </div>
                 </div>
                 <div className="flex space-x-4">
                   <div className="w-1/2">
                     <Input
                       type="text"
-                      placeholder="Postal Code"
+                      label="Postal Code"
                       id="postalCodeIDCard"
                       list="postalCodeIDCardList"
                       {...register("registeredAddress.zipCode")}
@@ -308,16 +278,11 @@ export default function BasicInfo() {
                         <option key={index} value={geography.zipcode} />
                       ))}
                     </datalist>
-                    {errors.registeredAddress?.zipCode && (
-                      <span className="text-red-500">
-                        {errors.registeredAddress?.zipCode.message}
-                      </span>
-                    )}
                   </div>
                   <div className="w-1/2">
                     <Input
                       type="text"
-                      placeholder="Country"
+                      label="Country"
                       id="countryIDCard"
                       list="countriesIDCard"
                       {...register("registeredAddress.countryName")}
@@ -327,22 +292,17 @@ export default function BasicInfo() {
                         <option key={country.code} value={country.name} />
                       ))}
                     </datalist>
-                    {errors.registeredAddress?.countryName && (
-                      <span className="text-red-500">
-                        {errors.registeredAddress?.countryName.message}
-                      </span>
-                    )}
                   </div>
                 </div>
               </div>
             </div>
           </CardContent>
-        </div>
-        <div className="box p-4">
+        </Card>
+        <Card className="p-4">
           <CardContent>
             <div className="space-y-4 ">
               <div className="flex items-center justify-between">
-                <div className="box-header flex gap-2 items-center text-xl">
+                <div className="flex gap-2 items-center text-[25px]">
                   <MdLocationPin />
                   ที่อยู่ปัจจุบัน
                 </div>
@@ -381,7 +341,7 @@ export default function BasicInfo() {
                     <div className="w-1/2">
                       <Input
                         type="text"
-                        placeholder="Address Number"
+                        label="Address Number"
                         id="addressNoHome"
                         {...register("currentAddress.homeNumber")}
                       />
@@ -389,7 +349,7 @@ export default function BasicInfo() {
                     <div className="w-1/2">
                       <Input
                         type="text"
-                        placeholder="Floor"
+                        label="Floor"
                         id="floorHome"
                         {...register("currentAddress.villageNumber")}
                       />
@@ -399,7 +359,7 @@ export default function BasicInfo() {
                     <div className="w-1/2">
                       <Input
                         type="text"
-                        placeholder="Moo"
+                        label="Moo"
                         id="mooHome"
                         {...register("currentAddress.villageName")}
                       />
@@ -407,7 +367,7 @@ export default function BasicInfo() {
                     <div className="w-1/2">
                       <Input
                         type="text"
-                        placeholder="Soi"
+                        label="Soi"
                         id="soiHome"
                         {...register("currentAddress.subStreetName")}
                       />
@@ -417,7 +377,7 @@ export default function BasicInfo() {
                     <div className="w-1/2">
                       <Input
                         type="text"
-                        placeholder="Road"
+                        label="Road"
                         id="roadHome"
                         {...register("currentAddress.streetName")}
                       />
@@ -425,7 +385,7 @@ export default function BasicInfo() {
                     <div className="w-1/2">
                       <Input
                         type="text"
-                        placeholder="Tambon"
+                        label="Tambon"
                         id="tambonHome"
                         list="tambonHomeList"
                         {...register("currentAddress.subDistrictName")}
@@ -444,7 +404,7 @@ export default function BasicInfo() {
                     <div className="w-1/2">
                       <Input
                         type="text"
-                        placeholder="Amphoe"
+                        label="Amphoe"
                         id="amphoeHome"
                         list="amphoeHomeList"
                         {...register("currentAddress.districtName")}
@@ -458,7 +418,7 @@ export default function BasicInfo() {
                     <div className="w-1/2">
                       <Input
                         type="text"
-                        placeholder="Province"
+                        label="Province"
                         id="provinceHome"
                         list="provinceHomeList"
                         {...register("currentAddress.provinceName")}
@@ -474,7 +434,7 @@ export default function BasicInfo() {
                     <div className="w-1/2">
                       <Input
                         type="text"
-                        placeholder="Postal Code"
+                        label="Postal Code"
                         id="postalCodeHome"
                         list="postalCodeHomeList"
                         {...register("currentAddress.zipCode")}
@@ -488,7 +448,7 @@ export default function BasicInfo() {
                     <div className="w-1/2">
                       <Input
                         type="text"
-                        placeholder="Country"
+                        label="Country"
                         id="countryHome"
                         list="countriesHome"
                         {...register("currentAddress.countryName")}
@@ -504,11 +464,11 @@ export default function BasicInfo() {
               )}
             </div>
           </CardContent>
-        </div>
-        <div className="box p-4">
+        </Card>
+        <Card className="p-4">
           <CardContent>
             <div className="flex flex-col space-y-4">
-              <div className="box-header flex gap-2 items-center text-xl">
+              <div className="flex gap-2 items-center text-[25px]">
                 <MdLocationPin />
                 อาชีพปัจจุบันและแหล่งที่มาของเงินลงทุน
               </div>
@@ -516,12 +476,9 @@ export default function BasicInfo() {
                 <div className="flex w-1/2">
                   <select
                     {...register("occupation.education")}
-                    className={
-                      errors?.occupation?.education
-                        ? "px-2.5 pb-2.5 pt-4 cursor-pointer border border-gray-700 text-gray-600 pl-2 hover:bg-slate-100 text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full h-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-700 dark:focus:border-gray-700 !border-danger focus:border-danger focus:ring-danger" 
-                        :
-                        "px-2.5 pb-2.5 pt-4 cursor-pointer border border-gray-700 text-gray-600 pl-2 hover:bg-slate-100 text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full h-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-700 dark:focus:border-gray-700"
-                    }
+                    className="px-2.5 pb-2.5 pt-4 cursor-pointer border border-gray-700 text-gray-600 pl-2 hover:bg-slate-100
+                                text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full h-full dark:bg-gray-700 dark:border-gray-600
+                                dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-700 dark:focus:border-gray-700"
                   >
                     <option value="">ระดับการศึกษาสูงสุด</option>
                     {educationTypes.map((status) => (
@@ -534,12 +491,9 @@ export default function BasicInfo() {
                 <div className="w-1/2">
                   <select
                     {...register("occupation.sourceOfIncome")}
-                    className={
-                      errors?.occupation?.sourceOfIncome
-                        ? "px-2.5 pb-2.5 pt-4 cursor-pointer border border-gray-700 text-gray-600 pl-2 hover:bg-slate-100 text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full h-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-700 dark:focus:border-gray-700 !border-danger focus:border-danger focus:ring-danger" 
-                        :
-                        "px-2.5 pb-2.5 pt-4 cursor-pointer border border-gray-700 text-gray-600 pl-2 hover:bg-slate-100 text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full h-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-700 dark:focus:border-gray-700"
-                    }
+                    className="px-2.5 pb-2.5 pt-4 cursor-pointer border border-gray-700 text-gray-600 pl-2 hover:bg-slate-100
+                                text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full h-full dark:bg-gray-700 dark:border-gray-600
+                                dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-700 dark:focus:border-gray-700"
                   >
                     <option value="">แหล่งที่มาของเงินลงทุน</option>
                     {sourceOfIncome.map((status) => (
@@ -554,12 +508,9 @@ export default function BasicInfo() {
                 <div className="w-1/2">
                   <select
                     {...register("occupation.currentOccupation")}
-                    className={
-                      errors?.occupation?.currentOccupation
-                        ? "px-2.5 pb-2.5 pt-4 cursor-pointer border border-gray-700 text-gray-600 pl-2 hover:bg-slate-100 text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full h-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-700 dark:focus:border-gray-700 !border-danger focus:border-danger focus:ring-danger" 
-                        :
-                        "px-2.5 pb-2.5 pt-4 cursor-pointer border border-gray-700 text-gray-600 pl-2 hover:bg-slate-100 text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full h-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-700 dark:focus:border-gray-700"
-                    }
+                    className="px-2.5 pb-2.5 pt-4 cursor-pointer border border-gray-700 text-gray-600 pl-2 hover:bg-slate-100
+                                    text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full h-full dark:bg-gray-700 dark:border-gray-600
+                                    dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-700 dark:focus:border-gray-700"
                   >
                     <option value="">อาชีพปัจจุบัน</option>
                     {careerTypes.map((status) => (
@@ -569,113 +520,119 @@ export default function BasicInfo() {
                     ))}
                   </select>
                 </div>
-                {showWorkplace ? (<div className="w-1/2">
-                  <Input
-                    type="text"
-                    placeholder="ชื่อสถานที่ทำงาน"
-                    id="workPlace"
-                    {...register("occupation.officeName")}
-                  />
-                </div>) : showWorkPosition ?
-                (<div className="w-1/2">
-                  <Input
-                    type="text"
-                    placeholder="ตำแหน่งงาน"
-                    id="่jobPosition"
-                    {...register("occupation.positionName")}
-                  />
-                </div>) :
-                (<div className="w-1/2">
-                  <select
-                    {...register("occupation.salaryRange")}
-                    className={
-                      errors?.occupation?.salaryRange
-                        ? "px-2.5 pb-2.5 pt-4 cursor-pointer border border-gray-700 text-gray-600 pl-2 hover:bg-slate-100 text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full h-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-700 dark:focus:border-gray-700 !border-danger focus:border-danger focus:ring-danger" 
-                        :
-                        "px-2.5 pb-2.5 pt-4 cursor-pointer border border-gray-700 text-gray-600 pl-2 hover:bg-slate-100 text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full h-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-700 dark:focus:border-gray-700"
-                    }
-                  >
-                    <option value="">รายได้ต่อเดือน</option>
-                    {salaryRange.map((status) => (
-                      <option key={status.id} value={status.id}>
-                        {status.name}
-                      </option>
-                    ))}
-                  </select>
-                  <div></div>
-                </div>)}
+                {showWorkplace ? (
+                  <div className="w-1/2">
+                    <Input
+                      type="text"
+                      label="ชื่อสถานที่ทำงาน"
+                      id="workPlace"
+                      {...register("occupation.officeName")}
+                    />
+                  </div>
+                ) : showWorkPosition ? (
+                  <div className="w-1/2">
+                    <Input
+                      type="text"
+                      label="ตำแหน่งงาน"
+                      id="่jobPosition"
+                      {...register("occupation.positionName")}
+                    />
+                  </div>
+                ) : (
+                  <div className="w-1/2">
+                    <select
+                      {...register("occupation.salaryRange")}
+                      className="px-2.5 pb-2.5 pt-4 cursor-pointer border border-gray-700 text-gray-600 pl-2 hover:bg-slate-100
+                                        text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full h-full dark:bg-gray-700 dark:border-gray-600
+                                        dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-700 dark:focus:border-gray-700"
+                    >
+                      <option value="">รายได้ต่อเดือน</option>
+                      {salaryRange.map((status) => (
+                        <option key={status.id} value={status.id}>
+                          {status.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                )}
               </div>
               <div className="flex space-x-6">
-                {showBusinessType ? (<div className="w-1/2">
-                  <select
-                    {...register("occupation.typeOfBusiness")}
-                    className="px-2.5 pb-2.5 pt-4 cursor-pointer border border-gray-700 text-gray-600 pl-2 hover:bg-slate-100
-                                          text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full h-full dark:bg-gray-700 dark:border-gray-600
-                                          dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-700 dark:focus:border-gray-700"
-                  >
-                    <option value="">ประเภทธุระกิจ</option>
-                    {businessTypes.map((status) => (
-                      <option key={status.id} value={status.id}>
-                        {status.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>) : (!showBusinessType && !showWorkPosition && !showWorkplace) ? (<div className="w-1/2"></div>) :(<div className="w-1/2">
-                  <select
-                    {...register("occupation.salaryRange")}
-                    className={
-                      errors?.occupation?.salaryRange
-                        ? "px-2.5 pb-2.5 pt-4 cursor-pointer border border-gray-700 text-gray-600 pl-2 hover:bg-slate-100 text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full h-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-700 dark:focus:border-gray-700 !border-danger focus:border-danger focus:ring-danger" 
-                        :
-                        "px-2.5 pb-2.5 pt-4 cursor-pointer border border-gray-700 text-gray-600 pl-2 hover:bg-slate-100 text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full h-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-700 dark:focus:border-gray-700"
-                    }
-                  >
-                    <option value="">รายได้ต่อเดือน</option>
-                    {salaryRange.map((status) => (
-                      <option key={status.id} value={status.id}>
-                        {status.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>)}
-                {showWorkPosition&&showWorkplace ? (<div className="w-1/2">
-                  <Input
-                    type="text"
-                    placeholder="ตำแหน่งงาน"
-                    id="่jobPosition"
-                    {...register("occupation.positionName")}
-                  />
-                </div>) : (<div className="w-1/2"></div>)}
+                {showBusinessType ? (
+                  <div className="w-1/2">
+                    <select
+                      {...register("occupation.typeOfBusiness")}
+                      className="px-2.5 pb-2.5 pt-4 cursor-pointer border border-gray-700 text-gray-600 pl-2 hover:bg-slate-100
+                                        text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full h-full dark:bg-gray-700 dark:border-gray-600
+                                        dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-700 dark:focus:border-gray-700"
+                    >
+                      <option value="">ประเภทธุระกิจ</option>
+                      {businessTypes.map((status) => (
+                        <option key={status.id} value={status.id}>
+                          {status.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                ) : !showBusinessType && !showWorkPosition && !showWorkplace ? (
+                  <div className="w-1/2"></div>
+                ) : (
+                  <div className="w-1/2">
+                    <select
+                      {...register("occupation.salaryRange")}
+                      className="px-2.5 pb-2.5 pt-4 cursor-pointer border border-gray-700 text-gray-600 pl-2 hover:bg-slate-100
+                                        text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full h-full dark:bg-gray-700 dark:border-gray-600
+                                        dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-700 dark:focus:border-gray-700"
+                    >
+                      <option value="">รายได้ต่อเดือน</option>
+                      {salaryRange.map((status) => (
+                        <option key={status.id} value={status.id}>
+                          {status.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                )}
+                {showWorkPosition && showWorkplace ? (
+                  <div className="w-1/2">
+                    <Input
+                      type="text"
+                      label="ตำแหน่งงาน"
+                      id="่jobPosition"
+                      {...register("occupation.positionName")}
+                    />
+                  </div>
+                ) : (
+                  <div className="w-1/2"></div>
+                )}
               </div>
-              {showBusinessType && <div className="flex space-x-6">
-                <div className="w-1/2">
-                  <select
-                    {...register("occupation.salaryRange")}
-                    className={
-                      errors?.occupation?.salaryRange
-                        ? "px-2.5 pb-2.5 pt-4 cursor-pointer border border-gray-700 text-gray-600 pl-2 hover:bg-slate-100 text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full h-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-700 dark:focus:border-gray-700 !border-danger focus:border-danger focus:ring-danger" 
-                        :
-                        "px-2.5 pb-2.5 pt-4 cursor-pointer border border-gray-700 text-gray-600 pl-2 hover:bg-slate-100 text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full h-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-700 dark:focus:border-gray-700"
-                    }
-                  >
-                    <option value="">รายได้ต่อเดือน</option>
-                    {salaryRange.map((status) => (
-                      <option key={status.id} value={status.id}>
-                        {status.name}
-                      </option>
-                    ))}
-                  </select>
+              {showBusinessType && (
+                <div className="flex space-x-6">
+                  <div className="w-1/2">
+                    <select
+                      {...register("occupation.salaryRange")}
+                      className="px-2.5 pb-2.5 pt-4 cursor-pointer border border-gray-700 text-gray-600 pl-2 hover:bg-slate-100
+                                        text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full h-full dark:bg-gray-700 dark:border-gray-600
+                                        dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-700 dark:focus:border-gray-700"
+                    >
+                      <option value="">รายได้ต่อเดือน</option>
+                      {salaryRange.map((status) => (
+                        <option key={status.id} value={status.id}>
+                          {status.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className="w-1/2"></div>
                 </div>
-                <div className="w-1/2"></div>
-              </div>}
+              )}
             </div>
           </CardContent>
-        </div>
-        <div className="box p-4">
+        </Card>
+        <Card className="p-4">
           <CardContent>
             <div className="space-y-4 ">
               <div className="flex items-center justify-between">
-                <div className="box-header flex gap-2 items-center text-xl">
+                <div className="flex gap-2 items-center text-[25px]">
                   <MdLocationPin />
                   ที่ตั้งที่ทำงาน
                 </div>
@@ -719,7 +676,7 @@ export default function BasicInfo() {
                       <div className="w-1/2">
                         <Input
                           type="text"
-                          placeholder="Address Number"
+                          label="Address Number"
                           id="addressNoWork"
                           {...register("officeAddress.homeNumber")}
                         />
@@ -727,7 +684,7 @@ export default function BasicInfo() {
                       <div className="w-1/2">
                         <Input
                           type="text"
-                          placeholder="Floor"
+                          label="Floor"
                           id="floorWork"
                           {...register("officeAddress.villageNumber")}
                         />
@@ -737,7 +694,7 @@ export default function BasicInfo() {
                       <div className="w-1/2">
                         <Input
                           type="text"
-                          placeholder="Moo"
+                          label="Moo"
                           id="mooWork"
                           {...register("officeAddress.villageName")}
                         />
@@ -745,7 +702,7 @@ export default function BasicInfo() {
                       <div className="w-1/2">
                         <Input
                           type="text"
-                          placeholder="Soi"
+                          label="Soi"
                           id="soiWork"
                           {...register("officeAddress.subStreetName")}
                         />
@@ -755,7 +712,7 @@ export default function BasicInfo() {
                       <div className="w-1/2">
                         <Input
                           type="text"
-                          placeholder="Road"
+                          label="Road"
                           id="roadWork"
                           {...register("officeAddress.streetName")}
                         />
@@ -763,7 +720,7 @@ export default function BasicInfo() {
                       <div className="w-1/2">
                         <Input
                           type="text"
-                          placeholder="Tambon"
+                          label="Tambon"
                           id="tambonWork"
                           list="tambonWorkList"
                           {...register("officeAddress.subDistrictName")}
@@ -782,28 +739,34 @@ export default function BasicInfo() {
                       <div className="w-1/2">
                         <Input
                           type="text"
-                          placeholder="Amphoe"
+                          label="Amphoe"
                           id="amphoeWork"
                           list="amphoeWorkList"
                           {...register("officeAddress.districtName")}
                         />
                         <datalist id="amphoeWorkList">
                           {uniqueGeographyTypes.map((geography, index) => (
-                            <option key={index} value={geography.district_name} />
+                            <option
+                              key={index}
+                              value={geography.district_name}
+                            />
                           ))}
                         </datalist>
                       </div>
                       <div className="w-1/2">
                         <Input
                           type="text"
-                          placeholder="Province"
+                          label="Province"
                           id="provinceWork"
                           list="provinceWorkList"
                           {...register("officeAddress.provinceName")}
                         />
                         <datalist id="provinceWorkList">
                           {uniqueProvince.map((geography, index) => (
-                            <option key={index} value={geography.province_name} />
+                            <option
+                              key={index}
+                              value={geography.province_name}
+                            />
                           ))}
                         </datalist>
                       </div>
@@ -812,7 +775,7 @@ export default function BasicInfo() {
                       <div className="w-1/2">
                         <Input
                           type="text"
-                          placeholder="Postal Code"
+                          label="Postal Code"
                           id="postalCodeWork"
                           list="postalCodeWorkList"
                           {...register("officeAddress.zipCode")}
@@ -826,7 +789,7 @@ export default function BasicInfo() {
                       <div className="w-1/2">
                         <Input
                           type="text"
-                          placeholder="Country"
+                          label="Country"
                           id="countryWork"
                           list="countriesWork"
                           {...register("officeAddress.countryName")}
@@ -843,11 +806,11 @@ export default function BasicInfo() {
               )}
             </div>
           </CardContent>
-        </div>
-        <div className="box">
+        </Card>
+        <Card>
           <CardContent>
             <div className="p-4 space-y-4">
-              <div className="box-header flex gap-2 items-center text-xl">
+              <div className="flex gap-2 items-center text-[25px]">
                 วัตถุประสงค์การลงทุน
               </div>
               <div className="space-y-4 flex flex-col">
@@ -856,7 +819,7 @@ export default function BasicInfo() {
                     type="checkbox"
                     id="objectiveCheckbox-1"
                     className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500
-                                      dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                    dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                     {...register("investment.shortTermInvestment")}
                   />
                   <label htmlFor="objectiveCheckbox-1">
@@ -868,7 +831,7 @@ export default function BasicInfo() {
                     type="checkbox"
                     id="objectiveCheckbox-2"
                     className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 
-                                      dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                    dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                     {...register("investment.longTermInvestment")}
                   />
                   <label htmlFor="objectiveCheckbox-2">
@@ -880,7 +843,7 @@ export default function BasicInfo() {
                     type="checkbox"
                     id="objectiveCheckbox-3"
                     className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 
-                                      dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                    dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                     {...register("investment.taxesInvestment")}
                   />
                   <label htmlFor="objectiveCheckbox-3">เพื่อเก็งกำไร</label>
@@ -890,7 +853,7 @@ export default function BasicInfo() {
                     type="checkbox"
                     id="objectiveCheckbox-4"
                     className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 
-                                      dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                    dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                     {...register("investment.retireInvestment")}
                   />
                   <label htmlFor="objectiveCheckbox-4">เพื่อการออม</label>
@@ -899,15 +862,15 @@ export default function BasicInfo() {
               {/* {errors.register && <div>This field is required</div>} */}
             </div>
           </CardContent>
-        </div>
-        <div className="box">
+        </Card>
+        <Card>
           <CardContent>
             <div className="p-4 space-y-4">
               <div>
-                <div className="flex gap-2 items-center text-xl">
+                <div className="flex gap-2 items-center text-[25px]">
                   บัญชีธนาคารของท่าน (เพื่อใช้ในการถอนเงิน)
                 </div>
-                <div className="flex items-center text-[15px] text-gray-400 mt-4">
+                <div className="flex items-center text-[15px] text-gray-400">
                   <span className="text-red-500">*</span>
                   กรุณาระบุชื่อธนาคารก่อนกรอกชื่อสาขา
                 </div>
@@ -917,8 +880,8 @@ export default function BasicInfo() {
                   <select
                     {...register("firstBankAccount.bankName")}
                     className="px-2.5 pb-2.5 pt-4 cursor-pointer border border-gray-700 text-gray-600 pl-2 hover:bg-slate-100
-                                              text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full h-full dark:bg-gray-700 dark:border-gray-600
-                                              dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-700 dark:focus:border-gray-700"
+                                            text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full h-full dark:bg-gray-700 dark:border-gray-600
+                                            dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-700 dark:focus:border-gray-700"
                   >
                     <option value="">กรุณาเลือกธนาคาร</option>
                     {bank.map((status) => (
@@ -931,7 +894,7 @@ export default function BasicInfo() {
                 <div className="flex space-x-4">
                   <Input
                     type="text"
-                    placeholder="ชื่อสาขา"
+                    label="ชื่อสาขา"
                     id="bankBranch"
                     {...register("firstBankAccount.bankBranchName")}
                   />
@@ -939,15 +902,15 @@ export default function BasicInfo() {
                 <div className="flex space-x-4">
                   <Input
                     type="text"
-                    placeholder="กรุณาระบุเลขบัญชี"
+                    label="กรุณาระบุเลขบัญชี"
                     id="bankAccount"
                     {...register("firstBankAccount.bankAccountNumber")}
                   />
                 </div>
               </div>
-              <div className="flex flex-col space-y-4">
+              <div>
                 <div className="flex items-center justify-between pt-4">
-                  <div className="flex gap-2 items-center text-xl">
+                  <div className="flex gap-2 items-center text-[25px]">
                     เพิ่มบัญชีธนาคารที่ 2 (เพื่อใช้ในการถอนเงิน)
                   </div>
                   <div className="flex space-x-6">
@@ -985,8 +948,8 @@ export default function BasicInfo() {
                       <select
                         {...register("secondBankAccountBody.bankName")}
                         className="px-2.5 pb-2.5 pt-4 cursor-pointer border border-gray-700 text-gray-600 pl-2 hover:bg-slate-100
-                                              text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full h-full dark:bg-gray-700 dark:border-gray-600
-                                              dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-700 dark:focus:border-gray-700"
+                                            text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full h-full dark:bg-gray-700 dark:border-gray-600
+                                            dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-700 dark:focus:border-gray-700"
                       >
                         <option value="">กรุณาเลือกธนาคาร</option>
                         {bank.map((status) => (
@@ -999,7 +962,7 @@ export default function BasicInfo() {
                     <div className="flex space-x-4">
                       <Input
                         type="text"
-                        placeholder="ชื่อสาขา"
+                        label="ชื่อสาขา"
                         id="bankBranchAdditional"
                         {...register("secondBankAccountBody.bankBranchName")}
                       />
@@ -1007,7 +970,7 @@ export default function BasicInfo() {
                     <div className="flex space-x-4">
                       <Input
                         type="text"
-                        placeholder="กรุณาระบุเลขบัญชี"
+                        label="กรุณาระบุเลขบัญชี"
                         id="bankAccountAdditional"
                         {...register("secondBankAccountBody.bankAccountNumber")}
                       />
@@ -1017,9 +980,9 @@ export default function BasicInfo() {
               </div>
             </div>
           </CardContent>
-        </div>
+        </Card>
         <div className="flex justify-end">
-          <Button type="submit" className = "ti-btn ti-btn-primary ti-custom-validate-btn">Submit</Button>
+          <Button type="submit">Submit</Button>
         </div>
       </form>
     </div>

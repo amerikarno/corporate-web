@@ -222,19 +222,10 @@ type AnswersType = {
     };
 
     const handleAnswerChange = (questionId: number, answer: number) => {
-        setAnswers((prevAnswers) => {
-            const updatedAnswers = { ...prevAnswers, [questionId]: answer };
-            
-            const question = questionsData.items.find((q) => q.id === questionId);
-            if (question && updatedAnswers[questionId] === question.ans) {
-                setIncorrectAnswers((prevIncorrectAnswers) => {
-                    const { [questionId]: _, ...remainingIncorrectAnswers } = prevIncorrectAnswers;
-                    return remainingIncorrectAnswers;
-                });
-            }
-    
-            return updatedAnswers;
-        });
+        setAnswers((prevAnswers) => ({
+            ...prevAnswers,
+            [questionId]: answer,
+        }));
         setHighlightedQuestion(null);
     };
 
@@ -272,13 +263,13 @@ type AnswersType = {
     return (
         <div className="space-y-8 mt-8">
             <div className="flex items-center gap-4">
-                <div className="rounded-full h-3 w-full bg-gray-200 dark:bg-neutral-600">
+                <div className="rounded-full h-3 w-full bg-neutral-200 dark:bg-neutral-600">
                     <div
                         className="rounded-full h-3 bg-primary transition-all"
                         style={{ width: `${(answeredQuestionsCount / totalQuestions) * 100}%`, transitionDuration: "300ms" }}
                     ></div>
                 </div>
-                <div className="border rounded-full p-5 bg-primary text-white font-bold text-lg">
+                <div className="border rounded-full p-5 bg-primary text-neutral-200 font-bold text-lg">
                     {answeredQuestionsCount}/{totalQuestions}
                 </div>
             </div>
@@ -292,11 +283,11 @@ type AnswersType = {
                             {renderQuestions()}
                         </div>
                         <div className="flex justify-between">
-                            <Button onClick={handlePrev} className = "ti-btn ti-btn-primary" disabled={currentPage === 1}>Previous</Button>
+                            <Button onClick={handlePrev} disabled={currentPage === 1}>Previous</Button>
                             {currentPage < totalPages ? (
-                                <Button className = "ti-btn ti-btn-primary" onClick={handleNext}>Next</Button>
+                                <Button onClick={handleNext}>Next</Button>
                             ) : (
-                                <Button className={allTestSuccess? "bg-green-500 text-white border-4 rounded-full transition-all duration-500 cursor-pointer hover:bg-green-500" : "ti-btn ti-btn-primary"}
+                                <Button className={allTestSuccess? "bg-green-500 text-white border-4 rounded-full transition-all duration-500 cursor-pointer hover:bg-green-500" : ""}
                                 onClick={handleDone}>{allTestSuccess ? "All Corrected" : "Done "}{allTestSuccess && <TiTick className="text-xl" />}</Button>
                             )}
                         </div>

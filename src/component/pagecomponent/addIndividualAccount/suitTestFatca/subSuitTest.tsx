@@ -1,8 +1,6 @@
-import { FileChart } from '@/common/chartdata';
 import { Button } from '../components/ui/Button';
 import { Card } from '../components/ui/Card';
 import { useState } from 'react';
-import toast,{ Toaster ,ToasterProps } from 'react-hot-toast';
 
 interface Answer {
   questionIndex: number;
@@ -14,14 +12,6 @@ interface Answer {
 type SubSuitTestProps = {
     onSuitTestDone: (done: boolean) => void;
   }
-
-  const ErrorNotify = (): void => {
-		const options: ToasterProps = {
-		  reverseOrder: false,
-		};
-	  
-		toast.error("Please do suit test first.", options);
-	  };
 
 export default function SubSuitTest({ onSuitTestDone }: SubSuitTestProps) {
   const questions = [
@@ -174,7 +164,7 @@ const giveGrade = (score: number) => {
       }
       console.log(body)
     }else{
-      ErrorNotify()
+      alert("Do suit test first.")
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
@@ -183,7 +173,7 @@ const giveGrade = (score: number) => {
     <div className="">
       <div className="md:px-16 flex flex-col space-y-8">
         {questions.map((question, questionIndex) => ( questionIndex+1 === 3 ? 
-            <div className="box p-4" key={questionIndex}>
+            <Card className="p-4" key={questionIndex}>
                 <div className="flex flex-col space-y-4 p-8">
                     <p className="font-bold">{questionIndex + 1}.{question.question}</p>
                     <div className="flex flex-col space-y-4">
@@ -205,9 +195,9 @@ const giveGrade = (score: number) => {
                         ))}
                     </div>
                 </div>
-            </div>  
+            </Card>  
             :
-            <div className="box p-4" key={questionIndex}>
+            <Card className="p-4" key={questionIndex}>
                 {
                     questionIndex === 0 && 
                     <div className="flex text-gray-400 text-l p-4">
@@ -219,7 +209,7 @@ const giveGrade = (score: number) => {
                     <p className="font-bold">{questionIndex + 1}.{question.question}</p>
                     <div className="flex md:flex-row flex-col md:space-x-8">
                         {question.choices.map((choice, choiceIndex) => (
-                        <div className="flex px-4" key={choiceIndex}>
+                        <div className="flex" key={choiceIndex}>
                             <input
                                 type="radio"
                                 name={`question-${questionIndex}`}
@@ -227,37 +217,52 @@ const giveGrade = (score: number) => {
                                 value={choice}
                                 checked={answers[questionIndex].answer === choice}
                                 onChange={() => handleOptionChange(questionIndex, choice, choiceIndex)}
-                                className="mr-1"
+                                className="mr-4"
                             />
                             <label htmlFor={`question-${questionIndex}-choice-${choiceIndex}`} className="">
-                            <span className="">{choiceIndex+1}.</span> {choice}
+                            {choice}
                             </label>
                         </div>
                         ))}
                     </div>
                 </div>
-            </div> 
+            </Card> 
         ))}
-          {!suitTestDone && <div className="flex justify-center pb-8">
-              <Button type="button" className = "ti-btn ti-btn-primary w-1/8" onClick={handleSubmit}>
-                  Done
-              </Button>
-          </div>}
+        <div className="flex justify-center">
+            {!suitTestDone && <Button type="button" className="w-1/8" onClick={handleSubmit}>
+                Done
+            </Button>}
+        </div>
         {suitTestDone &&
-            <div className="p-4 overflow-hidden box space-x-8 md:relative flex md:flex-row flex-col w-full m-8 justify-center">
-                <div className="flex md:w-1/4 flex-col items-center space-y-4 md:border-l-4 md:border-t-0 p-4 pt-4">
-                    <div className="mb-4">
+            <div className="md:relative flex md:flex-row flex-col w-full m-8">
+                <div className="flex md:w-1/4 flex-col items-center space-y-4 border-t-4 md:border-l-4 md:border-t-0 p-4 pt-4">
+                    <div className="">
                         <span className="font-bold">ผลคะแนนที่ทำได้</span>
                     </div>
-                        <div className="w-40 h-40 relative mx-auto flex">
-                          <div className="flex items-center justify-center font-bold text-xl w-full h-10 absolute top-1/2 ltr:left-0 rtl:right-0 text-center -mt-5 leading-[28px]">
-                            {totalScore}/40
-                          </div>
-                          <FileChart />
-                        </div>
-                </div>
-                <div className="flex items-center relative">
-                  <hr className="absolute w-1 h-80 bg-gray-200 border-1 rotate-90 mx-auto"/>
+                    <svg className="w-3/4 h-full" viewBox="0 0 100 100">
+                        <>
+                            <circle
+                                className="text-gray-200 stroke-current"
+                                strokeWidth="10"
+                                cx="50"
+                                cy="50"
+                                r="40"
+                                fill="transparent"
+                            />
+                            <circle
+                                className="text-slate-800 progress-ring__circle stroke-current transition-all duration-500"
+                                strokeWidth="10"
+                                strokeLinecap="round"
+                                cx="50"
+                                cy="50"
+                                r="40"
+                                fill="transparent"
+                                strokeDasharray="251.2"
+                                strokeDashoffset={`calc(251.2 - (251.2 * ${totalScore}) / 40)`}
+                            />
+                            <text x="50" y="50" fontFamily="Verdana" fontSize="12" textAnchor="middle" alignmentBaseline="middle">{totalScore}/40</text>
+                        </>
+                    </svg>
                 </div>
                 <div className="flex md:w-1/4 flex-col  space-y-4 border-y-4 md:border-y-0 md:border-x-4 p-4">
                     <div className="flex justify-center">
@@ -267,9 +272,6 @@ const giveGrade = (score: number) => {
                         <span className="font-bold text-xl text-slate-800">ท่านเป็นนักลงทุนประเภท</span>
                         <span className="font-bold text-xl text-slate-800">{investorType}</span>
                     </div>
-                </div>
-                <div className="flex items-center relative">
-                  <hr className="absolute w-1 h-80 bg-gray-200 border-1 rotate-90 mx-auto"/>
                 </div>
                 <div className="flex flex-col md:w-1/2 items-center p-4 space-y-4-8 gap-4">
                     <div className="flex pl-8">
