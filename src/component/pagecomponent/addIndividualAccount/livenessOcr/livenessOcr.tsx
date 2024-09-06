@@ -38,17 +38,12 @@ export default function Liveness() {
   let trackIsRight = false;
   let trackIsMouthOpen = false;
   let isCapture = false;
+  const aspectRatio = 4 / 3;
 
   let customerCode = 90000001;
 
-  const windowWidth = window.innerWidth;
-  const windowHeight = window.innerHeight;
-  console.log("screen width height", windowWidth, windowHeight);
-
-  useEffect(() => {
-    console.log(image);
-    console.log("window.innerWidth", window.innerWidth);
-  }, [window.innerWidth]);
+  let screenWidth = window.innerWidth;
+  let screenHeight = window.innerHeight;
 
   useEffect(() => {
     const loadModels = async () => {
@@ -65,6 +60,7 @@ export default function Liveness() {
     }
 
     loadModels();
+    console.log(image);
   }, []);
 
   useEffect(() => {
@@ -90,9 +86,14 @@ export default function Liveness() {
   }, [isModelsLoaded]);
 
   const startVideo = async () => {
+    const w = screenWidth > 640 ? 640 : screenWidth;
+    const h = screenWidth > 640 ? 480 : screenWidth / aspectRatio;
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
-        video: {},
+        video: {
+          width: w,
+          height: h,
+        },
       });
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
@@ -274,11 +275,11 @@ export default function Liveness() {
     }>
   ) => {
     // Get the screen width and height
-    let screenWidth = windowWidth;
-    let screenHeight = windowHeight;
+    // let screenWidth = windowWidth;
+    // let screenHeight = windowHeight;
     // const screenWidth = 640;
     // const screenHeight = 480;
-    const aspectRatio = 4 / 3;
+
     if (screenWidth > 640) {
       screenWidth = 640;
       screenHeight = 480;
@@ -293,6 +294,8 @@ export default function Liveness() {
       faceapi.matchDimensions(canvasRef.current, {
         width: screenWidth,
         height: screenHeight,
+        // width: videoRef.current.videoWidth,
+        // height: videoRef.current.videoHeight,
       });
     }
     const canvas = canvasRef.current;
@@ -436,42 +439,40 @@ export default function Liveness() {
   }
 
   return (
-    <div className="w-[640px]">
-      <div className="relative w-fit h-[480px]">
-        <video
-          ref={videoRef}
-          onPlay={handleVideoPlay}
-          className={`${isModelsLoaded ? "block" : "hidden"}`}
-          width="640"
-          height="480"
-          autoPlay
-          muted
-        />
-      </div>
-      {/* <canvas
-          ref={canvasRef2}
-          className="absolute top-0 left-0 w-[640px] h-[480px]"
-        /> */}
-      <div className="absolute top-0 left-0">
-        <canvas ref={canvasRef} className="" />
-      </div>
-
-      {isModelsLoaded && (
-        <div className="py-10 w-[640px] flex justify-center text-green-500 text-xl font-bold">
-          {getMessage()}
+    <div className="flex justify-center">
+      <div className="w-[640px]">
+        <div className="relative w-fit h-[480px]">
+          <video
+            ref={videoRef}
+            onPlay={handleVideoPlay}
+            className={`${isModelsLoaded ? "block" : "hidden"}`}
+            width="640"
+            height="480"
+            autoPlay
+            muted
+          />
+          <div className="absolute top-0 left-0">
+            <canvas ref={canvasRef} className="" />
+            {/* <canvas ref={canvasRef2} className="" /> */}
+          </div>
         </div>
-      )}
 
-      {isModelsLoaded && (
-        <div
-          className="py-10 w-[640px] flex justify-center"
-          onClick={() => takePhoto()}
-        >
-          <Camera className="w-10 h-10" />
-        </div>
-      )}
+        {isModelsLoaded && (
+          <div className="py-10 w-[640px] flex justify-center text-green-500 text-xl font-bold">
+            {getMessage()}
+          </div>
+        )}
 
-      {/* {isModelsLoaded && image && (
+        {isModelsLoaded && (
+          <div
+            className="py-10 w-[640px] flex justify-center"
+            onClick={() => takePhoto()}
+          >
+            <Camera className="w-10 h-10" />
+          </div>
+        )}
+
+        {/* {isModelsLoaded && image && (
         <div className="w-1/2 pb-20">
           <img src={image} alt="Screenshot" />
           <div className="flex justify-center py-5">
@@ -480,75 +481,17 @@ export default function Liveness() {
         </div>
       )} */}
 
-      {isModelsLoaded && (
-        <div className="w-[640px] flex justify-center">
-          <Button onClick={() => handleSubmit()}>Next</Button>
-        </div>
-      )}
-      {/* {isModelsLoaded && image && (
+        {isModelsLoaded && (
+          <div className="w-[640px] flex justify-center">
+            <Button onClick={() => handleSubmit()}>Next</Button>
+          </div>
+        )}
+        {/* {isModelsLoaded && image && (
         <div className="w-[640px] flex justify-center">
           <Button onClick={() => handleSubmit()}>Next</Button>
         </div>
       )} */}
+      </div>
     </div>
-    // <div className="flex justify-center">
-    //   <div className="py-10">
-    //     <div className="w-[640px]">
-    //       <div className="relative w-fit h-[480px]">
-    //         <video
-    //           ref={videoRef}
-    //           onPlay={handleVideoPlay}
-    //           className={`${isModelsLoaded ? "block" : "hidden"}`}
-    //           width="640"
-    //           height="480"
-    //           autoPlay
-    //           muted
-    //         />
-    //       </div>
-    //       {/* <canvas
-    //       ref={canvasRef2}
-    //       className="absolute top-0 left-0 w-[640px] h-[480px]"
-    //     /> */}
-    //       <div className="absolute top-0 left-0">
-    //         <canvas ref={canvasRef} className="" />
-    //       </div>
-
-    //       {isModelsLoaded && (
-    //         <div className="py-10 w-[640px] flex justify-center text-green-500 text-xl font-bold">
-    //           {getMessage()}
-    //         </div>
-    //       )}
-
-    //       {isModelsLoaded && (
-    //         <div
-    //           className="py-10 w-[640px] flex justify-center"
-    //           onClick={() => takePhoto()}
-    //         >
-    //           <Camera className="w-10 h-10" />
-    //         </div>
-    //       )}
-
-    //       {/* {isModelsLoaded && image && (
-    //     <div className="w-1/2 pb-20">
-    //       <img src={image} alt="Screenshot" />
-    //       <div className="flex justify-center py-5">
-    //         <Button onClick={() => handleSubmit()}>Next</Button>
-    //       </div>
-    //     </div>
-    //   )} */}
-
-    //       {isModelsLoaded && (
-    //         <div className="w-[640px] flex justify-center">
-    //           <Button onClick={() => handleSubmit()}>Next</Button>
-    //         </div>
-    //       )}
-    //       {/* {isModelsLoaded && image && (
-    //     <div className="w-[640px] flex justify-center">
-    //       <Button onClick={() => handleSubmit()}>Next</Button>
-    //     </div>
-    //   )} */}
-    //     </div>
-    //   </div>
-    // </div>
   );
 }
