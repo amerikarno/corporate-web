@@ -2603,7 +2603,7 @@ const Landing = ({ ThemeChanger }: datatype) => {
                           {" "}
                           <Link to="#" className="inline-flex">
                             <i className="text-white ri-global-line ltr:mr-2 rtl:ml-2"></i>
-                            https://finansiada.com
+                            https://example.com
                           </Link>{" "}
                         </li> */}
                       </ul>
