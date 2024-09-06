@@ -145,22 +145,22 @@ const Landing = ({ ThemeChanger }: datatype) => {
                     to={`${import.meta.env.BASE_URL}dashboards/sales/`}
                     aria-label="Brand"
                   >
-                    <img
+                    {/* <img
                       src={ALLImages("logo")}
                       alt="logo"
                       className="mx-auto"
-                    />
+                    /> */}
                   </Link>
                   <Link
                     className="responsive-logo-dark"
                     to={`${import.meta.env.BASE_URL}dashboards/sales/`}
                     aria-label="Brand"
                   >
-                    <img
+                    {/* <img
                       src={ALLImages("logo")}
                       alt="logo"
                       className="mx-auto"
-                    />
+                    /> */}
                   </Link>
                 </div>
               </div>

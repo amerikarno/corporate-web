@@ -25,11 +25,11 @@ const SignUpBasic = () => {
         // to={`${import.meta.env.BASE_URL}dashboards/sales/`}
         className="header-logo"
       >
-        <img
+        {/* <img
           src={ALLImages("logo")}
           alt="logo"
           className="mx-auto block dark:hidden"
-        />
+        /> */}
         <img
           src={ALLImages("desktop-light")}
           alt="logo"

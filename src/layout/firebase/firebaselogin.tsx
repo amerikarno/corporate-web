@@ -100,11 +100,11 @@ const Firebaselogin = () => {
         <div className="authentication-page w-full">
           <main id="content" className="w-full max-w-md mx-auto p-6">
             <Link to="#" className="header-logo lg:hidden">
-              <img
+              {/* <img
                 src={ALLImages("logo")}
                 alt="logo"
                 className="mx-auto block dark:hidden"
-              />
+              /> */}
               <img
                 src={ALLImages("desktop-light")}
                 alt="logo"
