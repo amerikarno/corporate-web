@@ -1,21 +1,11 @@
 import thaiid from "./assets/thaiid.png";
 import ndid from "./assets/ndid.png";
 import { Card } from "../components/ui/Card";
-import { Button } from "../components/ui/Button";
 import { FaPhoneAlt } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "../components/ui/alert-dialog";
 import { useNavigate } from "react-router-dom";
+import { Button } from "../components/ui/Button";
+import { CustomModal } from "@/component/components/customModal/customModal";
 
 export default function IdentityVerification() {
   const navigate = useNavigate();
@@ -32,7 +22,7 @@ export default function IdentityVerification() {
           หลังการยืนยันตัวตน ท่านจะได้รับ Username & Password ผ่านทางอีเมลล์
         </span>
       </div>
-      <Card className="flex items-center p-4 pb-20 md:w-3/4 relative">
+      <Card className="flex items-center space-x-4 p-4 pb-20 md:w-3/4 relative">
         <div className="m-8 w-28 flex-shrink-0 flex">
           <img src={ndid} alt="NDID" />
         </div>
@@ -50,34 +40,16 @@ export default function IdentityVerification() {
             ถ้าทำรายการไม่สำเร็จต้องรอ 1 ชม.
             จึงจะเปลี่ยนวิธียืนยันตัวตนแบบอื่นได้
           </span>
-          <div className="absolute bottom-4 left-[43%]">
-            <AlertDialog>
-              <AlertDialogTrigger asChild>
-                <Button
-                  variant="outline"
-                  className="bg-slate-800 text-white hover:bg-slate-700 hover:text-white w-36 font-bold"
-                >
-                  ตกลง
-                </Button>
-              </AlertDialogTrigger>
-              <AlertDialogContent>
-                <AlertDialogHeader>
-                  <AlertDialogTitle>คุณแน่ใจมั้ย?</AlertDialogTitle>
-                  <AlertDialogDescription>
-                    หมายเหตุ ถ้าทำรายการไม่สำเร็จต้องรอ 1 ชม.
-                    จึงจะเปลี่ยนวิธียืนยันตัวตนแบบอื่นได้
-                  </AlertDialogDescription>
-                </AlertDialogHeader>
-                <AlertDialogFooter>
-                  <AlertDialogCancel>Cancel</AlertDialogCancel>
-                  <AlertDialogAction>ตกลง</AlertDialogAction>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialog>
-          </div>
+          <CustomModal
+            title="คุณแน่ใจมั้ย?"
+            description="หมายเหตุ ถ้าทำรายการไม่สำเร็จต้องรอ 1 ชม. จึงจะเปลี่ยนวิธียืนยันตัวตนแบบอื่นได้"
+            textClose="ยกเลิก"
+            textSave="ยืนยัน"
+            onSave={() => {}}
+          />
         </div>
       </Card>
-      <Card className="flex items-center p-4 pb-20 md:w-3/4 relative">
+      <Card className="flex items-center space-x-4 p-4 pb-20 md:w-3/4 relative">
         <div className="m-8 w-32 h-32 flex-shrink-0 flex">
           <img src={thaiid} alt="THAIID" />
         </div>
@@ -92,31 +64,13 @@ export default function IdentityVerification() {
             ถ้าทำรายการไม่สำเร็จต้องรอ 1 ชม.
             จึงจะเปลี่ยนวิธียืนยันตัวตนแบบอื่นได้
           </span>
-          <div className="absolute bottom-4 left-[43%]">
-            <AlertDialog>
-              <AlertDialogTrigger asChild>
-                <Button
-                  variant="outline"
-                  className="bg-slate-800 text-white hover:bg-slate-700 hover:text-white w-36 font-bold"
-                >
-                  ตกลง
-                </Button>
-              </AlertDialogTrigger>
-              <AlertDialogContent>
-                <AlertDialogHeader>
-                  <AlertDialogTitle>คุณแน่ใจมั้ย?</AlertDialogTitle>
-                  <AlertDialogDescription>
-                    หมายเหตุ ถ้าทำรายการไม่สำเร็จต้องรอ 1 ชม.
-                    จึงจะเปลี่ยนวิธียืนยันตัวตนแบบอื่นได้
-                  </AlertDialogDescription>
-                </AlertDialogHeader>
-                <AlertDialogFooter>
-                  <AlertDialogCancel>Cancel</AlertDialogCancel>
-                  <AlertDialogAction>ตกลง</AlertDialogAction>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialog>
-          </div>
+          <CustomModal
+            title="คุณแน่ใจมั้ย?"
+            description="หมายเหตุ ถ้าทำรายการไม่สำเร็จต้องรอ 1 ชม. จึงจะเปลี่ยนวิธียืนยันตัวตนแบบอื่นได้"
+            textClose="ยกเลิก"
+            textSave="ยืนยัน"
+            onSave={() => {}}
+          />
         </div>
       </Card>
 

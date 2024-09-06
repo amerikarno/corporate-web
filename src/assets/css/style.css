@@ -2477,7 +2477,8 @@ select:focus {
 /* Start Modal Styles */
 .ti-modal {
   position: fixed;
-  top: 0px;
+  top: 20px;
+  left: 0px;
   z-index: 60;
   height: 100%;
   width: 100%;
@@ -2504,11 +2505,14 @@ select:focus {
   border-color: rgb(255 255 255 / 0.1);
 }
 .ti-modal .ti-modal-box {
-  margin: 0.75rem;
+  /* Centered modal box */
+  margin: 0;
   opacity: 0;
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
+  max-width: 32rem;
+  width: 100%;
 }
 .open.ti-modal .ti-modal-box {
   opacity: 1;

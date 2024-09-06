@@ -273,8 +273,8 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
                 <Route
                   path={`${
                     import.meta.env.BASE_URL
-                  }Authentication/signup/identityverification`}
-                  element={<IdentityVerification />}
+                  }Authentication/signup/otpemailconfirm`}
+                  element={<OtpEmailConfirm />}
                 />
 
                 <Route
@@ -299,8 +299,8 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
                 <Route
                   path={`${
                     import.meta.env.BASE_URL
-                  }Authentication/signup/otpemailconfirm`}
-                  element={<OtpEmailConfirm />}
+                  }Authentication/signup/identityverification`}
+                  element={<IdentityVerification />}
                 />
 
                 <Route

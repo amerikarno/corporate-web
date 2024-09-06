@@ -71,20 +71,20 @@ const Firebaselogin = () => {
   );
 
   return (
-    <Fragment>
+    <>
       <Helmet>
         <html dir="ltr"></html>
         <body className="error-page flex h-full !py-0 bg-white dark:bg-bgdark"></body>
       </Helmet>
-      <div className="lg:col-span-6 col-span-12 hidden lg:block relative">
+      {/* <div className="lg:col-span-6 col-span-12 hidden lg:block relative">
         <div className="cover relative w-full h-full z-[1] p-10">
           <Link to="/" className="header-logo">
-            {/* <img
+            <img
               src={ALLImages("logo")}
               //   src={ALLImages("desktoplight")}
               alt="logo"
               className="ltr:ml-auto rtl:mr-auto block"
-            /> */}
+            />
           </Link>
           <div className="authentication-page justify-center w-full max-w-7xl mx-auto p-0">
             <img
@@ -95,24 +95,24 @@ const Firebaselogin = () => {
             />
           </div>
         </div>
-      </div>
-      <div className="lg:col-span-6 col-span-12">
+      </div> */}
+      <div className="col-span-12">
         <div className="authentication-page w-full">
           <main id="content" className="w-full max-w-md mx-auto p-6">
-            <Link to="#" className="header-logo lg:hidden">
-              {/* <img
+            {/* <Link to="#" className="header-logo lg:hidden">
+              <img
                 src={ALLImages("logo")}
                 alt="logo"
                 className="mx-auto block dark:hidden"
-              /> */}
+              />
               <img
                 src={ALLImages("desktop-light")}
                 alt="logo"
                 className="mx-auto hidden dark:block"
               />
-            </Link>
+            </Link> */}
             <div className="mt-7">
-              <nav className="!block px-6" aria-label="Tabs">
+              {/* <nav className="!block px-6" aria-label="Tabs">
                 <div className="flex justify-center space-x-2">
                   <button
                     type="button"
@@ -153,7 +153,7 @@ const Firebaselogin = () => {
                     </span>
                   </button>
                 </div>
-              </nav>
+              </nav> */}
               <div
                 id="pills-with-brand-color-01"
                 role="tabpanel"
@@ -283,7 +283,7 @@ const Firebaselogin = () => {
                   </div>
                 </div>
               </div>
-              <div
+              {/* <div
                 id="pills-with-brand-color-02"
                 className="hidden"
                 role="tabpanel"
@@ -403,12 +403,12 @@ const Firebaselogin = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
           </main>
         </div>
       </div>
-    </Fragment>
+    </>
   );
 };
 
