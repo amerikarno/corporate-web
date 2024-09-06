@@ -55,9 +55,9 @@ export default function IdentityVerification() {
         </div>
         <div className="flex flex-col">
           <span className="text-slate-800 font-bold py-4 text-2xl ">
-            2.THAIID
+            2.THAID
           </span>
-          <span>1. ยืนยันตัวตนผ่าน THAIID</span>
+          <span>1. ยืนยันตัวตนผ่าน THAID</span>
           <span>2. ทำรายการให้สำเร็จภายใน 1 วัน</span>
           <span className="p-4 pl-0 md:pl-4">
             <span className="underline font-bold pr-4">หมายเหตุ</span>
