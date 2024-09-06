@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { auth } from "./firebaseapikey";
+// import { auth } from "./firebaseapikey";
 import ALLImages from "../../common/imagesdata";
 import { Helmet } from "react-helmet";
 import { sleep } from "@/util/util";
@@ -19,7 +19,7 @@ const Firebaselogin = () => {
   const [err, setError] = useState("");
   const [loading, setLoader] = useState(false);
   const [data, setData] = useState({
-    email: "admin@finansiada.com",
+    email: "admin@admin.com",
     password: "password",
   });
   //   const [data, setData] = useState({
@@ -79,12 +79,12 @@ const Firebaselogin = () => {
       <div className="lg:col-span-6 col-span-12 hidden lg:block relative">
         <div className="cover relative w-full h-full z-[1] p-10">
           <Link to="/" className="header-logo">
-            <img
+            {/* <img
               src={ALLImages("logo")}
               //   src={ALLImages("desktoplight")}
               alt="logo"
               className="ltr:ml-auto rtl:mr-auto block"
-            />
+            /> */}
           </Link>
           <div className="authentication-page justify-center w-full max-w-7xl mx-auto p-0">
             <img
@@ -168,9 +168,12 @@ const Firebaselogin = () => {
                       Don't have an account yet?
                       <Link
                         className="text-primary decoration-2 hover:underline font-medium"
+                        // to={`${
+                        //   import.meta.env.BASE_URL
+                        // }firebase/firebaseregister`}
                         to={`${
                           import.meta.env.BASE_URL
-                        }firebase/firebaseregister`}
+                        }Authentication/signup/addindividualaccount`}
                       >
                         Sign up here
                       </Link>
@@ -297,7 +300,10 @@ const Firebaselogin = () => {
                         className="text-primary decoration-2 hover:underline font-medium"
                         to={`${
                           import.meta.env.BASE_URL
-                        }Authentication/signup/cover2`}
+                        }Authentication/signup/addindividualaccount`}
+                        // to={`${
+                        //   import.meta.env.BASE_URL
+                        // }Authentication/signup/cover2`}
                       >
                         Sign up here
                       </Link>

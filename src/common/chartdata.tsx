@@ -1,23 +1,30 @@
-import { Component } from 'react';
-import ReactApexChart from 'react-apexcharts';  // Apex chart
-import { Doughnut, Line, Bar, Radar, Scatter, Bubble, Pie } from 'react-chartjs-2';     // react-chartjs
-import { Chart, registerables } from 'chart.js'; // chartjs
-import ReactEcharts from "echarts-for-react";  //E chart
+import { Component } from "react";
+import ReactApexChart from "react-apexcharts"; // Apex chart
+import {
+  Doughnut,
+  Line,
+  Bar,
+  Radar,
+  Scatter,
+  Bubble,
+  Pie,
+} from "react-chartjs-2"; // react-chartjs
+import { Chart, registerables } from "chart.js"; // chartjs
+import ReactEcharts from "echarts-for-react"; //E chart
 
-import { ApexOptions } from 'apexcharts';
-import ALLImages from './imagesdata';
+import { ApexOptions } from "apexcharts";
+import ALLImages from "./imagesdata";
 Chart.register(...registerables);
 
 interface spark3 {
-  options?: ApexOptions,
-  width?: string | number,
-  height?: string | number,
-  series?: ApexOptions['series'],
-  [key: string]: any
-  label?: XAxisAnnotations
-  endingShape?: string
+  options?: ApexOptions;
+  width?: string | number;
+  height?: string | number;
+  series?: ApexOptions["series"];
+  [key: string]: any;
+  label?: XAxisAnnotations;
+  endingShape?: string;
 }
-
 
 //Sales Over View
 
@@ -26,7 +33,6 @@ export class SalesOverView extends Component<{}, spark3> {
     super(props);
 
     this.state = {
-
       series: [
         {
           name: "Income",
@@ -40,9 +46,9 @@ export class SalesOverView extends Component<{}, spark3> {
       options: {
         chart: {
           events: {
-            mounted: (chart:any) => {
+            mounted: (chart: any) => {
               chart.windowResizeHandler();
-            }
+            },
           },
           height: 300,
           type: "bar",
@@ -90,7 +96,7 @@ export class SalesOverView extends Component<{}, spark3> {
               colors: "rgb(107 ,114 ,128)",
               fontSize: "12px",
             },
-            formatter: function (y:any) {
+            formatter: function (y: any) {
               return y.toFixed(0) + "";
             },
           },
@@ -137,13 +143,17 @@ export class SalesOverView extends Component<{}, spark3> {
 
   render() {
     return (
-
       <div id="chart">
-        <ReactApexChart height={300} options={this.state.options} series={this.state.series} type="bar" />
+        <ReactApexChart
+          height={300}
+          options={this.state.options}
+          series={this.state.series}
+          type="bar"
+        />
       </div>
-    )
+    );
   }
-};
+}
 
 //Sale Value
 
@@ -173,7 +183,16 @@ const options = {
 };
 
 export function SalesValue() {
-  return <Doughnut id='sales-donut' className="!h-[230px] mx-auto my-auto" data={data} options={options} width={230} height={230} />
+  return (
+    <Doughnut
+      id="sales-donut"
+      className="!h-[230px] mx-auto my-auto"
+      data={data}
+      options={options}
+      width={230}
+      height={230}
+    />
+  );
 }
 
 //Social visitors
@@ -183,7 +202,6 @@ export class SocialVisitor extends Component<{}, spark3> {
     super(props);
 
     this.state = {
-
       series: [
         {
           data: [400, 470, 540, 690, 1100, 1380],
@@ -192,9 +210,9 @@ export class SocialVisitor extends Component<{}, spark3> {
       options: {
         chart: {
           events: {
-            mounted: (chart:any) => {
+            mounted: (chart: any) => {
               chart.windowResizeHandler();
-            }
+            },
           },
           type: "bar",
           height: 370,
@@ -246,16 +264,16 @@ export class SocialVisitor extends Component<{}, spark3> {
           ],
           axisBorder: {
             show: true,
-            color: 'rgba(119, 119, 142, 0.1)',
+            color: "rgba(119, 119, 142, 0.1)",
             offsetX: 0,
             offsetY: 0,
           },
           axisTicks: {
             show: true,
-            borderType: 'solid',
-            color: 'rgba(119, 119, 142, 0.1)',
+            borderType: "solid",
+            color: "rgba(119, 119, 142, 0.1)",
             offsetX: 0,
-            offsetY: 0
+            offsetY: 0,
           },
           labels: {
             show: true,
@@ -283,14 +301,17 @@ export class SocialVisitor extends Component<{}, spark3> {
 
   render() {
     return (
-
-      <div id="chart" className='visitors'>
-        <ReactApexChart height={370}  options={this.state.options} series={this.state.series} type="bar" />
+      <div id="chart" className="visitors">
+        <ReactApexChart
+          height={370}
+          options={this.state.options}
+          series={this.state.series}
+          type="bar"
+        />
       </div>
-    )
+    );
   }
-};
-
+}
 
 // *******************************************************************************************
 
@@ -303,23 +324,24 @@ export class OrderVsSales extends Component<{}, spark3> {
     super(props);
 
     this.state = {
-
-      series: [{
-        name: "Orders",
-        type: "bar",
-        data: [23, 55, 22, 45, 20, 32, 22, 42, 21, 44, 22, 30],
-      },
-      {
-        name: "Sales",
-        type: "line",
-        data: [40, 35, 66, 28, 38, 55, 45, 70, 55, 69, 46, 49],
-      },],
+      series: [
+        {
+          name: "Orders",
+          type: "bar",
+          data: [23, 55, 22, 45, 20, 32, 22, 42, 21, 44, 22, 30],
+        },
+        {
+          name: "Sales",
+          type: "line",
+          data: [40, 35, 66, 28, 38, 55, 45, 70, 55, 69, 46, 49],
+        },
+      ],
       options: {
         chart: {
           events: {
-            mounted: (chart:any) => {
+            mounted: (chart: any) => {
               chart.windowResizeHandler();
-            }
+            },
           },
           height: 310,
           // type: "area",
@@ -371,7 +393,7 @@ export class OrderVsSales extends Component<{}, spark3> {
               fontFamily: "Inter, sans-serif",
               fontWeight: 500,
             },
-            formatter: function (y:any) {
+            formatter: function (y: any) {
               return y.toFixed(0) + "";
             },
           },
@@ -412,35 +434,67 @@ export class OrderVsSales extends Component<{}, spark3> {
             },
           },
         },
-      }
+      },
     };
-
-  };
+  }
 
   render() {
     return (
-
       <div className="box">
         <div className="box-header">
           <div className="sm:flex justify-between">
             <h5 className="box-title my-auto">Order Vs Sales</h5>
             <div className="inline-flex rounded-md shadow-sm">
-              <button type="button" className="ti-btn-group text-xs !border-0 py-2 px-3 ti-btn-primary">1D</button>
-              <button type="button" className="ti-btn-group text-xs !border-0 py-2 px-3 ti-btn-soft-primary">1W</button>
-              <button type="button" className="ti-btn-group text-xs !border-0 py-2 px-3 ti-btn-soft-primary">1M</button>
-              <button type="button" className="ti-btn-group text-xs !border-0 py-2 px-3 ti-btn-soft-primary">3M</button>
-              <button type="button" className="ti-btn-group text-xs !border-0 py-2 px-3 ti-btn-soft-primary">6M</button>
-              <button type="button" className="ti-btn-group text-xs !border-0 py-2 px-3 ti-btn-soft-primary">1Y</button>
+              <button
+                type="button"
+                className="ti-btn-group text-xs !border-0 py-2 px-3 ti-btn-primary"
+              >
+                1D
+              </button>
+              <button
+                type="button"
+                className="ti-btn-group text-xs !border-0 py-2 px-3 ti-btn-soft-primary"
+              >
+                1W
+              </button>
+              <button
+                type="button"
+                className="ti-btn-group text-xs !border-0 py-2 px-3 ti-btn-soft-primary"
+              >
+                1M
+              </button>
+              <button
+                type="button"
+                className="ti-btn-group text-xs !border-0 py-2 px-3 ti-btn-soft-primary"
+              >
+                3M
+              </button>
+              <button
+                type="button"
+                className="ti-btn-group text-xs !border-0 py-2 px-3 ti-btn-soft-primary"
+              >
+                6M
+              </button>
+              <button
+                type="button"
+                className="ti-btn-group text-xs !border-0 py-2 px-3 ti-btn-soft-primary"
+              >
+                1Y
+              </button>
             </div>
           </div>
         </div>
         <div className="box-body">
           <div id="chart">
-            <ReactApexChart height={310} options={this.state.options} series={this.state.series} type="bar" />
+            <ReactApexChart
+              height={310}
+              options={this.state.options}
+              series={this.state.series}
+              type="bar"
+            />
           </div>
         </div>
       </div>
-
     );
   }
 }
@@ -456,7 +510,6 @@ export class SalesOverview extends Component<{}, spark3> {
     super(props);
 
     this.state = {
-
       series: [
         {
           data: [
@@ -706,9 +759,9 @@ export class SalesOverview extends Component<{}, spark3> {
       options: {
         chart: {
           events: {
-            mounted: (chart:any) => {
+            mounted: (chart: any) => {
               chart.windowResizeHandler();
-            }
+            },
           },
           type: "candlestick",
           height: 330,
@@ -753,25 +806,59 @@ export class SalesOverview extends Component<{}, spark3> {
           },
         },
       },
-      selection: 'one_year',
+      selection: "one_year",
     };
-
-  };
+  }
 
   render() {
     return (
-
       <div className="box">
         <div className="box-header">
           <div className="sm:flex justify-between space-y-2 sm:space-y-0">
             <h5 className="box-title my-auto">Sales Overview</h5>
             <div className="inline-flex rounded-md shadow-sm">
-              <button type="button" className="ti-btn-group text-xs !border-0 py-2 px-3 ti-btn-primary"> 1D </button>
-              <button type="button" className="ti-btn-group text-xs !border-0 py-2 px-3 ti-btn-soft-primary"> 1W </button>
-              <button type="button" className="ti-btn-group text-xs !border-0 py-2 px-3 ti-btn-soft-primary"> 1M </button>
-              <button type="button" className="ti-btn-group text-xs !border-0 py-2 px-3 ti-btn-soft-primary"> 3M </button>
-              <button type="button" className="ti-btn-group text-xs !border-0 py-2 px-3 ti-btn-soft-primary"> 6M </button>
-              <button type="button" className="ti-btn-group text-xs !border-0 py-2 px-3 ti-btn-soft-primary"> 1Y </button>
+              <button
+                type="button"
+                className="ti-btn-group text-xs !border-0 py-2 px-3 ti-btn-primary"
+              >
+                {" "}
+                1D{" "}
+              </button>
+              <button
+                type="button"
+                className="ti-btn-group text-xs !border-0 py-2 px-3 ti-btn-soft-primary"
+              >
+                {" "}
+                1W{" "}
+              </button>
+              <button
+                type="button"
+                className="ti-btn-group text-xs !border-0 py-2 px-3 ti-btn-soft-primary"
+              >
+                {" "}
+                1M{" "}
+              </button>
+              <button
+                type="button"
+                className="ti-btn-group text-xs !border-0 py-2 px-3 ti-btn-soft-primary"
+              >
+                {" "}
+                3M{" "}
+              </button>
+              <button
+                type="button"
+                className="ti-btn-group text-xs !border-0 py-2 px-3 ti-btn-soft-primary"
+              >
+                {" "}
+                6M{" "}
+              </button>
+              <button
+                type="button"
+                className="ti-btn-group text-xs !border-0 py-2 px-3 ti-btn-soft-primary"
+              >
+                {" "}
+                1Y{" "}
+              </button>
             </div>
           </div>
         </div>
@@ -780,7 +867,10 @@ export class SalesOverview extends Component<{}, spark3> {
             <div className="ltr:mr-3 rtl:ml-3">
               <span className="avatar avatar-sm rounded-full p-2 bg-gray-100 dark:bg-black/20">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
-                  <path fill="#f89f36" d="M109.8 75.7c-.8-5.7-3.6-10.1-8.6-13-2.3-1.3-4.8-2.2-7.4-3.3.3-.2.5-.4.7-.5 12.5-6.4 11.4-25.7 2.3-32.3-3.7-2.7-7.8-4.4-12.1-5.4-3.1-.7-6.2-1.2-9.4-1.7 0-5.6.1-13.3.1-19.5H63.7c-.1 6.1-.1 13.6-.2 19.1h-9.4c0-5.5.1-13 .1-19.1H42.6c-.1 6.2-.1 13.9-.2 19.4-8-.1-15.7-.1-23.7-.2 0 4.3-.1 8.3-.1 12.5 1.7 0 3.2 0 4.6.1 1.5 0 3 0 4.4.1 4.1.3 6.2 2.6 6.2 6.6-.2 16.7-.4 33.5-.5 50.2 0 3.7-1.6 5.1-5.2 5.1h-7.8c-.8 4.7-1.6 9.2-2.4 13.9 7.9.1 15.7.2 23.7.3 0 6-.1 13.6-.1 19.9h11.7c.1-6.3.1-13.7.2-19.6 3.3.1 6.3.2 9.4.3 0 6-.1 13.3-.1 19.4h11.7c.1-6.3.1-13.7.2-19.5.4-.1.7-.1 1-.2 5.6-.9 11.3-1.4 16.7-2.7 7.1-1.8 12.7-5.9 15.7-12.9 2.1-5.4 2.6-11.1 1.8-17zM54.3 32.9c7.3 0 14.4-.6 21 2.4 4.4 1.9 6.6 5.5 6.3 9.8-.3 4.6-2.9 7.9-7.6 9.4-6.4 2.1-13.1 2-20 1.7.1-7.6.2-15.2.3-23.3zm25.5 58.4c-6.5 2.9-13.3 2.9-20.2 3-1.9 0-3.8-.1-5.9-.1l.3-25.9c8.9 0 17.7-.7 26 3 4.3 1.9 6.8 5.2 6.8 10.1-.1 4.9-2.7 8-7 9.9z" />
+                  <path
+                    fill="#f89f36"
+                    d="M109.8 75.7c-.8-5.7-3.6-10.1-8.6-13-2.3-1.3-4.8-2.2-7.4-3.3.3-.2.5-.4.7-.5 12.5-6.4 11.4-25.7 2.3-32.3-3.7-2.7-7.8-4.4-12.1-5.4-3.1-.7-6.2-1.2-9.4-1.7 0-5.6.1-13.3.1-19.5H63.7c-.1 6.1-.1 13.6-.2 19.1h-9.4c0-5.5.1-13 .1-19.1H42.6c-.1 6.2-.1 13.9-.2 19.4-8-.1-15.7-.1-23.7-.2 0 4.3-.1 8.3-.1 12.5 1.7 0 3.2 0 4.6.1 1.5 0 3 0 4.4.1 4.1.3 6.2 2.6 6.2 6.6-.2 16.7-.4 33.5-.5 50.2 0 3.7-1.6 5.1-5.2 5.1h-7.8c-.8 4.7-1.6 9.2-2.4 13.9 7.9.1 15.7.2 23.7.3 0 6-.1 13.6-.1 19.9h11.7c.1-6.3.1-13.7.2-19.6 3.3.1 6.3.2 9.4.3 0 6-.1 13.3-.1 19.4h11.7c.1-6.3.1-13.7.2-19.5.4-.1.7-.1 1-.2 5.6-.9 11.3-1.4 16.7-2.7 7.1-1.8 12.7-5.9 15.7-12.9 2.1-5.4 2.6-11.1 1.8-17zM54.3 32.9c7.3 0 14.4-.6 21 2.4 4.4 1.9 6.6 5.5 6.3 9.8-.3 4.6-2.9 7.9-7.6 9.4-6.4 2.1-13.1 2-20 1.7.1-7.6.2-15.2.3-23.3zm25.5 58.4c-6.5 2.9-13.3 2.9-20.2 3-1.9 0-3.8-.1-5.9-.1l.3-25.9c8.9 0 17.7-.7 26 3 4.3 1.9 6.8 5.2 6.8 10.1-.1 4.9-2.7 8-7 9.9z"
+                  />
                 </svg>
               </span>
             </div>
@@ -790,33 +880,43 @@ export class SalesOverview extends Component<{}, spark3> {
                 <p className="font-semibold mb-0">BTC</p>
               </div>
               <div className="sm:m-0 m-2">
-                <span className="text-gray-500 dark:text-white/70">Price Benchmark</span>
+                <span className="text-gray-500 dark:text-white/70">
+                  Price Benchmark
+                </span>
                 <p className="font-semibold mb-0">128.00%</p>
               </div>
               <div className="sm:m-0 m-2">
-                <span className="text-gray-500 dark:text-white/70">Price (USD)</span>
+                <span className="text-gray-500 dark:text-white/70">
+                  Price (USD)
+                </span>
                 <p className="text-success font-semibold mb-0">$4,253.49</p>
               </div>
               <div className="sm:m-0 m-2">
-                <span className="text-gray-500 dark:text-white/70">Change (24H)</span>
+                <span className="text-gray-500 dark:text-white/70">
+                  Change (24H)
+                </span>
                 <p className="text-danger font-semibold mb-0">-0.24%</p>
               </div>
               <div className="sm:m-0 m-2">
-                <span className="text-gray-500 dark:text-white/70">Market Cap</span>
+                <span className="text-gray-500 dark:text-white/70">
+                  Market Cap
+                </span>
                 <p className="font-semibold mb-0">$179.12B</p>
               </div>
             </div>
           </div>
 
           <div id="chart">
-            <ReactApexChart className="p-4" height={330} options={this.state.options} series={this.state.series} type="candlestick" />
+            <ReactApexChart
+              className="p-4"
+              height={330}
+              options={this.state.options}
+              series={this.state.series}
+              type="candlestick"
+            />
           </div>
-
         </div>
       </div>
-
-
-
     );
   }
 }
@@ -828,22 +928,21 @@ export class Bitcoin extends Component<{}, spark3> {
     super(props);
 
     this.state = {
-
       series: [
         {
           name: "Value",
           data: [
-            0, 45, 54, 38, 56, 24, 65, 31, 37, 39, 62, 51, 35, 41, 35, 27, 93, 53,
-            61, 27, 54, 43, 19, 46,
+            0, 45, 54, 38, 56, 24, 65, 31, 37, 39, 62, 51, 35, 41, 35, 27, 93,
+            53, 61, 27, 54, 43, 19, 46,
           ],
         },
       ],
       options: {
         chart: {
           events: {
-            mounted: (chart:any) => {
+            mounted: (chart: any) => {
               chart.windowResizeHandler();
-            }
+            },
           },
           type: "line",
           height: 20,
@@ -881,42 +980,44 @@ export class Bitcoin extends Component<{}, spark3> {
 
         colors: ["#28d193"],
       },
-
     };
   }
 
   render() {
     return (
-
-
       <div id="chart">
-        <ReactApexChart height={20} width={120} options={this.state.options} series={this.state.series} type="line" />
+        <ReactApexChart
+          height={20}
+          width={120}
+          options={this.state.options}
+          series={this.state.series}
+          type="line"
+        />
       </div>
-    )
+    );
   }
-};
+}
 
 export class Etherium extends Component<{}, spark3> {
   constructor(props: {} | Readonly<{}>) {
     super(props);
 
     this.state = {
-
       series: [
         {
           name: "Value",
           data: [
-            0, 45, 54, 38, 56, 24, 65, 35, 27, 93, 53, 61, 27, 54, 43, 19, 46, 31,
-            37, 39, 62, 51, 35, 41,
+            0, 45, 54, 38, 56, 24, 65, 35, 27, 93, 53, 61, 27, 54, 43, 19, 46,
+            31, 37, 39, 62, 51, 35, 41,
           ],
         },
       ],
       options: {
         chart: {
           events: {
-            mounted: (chart:any) => {
+            mounted: (chart: any) => {
               chart.windowResizeHandler();
-            }
+            },
           },
           type: "line",
           height: 20,
@@ -952,42 +1053,45 @@ export class Etherium extends Component<{}, spark3> {
         },
 
         colors: ["#ff534d"],
-      }
+      },
     };
   }
 
   render() {
     return (
-
-
       <div id="chart">
-        <ReactApexChart height={20} width={120} options={this.state.options} series={this.state.series} type="line" />
+        <ReactApexChart
+          height={20}
+          width={120}
+          options={this.state.options}
+          series={this.state.series}
+          type="line"
+        />
       </div>
-    )
+    );
   }
-};
+}
 
 export class Dash extends Component<{}, spark3> {
   constructor(props: {} | Readonly<{}>) {
     super(props);
 
     this.state = {
-
       series: [
         {
           name: "Value",
           data: [
-            61, 27, 54, 43, 19, 46, 31, 37, 39, 0, 45, 54, 38, 56, 24, 65, 35, 27,
-            93, 53, 62, 51, 35, 41,
+            61, 27, 54, 43, 19, 46, 31, 37, 39, 0, 45, 54, 38, 56, 24, 65, 35,
+            27, 93, 53, 62, 51, 35, 41,
           ],
         },
       ],
       options: {
         chart: {
           events: {
-            mounted: (chart:any) => {
+            mounted: (chart: any) => {
               chart.windowResizeHandler();
-            }
+            },
           },
           type: "line",
           height: 20,
@@ -1023,42 +1127,45 @@ export class Dash extends Component<{}, spark3> {
         },
 
         colors: ["#28d193"],
-      }
+      },
     };
   }
 
   render() {
     return (
-
-
       <div id="chart">
-        <ReactApexChart height={20} width={120} options={this.state.options} series={this.state.series} type="line" />
+        <ReactApexChart
+          height={20}
+          width={120}
+          options={this.state.options}
+          series={this.state.series}
+          type="line"
+        />
       </div>
-    )
+    );
   }
-};
+}
 
 export class Ripple extends Component<{}, spark3> {
   constructor(props: {} | Readonly<{}>) {
     super(props);
 
     this.state = {
-
       series: [
         {
           name: "Value",
           data: [
-            61, 27, 54, 43, 19, 56, 24, 65, 35, 27, 93, 53, 46, 31, 37, 39, 0, 45,
-            54, 38, 62, 51, 35, 41,
+            61, 27, 54, 43, 19, 56, 24, 65, 35, 27, 93, 53, 46, 31, 37, 39, 0,
+            45, 54, 38, 62, 51, 35, 41,
           ],
         },
       ],
       options: {
         chart: {
           events: {
-            mounted: (chart:any) => {
+            mounted: (chart: any) => {
               chart.windowResizeHandler();
-            }
+            },
           },
           type: "line",
           height: 20,
@@ -1094,42 +1201,45 @@ export class Ripple extends Component<{}, spark3> {
         },
 
         colors: ["#28d193"],
-      }
+      },
     };
   }
 
   render() {
     return (
-
-
       <div id="chart">
-        <ReactApexChart height={20} width={120} options={this.state.options} series={this.state.series} type="line" />
+        <ReactApexChart
+          height={20}
+          width={120}
+          options={this.state.options}
+          series={this.state.series}
+          type="line"
+        />
       </div>
-    )
+    );
   }
-};
+}
 
 export class Iota extends Component<{}, spark3> {
   constructor(props: {} | Readonly<{}>) {
     super(props);
 
     this.state = {
-
       series: [
         {
           name: "Value",
           data: [
-            61, 27, 54, 37, 39, 0, 45, 54, 38, 62, 51, 35, 41, 43, 19, 56, 24, 65,
-            35, 27, 93, 53, 46, 31,
+            61, 27, 54, 37, 39, 0, 45, 54, 38, 62, 51, 35, 41, 43, 19, 56, 24,
+            65, 35, 27, 93, 53, 46, 31,
           ],
         },
       ],
       options: {
         chart: {
           events: {
-            mounted: (chart:any) => {
+            mounted: (chart: any) => {
               chart.windowResizeHandler();
-            }
+            },
           },
           type: "line",
           height: 20,
@@ -1165,42 +1275,45 @@ export class Iota extends Component<{}, spark3> {
         },
 
         colors: ["#ff534d"],
-      }
+      },
     };
   }
 
   render() {
     return (
-
-
       <div id="chart">
-        <ReactApexChart height={20} width={120} options={this.state.options} series={this.state.series} type="line" />
+        <ReactApexChart
+          height={20}
+          width={120}
+          options={this.state.options}
+          series={this.state.series}
+          type="line"
+        />
       </div>
-    )
+    );
   }
-};
+}
 
 export class Neo extends Component<{}, spark3> {
   constructor(props: {} | Readonly<{}>) {
     super(props);
 
     this.state = {
-
       series: [
         {
           name: "Value",
           data: [
-            62, 51, 35, 41, 43, 19, 56, 24, 65, 35, 27, 93, 53, 46, 31, 61, 27, 54,
-            37, 39, 0, 45, 54, 38,
+            62, 51, 35, 41, 43, 19, 56, 24, 65, 35, 27, 93, 53, 46, 31, 61, 27,
+            54, 37, 39, 0, 45, 54, 38,
           ],
         },
       ],
       options: {
         chart: {
           events: {
-            mounted: (chart:any) => {
+            mounted: (chart: any) => {
               chart.windowResizeHandler();
-            }
+            },
           },
           type: "line",
           height: 20,
@@ -1236,20 +1349,24 @@ export class Neo extends Component<{}, spark3> {
         },
 
         colors: ["#ff534d"],
-      }
+      },
     };
   }
 
   render() {
     return (
-
-
       <div id="chart">
-        <ReactApexChart height={20} width={120} options={this.state.options} series={this.state.series} type="line" />
+        <ReactApexChart
+          height={20}
+          width={120}
+          options={this.state.options}
+          series={this.state.series}
+          type="line"
+        />
       </div>
-    )
+    );
   }
-};
+}
 
 // *******************************************************************************************
 
@@ -1262,7 +1379,6 @@ export class ApplicationsOverview extends Component<{}, spark3> {
     super(props);
 
     this.state = {
-
       series: [
         {
           name: "Total Candidates",
@@ -1283,9 +1399,9 @@ export class ApplicationsOverview extends Component<{}, spark3> {
       options: {
         chart: {
           events: {
-            mounted: (chart:any) => {
+            mounted: (chart: any) => {
               chart.windowResizeHandler();
-            }
+            },
           },
           height: 240,
           type: "line",
@@ -1300,7 +1416,11 @@ export class ApplicationsOverview extends Component<{}, spark3> {
         grid: {
           borderColor: "rgba(107 ,114 ,128,0.1)",
         },
-        colors: ["rgb(90,102,241)", "rgba(203,213,225, 0.3)", "rgb(96, 165 ,250)"],
+        colors: [
+          "rgb(90,102,241)",
+          "rgba(203,213,225, 0.3)",
+          "rgb(96, 165 ,250)",
+        ],
         legend: {
           show: false,
         },
@@ -1345,7 +1465,7 @@ export class ApplicationsOverview extends Component<{}, spark3> {
               colors: "rgb(107 ,114 ,128)",
               fontSize: "12px",
             },
-            formatter: function (y:any) {
+            formatter: function (y: any) {
               return y.toFixed(0) + "";
             },
           },
@@ -1387,18 +1507,20 @@ export class ApplicationsOverview extends Component<{}, spark3> {
           },
         },
       },
-
     };
-
-  };
+  }
 
   render() {
     return (
-
       <div id="chart">
-        <ReactApexChart className="px-4 sm:mt-0 mt-3" height={240} options={this.state.options} series={this.state.series} type="line" />
+        <ReactApexChart
+          className="px-4 sm:mt-0 mt-3"
+          height={240}
+          options={this.state.options}
+          series={this.state.series}
+          type="line"
+        />
       </div>
-
     );
   }
 }
@@ -1410,15 +1532,14 @@ export class AcceptanceRatio extends Component<{}, spark3> {
     super(props);
 
     this.state = {
-
       series: [1754, 1234],
       labels: ["Accepted", "Rejected"],
       options: {
         chart: {
           events: {
-            mounted: (chart:any) => {
+            mounted: (chart: any) => {
               chart.windowResizeHandler();
-            }
+            },
           },
           height: 220,
           type: "donut",
@@ -1463,9 +1584,9 @@ export class AcceptanceRatio extends Component<{}, spark3> {
                 value: {
                   show: true,
                   fontSize: "18px",
-                  color: '#596478',
+                  color: "#596478",
                   offsetY: 8,
-                  formatter: function (val:any) {
+                  formatter: function (val: any) {
                     return val + "%";
                   },
                 },
@@ -1484,18 +1605,20 @@ export class AcceptanceRatio extends Component<{}, spark3> {
 
         colors: ["rgb(90,102,241)", "#60a5fa"],
       },
-
     };
-
-  };
+  }
 
   render() {
     return (
-
       <div id="chart">
-        <ReactApexChart className="p-4  border-b border-dashed border-gray-200 dark:border-white/10" height={220} options={this.state.options} series={this.state.series} type="donut" />
+        <ReactApexChart
+          className="p-4  border-b border-dashed border-gray-200 dark:border-white/10"
+          height={220}
+          options={this.state.options}
+          series={this.state.series}
+          type="donut"
+        />
       </div>
-
     );
   }
 }
@@ -1511,7 +1634,6 @@ export class NFTsalesOverview extends Component<{}, spark3> {
     super(props);
 
     this.state = {
-
       series: [
         {
           data: [
@@ -1761,9 +1883,9 @@ export class NFTsalesOverview extends Component<{}, spark3> {
       options: {
         chart: {
           events: {
-            mounted: (chart:any) => {
+            mounted: (chart: any) => {
               chart.windowResizeHandler();
-            }
+            },
           },
           type: "candlestick",
           height: 420,
@@ -1822,34 +1944,65 @@ export class NFTsalesOverview extends Component<{}, spark3> {
         },
       },
     };
-
-  };
-
+  }
 
   render() {
-
     return (
-
       <div className="box">
         <div className="box-header">
           <div className="sm:flex justify-between">
             <h5 className="box-title my-auto">Sales Overview</h5>
             <div className="inline-flex rounded-md shadow-sm">
-              <button type="button" className="ti-btn-group text-xs !border-0 py-2 px-3 ti-btn-primary"> 1D </button>
-              <button type="button" className="ti-btn-group text-xs !border-0 py-2 px-3 ti-btn-soft-primary"> 1W </button>
-              <button type="button" className="ti-btn-group text-xs !border-0 py-2 px-3 ti-btn-soft-primary"> 1M </button>
-              <button type="button" className="ti-btn-group text-xs !border-0 py-2 px-3 ti-btn-soft-primary"> 3M </button>
-              <button type="button" className="ti-btn-group text-xs !border-0 py-2 px-3 ti-btn-soft-primary"> 6M </button>
-              <button type="button" className="ti-btn-group text-xs !border-0 py-2 px-3 ti-btn-soft-primary"> 1Y </button>
+              <button
+                type="button"
+                className="ti-btn-group text-xs !border-0 py-2 px-3 ti-btn-primary"
+              >
+                {" "}
+                1D{" "}
+              </button>
+              <button
+                type="button"
+                className="ti-btn-group text-xs !border-0 py-2 px-3 ti-btn-soft-primary"
+              >
+                {" "}
+                1W{" "}
+              </button>
+              <button
+                type="button"
+                className="ti-btn-group text-xs !border-0 py-2 px-3 ti-btn-soft-primary"
+              >
+                {" "}
+                1M{" "}
+              </button>
+              <button
+                type="button"
+                className="ti-btn-group text-xs !border-0 py-2 px-3 ti-btn-soft-primary"
+              >
+                {" "}
+                3M{" "}
+              </button>
+              <button
+                type="button"
+                className="ti-btn-group text-xs !border-0 py-2 px-3 ti-btn-soft-primary"
+              >
+                {" "}
+                6M{" "}
+              </button>
+              <button
+                type="button"
+                className="ti-btn-group text-xs !border-0 py-2 px-3 ti-btn-soft-primary"
+              >
+                {" "}
+                1Y{" "}
+              </button>
             </div>
           </div>
         </div>
         <div className="box-body p-0">
-          <div
-            className="flex flex-wrap p-4 border-b border-dashed border-gray-200 dark:border-white/10">
+          <div className="flex flex-wrap p-4 border-b border-dashed border-gray-200 dark:border-white/10">
             <div className="ltr:mr-3 rtl:ml-3">
               <span className="avatar avatar-sm rounded-full p-2 bg-gray-100 dark:bg-black/20">
-                <img src={ALLImages('svg8')} alt="" />
+                <img src={ALLImages("svg8")} alt="" />
               </span>
             </div>
             <div className="flex flex-wrap justify-evenly flex-auto">
@@ -1876,7 +2029,13 @@ export class NFTsalesOverview extends Component<{}, spark3> {
             </div>
           </div>
           <div id="chart">
-            <ReactApexChart className="p-4" height={423} options={this.state.options} series={this.state.series} type="candlestick" />
+            <ReactApexChart
+              className="p-4"
+              height={423}
+              options={this.state.options}
+              series={this.state.series}
+              type="candlestick"
+            />
           </div>
         </div>
       </div>
@@ -1895,20 +2054,19 @@ export class SessionOverview extends Component<{}, spark3> {
     super(props);
 
     this.state = {
-
       series: [
         {
           name: "Session",
           data: [20, 38, 38, 72, 55, 63, 43, 76, 55, 80, 40, 100],
-          color: "#5a66f1"
+          color: "#5a66f1",
         },
       ],
       options: {
         chart: {
           events: {
-            mounted: (chart:any) => {
+            mounted: (chart: any) => {
               chart.windowResizeHandler();
-            }
+            },
           },
           height: 300,
           type: "bar",
@@ -1949,7 +2107,7 @@ export class SessionOverview extends Component<{}, spark3> {
               colors: "rgb(107 ,114 ,128)",
               fontSize: "12px",
             },
-            formatter: function (y:any) {
+            formatter: function (y: any) {
               return y.toFixed(0) + "";
             },
           },
@@ -1989,24 +2147,24 @@ export class SessionOverview extends Component<{}, spark3> {
               fontSize: "12px",
             },
           },
-
         },
       },
-
-
     };
   }
 
   render() {
     return (
-
-
-      <div id="chart" >
-        <ReactApexChart height={300} options={this.state.options} series={this.state.series} type="bar" />
+      <div id="chart">
+        <ReactApexChart
+          height={300}
+          options={this.state.options}
+          series={this.state.series}
+          type="bar"
+        />
       </div>
-    )
+    );
   }
-};
+}
 
 //Device views
 
@@ -2015,15 +2173,14 @@ export class Deviceview extends Component<{}, spark3> {
     super(props);
 
     this.state = {
-
       series: [1754, 1234, 878, 270],
       labels: ["Mobile", "Tablet", "Desktop", "Others"],
       options: {
         chart: {
           events: {
-            mounted: (chart:any) => {
+            mounted: (chart: any) => {
               chart.windowResizeHandler();
-            }
+            },
           },
           height: 325,
           type: "donut",
@@ -2037,7 +2194,6 @@ export class Deviceview extends Component<{}, spark3> {
           horizontalAlign: "center",
           fontSize: "15px",
           fontWeight: 500,
-          
         },
         stroke: {
           show: true,
@@ -2068,7 +2224,7 @@ export class Deviceview extends Component<{}, spark3> {
                   fontSize: "15px",
                   fontWeight: 600,
                   offsetY: 8,
-                  formatter: function (val:any) {
+                  formatter: function (val: any) {
                     return val + "%";
                   },
                 },
@@ -2090,21 +2246,22 @@ export class Deviceview extends Component<{}, spark3> {
           "rgba(203,213,225, 1)",
         ],
       },
-
-
     };
   }
 
   render() {
     return (
-
-
       <div id="chart">
-        <ReactApexChart height={325} options={this.state.options} series={this.state.series} type="donut" />
+        <ReactApexChart
+          height={325}
+          options={this.state.options}
+          series={this.state.series}
+          type="donut"
+        />
       </div>
-    )
+    );
   }
-};
+}
 
 //Sessions By Gender
 
@@ -2113,55 +2270,60 @@ export class SessionsByGender extends Component<{}, spark3> {
     super(props);
 
     this.state = {
-
       series: [40, 40, 20],
       options: {
         chart: {
           events: {
-            mounted: (chart:any) => {
+            mounted: (chart: any) => {
               chart.windowResizeHandler();
-            }
+            },
           },
-          type: 'polarArea',
+          type: "polarArea",
           height: 350,
-          width: 450
+          width: 450,
         },
-        labels: ['Male', 'Female', 'Others'],
+        labels: ["Male", "Female", "Others"],
         stroke: {
-          colors: ['#fff']
+          colors: ["#fff"],
         },
         fill: {
-          opacity: 0.8
+          opacity: 0.8,
         },
         legend: {
-          position: 'bottom'
+          position: "bottom",
         },
         colors: ["#5a66f1", "#d5dde7", "#60a5fa"],
-        responsive: [{
-          breakpoint: 480,
-          options: {
-            chart: {
-              width: 200
+        responsive: [
+          {
+            breakpoint: 480,
+            options: {
+              chart: {
+                width: 200,
+              },
+              legend: {
+                position: "bottom",
+              },
             },
-            legend: {
-              position: 'bottom'
-            }
-          }
-        }]
+          },
+        ],
       },
     };
   }
 
   render() {
     return (
-
-
       <div id="chart">
-        <ReactApexChart className="flex justify-center" height={350} options={this.state.options} series={this.state.series} type="polarArea" />
+        <ReactApexChart
+          className="flex justify-center"
+          height={350}
+          options={this.state.options}
+          series={this.state.series}
+          type="polarArea"
+        />
       </div>
-    )
+    );
   }
-};
+}
 
 //Audience Overview
 
@@ -2170,20 +2332,22 @@ export class AudienceOverview extends Component<{}, spark3> {
     super(props);
 
     this.state = {
-
-      series: [{
-        data: [44, 55, 41, 64, 22, 43, 21]
-      }, {
-        data: [53, 32, 33, 52, 13, 44, 32]
-      }],
+      series: [
+        {
+          data: [44, 55, 41, 64, 22, 43, 21],
+        },
+        {
+          data: [53, 32, 33, 52, 13, 44, 32],
+        },
+      ],
       options: {
         chart: {
           events: {
-            mounted: (chart:any) => {
+            mounted: (chart: any) => {
               chart.windowResizeHandler();
-            }
+            },
           },
-          type: 'bar',
+          type: "bar",
           height: 280,
           toolbar: {
             show: false,
@@ -2193,9 +2357,9 @@ export class AudienceOverview extends Component<{}, spark3> {
           bar: {
             horizontal: true,
             dataLabels: {
-              position: 'top',
+              position: "top",
             },
-          }
+          },
         },
         grid: {
           borderColor: "rgba(107 ,114 ,128,0.1)",
@@ -2205,9 +2369,9 @@ export class AudienceOverview extends Component<{}, spark3> {
           enabled: false,
           offsetX: -6,
           style: {
-            fontSize: '12px',
-            colors: ['#fff']
-          }
+            fontSize: "12px",
+            colors: ["#fff"],
+          },
         },
         legend: {
           show: false,
@@ -2215,14 +2379,14 @@ export class AudienceOverview extends Component<{}, spark3> {
         stroke: {
           show: true,
           width: 1,
-          colors: ['rgba(107 ,114 ,128,0.1)']
+          colors: ["rgba(107 ,114 ,128,0.1)"],
         },
         tooltip: {
           shared: true,
-          intersect: false
+          intersect: false,
         },
         xaxis: {
-          categories: ['Jan', 'feb', 'mar', 'apr', 'jun', 'jul', 'aug'],
+          categories: ["Jan", "feb", "mar", "apr", "jun", "jul", "aug"],
           axisBorder: {
             show: true,
             color: "rgba(119, 119, 142, 0.05)",
@@ -2240,39 +2404,41 @@ export class AudienceOverview extends Component<{}, spark3> {
             show: true,
             style: {
               colors: "#8c9097",
-              fontSize: '11px',
+              fontSize: "11px",
               fontWeight: 600,
-              cssClass: 'apexcharts-xaxis-label',
+              cssClass: "apexcharts-xaxis-label",
             },
-          }
+          },
         },
         yaxis: {
           labels: {
             show: true,
             style: {
               colors: "#8c9097",
-              fontSize: '11px',
+              fontSize: "11px",
               fontWeight: 600,
-              cssClass: 'apexcharts-yaxis-label',
+              cssClass: "apexcharts-yaxis-label",
             },
-          }
-        }
-
+          },
+        },
       },
-
     };
   }
 
   render() {
     return (
-
-
-      <div id="chart" className='overview'>
-        <ReactApexChart className="flex justify-center" height={280} options={this.state.options} series={this.state.series} type="bar" />
+      <div id="chart" className="overview">
+        <ReactApexChart
+          className="flex justify-center"
+          height={280}
+          options={this.state.options}
+          series={this.state.series}
+          type="bar"
+        />
       </div>
-    )
+    );
   }
-};
+}
 
 // *******************************************************************************************
 
@@ -2285,29 +2451,29 @@ export class ProjectAnalysis extends Component<{}, spark3> {
     super(props);
 
     this.state = {
-
-      series: [{
-        name: "Projects",
-        type: "column",
-        data: [1.8, 2.5, 2.5, 1.5, 2.5, 2.8, 3.8],
-      },
-      {
-        name: "Tasks",
-        type: "column",
-        data: [1.1, 2.2, 3.1, 4, 4.1, 4.9, 6.5],
-      },
-      {
-        name: "Revenue",
-        type: "line",
-        data: [20, 29, 37, 35, 44, 43, 50],
-      },
+      series: [
+        {
+          name: "Projects",
+          type: "column",
+          data: [1.8, 2.5, 2.5, 1.5, 2.5, 2.8, 3.8],
+        },
+        {
+          name: "Tasks",
+          type: "column",
+          data: [1.1, 2.2, 3.1, 4, 4.1, 4.9, 6.5],
+        },
+        {
+          name: "Revenue",
+          type: "line",
+          data: [20, 29, 37, 35, 44, 43, 50],
+        },
       ],
       options: {
         chart: {
           events: {
-            mounted: (chart:any) => {
+            mounted: (chart: any) => {
               chart.windowResizeHandler();
-            }
+            },
           },
           toolbar: {
             show: false,
@@ -2415,10 +2581,10 @@ export class ProjectAnalysis extends Component<{}, spark3> {
           labels: {
             colors: "#acb1b1",
           },
-          markers: {
-            width: 10,
-            height: 10,
-          },
+          // markers: {
+          //   width: 10,
+          //   height: 10,
+          // },
         },
         stroke: {
           width: [0, 0, 1.5],
@@ -2432,20 +2598,22 @@ export class ProjectAnalysis extends Component<{}, spark3> {
           },
         },
       },
-
-
     };
   }
 
   render() {
     return (
-
       <div id="chart">
-        <ReactApexChart height={370} options={this.state.options} series={this.state.series} type="line" />
+        <ReactApexChart
+          height={370}
+          options={this.state.options}
+          series={this.state.series}
+          type="line"
+        />
       </div>
-    )
+    );
   }
-};
+}
 
 // *******************************************************************************************
 
@@ -2458,66 +2626,84 @@ export class SalesOverviewHRM extends Component<{}, spark3> {
     super(props);
 
     this.state = {
-
-      series: [{
-        name: 'Designing',
-        data: [44, 55, 41, 67, 22, 43, 44, 55, 41, 67, 22, 43]
-      }, {
-        name: 'Development',
-        data: [13, 23, 20, 8, 13, 27, 13, 23, 20, 8, 13, 27]
-      }, {
-        name: 'SEO',
-        data: [11, 17, 15, 15, 21, 14, 11, 17, 15, 15, 21, 14]
-      }],
+      series: [
+        {
+          name: "Designing",
+          data: [44, 55, 41, 67, 22, 43, 44, 55, 41, 67, 22, 43],
+        },
+        {
+          name: "Development",
+          data: [13, 23, 20, 8, 13, 27, 13, 23, 20, 8, 13, 27],
+        },
+        {
+          name: "SEO",
+          data: [11, 17, 15, 15, 21, 14, 11, 17, 15, 15, 21, 14],
+        },
+      ],
       options: {
         chart: {
           events: {
-            mounted: (chart:any) => {
+            mounted: (chart: any) => {
               chart.windowResizeHandler();
-            }
+            },
           },
-          type: 'bar',
+          type: "bar",
           height: 310,
           stacked: true,
           toolbar: {
-            show: false
+            show: false,
           },
           zoom: {
-            enabled: true
-          }
+            enabled: true,
+          },
         },
         grid: {
           borderColor: "rgba(107 ,114 ,128,0.1)",
         },
-        responsive: [{
-          breakpoint: 480,
-          options: {
-            legend: {
-              position: 'bottom',
-              offsetX: -10,
-              offsetY: 0
-            }
-          }
-        }],
+        responsive: [
+          {
+            breakpoint: 480,
+            options: {
+              legend: {
+                position: "bottom",
+                offsetX: -10,
+                offsetY: 0,
+              },
+            },
+          },
+        ],
         colors: ["#5a66f1", "#60a5fa", "#d5dde7"],
         legend: {
           show: true,
-          position: 'top',
+          position: "top",
           labels: {
-            colors: '#74767c',
+            colors: "#74767c",
           },
         },
         plotOptions: {
           bar: {
             columnWidth: "20%",
-            borderRadius: 5
-          }
+            borderRadius: 5,
+          },
         },
         dataLabels: {
-          enabled: false
+          enabled: false,
         },
         xaxis: {
-          categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+          categories: [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug",
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec",
+          ],
           axisBorder: {
             show: true,
             color: "rgba(119, 119, 142, 0.05)",
@@ -2534,28 +2720,30 @@ export class SalesOverviewHRM extends Component<{}, spark3> {
           labels: {
             rotate: -90,
             style: {
-                colors: "#8c9097",
+              colors: "#8c9097",
             },
-          }
+          },
         },
         fill: {
-          opacity: 1
-        }
+          opacity: 1,
+        },
       },
-
     };
   }
 
   render() {
     return (
-
-
       <div id="chart">
-        <ReactApexChart height={310} options={this.state.options} series={this.state.series} type="bar" />
+        <ReactApexChart
+          height={310}
+          options={this.state.options}
+          series={this.state.series}
+          type="bar"
+        />
       </div>
-    )
+    );
   }
-};
+}
 
 // *******************************************************************************************
 
@@ -2568,7 +2756,6 @@ export class Revenue extends Component<{}, spark3> {
     super(props);
 
     this.state = {
-
       series: [
         {
           name: "Deals",
@@ -2584,9 +2771,9 @@ export class Revenue extends Component<{}, spark3> {
       options: {
         chart: {
           events: {
-            mounted: (chart:any) => {
+            mounted: (chart: any) => {
               chart.windowResizeHandler();
-            }
+            },
           },
           height: 280,
           type: "line",
@@ -2646,20 +2833,22 @@ export class Revenue extends Component<{}, spark3> {
           },
         },
       },
-
-
     };
   }
 
   render() {
     return (
-
       <div id="chart">
-        <ReactApexChart height={280} options={this.state.options} series={this.state.series} type="line" />
+        <ReactApexChart
+          height={280}
+          options={this.state.options}
+          series={this.state.series}
+          type="line"
+        />
       </div>
-    )
+    );
   }
-};
+}
 
 //Leads By Source
 
@@ -2668,18 +2857,17 @@ export class LeadsBySource extends Component<{}, spark3> {
     super(props);
 
     this.state = {
-
       series: [
         {
-          data: [400, 430, 470, 540, 600, 800]
+          data: [400, 430, 470, 540, 600, 800],
         },
       ],
       options: {
         chart: {
           events: {
-            mounted: (chart:any) => {
+            mounted: (chart: any) => {
               chart.windowResizeHandler();
-            }
+            },
           },
           type: "bar",
           height: 380,
@@ -2721,7 +2909,14 @@ export class LeadsBySource extends Component<{}, spark3> {
           enabled: false,
         },
         xaxis: {
-          categories: ['Marketing', 'Digital', 'Web', 'Advertisement', 'Employee Referal', 'Other'],
+          categories: [
+            "Marketing",
+            "Digital",
+            "Web",
+            "Advertisement",
+            "Employee Referal",
+            "Other",
+          ],
           axisBorder: {
             show: true,
             color: "rgba(119, 119, 142, 0.1)",
@@ -2757,20 +2952,22 @@ export class LeadsBySource extends Component<{}, spark3> {
           },
         },
       },
-
     };
   }
 
   render() {
     return (
-
-
-      <div id="leads-by-soruce" className='leads'>
-        <ReactApexChart height={380} options={this.state.options} series={this.state.series} type="bar" />
+      <div id="leads-by-soruce" className="leads">
+        <ReactApexChart
+          height={380}
+          options={this.state.options}
+          series={this.state.series}
+          type="bar"
+        />
       </div>
-    )
+    );
   }
-};
+}
 
 // *******************************************************************************************
 
@@ -2783,7 +2980,6 @@ export class Statistic extends Component<{}, spark3> {
     super(props);
 
     this.state = {
-
       series: [
         {
           name: "Income",
@@ -2797,9 +2993,9 @@ export class Statistic extends Component<{}, spark3> {
       options: {
         chart: {
           events: {
-            mounted: (chart:any) => {
+            mounted: (chart: any) => {
               chart.windowResizeHandler();
-            }
+            },
           },
           height: 390,
           type: "bar",
@@ -2851,7 +3047,7 @@ export class Statistic extends Component<{}, spark3> {
               fontFamily: "Inter, sans-serif",
               fontWeight: 500,
             },
-            formatter: function (y:any) {
+            formatter: function (y: any) {
               return y.toFixed(0) + "";
             },
           },
@@ -2893,19 +3089,22 @@ export class Statistic extends Component<{}, spark3> {
           },
         },
       },
-
     };
   }
 
   render() {
     return (
-
       <div id="chart">
-        <ReactApexChart height={390} options={this.state.options} series={this.state.series} type="bar" />
+        <ReactApexChart
+          height={390}
+          options={this.state.options}
+          series={this.state.series}
+          type="bar"
+        />
       </div>
-    )
+    );
   }
-};
+}
 
 // *******************************************************************************************
 
@@ -2918,7 +3117,6 @@ export class Investments extends Component<{}, spark3> {
     super(props);
 
     this.state = {
-
       series: [
         {
           name: "Invested Value",
@@ -2929,13 +3127,14 @@ export class Investments extends Component<{}, spark3> {
           name: "Total Returns",
           type: "area",
           data: [44, 55, 41, 67, 22, 43, 21, 41, 56, 27, 43],
-        },],
+        },
+      ],
       options: {
         chart: {
           events: {
-            mounted: (chart:any) => {
+            mounted: (chart: any) => {
               chart.windowResizeHandler();
-            }
+            },
           },
           height: 300,
           type: "area",
@@ -2993,7 +3192,7 @@ export class Investments extends Component<{}, spark3> {
               colors: "rgb(107 ,114 ,128)",
               fontSize: "12px",
             },
-            formatter: function (y:any) {
+            formatter: function (y: any) {
               return y.toFixed(0) + "";
             },
           },
@@ -3036,51 +3235,113 @@ export class Investments extends Component<{}, spark3> {
         },
       },
     };
-
-  };
+  }
 
   render() {
     return (
-
       <div className="box">
         <div className="box-header">
           <div className="sm:flex justify-between">
             <h5 className="box-title my-auto">Total Investments</h5>
             <div className="inline-flex rounded-md shadow-sm">
-              <button type="button" className="ti-btn-group text-xs !border-0 py-2 px-3 ti-btn-primary"> 1D </button>
-              <button type="button" className="ti-btn-group text-xs !border-0 py-2 px-3 ti-btn-soft-primary"> 1W </button>
-              <button type="button" className="ti-btn-group text-xs !border-0 py-2 px-3 ti-btn-soft-primary"> 1M </button>
-              <button type="button" className="ti-btn-group text-xs !border-0 py-2 px-3 ti-btn-soft-primary"> 3M </button>
-              <button type="button" className="ti-btn-group text-xs !border-0 py-2 px-3 ti-btn-soft-primary"> 6M </button>
-              <button type="button" className="ti-btn-group text-xs !border-0 py-2 px-3 ti-btn-soft-primary"> 1Y </button>
+              <button
+                type="button"
+                className="ti-btn-group text-xs !border-0 py-2 px-3 ti-btn-primary"
+              >
+                {" "}
+                1D{" "}
+              </button>
+              <button
+                type="button"
+                className="ti-btn-group text-xs !border-0 py-2 px-3 ti-btn-soft-primary"
+              >
+                {" "}
+                1W{" "}
+              </button>
+              <button
+                type="button"
+                className="ti-btn-group text-xs !border-0 py-2 px-3 ti-btn-soft-primary"
+              >
+                {" "}
+                1M{" "}
+              </button>
+              <button
+                type="button"
+                className="ti-btn-group text-xs !border-0 py-2 px-3 ti-btn-soft-primary"
+              >
+                {" "}
+                3M{" "}
+              </button>
+              <button
+                type="button"
+                className="ti-btn-group text-xs !border-0 py-2 px-3 ti-btn-soft-primary"
+              >
+                {" "}
+                6M{" "}
+              </button>
+              <button
+                type="button"
+                className="ti-btn-group text-xs !border-0 py-2 px-3 ti-btn-soft-primary"
+              >
+                {" "}
+                1Y{" "}
+              </button>
             </div>
           </div>
         </div>
         <div className="box-body">
-        <div className="sm:flex justify-between items-center text-sm text-center mb-4">
-                  <div className="sm:flex items-center mb-4 sm:mb-0 space-y-4 sm:space-y-0">
-                    <div className="ltr:mr-6 rtl:ml-6">
-                      <span className="text-gray-500 dark:text-white/70">Invested Value</span>
-                      <p className="mt-1 mb-0">$1,290.94 <span className="ltr:ml-1 rtl:mr-1 text-success"><i className="ti ti-trending-up"></i> 1.22%</span></p>
-                    </div>
-                    <div className="ltr:mr-0 rtl:ml-0">
-                      <span className="text-gray-500 dark:text-white/70">Total Returns</span>
-                      <p className="mt-1 mb-0">$25,458.20 <span className="ltr:ml-1 rtl:mr-1 text-success"><i className="ti ti-trending-up"></i> 12.22%</span></p>
-                    </div>
-                  </div>
-                  <div className="sm:flex items-center space-y-4 sm:space-y-0">
-                    <div className="ltr:mr-6 rtl:ml-6">
-                      <span className="text-gray-500 dark:text-white/70">Today Change</span>
-                      <p className="mt-1 mb-0">$112.09</p>
-                    </div>
-                    <div className="ltr:mr-0 rtl:ml-0">
-                      <span className="text-gray-500 dark:text-white/70">Change In %</span>
-                      <p className="mt-1 mb-0">+0.01% <span className="ltr:ml-1 rtl:mr-1 text-success"><i className="ti ti-trending-up"></i> 0.03%</span></p>
-                    </div>
-                  </div>
-                </div>
+          <div className="sm:flex justify-between items-center text-sm text-center mb-4">
+            <div className="sm:flex items-center mb-4 sm:mb-0 space-y-4 sm:space-y-0">
+              <div className="ltr:mr-6 rtl:ml-6">
+                <span className="text-gray-500 dark:text-white/70">
+                  Invested Value
+                </span>
+                <p className="mt-1 mb-0">
+                  $1,290.94{" "}
+                  <span className="ltr:ml-1 rtl:mr-1 text-success">
+                    <i className="ti ti-trending-up"></i> 1.22%
+                  </span>
+                </p>
+              </div>
+              <div className="ltr:mr-0 rtl:ml-0">
+                <span className="text-gray-500 dark:text-white/70">
+                  Total Returns
+                </span>
+                <p className="mt-1 mb-0">
+                  $25,458.20{" "}
+                  <span className="ltr:ml-1 rtl:mr-1 text-success">
+                    <i className="ti ti-trending-up"></i> 12.22%
+                  </span>
+                </p>
+              </div>
+            </div>
+            <div className="sm:flex items-center space-y-4 sm:space-y-0">
+              <div className="ltr:mr-6 rtl:ml-6">
+                <span className="text-gray-500 dark:text-white/70">
+                  Today Change
+                </span>
+                <p className="mt-1 mb-0">$112.09</p>
+              </div>
+              <div className="ltr:mr-0 rtl:ml-0">
+                <span className="text-gray-500 dark:text-white/70">
+                  Change In %
+                </span>
+                <p className="mt-1 mb-0">
+                  +0.01%{" "}
+                  <span className="ltr:ml-1 rtl:mr-1 text-success">
+                    <i className="ti ti-trending-up"></i> 0.03%
+                  </span>
+                </p>
+              </div>
+            </div>
+          </div>
           <div id="chart">
-            <ReactApexChart height={300} options={this.state.options} series={this.state.series} type="area" />
+            <ReactApexChart
+              height={300}
+              options={this.state.options}
+              series={this.state.series}
+              type="area"
+            />
           </div>
         </div>
       </div>
@@ -3099,44 +3360,56 @@ export class EarningReport extends Component<{}, spark3> {
     super(props);
 
     this.state = {
-
       series: [
         {
-          name: 'Students',
-          type: 'column',
-          data: [23, 11, 22, 27, 13, 22, 37, 21, 44, 22, 45, 35]
+          name: "Students",
+          type: "column",
+          data: [23, 11, 22, 27, 13, 22, 37, 21, 44, 22, 45, 35],
         },
         {
-          name: 'Earnings',
-          type: 'line',
-          data: [44, 55, 41, 67, 22, 43, 21, 41, 56, 27, 43, 27]
+          name: "Earnings",
+          type: "line",
+          data: [44, 55, 41, 67, 22, 43, 21, 41, 56, 27, 43, 27],
         },
       ],
       options: {
         chart: {
           events: {
-            mounted: (chart:any) => {
+            mounted: (chart: any) => {
               chart.windowResizeHandler();
-            }
+            },
           },
           toolbar: {
-            show: false
+            show: false,
           },
-          type: 'line',
+          type: "line",
           height: 340,
         },
         grid: {
           borderColor: "rgba(107 ,114 ,128,0.1)",
-          strokeDashArray: 3
+          strokeDashArray: 3,
         },
         colors: ["rgb(90,102,241)", "rgb(203,213,225)"],
-        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        labels: [
+          "Jan",
+          "Feb",
+          "Mar",
+          "Apr",
+          "May",
+          "Jun",
+          "Jul",
+          "Aug",
+          "Sep",
+          "Oct",
+          "Nov",
+          "Dec",
+        ],
         dataLabels: {
-          enabled: false
+          enabled: false,
         },
         stroke: {
           width: [1, 1.1],
-          curve: ['straight', 'smooth'],
+          curve: ["straight", "smooth"],
         },
         legend: {
           show: false,
@@ -3159,24 +3432,26 @@ export class EarningReport extends Component<{}, spark3> {
         plotOptions: {
           bar: {
             columnWidth: "22%",
-            borderRadius: 2
-          }
+            borderRadius: 2,
+          },
         },
       },
-
     };
   }
 
   render() {
     return (
-
-
       <div id="chart">
-        <ReactApexChart height={340} options={this.state.options} series={this.state.series} type="line" />
+        <ReactApexChart
+          height={340}
+          options={this.state.options}
+          series={this.state.series}
+          type="line"
+        />
       </div>
-    )
+    );
   }
-};
+}
 
 // *******************************************************************************************
 
@@ -3189,80 +3464,82 @@ export class Bitcoins extends Component<{}, spark3> {
     super(props);
 
     this.state = {
-
       series: [
         {
-          data: [34, 55, 41, 67, 22, 43, 21]
+          data: [34, 55, 41, 67, 22, 43, 21],
         },
       ],
       options: {
         chart: {
           events: {
-            mounted: (chart:any) => {
+            mounted: (chart: any) => {
               chart.windowResizeHandler();
-            }
+            },
           },
           sparkline: {
-            enabled: true
+            enabled: true,
           },
           dropShadow: {
             enabled: true,
             enabledOnSeries: undefined,
             blur: 3,
-            opacity: 0.2
+            opacity: 0.2,
           },
-          type: 'line',
+          type: "line",
           height: 20,
-          width: 100
+          width: 100,
         },
         tooltip: {
           x: {
-            show: false
+            show: false,
           },
           y: {
             title: {
               formatter: function () {
-                return ''
-              }
-            }
+                return "";
+              },
+            },
           },
           marker: {
-            show: false
-          }
+            show: false,
+          },
         },
         colors: ["#47bbed"],
         stroke: {
           width: [1.5],
-          curve: ['smooth'],
+          curve: ["smooth"],
         },
         xaxis: {
           crosshairs: {
             show: false,
-          }
+          },
         },
         fill: {
-          type: 'gradient',
+          type: "gradient",
           gradient: {
             opacityFrom: 0.9,
             opacityTo: 0.9,
             stops: [0, 98],
-          }
+          },
         },
       },
-
     };
   }
 
   render() {
     return (
-
-
       <div id="chart">
-        <ReactApexChart height={20} width={100} options={this.state.options} series={this.state.series} type="line" />
+        <ReactApexChart
+          height={20}
+          width={100}
+          options={this.state.options}
+          series={this.state.series}
+          type="line"
+        />
       </div>
-    )
+    );
   }
-};
+}
 
 //Ethereum
 
@@ -3271,79 +3548,81 @@ export class Ethereum extends Component<{}, spark3> {
     super(props);
 
     this.state = {
-
       series: [
         {
-          data: [34, 55, 41, 47, 32, 53, 31]
+          data: [34, 55, 41, 47, 32, 53, 31],
         },
       ],
       options: {
         chart: {
           events: {
-            mounted: (chart:any) => {
+            mounted: (chart: any) => {
               chart.windowResizeHandler();
-            }
+            },
           },
           sparkline: {
-            enabled: true
+            enabled: true,
           },
           dropShadow: {
             enabled: true,
             enabledOnSeries: undefined,
-            opacity: 0.2
+            opacity: 0.2,
           },
-          type: 'line',
+          type: "line",
           height: 20,
-          width: 100
+          width: 100,
         },
         tooltip: {
           x: {
-            show: false
+            show: false,
           },
           y: {
             title: {
               formatter: function () {
-                return ''
-              }
-            }
+                return "";
+              },
+            },
           },
           marker: {
-            show: false
-          }
+            show: false,
+          },
         },
         colors: ["#60a5fa"],
         stroke: {
           width: [1.5],
-          curve: ['smooth'],
+          curve: ["smooth"],
         },
         xaxis: {
           crosshairs: {
             show: false,
-          }
+          },
         },
         fill: {
-          type: 'gradient',
+          type: "gradient",
           gradient: {
             opacityFrom: 0.9,
             opacityTo: 0.9,
             stops: [0, 98],
-          }
+          },
         },
       },
-
     };
   }
 
   render() {
     return (
-
-
       <div id="chart">
-        <ReactApexChart height={20} width={100} options={this.state.options} series={this.state.series} type="line" />
+        <ReactApexChart
+          height={20}
+          width={100}
+          options={this.state.options}
+          series={this.state.series}
+          type="line"
+        />
       </div>
-    )
+    );
   }
-};
+}
 
 //dshCoin
 
@@ -3352,79 +3631,81 @@ export class DshCoin extends Component<{}, spark3> {
     super(props);
 
     this.state = {
-
       series: [
         {
-          data: [31, 53, 32, 47, 41, 55, 44]
+          data: [31, 53, 32, 47, 41, 55, 44],
         },
       ],
       options: {
         chart: {
           events: {
-            mounted: (chart:any) => {
+            mounted: (chart: any) => {
               chart.windowResizeHandler();
-            }
+            },
           },
           sparkline: {
-            enabled: true
+            enabled: true,
           },
           dropShadow: {
             enabled: true,
-            enabledOnSeries: undefined,           
-            opacity: 0.2
+            enabledOnSeries: undefined,
+            opacity: 0.2,
           },
-          type: 'line',
+          type: "line",
           height: 20,
-          width: 100
+          width: 100,
         },
         tooltip: {
           x: {
-            show: false
+            show: false,
           },
           y: {
             title: {
               formatter: function () {
-                return ''
-              }
-            }
+                return "";
+              },
+            },
           },
           marker: {
-            show: false
-          }
+            show: false,
+          },
         },
         colors: ["#FF534D"],
         stroke: {
           width: [1.5],
-          curve: ['smooth'],
+          curve: ["smooth"],
         },
         xaxis: {
           crosshairs: {
             show: false,
-          }
+          },
         },
         fill: {
-          type: 'gradient',
+          type: "gradient",
           gradient: {
             opacityFrom: 0.9,
             opacityTo: 0.9,
             stops: [0, 98],
-          }
+          },
         },
       },
-
     };
   }
 
   render() {
     return (
-
-
       <div id="chart">
-        <ReactApexChart height={20} width={100} options={this.state.options} series={this.state.series} type="line" />
+        <ReactApexChart
+          height={20}
+          width={100}
+          options={this.state.options}
+          series={this.state.series}
+          type="line"
+        />
       </div>
-    )
+    );
   }
-};
+}
 
 //Golem
 
@@ -3433,79 +3714,81 @@ export class Golem extends Component<{}, spark3> {
     super(props);
 
     this.state = {
-
       series: [
         {
-          data: [21, 43, 22, 45, 35, 55, 34]
+          data: [21, 43, 22, 45, 35, 55, 34],
         },
       ],
       options: {
         chart: {
           events: {
-            mounted: (chart:any) => {
+            mounted: (chart: any) => {
               chart.windowResizeHandler();
-            }
+            },
           },
           sparkline: {
-            enabled: true
+            enabled: true,
           },
           dropShadow: {
             enabled: true,
             enabledOnSeries: undefined,
-            opacity: 0.2
+            opacity: 0.2,
           },
-          type: 'line',
+          type: "line",
           height: 20,
-          width: 100
+          width: 100,
         },
         tooltip: {
           x: {
-            show: false
+            show: false,
           },
           y: {
             title: {
               formatter: function () {
-                return ''
-              }
-            }
+                return "";
+              },
+            },
           },
           marker: {
-            show: false
-          }
+            show: false,
+          },
         },
         colors: ["#FFBE14"],
         stroke: {
           width: [1.5],
-          curve: ['smooth'],
+          curve: ["smooth"],
         },
         xaxis: {
           crosshairs: {
             show: false,
-          }
+          },
         },
         fill: {
-          type: 'gradient',
+          type: "gradient",
           gradient: {
             opacityFrom: 0.9,
             opacityTo: 0.9,
             stops: [0, 98],
-          }
+          },
         },
       },
-
     };
   }
 
   render() {
     return (
-
-
       <div id="chart">
-        <ReactApexChart height={20} width={100} options={this.state.options} series={this.state.series} type="line" />
+        <ReactApexChart
+          height={20}
+          width={100}
+          options={this.state.options}
+          series={this.state.series}
+          type="line"
+        />
       </div>
-    )
+    );
   }
-};
+}
 
 //Total Revenue
 
@@ -3514,68 +3797,85 @@ export class WidgetsRevenue extends Component<{}, spark3> {
     super(props);
 
     this.state = {
-
-      series: [{
-        name: "Revenue",
-        data: [55, 55, 52, 52, 55, 55, 58, 58, 53, 53, 55, 55]
-      }],
+      series: [
+        {
+          name: "Revenue",
+          data: [55, 55, 52, 52, 55, 55, 58, 58, 53, 53, 55, 55],
+        },
+      ],
       options: {
         chart: {
           events: {
-            mounted: (chart:any) => {
+            mounted: (chart: any) => {
               chart.windowResizeHandler();
-            }
+            },
           },
           height: 180,
           type: "area",
           sparkline: {
-            enabled: true
-          }
+            enabled: true,
+          },
         },
         dataLabels: {
-          enabled: false
+          enabled: false,
         },
         stroke: {
           width: [1.4],
           show: true,
-          curve: ['smooth'],
+          curve: ["smooth"],
         },
         xaxis: {
           crosshairs: {
             show: false,
-          }
+          },
         },
         legend: {
-          show: false
+          show: false,
         },
-        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        labels: [
+          "Jan",
+          "Feb",
+          "Mar",
+          "Apr",
+          "May",
+          "Jun",
+          "Jul",
+          "Aug",
+          "Sep",
+          "Oct",
+          "Nov",
+          "Dec",
+        ],
         markers: {
-          size: 0
+          size: 0,
         },
         colors: ["#60a5fa"],
         fill: {
-          type: 'gradient',
+          type: "gradient",
           gradient: {
             shadeIntensity: 1,
             opacityFrom: 0.4,
             opacityTo: 0.7,
-            stops: [0, 100]
-          }
+            stops: [0, 100],
+          },
         },
       },
-
     };
   }
 
   render() {
     return (
-
       <div id="chart">
-        <ReactApexChart height={180} options={this.state.options} series={this.state.series} type="area" />
+        <ReactApexChart
+          height={180}
+          options={this.state.options}
+          series={this.state.series}
+          type="area"
+        />
       </div>
-    )
+    );
   }
-};
+}
 
 //Recent Applicants
 
@@ -3584,28 +3884,30 @@ export class Applicants extends Component<{}, spark3> {
     super(props);
 
     this.state = {
-
-      series: [{
-        name: 'Job Applied',
-        type: 'line',
-        data: [25, 50, 30, 55, 20, 45, 30]
-      }, {
-        name: 'Job Viewed',
-        type: 'area',
-        data: [35, 25, 40, 30, 45, 35, 60]
-      }],
+      series: [
+        {
+          name: "Job Applied",
+          type: "line",
+          data: [25, 50, 30, 55, 20, 45, 30],
+        },
+        {
+          name: "Job Viewed",
+          type: "area",
+          data: [35, 25, 40, 30, 45, 35, 60],
+        },
+      ],
       options: {
         chart: {
           events: {
-            mounted: (chart:any) => {
+            mounted: (chart: any) => {
               chart.windowResizeHandler();
-            }
+            },
           },
           height: 348,
-          type: 'line',
+          type: "line",
           stacked: false,
           toolbar: {
-            show: false
+            show: false,
           },
           dropShadow: {
             enabled: true,
@@ -3613,86 +3915,86 @@ export class Applicants extends Component<{}, spark3> {
             top: 7,
             left: 1,
             blur: 3,
-            color: '#000',
-            opacity: 0.2
+            color: "#000",
+            opacity: 0.2,
           },
         },
-        colors: ['rgba(90,102,2411, 1)', 'rgba(90,102,241, 0.1)'],
+        colors: ["rgba(90,102,2411, 1)", "rgba(90,102,241, 0.1)"],
         grid: {
           borderColor: "rgba(107 ,114 ,128,0.1)",
           padding: {
             top: 10,
             right: 0,
             bottom: 0,
-            left: 0
+            left: 0,
           },
         },
         stroke: {
           width: [2, 2],
-          curve: 'smooth',
-          dashArray: [0, 4]
+          curve: "smooth",
+          dashArray: [0, 4],
         },
-        labels: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+        labels: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
         markers: {
           size: 4,
           hover: {
-            size: 5
-          }
+            size: 5,
+          },
         },
         fill: {
           opacity: [0.85, 0.25, 1],
           gradient: {
             inverseColors: false,
             shadeIntensity: 1,
-            shade: 'light',
+            shade: "light",
             type: "vertical",
             opacityFrom: 0.85,
             opacityTo: 0.55,
-            stops: [0, 100, 100, 100]
-          }
+            stops: [0, 100, 100, 100],
+          },
         },
         legend: {
           show: true,
-          position: 'top',
-          fontFamily: 'Inter, sans-serif',
-          markers: {
-            width: 10,
-            height: 10,
-          }
+          position: "top",
+          fontFamily: "Inter, sans-serif",
+          // markers: {
+          //   width: 10,
+          //   height: 10,
+          // },
         },
         xaxis: {
           axisBorder: {
             show: true,
-            color: 'rgba(119, 119, 142, 0.05)',
+            color: "rgba(119, 119, 142, 0.05)",
             offsetX: 0,
             offsetY: 0,
           },
           axisTicks: {
             show: true,
-            borderType: 'solid',
-            color: 'rgba(119, 119, 142, 0.05)',
+            borderType: "solid",
+            color: "rgba(119, 119, 142, 0.05)",
             // width: 6,
             offsetX: 0,
-            offsetY: 0
+            offsetY: 0,
           },
           labels: {
-            rotate: -90
-          }
+            rotate: -90,
+          },
         },
         yaxis: {
           title: {
             style: {
-              color: '#adb5be',
-              fontSize: '14px',
-              fontFamily: 'Inter, sans-serif',
-              fontWeight: 600
+              color: "#adb5be",
+              fontSize: "14px",
+              fontFamily: "Inter, sans-serif",
+              fontWeight: 600,
             },
           },
           labels: {
             formatter: function (y) {
               return y.toFixed(0) + "";
-            }
-          }
+            },
+          },
         },
         tooltip: {
           shared: true,
@@ -3703,25 +4005,26 @@ export class Applicants extends Component<{}, spark3> {
                 return y.toFixed(0) + " points";
               }
               return y;
-
-            }
-          }
-        }
+            },
+          },
+        },
       },
-
     };
   }
 
   render() {
     return (
-
-
       <div id="chart">
-        <ReactApexChart height={348} options={this.state.options} series={this.state.series} type="line" />
+        <ReactApexChart
+          height={348}
+          options={this.state.options}
+          series={this.state.series}
+          type="line"
+        />
       </div>
-    )
+    );
   }
-};
+}
 
 //Sessions By Device
 
@@ -3730,52 +4033,51 @@ export class SessionsDevice extends Component<{}, spark3> {
     super(props);
 
     this.state = {
-
       series: [
         {
           name: "Tablet",
-          data: [[10, 35, 80]]
+          data: [[10, 35, 80]],
         },
         {
           name: "Mobile",
-          data: [[22, 10, 80]]
+          data: [[22, 10, 80]],
         },
         {
           name: "Desktop",
-          data: [[25, 25, 150]]
+          data: [[25, 25, 150]],
         },
       ],
       options: {
         chart: {
           events: {
-            mounted: (chart:any) => {
+            mounted: (chart: any) => {
               chart.windowResizeHandler();
-            }
+            },
           },
           height: 350,
           type: "bubble",
           toolbar: {
-            show: false
-          }
+            show: false,
+          },
         },
         grid: {
           borderColor: "rgba(107 ,114 ,128,0.1)",
-          strokeDashArray: 3
+          strokeDashArray: 3,
         },
         colors: ["#f43f63", "#60a5fa", "#6366f1"],
         dataLabels: {
-          enabled: false
+          enabled: false,
         },
         legend: {
           show: true,
-          fontSize: '13px',
+          fontSize: "13px",
           labels: {
-            colors: '#959595',
+            colors: "#959595",
           },
-          markers: {
-            width: 10,
-            height: 10,
-          },
+          // markers: {
+          //   width: 10,
+          //   height: 10,
+          // },
         },
         xaxis: {
           min: 0,
@@ -3792,22 +4094,24 @@ export class SessionsDevice extends Component<{}, spark3> {
           labels: {
             show: false,
           },
-        }
+        },
       },
-
     };
   }
 
   render() {
     return (
-
-
       <div id="chart">
-        <ReactApexChart height={350} options={this.state.options} series={this.state.series} type="bubble" />
+        <ReactApexChart
+          height={350}
+          options={this.state.options}
+          series={this.state.series}
+          type="bubble"
+        />
       </div>
-    )
+    );
   }
-};
+}
 
 //Target Report
 
@@ -3816,22 +4120,23 @@ export class TargetReport extends Component<{}, spark3> {
     super(props);
 
     this.state = {
-
-      series: [{
-        data: [17, 22, 37, 47, 39, 28, 14],
-        name: 'Revenue',
-      }],
+      series: [
+        {
+          data: [17, 22, 37, 47, 39, 28, 14],
+          name: "Revenue",
+        },
+      ],
       options: {
         chart: {
           events: {
-            mounted: (chart:any) => {
+            mounted: (chart: any) => {
               chart.windowResizeHandler();
-            }
+            },
           },
-          type: 'bar',
+          type: "bar",
           height: 235,
           toolbar: {
-            show: false
+            show: false,
           },
           dropShadow: {
             enabled: true,
@@ -3839,89 +4144,92 @@ export class TargetReport extends Component<{}, spark3> {
             top: 6,
             left: 6,
             blur: 3,
-            color: '#000',
-            opacity: 0.05
+            color: "#000",
+            opacity: 0.05,
           },
         },
         plotOptions: {
           bar: {
-            columnWidth: '35%',
+            columnWidth: "35%",
             borderRadius: 4,
             horizontal: false,
             colors: {
-              ranges: [{
-                from: 41,
-                to: Infinity,
-                color: 'rgba(90,102,2411, 1)',
-              },
-              {
-                from: 0,
-                to: 40,
-                color: 'rgba(90,102,241, 0.1)'
-              }]
+              ranges: [
+                {
+                  from: 41,
+                  to: Infinity,
+                  color: "rgba(90,102,2411, 1)",
+                },
+                {
+                  from: 0,
+                  to: 40,
+                  color: "rgba(90,102,241, 0.1)",
+                },
+              ],
             },
-          }
+          },
         },
         dataLabels: {
-          enabled: false
+          enabled: false,
         },
         grid: {
           show: false,
-          borderColor: 'transparent',
+          borderColor: "transparent",
           padding: {
             top: 0,
             right: 0,
             bottom: 0,
-            left: 0
+            left: 0,
           },
           yaxis: {
             lines: {
-              show: false
-            }
+              show: false,
+            },
           },
         },
         xaxis: {
-          categories: ['Mon', 'Tues', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+          categories: ["Mon", "Tues", "Wed", "Thu", "Fri", "Sat", "Sun"],
           axisBorder: {
-            show: false
+            show: false,
           },
           axisTicks: {
-            show: false
+            show: false,
           },
           labels: {
             rotate: -90,
             style: {
-              fontFamily: 'Inter, sans-serif',
+              fontFamily: "Inter, sans-serif",
             },
-          }
+          },
         },
         yaxis: {
           axisBorder: {
-            show: false
+            show: false,
           },
           axisTicks: {
-            show: false
+            show: false,
           },
           labels: {
-            show: false
-          }
-        }
+            show: false,
+          },
+        },
       },
-
     };
   }
 
   render() {
     return (
-
-
       <div id="chart">
-        <ReactApexChart height={235} options={this.state.options} series={this.state.series} type="bar" />
+        <ReactApexChart
+          height={235}
+          options={this.state.options}
+          series={this.state.series}
+          type="bar"
+        />
       </div>
-    )
+    );
   }
-};
-
+}
 
 // **************************************************************************************************************
 
@@ -3934,869 +4242,965 @@ export class LineChart extends Component<{}, spark3> {
     super(props);
 
     this.state = {
-
-      series: [{
-        name: "Desktops",
-        data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
-      }],
+      series: [
+        {
+          name: "Desktops",
+          data: [10, 41, 35, 51, 49, 62, 69, 91, 148],
+        },
+      ],
       options: {
         chart: {
           events: {
-            mounted: (chart:any) => {
+            mounted: (chart: any) => {
               chart.windowResizeHandler();
-            }
+            },
           },
           height: 320,
-          type: 'line',
+          type: "line",
           zoom: {
-            enabled: false
-          }
+            enabled: false,
+          },
         },
-        colors: ['#6366f1'],
+        colors: ["#6366f1"],
         dataLabels: {
-          enabled: false
+          enabled: false,
         },
         stroke: {
-          curve: 'straight',
+          curve: "straight",
           width: 3,
         },
         grid: {
-          borderColor: 'rgba(119, 119, 142, 0.05)',
+          borderColor: "rgba(119, 119, 142, 0.05)",
         },
         title: {
-          text: 'Product Trends by Month',
-          align: 'left',
+          text: "Product Trends by Month",
+          align: "left",
           style: {
-            fontSize: '13px',
-            fontWeight: 'bold',
-            color: '#8c9097'
+            fontSize: "13px",
+            fontWeight: "bold",
+            color: "#8c9097",
           },
         },
         xaxis: {
-          categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
-          labels: {
-            show: true,
-            style: {
-              colors: "#8c9097",
-              fontSize: '11px',
-              fontWeight: 600,
-              cssClass: 'apexcharts-xaxis-label',
-            },
-          }
-        },
-        yaxis: {
-          labels: {
-            show: true,
-            style: {
-              colors: "#8c9097",
-              fontSize: '11px',
-              fontWeight: 600,
-              cssClass: 'apexcharts-yaxis-label',
-            },
-          }
-        }
-      },
-
-    };
-  }
-
-  render() {
-    return (
-
-
-      <div id="chart">
-        <ReactApexChart height={320} options={this.state.options} series={this.state.series} type="line" />
-      </div>
-    )
-  }
-};
-let AreaPrices = [8107.85, 8128.0, 8122.9, 8165.5, 8340.7, 8423.7, 8423.5, 8514.3, 8481.85, 8487.7, 8506.9, 8626.2, 8668.95, 8602.3, 8607.55, 8512.9, 8496.25, 8600.65, 8881.1, 9340.85]
-let AreaDate = ["13 Nov 2017", "14 Nov 2017", "15 Nov 2017", "16 Nov 2017", "17 Nov 2017", "20 Nov 2017", "21 Nov 2017", "22 Nov 2017", "23 Nov 2017", "24 Nov 2017", "27 Nov 2017", "28 Nov 2017", "29 Nov 2017", "30 Nov 2017", "01 Dec 2017", "04 Dec 2017", "05 Dec 2017", "06 Dec 2017", "07 Dec 2017", "08 Dec 2017",]
-export class AreaChart extends Component<{}, spark3> {
-  constructor(props: {} | Readonly<{}>) {
-    super(props);
-
-    this.state = {
-
-      series: [{
-        name: "STOCK ABC",
-        data: AreaPrices
-      }],
-      options: {
-        chart: {
-          events: {
-            mounted: (chart:any) => {
-              chart.windowResizeHandler();
-            }
-          },
-          type: 'area',
-          height: 320,
-          zoom: {
-            enabled: false
-          }
-        },
-        dataLabels: {
-          enabled: false
-        },
-        stroke: {
-          curve: 'straight'
-        },
-        subtitle: {
-          text: 'Price Movements',
-          align: 'left',
-          style: {
-            fontSize: '11px',
-            fontWeight: 'normal',
-            color: '#8c9097'
-          },
-        },
-        grid: {
-          borderColor: 'rgba(119, 119, 142, 0.05)',
-        },
-        labels: AreaDate,
-        title: {
-          text: 'Fundamental Analysis of Stocks',
-          align: 'left',
-          style: {
-            fontSize: '13px',
-            fontWeight: 'bold',
-            color: '#8c9097'
-          },
-        },
-        colors: ['#6366f1'],
-        xaxis: {
-          type: 'datetime',
-          labels: {
-            show: true,
-            style: {
-              colors: "#8c9097",
-              fontSize: '11px',
-              fontWeight: 600,
-              cssClass: 'apexcharts-xaxis-label',
-            },
-          }
-        },
-        yaxis: {
-          opposite: true,
-          labels: {
-            show: true,
-            style: {
-              colors: "#8c9097",
-              fontSize: '11px',
-              fontWeight: 600,
-              cssClass: 'apexcharts-xaxis-label',
-            },
-          }
-        },
-        legend: {
-          horizontalAlign: 'left'
-        }
-      },
-
-    };
-  }
-
-  render() {
-    return (
-
-
-      <div id="chart">
-        <ReactApexChart height={320} options={this.state.options} series={this.state.series} type="area" />
-      </div>
-    )
-  }
-};
-export class ColumnChart extends Component<{}, spark3> {
-  constructor(props: {} | Readonly<{}>) {
-    super(props);
-
-    this.state = {
-
-      series: [{
-        name: 'Net Profit',
-        data: [44, 55, 57, 56, 61, 58, 63, 60, 66]
-      }, {
-        name: 'Revenue',
-        data: [76, 85, 101, 98, 87, 105, 91, 114, 94]
-      }, {
-        name: 'Free Cash Flow',
-        data: [35, 41, 36, 26, 45, 48, 52, 53, 41]
-      }],
-      options: {
-        chart: {
-          events: {
-            mounted: (chart:any) => {
-              chart.windowResizeHandler();
-            }
-          },
-          type: 'bar',
-          height: 320
-        },
-        plotOptions: {
-          bar: {
-            horizontal: false,
-            columnWidth: '55%',
-          },
-        },
-        grid: {
-          borderColor: 'rgba(119, 119, 142, 0.05)',
-        },
-        dataLabels: {
-          enabled: false
-        },
-        colors: ["#6366f1", "#60a5fa", "#f43f63"],
-        stroke: {
-          show: true,
-          width: 2,
-          colors: ['transparent']
-        },
-        legend: {
-          show: true,
-          labels: {
-            colors: '#74767c',
-          },
-        },
-        xaxis: {
-          categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
-          labels: {
-            show: true,
-            style: {
-              colors: "#8c9097",
-              fontSize: '11px',
-              fontWeight: 600,
-              cssClass: 'apexcharts-xaxis-label',
-            },
-          }
-        },
-        yaxis: {
-          title: {
-            style: {
-              color: "#8c9097",
-            }
-          },
-          labels: {
-            show: true,
-            style: {
-              colors: "#8c9097",
-              fontSize: '11px',
-              fontWeight: 600,
-              cssClass: 'apexcharts-xaxis-label',
-            },
-          }
-        },
-        fill: {
-          opacity: 1
-        },
-        tooltip: {
-          y: {
-            formatter: function (val:any) {
-              return "$ " + val + " thousands"
-            }
-          }
-        }
-      },
-
-    };
-  }
-
-  render() {
-    return (
-
-
-      <div id="chart">
-        <ReactApexChart height={320} options={this.state.options} series={this.state.series} type="bar" />
-      </div>
-    )
-  }
-};
-export class BarChart extends Component<{}, spark3> {
-  constructor(props: {} | Readonly<{}>) {
-    super(props);
-
-    this.state = {
-
-      series: [{
-        data: [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380]
-      }],
-      options: {
-        chart: {
-          events: {
-            mounted: (chart:any) => {
-              chart.windowResizeHandler();
-            }
-          },
-          type: 'bar',
-          height: 320
-        },
-        plotOptions: {
-          bar: {
-            borderRadius: 4,
-            horizontal: true,
-          }
-        },
-        colors: ["#6366f1"],
-        grid: {
-          borderColor: 'rgba(119, 119, 142, 0.05)',
-        },
-        dataLabels: {
-          enabled: false
-        },
-        xaxis: {
-          categories: ['South Korea', 'Canada', 'United Kingdom', 'Netherlands', 'Italy', 'France', 'Japan',
-            'United States', 'China', 'Germany'
+          categories: [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug",
+            "Sep",
           ],
           labels: {
             show: true,
             style: {
               colors: "#8c9097",
-              fontSize: '11px',
+              fontSize: "11px",
               fontWeight: 600,
-              cssClass: 'apexcharts-xaxis-label',
+              cssClass: "apexcharts-xaxis-label",
             },
-          }
+          },
         },
         yaxis: {
           labels: {
             show: true,
             style: {
               colors: "#8c9097",
-              fontSize: '11px',
+              fontSize: "11px",
               fontWeight: 600,
-              cssClass: 'apexcharts-yaxis-label',
+              cssClass: "apexcharts-yaxis-label",
             },
-          }
-        }
+          },
+        },
       },
-
     };
   }
 
   render() {
     return (
-
-
       <div id="chart">
-        <ReactApexChart height={320} options={this.state.options} series={this.state.series} type="bar" />
+        <ReactApexChart
+          height={320}
+          options={this.state.options}
+          series={this.state.series}
+          type="line"
+        />
       </div>
-    )
+    );
   }
-};
+}
+let AreaPrices = [
+  8107.85, 8128.0, 8122.9, 8165.5, 8340.7, 8423.7, 8423.5, 8514.3, 8481.85,
+  8487.7, 8506.9, 8626.2, 8668.95, 8602.3, 8607.55, 8512.9, 8496.25, 8600.65,
+  8881.1, 9340.85,
+];
+let AreaDate = [
+  "13 Nov 2017",
+  "14 Nov 2017",
+  "15 Nov 2017",
+  "16 Nov 2017",
+  "17 Nov 2017",
+  "20 Nov 2017",
+  "21 Nov 2017",
+  "22 Nov 2017",
+  "23 Nov 2017",
+  "24 Nov 2017",
+  "27 Nov 2017",
+  "28 Nov 2017",
+  "29 Nov 2017",
+  "30 Nov 2017",
+  "01 Dec 2017",
+  "04 Dec 2017",
+  "05 Dec 2017",
+  "06 Dec 2017",
+  "07 Dec 2017",
+  "08 Dec 2017",
+];
+export class AreaChart extends Component<{}, spark3> {
+  constructor(props: {} | Readonly<{}>) {
+    super(props);
+
+    this.state = {
+      series: [
+        {
+          name: "STOCK ABC",
+          data: AreaPrices,
+        },
+      ],
+      options: {
+        chart: {
+          events: {
+            mounted: (chart: any) => {
+              chart.windowResizeHandler();
+            },
+          },
+          type: "area",
+          height: 320,
+          zoom: {
+            enabled: false,
+          },
+        },
+        dataLabels: {
+          enabled: false,
+        },
+        stroke: {
+          curve: "straight",
+        },
+        subtitle: {
+          text: "Price Movements",
+          align: "left",
+          style: {
+            fontSize: "11px",
+            fontWeight: "normal",
+            color: "#8c9097",
+          },
+        },
+        grid: {
+          borderColor: "rgba(119, 119, 142, 0.05)",
+        },
+        labels: AreaDate,
+        title: {
+          text: "Fundamental Analysis of Stocks",
+          align: "left",
+          style: {
+            fontSize: "13px",
+            fontWeight: "bold",
+            color: "#8c9097",
+          },
+        },
+        colors: ["#6366f1"],
+        xaxis: {
+          type: "datetime",
+          labels: {
+            show: true,
+            style: {
+              colors: "#8c9097",
+              fontSize: "11px",
+              fontWeight: 600,
+              cssClass: "apexcharts-xaxis-label",
+            },
+          },
+        },
+        yaxis: {
+          opposite: true,
+          labels: {
+            show: true,
+            style: {
+              colors: "#8c9097",
+              fontSize: "11px",
+              fontWeight: 600,
+              cssClass: "apexcharts-xaxis-label",
+            },
+          },
+        },
+        legend: {
+          horizontalAlign: "left",
+        },
+      },
+    };
+  }
+
+  render() {
+    return (
+      <div id="chart">
+        <ReactApexChart
+          height={320}
+          options={this.state.options}
+          series={this.state.series}
+          type="area"
+        />
+      </div>
+    );
+  }
+}
+export class ColumnChart extends Component<{}, spark3> {
+  constructor(props: {} | Readonly<{}>) {
+    super(props);
+
+    this.state = {
+      series: [
+        {
+          name: "Net Profit",
+          data: [44, 55, 57, 56, 61, 58, 63, 60, 66],
+        },
+        {
+          name: "Revenue",
+          data: [76, 85, 101, 98, 87, 105, 91, 114, 94],
+        },
+        {
+          name: "Free Cash Flow",
+          data: [35, 41, 36, 26, 45, 48, 52, 53, 41],
+        },
+      ],
+      options: {
+        chart: {
+          events: {
+            mounted: (chart: any) => {
+              chart.windowResizeHandler();
+            },
+          },
+          type: "bar",
+          height: 320,
+        },
+        plotOptions: {
+          bar: {
+            horizontal: false,
+            columnWidth: "55%",
+          },
+        },
+        grid: {
+          borderColor: "rgba(119, 119, 142, 0.05)",
+        },
+        dataLabels: {
+          enabled: false,
+        },
+        colors: ["#6366f1", "#60a5fa", "#f43f63"],
+        stroke: {
+          show: true,
+          width: 2,
+          colors: ["transparent"],
+        },
+        legend: {
+          show: true,
+          labels: {
+            colors: "#74767c",
+          },
+        },
+        xaxis: {
+          categories: [
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug",
+            "Sep",
+            "Oct",
+          ],
+          labels: {
+            show: true,
+            style: {
+              colors: "#8c9097",
+              fontSize: "11px",
+              fontWeight: 600,
+              cssClass: "apexcharts-xaxis-label",
+            },
+          },
+        },
+        yaxis: {
+          title: {
+            style: {
+              color: "#8c9097",
+            },
+          },
+          labels: {
+            show: true,
+            style: {
+              colors: "#8c9097",
+              fontSize: "11px",
+              fontWeight: 600,
+              cssClass: "apexcharts-xaxis-label",
+            },
+          },
+        },
+        fill: {
+          opacity: 1,
+        },
+        tooltip: {
+          y: {
+            formatter: function (val: any) {
+              return "$ " + val + " thousands";
+            },
+          },
+        },
+      },
+    };
+  }
+
+  render() {
+    return (
+      <div id="chart">
+        <ReactApexChart
+          height={320}
+          options={this.state.options}
+          series={this.state.series}
+          type="bar"
+        />
+      </div>
+    );
+  }
+}
+export class BarChart extends Component<{}, spark3> {
+  constructor(props: {} | Readonly<{}>) {
+    super(props);
+
+    this.state = {
+      series: [
+        {
+          data: [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380],
+        },
+      ],
+      options: {
+        chart: {
+          events: {
+            mounted: (chart: any) => {
+              chart.windowResizeHandler();
+            },
+          },
+          type: "bar",
+          height: 320,
+        },
+        plotOptions: {
+          bar: {
+            borderRadius: 4,
+            horizontal: true,
+          },
+        },
+        colors: ["#6366f1"],
+        grid: {
+          borderColor: "rgba(119, 119, 142, 0.05)",
+        },
+        dataLabels: {
+          enabled: false,
+        },
+        xaxis: {
+          categories: [
+            "South Korea",
+            "Canada",
+            "United Kingdom",
+            "Netherlands",
+            "Italy",
+            "France",
+            "Japan",
+            "United States",
+            "China",
+            "Germany",
+          ],
+          labels: {
+            show: true,
+            style: {
+              colors: "#8c9097",
+              fontSize: "11px",
+              fontWeight: 600,
+              cssClass: "apexcharts-xaxis-label",
+            },
+          },
+        },
+        yaxis: {
+          labels: {
+            show: true,
+            style: {
+              colors: "#8c9097",
+              fontSize: "11px",
+              fontWeight: 600,
+              cssClass: "apexcharts-yaxis-label",
+            },
+          },
+        },
+      },
+    };
+  }
+
+  render() {
+    return (
+      <div id="chart">
+        <ReactApexChart
+          height={320}
+          options={this.state.options}
+          series={this.state.series}
+          type="bar"
+        />
+      </div>
+    );
+  }
+}
 export class LineAndColumnChart extends Component<{}, spark3> {
   constructor(props: {} | Readonly<{}>) {
     super(props);
 
     this.state = {
-
-      series: [{
-        name: 'Website Blog',
-        type: 'column',
-        data: [440, 505, 414, 671, 227, 413, 201, 352, 752, 320, 257, 160]
-      }, {
-        name: 'Social Media',
-        type: 'line',
-        data: [23, 42, 35, 27, 43, 22, 17, 31, 22, 22, 12, 16]
-      }],
+      series: [
+        {
+          name: "Website Blog",
+          type: "column",
+          data: [440, 505, 414, 671, 227, 413, 201, 352, 752, 320, 257, 160],
+        },
+        {
+          name: "Social Media",
+          type: "line",
+          data: [23, 42, 35, 27, 43, 22, 17, 31, 22, 22, 12, 16],
+        },
+      ],
       options: {
         chart: {
           events: {
-            mounted: (chart:any) => {
+            mounted: (chart: any) => {
               chart.windowResizeHandler();
-            }
+            },
           },
           height: 320,
-          type: 'line',
+          type: "line",
         },
         stroke: {
-          width: [0, 4]
+          width: [0, 4],
         },
         grid: {
-          borderColor: 'rgba(119, 119, 142, 0.05)',
+          borderColor: "rgba(119, 119, 142, 0.05)",
         },
         title: {
-          text: 'Traffic Sources',
-          align: 'left',
+          text: "Traffic Sources",
+          align: "left",
           style: {
-            fontSize: '13px',
-            fontWeight: 'bold',
-            color: '#8c9097'
+            fontSize: "13px",
+            fontWeight: "bold",
+            color: "#8c9097",
           },
         },
         dataLabels: {
           enabled: true,
-          enabledOnSeries: [1]
+          enabledOnSeries: [1],
         },
         legend: {
           show: true,
           labels: {
-            colors: '#74767c',
+            colors: "#74767c",
           },
         },
         colors: ["#6366f1", "#60a5fa"],
-        labels: ['01 Jan 2001', '02 Jan 2001', '03 Jan 2001', '04 Jan 2001', '05 Jan 2001', '06 Jan 2001', '07 Jan 2001', '08 Jan 2001', '09 Jan 2001', '10 Jan 2001', '11 Jan 2001', '12 Jan 2001'],
+        labels: [
+          "01 Jan 2001",
+          "02 Jan 2001",
+          "03 Jan 2001",
+          "04 Jan 2001",
+          "05 Jan 2001",
+          "06 Jan 2001",
+          "07 Jan 2001",
+          "08 Jan 2001",
+          "09 Jan 2001",
+          "10 Jan 2001",
+          "11 Jan 2001",
+          "12 Jan 2001",
+        ],
         xaxis: {
-          type: 'datetime',
+          type: "datetime",
           labels: {
             show: true,
             style: {
               colors: "#8c9097",
-              fontSize: '11px',
+              fontSize: "11px",
               fontWeight: 600,
-              cssClass: 'apexcharts-xaxis-label',
+              cssClass: "apexcharts-xaxis-label",
             },
-          }
-        },
-        yaxis: [{
-          title: {
-            style: {
-              color: "#8c9097",
-            }
           },
-          labels: {
-            show: true,
-            style: {
-              colors: "#8c9097",
-              fontSize: '11px',
-              fontWeight: 600,
-              cssClass: 'apexcharts-yaxis-label',
+        },
+        yaxis: [
+          {
+            title: {
+              style: {
+                color: "#8c9097",
+              },
             },
-          }
-        }, {
-          opposite: true,
-          title: {
-            style: {
-              color: "#8c9097",
-            }
-          }
-        }]
-      }
+            labels: {
+              show: true,
+              style: {
+                colors: "#8c9097",
+                fontSize: "11px",
+                fontWeight: 600,
+                cssClass: "apexcharts-yaxis-label",
+              },
+            },
+          },
+          {
+            opposite: true,
+            title: {
+              style: {
+                color: "#8c9097",
+              },
+            },
+          },
+        ],
+      },
     };
   }
 
   render() {
     return (
-
-
       <div id="chart">
-        <ReactApexChart height={320} options={this.state.options} series={this.state.series} type="bar" />
+        <ReactApexChart
+          height={320}
+          options={this.state.options}
+          series={this.state.series}
+          type="bar"
+        />
       </div>
-    )
+    );
   }
-};
+}
 export class TimelineBasic extends Component<{}, spark3> {
   constructor(props: {} | Readonly<{}>) {
     super(props);
 
     this.state = {
-
       series: [
         {
           data: [
             {
-              x: 'Code',
+              x: "Code",
               y: [
-                new Date('2019-03-02').getTime(),
-                new Date('2019-03-04').getTime()
-              ]
+                new Date("2019-03-02").getTime(),
+                new Date("2019-03-04").getTime(),
+              ],
             },
             {
-              x: 'Test',
+              x: "Test",
               y: [
-                new Date('2019-03-04').getTime(),
-                new Date('2019-03-08').getTime()
-              ]
+                new Date("2019-03-04").getTime(),
+                new Date("2019-03-08").getTime(),
+              ],
             },
             {
-              x: 'Validation',
+              x: "Validation",
               y: [
-                new Date('2019-03-08').getTime(),
-                new Date('2019-03-12').getTime()
-              ]
+                new Date("2019-03-08").getTime(),
+                new Date("2019-03-12").getTime(),
+              ],
             },
             {
-              x: 'Deployment',
+              x: "Deployment",
               y: [
-                new Date('2019-03-12').getTime(),
-                new Date('2019-03-18').getTime()
-              ]
-            }
-          ]
-        }
+                new Date("2019-03-12").getTime(),
+                new Date("2019-03-18").getTime(),
+              ],
+            },
+          ],
+        },
       ],
       options: {
         chart: {
           events: {
-            mounted: (chart:any) => {
+            mounted: (chart: any) => {
               chart.windowResizeHandler();
-            }
+            },
           },
           height: 320,
-          type: 'rangeBar'
+          type: "rangeBar",
         },
         grid: {
-          borderColor: 'rgba(119, 119, 142, 0.05)',
+          borderColor: "rgba(119, 119, 142, 0.05)",
         },
         plotOptions: {
           bar: {
-            horizontal: true
-          }
+            horizontal: true,
+          },
         },
         colors: ["#6366f1"],
         xaxis: {
-          type: 'datetime',
+          type: "datetime",
           labels: {
             show: true,
             style: {
               colors: "#8c9097",
-              fontSize: '11px',
+              fontSize: "11px",
               fontWeight: 600,
-              cssClass: 'apexcharts-xaxis-label',
+              cssClass: "apexcharts-xaxis-label",
             },
-          }
+          },
         },
         yaxis: {
           labels: {
             show: true,
             style: {
               colors: "#8c9097",
-              fontSize: '11px',
+              fontSize: "11px",
               fontWeight: 600,
-              cssClass: 'apexcharts-yaxis-label',
+              cssClass: "apexcharts-yaxis-label",
             },
-          }
-        }
-      }
+          },
+        },
+      },
     };
   }
 
   render() {
     return (
-
-
       <div id="chart">
-        <ReactApexChart height={320} options={this.state.options} series={this.state.series} type="rangeBar" />
+        <ReactApexChart
+          height={320}
+          options={this.state.options}
+          series={this.state.series}
+          type="rangeBar"
+        />
       </div>
-    )
+    );
   }
-};
+}
 export class CandleStick extends Component<{}, spark3> {
   constructor(props: {} | Readonly<{}>) {
     super(props);
 
     this.state = {
-
-      series: [{
-        data: [{
-          x: new Date(1538778600000),
-          y: [6629.81, 6650.5, 6623.04, 6633.33]
-        },
+      series: [
         {
-          x: new Date(1538780400000),
-          y: [6632.01, 6643.59, 6620, 6630.11]
+          data: [
+            {
+              x: new Date(1538778600000),
+              y: [6629.81, 6650.5, 6623.04, 6633.33],
+            },
+            {
+              x: new Date(1538780400000),
+              y: [6632.01, 6643.59, 6620, 6630.11],
+            },
+            {
+              x: new Date(1538782200000),
+              y: [6630.71, 6648.95, 6623.34, 6635.65],
+            },
+            {
+              x: new Date(1538784000000),
+              y: [6635.65, 6651, 6629.67, 6638.24],
+            },
+            {
+              x: new Date(1538785800000),
+              y: [6638.24, 6640, 6620, 6624.47],
+            },
+            {
+              x: new Date(1538787600000),
+              y: [6624.53, 6636.03, 6621.68, 6624.31],
+            },
+            {
+              x: new Date(1538789400000),
+              y: [6624.61, 6632.2, 6617, 6626.02],
+            },
+            {
+              x: new Date(1538791200000),
+              y: [6627, 6627.62, 6584.22, 6603.02],
+            },
+            {
+              x: new Date(1538793000000),
+              y: [6605, 6608.03, 6598.95, 6604.01],
+            },
+            {
+              x: new Date(1538794800000),
+              y: [6604.5, 6614.4, 6602.26, 6608.02],
+            },
+            {
+              x: new Date(1538796600000),
+              y: [6608.02, 6610.68, 6601.99, 6608.91],
+            },
+            {
+              x: new Date(1538798400000),
+              y: [6608.91, 6618.99, 6608.01, 6612],
+            },
+            {
+              x: new Date(1538800200000),
+              y: [6612, 6615.13, 6605.09, 6612],
+            },
+            {
+              x: new Date(1538802000000),
+              y: [6612, 6624.12, 6608.43, 6622.95],
+            },
+            {
+              x: new Date(1538803800000),
+              y: [6623.91, 6623.91, 6615, 6615.67],
+            },
+            {
+              x: new Date(1538805600000),
+              y: [6618.69, 6618.74, 6610, 6610.4],
+            },
+            {
+              x: new Date(1538807400000),
+              y: [6611, 6622.78, 6610.4, 6614.9],
+            },
+            {
+              x: new Date(1538809200000),
+              y: [6614.9, 6626.2, 6613.33, 6623.45],
+            },
+            {
+              x: new Date(1538811000000),
+              y: [6623.48, 6627, 6618.38, 6620.35],
+            },
+            {
+              x: new Date(1538812800000),
+              y: [6619.43, 6620.35, 6610.05, 6615.53],
+            },
+            {
+              x: new Date(1538814600000),
+              y: [6615.53, 6617.93, 6610, 6615.19],
+            },
+            {
+              x: new Date(1538816400000),
+              y: [6615.19, 6621.6, 6608.2, 6620],
+            },
+            {
+              x: new Date(1538818200000),
+              y: [6619.54, 6625.17, 6614.15, 6620],
+            },
+            {
+              x: new Date(1538820000000),
+              y: [6620.33, 6634.15, 6617.24, 6624.61],
+            },
+            {
+              x: new Date(1538821800000),
+              y: [6625.95, 6626, 6611.66, 6617.58],
+            },
+            {
+              x: new Date(1538823600000),
+              y: [6619, 6625.97, 6595.27, 6598.86],
+            },
+            {
+              x: new Date(1538825400000),
+              y: [6598.86, 6598.88, 6570, 6587.16],
+            },
+            {
+              x: new Date(1538827200000),
+              y: [6588.86, 6600, 6580, 6593.4],
+            },
+            {
+              x: new Date(1538829000000),
+              y: [6593.99, 6598.89, 6585, 6587.81],
+            },
+            {
+              x: new Date(1538830800000),
+              y: [6587.81, 6592.73, 6567.14, 6578],
+            },
+            {
+              x: new Date(1538832600000),
+              y: [6578.35, 6581.72, 6567.39, 6579],
+            },
+            {
+              x: new Date(1538834400000),
+              y: [6579.38, 6580.92, 6566.77, 6575.96],
+            },
+            {
+              x: new Date(1538836200000),
+              y: [6575.96, 6589, 6571.77, 6588.92],
+            },
+            {
+              x: new Date(1538838000000),
+              y: [6588.92, 6594, 6577.55, 6589.22],
+            },
+            {
+              x: new Date(1538839800000),
+              y: [6589.3, 6598.89, 6589.1, 6596.08],
+            },
+            {
+              x: new Date(1538841600000),
+              y: [6597.5, 6600, 6588.39, 6596.25],
+            },
+            {
+              x: new Date(1538843400000),
+              y: [6598.03, 6600, 6588.73, 6595.97],
+            },
+            {
+              x: new Date(1538845200000),
+              y: [6595.97, 6602.01, 6588.17, 6602],
+            },
+            {
+              x: new Date(1538847000000),
+              y: [6602, 6607, 6596.51, 6599.95],
+            },
+            {
+              x: new Date(1538848800000),
+              y: [6600.63, 6601.21, 6590.39, 6591.02],
+            },
+            {
+              x: new Date(1538850600000),
+              y: [6591.02, 6603.08, 6591, 6591],
+            },
+            {
+              x: new Date(1538852400000),
+              y: [6591, 6601.32, 6585, 6592],
+            },
+            {
+              x: new Date(1538854200000),
+              y: [6593.13, 6596.01, 6590, 6593.34],
+            },
+            {
+              x: new Date(1538856000000),
+              y: [6593.34, 6604.76, 6582.63, 6593.86],
+            },
+            {
+              x: new Date(1538857800000),
+              y: [6593.86, 6604.28, 6586.57, 6600.01],
+            },
+            {
+              x: new Date(1538859600000),
+              y: [6601.81, 6603.21, 6592.78, 6596.25],
+            },
+            {
+              x: new Date(1538861400000),
+              y: [6596.25, 6604.2, 6590, 6602.99],
+            },
+            {
+              x: new Date(1538863200000),
+              y: [6602.99, 6606, 6584.99, 6587.81],
+            },
+            {
+              x: new Date(1538865000000),
+              y: [6587.81, 6595, 6583.27, 6591.96],
+            },
+            {
+              x: new Date(1538866800000),
+              y: [6591.97, 6596.07, 6585, 6588.39],
+            },
+            {
+              x: new Date(1538868600000),
+              y: [6587.6, 6598.21, 6587.6, 6594.27],
+            },
+            {
+              x: new Date(1538870400000),
+              y: [6596.44, 6601, 6590, 6596.55],
+            },
+            {
+              x: new Date(1538872200000),
+              y: [6598.91, 6605, 6596.61, 6600.02],
+            },
+            {
+              x: new Date(1538874000000),
+              y: [6600.55, 6605, 6589.14, 6593.01],
+            },
+            {
+              x: new Date(1538875800000),
+              y: [6593.15, 6605, 6592, 6603.06],
+            },
+            {
+              x: new Date(1538877600000),
+              y: [6603.07, 6604.5, 6599.09, 6603.89],
+            },
+            {
+              x: new Date(1538879400000),
+              y: [6604.44, 6604.44, 6600, 6603.5],
+            },
+            {
+              x: new Date(1538881200000),
+              y: [6603.5, 6603.99, 6597.5, 6603.86],
+            },
+            {
+              x: new Date(1538883000000),
+              y: [6603.85, 6605, 6600, 6604.07],
+            },
+            {
+              x: new Date(1538884800000),
+              y: [6604.98, 6606, 6604.07, 6606],
+            },
+          ],
         },
-        {
-          x: new Date(1538782200000),
-          y: [6630.71, 6648.95, 6623.34, 6635.65]
-        },
-        {
-          x: new Date(1538784000000),
-          y: [6635.65, 6651, 6629.67, 6638.24]
-        },
-        {
-          x: new Date(1538785800000),
-          y: [6638.24, 6640, 6620, 6624.47]
-        },
-        {
-          x: new Date(1538787600000),
-          y: [6624.53, 6636.03, 6621.68, 6624.31]
-        },
-        {
-          x: new Date(1538789400000),
-          y: [6624.61, 6632.2, 6617, 6626.02]
-        },
-        {
-          x: new Date(1538791200000),
-          y: [6627, 6627.62, 6584.22, 6603.02]
-        },
-        {
-          x: new Date(1538793000000),
-          y: [6605, 6608.03, 6598.95, 6604.01]
-        },
-        {
-          x: new Date(1538794800000),
-          y: [6604.5, 6614.4, 6602.26, 6608.02]
-        },
-        {
-          x: new Date(1538796600000),
-          y: [6608.02, 6610.68, 6601.99, 6608.91]
-        },
-        {
-          x: new Date(1538798400000),
-          y: [6608.91, 6618.99, 6608.01, 6612]
-        },
-        {
-          x: new Date(1538800200000),
-          y: [6612, 6615.13, 6605.09, 6612]
-        },
-        {
-          x: new Date(1538802000000),
-          y: [6612, 6624.12, 6608.43, 6622.95]
-        },
-        {
-          x: new Date(1538803800000),
-          y: [6623.91, 6623.91, 6615, 6615.67]
-        },
-        {
-          x: new Date(1538805600000),
-          y: [6618.69, 6618.74, 6610, 6610.4]
-        },
-        {
-          x: new Date(1538807400000),
-          y: [6611, 6622.78, 6610.4, 6614.9]
-        },
-        {
-          x: new Date(1538809200000),
-          y: [6614.9, 6626.2, 6613.33, 6623.45]
-        },
-        {
-          x: new Date(1538811000000),
-          y: [6623.48, 6627, 6618.38, 6620.35]
-        },
-        {
-          x: new Date(1538812800000),
-          y: [6619.43, 6620.35, 6610.05, 6615.53]
-        },
-        {
-          x: new Date(1538814600000),
-          y: [6615.53, 6617.93, 6610, 6615.19]
-        },
-        {
-          x: new Date(1538816400000),
-          y: [6615.19, 6621.6, 6608.2, 6620]
-        },
-        {
-          x: new Date(1538818200000),
-          y: [6619.54, 6625.17, 6614.15, 6620]
-        },
-        {
-          x: new Date(1538820000000),
-          y: [6620.33, 6634.15, 6617.24, 6624.61]
-        },
-        {
-          x: new Date(1538821800000),
-          y: [6625.95, 6626, 6611.66, 6617.58]
-        },
-        {
-          x: new Date(1538823600000),
-          y: [6619, 6625.97, 6595.27, 6598.86]
-        },
-        {
-          x: new Date(1538825400000),
-          y: [6598.86, 6598.88, 6570, 6587.16]
-        },
-        {
-          x: new Date(1538827200000),
-          y: [6588.86, 6600, 6580, 6593.4]
-        },
-        {
-          x: new Date(1538829000000),
-          y: [6593.99, 6598.89, 6585, 6587.81]
-        },
-        {
-          x: new Date(1538830800000),
-          y: [6587.81, 6592.73, 6567.14, 6578]
-        },
-        {
-          x: new Date(1538832600000),
-          y: [6578.35, 6581.72, 6567.39, 6579]
-        },
-        {
-          x: new Date(1538834400000),
-          y: [6579.38, 6580.92, 6566.77, 6575.96]
-        },
-        {
-          x: new Date(1538836200000),
-          y: [6575.96, 6589, 6571.77, 6588.92]
-        },
-        {
-          x: new Date(1538838000000),
-          y: [6588.92, 6594, 6577.55, 6589.22]
-        },
-        {
-          x: new Date(1538839800000),
-          y: [6589.3, 6598.89, 6589.1, 6596.08]
-        },
-        {
-          x: new Date(1538841600000),
-          y: [6597.5, 6600, 6588.39, 6596.25]
-        },
-        {
-          x: new Date(1538843400000),
-          y: [6598.03, 6600, 6588.73, 6595.97]
-        },
-        {
-          x: new Date(1538845200000),
-          y: [6595.97, 6602.01, 6588.17, 6602]
-        },
-        {
-          x: new Date(1538847000000),
-          y: [6602, 6607, 6596.51, 6599.95]
-        },
-        {
-          x: new Date(1538848800000),
-          y: [6600.63, 6601.21, 6590.39, 6591.02]
-        },
-        {
-          x: new Date(1538850600000),
-          y: [6591.02, 6603.08, 6591, 6591]
-        },
-        {
-          x: new Date(1538852400000),
-          y: [6591, 6601.32, 6585, 6592]
-        },
-        {
-          x: new Date(1538854200000),
-          y: [6593.13, 6596.01, 6590, 6593.34]
-        },
-        {
-          x: new Date(1538856000000),
-          y: [6593.34, 6604.76, 6582.63, 6593.86]
-        },
-        {
-          x: new Date(1538857800000),
-          y: [6593.86, 6604.28, 6586.57, 6600.01]
-        },
-        {
-          x: new Date(1538859600000),
-          y: [6601.81, 6603.21, 6592.78, 6596.25]
-        },
-        {
-          x: new Date(1538861400000),
-          y: [6596.25, 6604.2, 6590, 6602.99]
-        },
-        {
-          x: new Date(1538863200000),
-          y: [6602.99, 6606, 6584.99, 6587.81]
-        },
-        {
-          x: new Date(1538865000000),
-          y: [6587.81, 6595, 6583.27, 6591.96]
-        },
-        {
-          x: new Date(1538866800000),
-          y: [6591.97, 6596.07, 6585, 6588.39]
-        },
-        {
-          x: new Date(1538868600000),
-          y: [6587.6, 6598.21, 6587.6, 6594.27]
-        },
-        {
-          x: new Date(1538870400000),
-          y: [6596.44, 6601, 6590, 6596.55]
-        },
-        {
-          x: new Date(1538872200000),
-          y: [6598.91, 6605, 6596.61, 6600.02]
-        },
-        {
-          x: new Date(1538874000000),
-          y: [6600.55, 6605, 6589.14, 6593.01]
-        },
-        {
-          x: new Date(1538875800000),
-          y: [6593.15, 6605, 6592, 6603.06]
-        },
-        {
-          x: new Date(1538877600000),
-          y: [6603.07, 6604.5, 6599.09, 6603.89]
-        },
-        {
-          x: new Date(1538879400000),
-          y: [6604.44, 6604.44, 6600, 6603.5]
-        },
-        {
-          x: new Date(1538881200000),
-          y: [6603.5, 6603.99, 6597.5, 6603.86]
-        },
-        {
-          x: new Date(1538883000000),
-          y: [6603.85, 6605, 6600, 6604.07]
-        },
-        {
-          x: new Date(1538884800000),
-          y: [6604.98, 6606, 6604.07, 6606]
-        },
-        ]
-      }],
+      ],
       options: {
         chart: {
           events: {
-            mounted: (chart:any) => {
+            mounted: (chart: any) => {
               chart.windowResizeHandler();
-            }
+            },
           },
-          type: 'candlestick',
-          height: 350
+          type: "candlestick",
+          height: 350,
         },
         title: {
-          text: 'CandleStick Chart',
-          align: 'left',
+          text: "CandleStick Chart",
+          align: "left",
           style: {
             color: "#8c9097",
-            fontSize: '13px',
-            fontWeight: 'bold',
-          }
+            fontSize: "13px",
+            fontWeight: "bold",
+          },
         },
         plotOptions: {
           candlestick: {
             colors: {
-              upward: '#6366f1',
-              downward: '#60a5fa'
-            }
-          }
+              upward: "#6366f1",
+              downward: "#60a5fa",
+            },
+          },
         },
         grid: {
-          borderColor: 'rgba(119, 119, 142, 0.05)',
+          borderColor: "rgba(119, 119, 142, 0.05)",
         },
         xaxis: {
-          type: 'datetime',
+          type: "datetime",
           labels: {
             show: true,
             style: {
               colors: "#8c9097",
-              fontSize: '11px',
+              fontSize: "11px",
               fontWeight: 600,
-              cssClass: 'apexcharts-xaxis-label',
+              cssClass: "apexcharts-xaxis-label",
             },
-          }
+          },
         },
         yaxis: {
           tooltip: {
-            enabled: true
+            enabled: true,
           },
           labels: {
             show: true,
             style: {
               colors: "#8c9097",
-              fontSize: '11px',
+              fontSize: "11px",
               fontWeight: 600,
-              cssClass: 'apexcharts-yaxis-label',
+              cssClass: "apexcharts-yaxis-label",
             },
-          }
-        }
-      }
+          },
+        },
+      },
     };
   }
 
   render() {
     return (
-
-
       <div id="chart">
-        <ReactApexChart height={320} options={this.state.options} series={this.state.series} type="candlestick" />
+        <ReactApexChart
+          height={320}
+          options={this.state.options}
+          series={this.state.series}
+          type="candlestick"
+        />
       </div>
-    )
+    );
   }
-};
+}
 export class Boxplot extends Component<{}, spark3> {
   constructor(props: {} | Readonly<{}>) {
     super(props);
@@ -4804,111 +5208,115 @@ export class Boxplot extends Component<{}, spark3> {
     this.state = {
       series: [
         {
-          type: 'boxPlot',
+          type: "boxPlot",
           data: [
             {
-              x: 'Jan 2015',
-              y: [54, 66, 69, 75, 88]
+              x: "Jan 2015",
+              y: [54, 66, 69, 75, 88],
             },
             {
-              x: 'Jan 2016',
-              y: [43, 65, 69, 76, 81]
+              x: "Jan 2016",
+              y: [43, 65, 69, 76, 81],
             },
             {
-              x: 'Jan 2017',
-              y: [31, 39, 45, 51, 59]
+              x: "Jan 2017",
+              y: [31, 39, 45, 51, 59],
             },
             {
-              x: 'Jan 2018',
-              y: [39, 46, 55, 65, 71]
+              x: "Jan 2018",
+              y: [39, 46, 55, 65, 71],
             },
             {
-              x: 'Jan 2019',
-              y: [29, 31, 35, 39, 44]
+              x: "Jan 2019",
+              y: [29, 31, 35, 39, 44],
             },
             {
-              x: 'Jan 2020',
-              y: [41, 49, 58, 61, 67]
+              x: "Jan 2020",
+              y: [41, 49, 58, 61, 67],
             },
             {
-              x: 'Jan 2021',
-              y: [54, 59, 66, 71, 88]
-            }
-          ]
-        }
+              x: "Jan 2021",
+              y: [54, 59, 66, 71, 88],
+            },
+          ],
+        },
       ],
       options: {
         chart: {
           events: {
-            mounted: (chart:any) => {
+            mounted: (chart: any) => {
               chart.windowResizeHandler();
-            }
+            },
           },
-          type: 'boxPlot',
-          height: 350
+          type: "boxPlot",
+          height: 350,
         },
         title: {
-          text: 'Basic BoxPlot Chart',
-          align: 'left',
+          text: "Basic BoxPlot Chart",
+          align: "left",
           style: {
-            fontSize: '13px',
-            fontWeight: 'bold',
-            color: '#8c9097'
+            fontSize: "13px",
+            fontWeight: "bold",
+            color: "#8c9097",
           },
         },
         grid: {
-          borderColor: '#77778e0d',
+          borderColor: "#77778e0d",
         },
         plotOptions: {
           boxPlot: {
             colors: {
-              upper: '#6366f1',
-              lower: '#60a5fa'
-            }
-          }
+              upper: "#6366f1",
+              lower: "#60a5fa",
+            },
+          },
         },
         xaxis: {
           labels: {
             show: true,
             style: {
               colors: "#8c9097",
-              fontSize: '11px',
+              fontSize: "11px",
               fontWeight: 600,
-              cssClass: 'apexcharts-xaxis-label',
+              cssClass: "apexcharts-xaxis-label",
             },
-          }
+          },
         },
         yaxis: {
           labels: {
             show: true,
             style: {
               colors: "#8c9097",
-              fontSize: '11px',
+              fontSize: "11px",
               fontWeight: 600,
-              cssClass: 'apexcharts-yaxis-label',
+              cssClass: "apexcharts-yaxis-label",
             },
-          }
-        }
-      }
+          },
+        },
+      },
     };
   }
 
   render() {
     return (
-
-
       <div id="chart">
-        <ReactApexChart height={320} options={this.state.options} series={this.state.series} type="boxPlot" />
+        <ReactApexChart
+          height={320}
+          options={this.state.options}
+          series={this.state.series}
+          type="boxPlot"
+        />
       </div>
-    )
+    );
   }
-};
-function generateData(baseval:any, count:any, yrange:any) {
+}
+function generateData(baseval: any, count: any, yrange: any) {
   let i = 0;
   let series = [];
   while (i < count) {
-    const x = Math.floor(Math.random() * (750 - 1 + 1)) + 1;;
-    const y = Math.floor(Math.random() * (yrange.max - yrange.min + 1)) + yrange.min;
+    const x = Math.floor(Math.random() * (750 - 1 + 1)) + 1;
+    const y =
+      Math.floor(Math.random() * (yrange.max - yrange.min + 1)) + yrange.min;
     const z = Math.floor(Math.random() * (75 - 15 + 1)) + 15;
 
     series.push([x, y, z]);
@@ -4922,82 +5330,84 @@ export class Bubble3D extends Component<{}, spark3> {
     super(props);
 
     this.state = {
-      series: [{
-        name: 'Product1',
-        data: generateData(new Date('11 Feb 2017 GMT').getTime(), 20, {
-          min: 10,
-          max: 60
-        })
-      },
-      {
-        name: 'Product2',
-        data: generateData(new Date('11 Feb 2017 GMT').getTime(), 20, {
-          min: 10,
-          max: 60
-        })
-      },
-      {
-        name: 'Product3',
-        data: generateData(new Date('11 Feb 2017 GMT').getTime(), 20, {
-          min: 10,
-          max: 60
-        })
-      },
-      {
-        name: 'Product4',
-        data: generateData(new Date('11 Feb 2017 GMT').getTime(), 20, {
-          min: 10,
-          max: 60
-        })
-      }],
+      series: [
+        {
+          name: "Product1",
+          data: generateData(new Date("11 Feb 2017 GMT").getTime(), 20, {
+            min: 10,
+            max: 60,
+          }),
+        },
+        {
+          name: "Product2",
+          data: generateData(new Date("11 Feb 2017 GMT").getTime(), 20, {
+            min: 10,
+            max: 60,
+          }),
+        },
+        {
+          name: "Product3",
+          data: generateData(new Date("11 Feb 2017 GMT").getTime(), 20, {
+            min: 10,
+            max: 60,
+          }),
+        },
+        {
+          name: "Product4",
+          data: generateData(new Date("11 Feb 2017 GMT").getTime(), 20, {
+            min: 10,
+            max: 60,
+          }),
+        },
+      ],
       options: {
         chart: {
           events: {
-            mounted: (chart:any) => {
+            mounted: (chart: any) => {
               chart.windowResizeHandler();
-            }
+            },
           },
           height: 320,
-          type: 'bubble',
+          type: "bubble",
         },
         dataLabels: {
-          enabled: false
+          enabled: false,
         },
         fill: {
-          type: 'gradient',
+          type: "gradient",
         },
         grid: {
-          borderColor: 'rgba(119, 119, 142, 0.05)',
+          borderColor: "rgba(119, 119, 142, 0.05)",
         },
         colors: ["#6366f1", "#60a5fa", "#f43f63"],
         title: {
-          text: '3D Bubble Chart',
-          align: 'left',
+          text: "3D Bubble Chart",
+          align: "left",
           style: {
-            fontSize: '13px',
-            fontWeight: 'bold',
-            color: '#8c9097'
+            fontSize: "13px",
+            fontWeight: "bold",
+            color: "#8c9097",
           },
         },
         legend: {
           show: true,
-          position: 'top',
+          position: "top",
           labels: {
-            colors: '#74767c',
+            colors: "#74767c",
           },
         },
         xaxis: {
           tickAmount: 12,
-          type: 'datetime',
+          type: "datetime",
           labels: {
             rotate: 0,
             style: {
               colors: "#8c9097",
-              fontSize: '11px',
+              fontSize: "11px",
               fontWeight: 600,
-              cssClass: 'apexcharts-xaxis-label',
+              cssClass: "apexcharts-xaxis-label",
             },
-          }
+          },
         },
         yaxis: {
           max: 70,
@@ -5005,31 +5415,37 @@ export class Bubble3D extends Component<{}, spark3> {
             show: true,
             style: {
               colors: "#8c9097",
-              fontSize: '11px',
+              fontSize: "11px",
               fontWeight: 600,
-              cssClass: 'apexcharts-yaxis-label',
+              cssClass: "apexcharts-yaxis-label",
             },
-          }
+          },
         },
         theme: {
-          palette: 'palette2'
-        }
-      }
+          palette: "palette2",
+        },
+      },
     };
   }
   render() {
     return (
       <div id="chart">
-        <ReactApexChart height={320} options={this.state.options} series={this.state.series} type="bubble" />
+        <ReactApexChart
+          height={320}
+          options={this.state.options}
+          series={this.state.series}
+          type="bubble"
+        />
       </div>
-    )
+    );
   }
-};
-function generateDayWiseTimeSeries(baseval:any, count:any, yrange:any) {
+}
+function generateDayWiseTimeSeries(baseval: any, count: any, yrange: any) {
   let i = 0;
   let series = [];
   while (i < count) {
-    const y = Math.floor(Math.random() * (yrange.max - yrange.min + 1)) + yrange.min;
+    const y =
+      Math.floor(Math.random() * (yrange.max - yrange.min + 1)) + yrange.min;
 
     series.push([baseval, y]);
     baseval += 86400000;
@@ -5042,80 +5458,101 @@ export class ScatterChart extends Component<{}, spark3> {
     super(props);
 
     this.state = {
-      series: [{
-        name: 'TEAM 1',
-        data: generateDayWiseTimeSeries(new Date('11 Feb 2017 GMT').getTime(), 20, {
-          min: 10,
-          max: 60
-        })
-      },
-      {
-        name: 'TEAM 2',
-        data: generateDayWiseTimeSeries(new Date('11 Feb 2017 GMT').getTime(), 20, {
-          min: 10,
-          max: 60
-        })
-      },
-      {
-        name: 'TEAM 3',
-        data: generateDayWiseTimeSeries(new Date('11 Feb 2017 GMT').getTime(), 30, {
-          min: 10,
-          max: 60
-        })
-      },
-      {
-        name: 'TEAM 4',
-        data: generateDayWiseTimeSeries(new Date('11 Feb 2017 GMT').getTime(), 10, {
-          min: 10,
-          max: 60
-        })
-      },
-      {
-        name: 'TEAM 5',
-        data: generateDayWiseTimeSeries(new Date('11 Feb 2017 GMT').getTime(), 30, {
-          min: 10,
-          max: 60
-        })
-      },
+      series: [
+        {
+          name: "TEAM 1",
+          data: generateDayWiseTimeSeries(
+            new Date("11 Feb 2017 GMT").getTime(),
+            20,
+            {
+              min: 10,
+              max: 60,
+            }
+          ),
+        },
+        {
+          name: "TEAM 2",
+          data: generateDayWiseTimeSeries(
+            new Date("11 Feb 2017 GMT").getTime(),
+            20,
+            {
+              min: 10,
+              max: 60,
+            }
+          ),
+        },
+        {
+          name: "TEAM 3",
+          data: generateDayWiseTimeSeries(
+            new Date("11 Feb 2017 GMT").getTime(),
+            30,
+            {
+              min: 10,
+              max: 60,
+            }
+          ),
+        },
+        {
+          name: "TEAM 4",
+          data: generateDayWiseTimeSeries(
+            new Date("11 Feb 2017 GMT").getTime(),
+            10,
+            {
+              min: 10,
+              max: 60,
+            }
+          ),
+        },
+        {
+          name: "TEAM 5",
+          data: generateDayWiseTimeSeries(
+            new Date("11 Feb 2017 GMT").getTime(),
+            30,
+            {
+              min: 10,
+              max: 60,
+            }
+          ),
+        },
       ],
       options: {
         chart: {
           events: {
-            mounted: (chart:any) => {
+            mounted: (chart: any) => {
               chart.windowResizeHandler();
-            }
+            },
           },
           height: 320,
-          type: 'scatter',
+          type: "scatter",
           zoom: {
-            type: 'xy'
-          }
+            type: "xy",
+          },
         },
         dataLabels: {
-          enabled: false
+          enabled: false,
         },
         colors: ["#6366f1", "#60a5fa", "#f43f63", "#b95d4b", "#5e9aa6"],
         grid: {
-          borderColor: 'rgba(119, 119, 142, 0.05)',
+          borderColor: "rgba(119, 119, 142, 0.05)",
         },
         legend: {
           show: true,
-          position: 'top',
+          position: "top",
           labels: {
-            colors: '#74767c',
+            colors: "#74767c",
           },
         },
         xaxis: {
-          type: 'datetime',
+          type: "datetime",
           labels: {
             show: true,
             style: {
               colors: "#8c9097",
-              fontSize: '11px',
+              fontSize: "11px",
               fontWeight: 600,
-              cssClass: 'apexcharts-xaxis-label',
+              cssClass: "apexcharts-xaxis-label",
             },
-          }
+          },
         },
         yaxis: {
           max: 70,
@@ -5123,34 +5560,40 @@ export class ScatterChart extends Component<{}, spark3> {
             show: true,
             style: {
               colors: "#8c9097",
-              fontSize: '11px',
+              fontSize: "11px",
               fontWeight: 600,
-              cssClass: 'apexcharts-yaxis-label',
+              cssClass: "apexcharts-yaxis-label",
             },
-          }
-        }
-      }
+          },
+        },
+      },
     };
   }
   render() {
     return (
       <div id="chart">
-        <ReactApexChart height={320} options={this.state.options} series={this.state.series} type="scatter" />
+        <ReactApexChart
+          height={320}
+          options={this.state.options}
+          series={this.state.series}
+          type="scatter"
+        />
       </div>
-    )
+    );
   }
-};
+}
 
-function generateData1(count:any, yrange:any) {
+function generateData1(count: any, yrange: any) {
   let i = 0;
   let series = [];
   while (i < count) {
-    const x = 'w' + (i + 1).toString();
-    const y = Math.floor(Math.random() * (yrange.max - yrange.min + 1)) + yrange.min;
+    const x = "w" + (i + 1).toString();
+    const y =
+      Math.floor(Math.random() * (yrange.max - yrange.min + 1)) + yrange.min;
 
     series.push({
       x: x,
-      y: y
+      y: y,
     });
     i++;
   }
@@ -5161,94 +5604,95 @@ export class BasicHeatMap extends Component<{}, spark3> {
     super(props);
 
     this.state = {
-      series: [{
-        name: 'Metric1',
-        data: generateData1(18, {
-          min: 0,
-          max: 90
-        })
-      },
-      {
-        name: 'Metric2',
-        data: generateData1(18, {
-          min: 0,
-          max: 90
-        })
-      },
-      {
-        name: 'Metric3',
-        data: generateData1(18, {
-          min: 0,
-          max: 90
-        })
-      },
-      {
-        name: 'Metric4',
-        data: generateData1(18, {
-          min: 0,
-          max: 90
-        })
-      },
-      {
-        name: 'Metric5',
-        data: generateData1(18, {
-          min: 0,
-          max: 90
-        })
-      },
-      {
-        name: 'Metric6',
-        data: generateData1(18, {
-          min: 0,
-          max: 90
-        })
-      },
-      {
-        name: 'Metric7',
-        data: generateData1(18, {
-          min: 0,
-          max: 90
-        })
-      },
-      {
-        name: 'Metric8',
-        data: generateData1(18, {
-          min: 0,
-          max: 90
-        })
-      },
-      {
-        name: 'Metric9',
-        data: generateData1(18, {
-          min: 0,
-          max: 90
-        })
-      }
+      series: [
+        {
+          name: "Metric1",
+          data: generateData1(18, {
+            min: 0,
+            max: 90,
+          }),
+        },
+        {
+          name: "Metric2",
+          data: generateData1(18, {
+            min: 0,
+            max: 90,
+          }),
+        },
+        {
+          name: "Metric3",
+          data: generateData1(18, {
+            min: 0,
+            max: 90,
+          }),
+        },
+        {
+          name: "Metric4",
+          data: generateData1(18, {
+            min: 0,
+            max: 90,
+          }),
+        },
+        {
+          name: "Metric5",
+          data: generateData1(18, {
+            min: 0,
+            max: 90,
+          }),
+        },
+        {
+          name: "Metric6",
+          data: generateData1(18, {
+            min: 0,
+            max: 90,
+          }),
+        },
+        {
+          name: "Metric7",
+          data: generateData1(18, {
+            min: 0,
+            max: 90,
+          }),
+        },
+        {
+          name: "Metric8",
+          data: generateData1(18, {
+            min: 0,
+            max: 90,
+          }),
+        },
+        {
+          name: "Metric9",
+          data: generateData1(18, {
+            min: 0,
+            max: 90,
+          }),
+        },
       ],
       options: {
         chart: {
           events: {
-            mounted: (chart:any) => {
+            mounted: (chart: any) => {
               chart.windowResizeHandler();
-            }
+            },
           },
           height: 350,
-          type: 'heatmap',
+          type: "heatmap",
         },
         dataLabels: {
-          enabled: false
+          enabled: false,
         },
         colors: ["#6366f1"],
         grid: {
-          borderColor: 'rgba(119, 119, 142, 0.05)',
+          borderColor: "rgba(119, 119, 142, 0.05)",
         },
         title: {
-          text: 'HeatMap Chart (Single color)',
-          align: 'left',
+          text: "HeatMap Chart (Single color)",
+          align: "left",
           style: {
-            fontSize: '13px',
-            fontWeight: 'bold',
-            color: '#8c9097'
+            fontSize: "13px",
+            fontWeight: "bold",
+            color: "#8c9097",
           },
         },
         xaxis: {
@@ -5256,34 +5700,39 @@ export class BasicHeatMap extends Component<{}, spark3> {
             show: true,
             style: {
               colors: "#8c9097",
-              fontSize: '11px',
+              fontSize: "11px",
               fontWeight: 600,
-              cssClass: 'apexcharts-xaxis-label',
+              cssClass: "apexcharts-xaxis-label",
             },
-          }
+          },
         },
         yaxis: {
           labels: {
             show: true,
             style: {
               colors: "#8c9097",
-              fontSize: '11px',
+              fontSize: "11px",
               fontWeight: 600,
-              cssClass: 'apexcharts-yaxis-label',
+              cssClass: "apexcharts-yaxis-label",
             },
-          }
-        }
-      }
+          },
+        },
+      },
     };
   }
   render() {
     return (
       <div id="chart">
-        <ReactApexChart height={320} options={this.state.options} series={this.state.series} type="heatmap" />
+        <ReactApexChart
+          height={320}
+          options={this.state.options}
+          series={this.state.series}
+          type="heatmap"
+        />
       </div>
-    )
+    );
   }
-};
+}
 export class TreeMap extends Component<{}, spark3> {
   constructor(props: {} | Readonly<{}>) {
     super(props);
@@ -5293,94 +5742,99 @@ export class TreeMap extends Component<{}, spark3> {
         {
           data: [
             {
-              x: 'New Delhi',
-              y: 218
+              x: "New Delhi",
+              y: 218,
             },
             {
-              x: 'Kolkata',
-              y: 149
+              x: "Kolkata",
+              y: 149,
             },
             {
-              x: 'Mumbai',
-              y: 184
+              x: "Mumbai",
+              y: 184,
             },
             {
-              x: 'Ahmedabad',
-              y: 55
+              x: "Ahmedabad",
+              y: 55,
             },
             {
-              x: 'Bangaluru',
-              y: 84
+              x: "Bangaluru",
+              y: 84,
             },
             {
-              x: 'Pune',
-              y: 31
+              x: "Pune",
+              y: 31,
             },
             {
-              x: 'Chennai',
-              y: 70
+              x: "Chennai",
+              y: 70,
             },
             {
-              x: 'Jaipur',
-              y: 30
+              x: "Jaipur",
+              y: 30,
             },
             {
-              x: 'Surat',
-              y: 44
+              x: "Surat",
+              y: 44,
             },
             {
-              x: 'Hyderabad',
-              y: 68
+              x: "Hyderabad",
+              y: 68,
             },
             {
-              x: 'Lucknow',
-              y: 28
+              x: "Lucknow",
+              y: 28,
             },
             {
-              x: 'Indore',
-              y: 19
+              x: "Indore",
+              y: 19,
             },
             {
-              x: 'Kanpur',
-              y: 29
-            }
-          ]
-        }
+              x: "Kanpur",
+              y: 29,
+            },
+          ],
+        },
       ],
       options: {
         legend: {
-          show: false
+          show: false,
         },
         chart: {
           events: {
-            mounted: (chart:any) => {
+            mounted: (chart: any) => {
               chart.windowResizeHandler();
-            }
+            },
           },
           height: 350,
-          type: 'treemap'
+          type: "treemap",
         },
         colors: ["#6366f1"],
         title: {
-          text: 'Basic Treemap',
-          align: 'left',
+          text: "Basic Treemap",
+          align: "left",
           style: {
-            fontSize: '13px',
-            fontWeight: 'bold',
-            color: '#8c9097'
+            fontSize: "13px",
+            fontWeight: "bold",
+            color: "#8c9097",
           },
         },
-      }
+      },
     };
   }
   render() {
     return (
       <div id="chart">
-        <ReactApexChart height={320} options={this.state.options} series={this.state.series} type="treemap" />
+        <ReactApexChart
+          height={320}
+          options={this.state.options}
+          series={this.state.series}
+          type="treemap"
+        />
       </div>
-    )
+    );
   }
-};
+}
 export class PieChart extends Component<{}, spark3> {
   constructor(props: {} | Readonly<{}>) {
     super(props);
@@ -5390,45 +5844,52 @@ export class PieChart extends Component<{}, spark3> {
       options: {
         chart: {
           events: {
-            mounted: (chart:any) => {
+            mounted: (chart: any) => {
               chart.windowResizeHandler();
-            }
+            },
           },
           width: 350,
-          type: 'pie',
+          type: "pie",
         },
         colors: ["#6366f1", "#60a5fa", "#f43f63", "#5e9aa6", "#b95d4b"],
-        labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
+        labels: ["Team A", "Team B", "Team C", "Team D", "Team E"],
         legend: {
           position: "bottom",
           labels: {
-            colors: '#74767c',
+            colors: "#74767c",
           },
         },
-        responsive: [{
-          breakpoint: 480,
-          options: {
-            chart: {
-              width: 200
+        responsive: [
+          {
+            breakpoint: 480,
+            options: {
+              chart: {
+                width: 200,
+              },
             },
-          }
-        }],
+          },
+        ],
         dataLabels: {
           dropShadow: {
-            enabled: false
-          }
+            enabled: false,
+          },
         },
-      }
+      },
     };
   }
   render() {
     return (
       <div id="chart">
-        <ReactApexChart height={320} options={this.state.options} series={this.state.series} type="pie" />
+        <ReactApexChart
+          height={320}
+          options={this.state.options}
+          series={this.state.series}
+          type="pie"
+        />
       </div>
-    )
+    );
   }
-};
+}
 export class DonutChart extends Component<{}, spark3> {
   constructor(props: {} | Readonly<{}>) {
     super(props);
@@ -5438,47 +5899,54 @@ export class DonutChart extends Component<{}, spark3> {
       options: {
         chart: {
           events: {
-            mounted: (chart:any) => {
+            mounted: (chart: any) => {
               chart.windowResizeHandler();
-            }
+            },
           },
-          type: 'donut',
-          height: 290
+          type: "donut",
+          height: 290,
         },
         legend: {
-          position: 'bottom',
+          position: "bottom",
           labels: {
-            colors: '#74767c',
+            colors: "#74767c",
           },
         },
         colors: ["#6366f1", "#60a5fa", "#f43f63", "#5e9aa6", "#b95d4b"],
-        responsive: [{
-          breakpoint: 480,
-          options: {
-            chart: {
-              height: 250
+        responsive: [
+          {
+            breakpoint: 480,
+            options: {
+              chart: {
+                height: 250,
+              },
+              legend: {
+                position: "bottom",
+              },
             },
-            legend: {
-              position: 'bottom'
-            }
-          }
-        }],
+          },
+        ],
         dataLabels: {
           dropShadow: {
-            enabled: false
-          }
+            enabled: false,
+          },
         },
-      }
+      },
     };
   }
   render() {
     return (
       <div id="chart">
-        <ReactApexChart height={320} options={this.state.options} series={this.state.series} type="donut" />
+        <ReactApexChart
+          height={320}
+          options={this.state.options}
+          series={this.state.series}
+          type="donut"
+        />
       </div>
-    )
+    );
   }
-};
+}
 export class RadialChart extends Component<{}, spark3> {
   constructor(props: {} | Readonly<{}>) {
     super(props);
@@ -5488,41 +5956,48 @@ export class RadialChart extends Component<{}, spark3> {
       options: {
         chart: {
           events: {
-            mounted: (chart:any) => {
+            mounted: (chart: any) => {
               chart.windowResizeHandler();
-            }
+            },
           },
           height: 350,
-          type: 'radialBar',
+          type: "radialBar",
         },
         colors: ["#6366f1"],
         plotOptions: {
           radialBar: {
             hollow: {
-              size: '70%',
-            }
+              size: "70%",
+            },
           },
         },
-        labels: ['Cricket'],
-        responsive: [{
-          breakpoint: 350,
-          options: {
-            chart: {
-              height: 300,
+        labels: ["Cricket"],
+        responsive: [
+          {
+            breakpoint: 350,
+            options: {
+              chart: {
+                height: 300,
+              },
             },
-          }
-        }],
-      }
+          },
+        ],
+      },
     };
   }
   render() {
     return (
       <div id="chart">
-        <ReactApexChart height={320} options={this.state.options} series={this.state.series} type="radialBar" />
+        <ReactApexChart
+          height={320}
+          options={this.state.options}
+          series={this.state.series}
+          type="radialBar"
+        />
       </div>
-    )
+    );
   }
-};
+}
 export class StrokedCircularGauge extends Component<{}, spark3> {
   constructor(props: {} | Readonly<{}>) {
     super(props);
@@ -5532,13 +6007,13 @@ export class StrokedCircularGauge extends Component<{}, spark3> {
       options: {
         chart: {
           events: {
-            mounted: (chart:any) => {
+            mounted: (chart: any) => {
               chart.windowResizeHandler();
-            }
+            },
           },
           height: 350,
-          type: 'radialBar',
-          offsetY: -10
+          type: "radialBar",
+          offsetY: -10,
         },
         colors: ["#6366f1"],
         plotOptions: {
@@ -5547,116 +6022,130 @@ export class StrokedCircularGauge extends Component<{}, spark3> {
             endAngle: 135,
             dataLabels: {
               name: {
-                fontSize: '16px',
+                fontSize: "16px",
                 color: undefined,
-                offsetY: 120
+                offsetY: 120,
               },
               value: {
                 offsetY: 76,
-                fontSize: '22px',
+                fontSize: "22px",
                 color: undefined,
-                formatter: function (val:any) {
+                formatter: function (val: any) {
                   return val + "%";
-                }
-              }
-            }
-          }
+                },
+              },
+            },
+          },
         },
         fill: {
-          type: 'gradient',
+          type: "gradient",
           gradient: {
-            shade: 'dark',
+            shade: "dark",
             shadeIntensity: 0.15,
             inverseColors: false,
             opacityFrom: 1,
             opacityTo: 1,
-            stops: [0, 50, 65, 91]
+            stops: [0, 50, 65, 91],
           },
         },
         stroke: {
-          dashArray: 4
+          dashArray: 4,
         },
-        labels: ['Median Ratio'],
-      }
+        labels: ["Median Ratio"],
+      },
     };
   }
   render() {
     return (
       <div id="chart">
-        <ReactApexChart height={320} options={this.state.options} series={this.state.series} type="radialBar" />
+        <ReactApexChart
+          height={320}
+          options={this.state.options}
+          series={this.state.series}
+          type="radialBar"
+        />
       </div>
-    )
+    );
   }
-};
+}
 export class RaderChart extends Component<{}, spark3> {
   constructor(props: {} | Readonly<{}>) {
     super(props);
 
     this.state = {
-      series: [{
-        name: 'Series 1',
-        data: [80, 50, 30, 40, 100, 20],
-      }, {
-        name: 'Series 2',
-        data: [20, 30, 40, 80, 20, 80],
-      }, {
-        name: 'Series 3',
-        data: [44, 76, 78, 13, 43, 10],
-      }],
+      series: [
+        {
+          name: "Series 1",
+          data: [80, 50, 30, 40, 100, 20],
+        },
+        {
+          name: "Series 2",
+          data: [20, 30, 40, 80, 20, 80],
+        },
+        {
+          name: "Series 3",
+          data: [44, 76, 78, 13, 43, 10],
+        },
+      ],
       options: {
         chart: {
           events: {
-            mounted: (chart:any) => {
+            mounted: (chart: any) => {
               chart.windowResizeHandler();
-            }
+            },
           },
           height: 350,
-          type: 'radar',
+          type: "radar",
           dropShadow: {
             enabled: true,
             blur: 1,
             left: 1,
-            top: 1
-          }
+            top: 1,
+          },
         },
         title: {
-          text: 'Radar Chart - Multi Series',
-          align: 'left',
+          text: "Radar Chart - Multi Series",
+          align: "left",
           style: {
-            fontSize: '13px',
-            fontWeight: 'bold',
-            color: '#8c9097'
+            fontSize: "13px",
+            fontWeight: "bold",
+            color: "#8c9097",
           },
         },
         legend: {
           labels: {
-            colors: '#74767c',
+            colors: "#74767c",
           },
         },
         colors: ["#6366f1", "#60a5fa", "#f43f63"],
         stroke: {
-          width: 2
+          width: 2,
         },
         fill: {
-          opacity: 0.1
+          opacity: 0.1,
         },
         markers: {
-          size: 0
+          size: 0,
         },
         xaxis: {
-          categories: ['2011', '2012', '2013', '2014', '2015', '2016']
-        }
-      }
+          categories: ["2011", "2012", "2013", "2014", "2015", "2016"],
+        },
+      },
     };
   }
   render() {
     return (
       <div id="chart">
-        <ReactApexChart height={320} options={this.state.options} series={this.state.series} type="radar" />
+        <ReactApexChart
+          height={320}
+          options={this.state.options}
+          series={this.state.series}
+          type="radar"
+        />
       </div>
-    )
+    );
   }
-};
+}
 export class PolarAreaChart extends Component<{}, spark3> {
   constructor(props: {} | Readonly<{}>) {
     super(props);
@@ -5666,62 +6155,80 @@ export class PolarAreaChart extends Component<{}, spark3> {
       options: {
         chart: {
           events: {
-            mounted: (chart:any) => {
+            mounted: (chart: any) => {
               chart.windowResizeHandler();
-            }
+            },
           },
-          type: 'polarArea',
-          width: 400
+          type: "polarArea",
+          width: 400,
         },
         stroke: {
-          colors: ['#fff']
+          colors: ["#fff"],
         },
         fill: {
-          opacity: 0.8
+          opacity: 0.8,
         },
         legend: {
-          position: 'bottom',
+          position: "bottom",
           labels: {
-            colors: '#74767c',
+            colors: "#74767c",
           },
         },
-        colors: ["#6366f1", "#60a5fa", "#f43f63", "#5e9aa6", "#b95d4b", "#76a65e", "#a65e76", "#5e9aa6", "#5b67c7"],
-        responsive: [{
-          breakpoint: 480,
-          options: {
-            chart: {
-              width: 200
+        colors: [
+          "#6366f1",
+          "#60a5fa",
+          "#f43f63",
+          "#5e9aa6",
+          "#b95d4b",
+          "#76a65e",
+          "#a65e76",
+          "#5e9aa6",
+          "#5b67c7",
+        ],
+        responsive: [
+          {
+            breakpoint: 480,
+            options: {
+              chart: {
+                width: 200,
+              },
+              legend: {
+                position: "bottom",
+              },
             },
-            legend: {
-              position: 'bottom'
-            }
-          }
-        }]
-      }
+          },
+        ],
+      },
     };
   }
   render() {
     return (
       <div id="chart">
-        <ReactApexChart className="flex justify-center" height={400} options={this.state.options} series={this.state.series} type="polarArea" />
+        <ReactApexChart
+          className="flex justify-center"
+          height={400}
+          options={this.state.options}
+          series={this.state.series}
+          type="polarArea"
+        />
       </div>
-    )
+    );
   }
-};
+}
 
 // **************************************************************************************************************
 
 // ** Chart.JS Souurce **
 
 const LineData = {
-  type: 'line',
-  labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+  type: "line",
+  labels: ["January", "February", "March", "April", "May", "June"],
   datasets: [
     {
       data: [0, 10, 5, 2, 20, 30, 45],
-      label: 'My First dataset',
-      backgroundColor: '#6366f1',
-      borderColor: '#6366f1',
+      label: "My First dataset",
+      backgroundColor: "#6366f1",
+      borderColor: "#6366f1",
     },
   ],
 };
@@ -5738,36 +6245,37 @@ const LineOptions = {
 };
 
 export function LineChartJS() {
-  return <Line width={741} height={300} options={LineOptions} data={LineData} />;
+  return (
+    <Line width={741} height={300} options={LineOptions} data={LineData} />
+  );
 }
 
-
 const BarData = {
-  type: 'line',
-  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July',],
+  type: "line",
+  labels: ["January", "February", "March", "April", "May", "June", "July"],
   datasets: [
     {
-      label: 'My First Dataset',
+      label: "My First Dataset",
       data: [65, 59, 80, 81, 56, 55, 40],
       backgroundColor: [
-        'rgba(94, 118, 166, 0.2)',
-        'rgba(94, 166, 142, 0.2)',
-        'rgba(166, 142, 94, 0.2)',
-        'rgba(94, 154, 166, 0.2)',
-        'rgba(185, 93, 75, 0.2)',
-        'rgba(118, 166, 94, 0.2)',
-        'rgba(140, 144, 151, 0.2)'
+        "rgba(94, 118, 166, 0.2)",
+        "rgba(94, 166, 142, 0.2)",
+        "rgba(166, 142, 94, 0.2)",
+        "rgba(94, 154, 166, 0.2)",
+        "rgba(185, 93, 75, 0.2)",
+        "rgba(118, 166, 94, 0.2)",
+        "rgba(140, 144, 151, 0.2)",
       ],
       borderColor: [
-        '#6366f1',
-        'rgb(94, 166, 142)',
-        'rgb(166, 142, 94)',
-        'rgb(94, 154, 166)',
-        'rgb(185, 93, 75)',
-        'rgb(118, 166, 94)',
-        'rgb(140, 144, 151)'
+        "#6366f1",
+        "rgb(94, 166, 142)",
+        "rgb(166, 142, 94)",
+        "rgb(94, 154, 166)",
+        "rgb(185, 93, 75)",
+        "rgb(118, 166, 94)",
+        "rgb(140, 144, 151)",
       ],
-      borderWidth: 1
+      borderWidth: 1,
     },
   ],
 };
@@ -5777,8 +6285,8 @@ const BarOptions = {
   maintainAspectRatio: false,
   scales: {
     y: {
-      beginAtZero: true
-    }
+      beginAtZero: true,
+    },
   },
   plugins: {
     legend: {
@@ -5793,30 +6301,40 @@ export function BarChartJS() {
 }
 
 const RadarData = {
-  type: 'radar',
-  labels: ['Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling', 'Running'],
+  type: "radar",
+  labels: [
+    "Eating",
+    "Drinking",
+    "Sleeping",
+    "Designing",
+    "Coding",
+    "Cycling",
+    "Running",
+  ],
   datasets: [
     {
-      label: 'My First Dataset',
+      label: "My First Dataset",
       data: [65, 59, 90, 81, 56, 55, 40],
       fill: true,
-      backgroundColor: 'rgba(94, 118, 166, 0.2)',
-      borderColor: '#6366f1',
-      pointBackgroundColor: '#6366f1',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: '#6366f1'
-    }, {
-      label: 'My Second Dataset',
+      backgroundColor: "rgba(94, 118, 166, 0.2)",
+      borderColor: "#6366f1",
+      pointBackgroundColor: "#6366f1",
+      pointBorderColor: "#fff",
+      pointHoverBackgroundColor: "#fff",
+      pointHoverBorderColor: "#6366f1",
+    },
+    {
+      label: "My Second Dataset",
       data: [28, 48, 40, 19, 96, 27, 100],
       fill: true,
-      backgroundColor: 'rgba(94, 166, 142, 0.2)',
-      borderColor: 'rgb(94, 166, 142)',
-      pointBackgroundColor: 'rgb(94, 166, 142)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgb(94, 166, 142)'
-    }]
+      backgroundColor: "rgba(94, 166, 142, 0.2)",
+      borderColor: "rgb(94, 166, 142)",
+      pointBackgroundColor: "rgb(94, 166, 142)",
+      pointBorderColor: "#fff",
+      pointHoverBackgroundColor: "#fff",
+      pointHoverBorderColor: "rgb(94, 166, 142)",
+    },
+  ],
 };
 
 const RadarOptions = {
@@ -5824,67 +6342,86 @@ const RadarOptions = {
   maintainAspectRatio: false,
   elements: {
     line: {
-      borderWidth: 3
-    }
-  }
+      borderWidth: 3,
+    },
+  },
 };
 
 export function RadarChartJS() {
-  return <Radar width={741} height={300} options={RadarOptions} data={RadarData} />;
+  return (
+    <Radar width={741} height={300} options={RadarOptions} data={RadarData} />
+  );
 }
 
 const ScatterData = {
-  type: 'scatter',
-  datasets: [{
-    label: 'Scatter Dataset',
-    data: [{
-      x: -10,
-      y: 0
-    }, {
-      x: 0,
-      y: 10
-    }, {
-      x: 10,
-      y: 5
-    }, {
-      x: 0.5,
-      y: 5.5
-    }],
-    backgroundColor: '#6366f1'
-  }],
+  type: "scatter",
+  datasets: [
+    {
+      label: "Scatter Dataset",
+      data: [
+        {
+          x: -10,
+          y: 0,
+        },
+        {
+          x: 0,
+          y: 10,
+        },
+        {
+          x: 10,
+          y: 5,
+        },
+        {
+          x: 0.5,
+          y: 5.5,
+        },
+      ],
+      backgroundColor: "#6366f1",
+    },
+  ],
 };
 
-const ScatterOptions:any = {
+const ScatterOptions: any = {
   responsive: true,
   maintainAspectRatio: false,
   scales: {
     x: {
-      type: 'linear',
-      position: 'bottom'
-    }
-  }
+      type: "linear",
+      position: "bottom",
+    },
+  },
 };
 
 export function ScatterChartJS() {
-  return <Scatter width={741} height={300} options={ScatterOptions} data={ScatterData} />;
+  return (
+    <Scatter
+      width={741}
+      height={300}
+      options={ScatterOptions}
+      data={ScatterData}
+    />
+  );
 }
 
-const MixedChartData:any = {
-  type: 'scatter',
-  labels: ['January', 'February', 'March', 'April'],
-  datasets: [{
-    type: 'bar',
-    label: 'Bar Dataset',
-    data: [10, 20, 30, 40],
-    borderColor: '#6366f1',
-    backgroundColor: 'rgba(94, 118, 166, 0.2)',
-  }, {
-    type: 'line',
-    label: 'Line Dataset',
-    data: [50, 50, 50, 50],
-    fill: false,
-    borderColor: 'rgb(94, 166, 142)',
-  }]
+const MixedChartData: any = {
+  type: "scatter",
+  labels: ["January", "February", "March", "April"],
+  datasets: [
+    {
+      type: "bar",
+      label: "Bar Dataset",
+      data: [10, 20, 30, 40],
+      borderColor: "#6366f1",
+      backgroundColor: "rgba(94, 118, 166, 0.2)",
+    },
+    {
+      type: "line",
+      label: "Line Dataset",
+      data: [50, 50, 50, 50],
+      fill: false,
+      borderColor: "rgb(94, 166, 142)",
+    },
+  ],
 };
 
 const MixedChartOptions = {
@@ -5892,30 +6429,42 @@ const MixedChartOptions = {
   maintainAspectRatio: false,
   scales: {
     y: {
-      beginAtZero: true
-    }
-  }
+      beginAtZero: true,
+    },
+  },
 };
 
 export function MixedChartJS() {
-  return <Scatter width={741} height={300} options={MixedChartOptions} data={MixedChartData} />;
+  return (
+    <Scatter
+      width={741}
+      height={300}
+      options={MixedChartOptions}
+      data={MixedChartData}
+    />
+  );
 }
 
 const BubbleData = {
-  type: 'bubble',
-  datasets: [{
-    label: 'First Dataset',
-    data: [{
-      x: 20,
-      y: 30,
-      r: 15
-    }, {
-      x: 40,
-      y: 10,
-      r: 10
-    }],
-    backgroundColor: '#6366f1'
-  }]
+  type: "bubble",
+  datasets: [
+    {
+      label: "First Dataset",
+      data: [
+        {
+          x: 20,
+          y: 30,
+          r: 15,
+        },
+        {
+          x: 40,
+          y: 10,
+          r: 10,
+        },
+      ],
+      backgroundColor: "#6366f1",
+    },
+  ],
 };
 
 const BubbleOptions = {
@@ -5923,34 +6472,39 @@ const BubbleOptions = {
   maintainAspectRatio: false,
   scales: {
     y: {
-      beginAtZero: true
-    }
-  }
+      beginAtZero: true,
+    },
+  },
 };
 
 export function BubbleChart() {
-  return <Bubble width={741} height={300} options={BubbleOptions} data={BubbleData} />;
+  return (
+    <Bubble
+      width={741}
+      height={300}
+      options={BubbleOptions}
+      data={BubbleData}
+    />
+  );
 }
 
 const PieData = {
-  type: 'pie',
-  labels: ['Red', 'Blue', 'Yellow'],
-  datasets: [{
-    label: 'My First Dataset',
-    data: [300, 50, 100],
-    backgroundColor: [
-      '#6366f1',
-      'rgb(94, 166, 142)',
-      'rgb(166, 142, 94)'
-    ],
-    hoverOffset: 4,
-    borderColor: 'rgba(142, 156, 173,0.1)'
-  }]
+  type: "pie",
+  labels: ["Red", "Blue", "Yellow"],
+  datasets: [
+    {
+      label: "My First Dataset",
+      data: [300, 50, 100],
+      backgroundColor: ["#6366f1", "rgb(94, 166, 142)", "rgb(166, 142, 94)"],
+      hoverOffset: 4,
+      borderColor: "rgba(142, 156, 173,0.1)",
+    },
+  ],
 };
 
 const PieOptions = {
   responsive: true,
-  maintainAspectRatio: false
+  maintainAspectRatio: false,
 };
 
 export function ChartPie() {
@@ -5958,54 +6512,68 @@ export function ChartPie() {
 }
 
 const DoughnutData = {
-  type: 'doughnut',
-  labels: ['Red', 'Blue', 'Yellow'],
-  datasets: [{
-    label: 'My First Dataset',
-    data: [300, 50, 100],
-    backgroundColor: [
-      '#6366f1',
-      'rgb(94, 166, 142)',
-      'rgb(166, 142, 94)'
-    ],
-    hoverOffset: 4,
-    borderColor: 'rgba(142, 156, 173,0.1)'
-  }]
+  type: "doughnut",
+  labels: ["Red", "Blue", "Yellow"],
+  datasets: [
+    {
+      label: "My First Dataset",
+      data: [300, 50, 100],
+      backgroundColor: ["#6366f1", "rgb(94, 166, 142)", "rgb(166, 142, 94)"],
+      hoverOffset: 4,
+      borderColor: "rgba(142, 156, 173,0.1)",
+    },
+  ],
 };
 
 const DoughnutOptions = {
   responsive: true,
-  maintainAspectRatio: false
+  maintainAspectRatio: false,
 };
 
 export function DoughnutChart() {
-  return <Doughnut width={741} height={300} options={DoughnutOptions} data={DoughnutData} />;
+  return (
+    <Doughnut
+      width={741}
+      height={300}
+      options={DoughnutOptions}
+      data={DoughnutData}
+    />
+  );
 }
 
 const polarData = {
-  type: 'doughnut',
-  labels: ['Red', 'Green', 'Yellow', 'Grey', 'Blue'],
-  datasets: [{
-    label: 'My First Dataset',
-    data: [11, 16, 7, 3, 14],
-    backgroundColor: [
-      '#6366f1',
-      'rgb(75, 192, 192)',
-      'rgb(166, 142, 94)',
-      'rgb(201, 203, 207)',
-      'rgb(94, 166, 142)'
-    ],
-    borderColor: 'rgba(142, 156, 173,0.1)'
-  }]
+  type: "doughnut",
+  labels: ["Red", "Green", "Yellow", "Grey", "Blue"],
+  datasets: [
+    {
+      label: "My First Dataset",
+      data: [11, 16, 7, 3, 14],
+      backgroundColor: [
+        "#6366f1",
+        "rgb(75, 192, 192)",
+        "rgb(166, 142, 94)",
+        "rgb(201, 203, 207)",
+        "rgb(94, 166, 142)",
+      ],
+      borderColor: "rgba(142, 156, 173,0.1)",
+    },
+  ],
 };
 
 const polarOptions = {
   responsive: true,
-  maintainAspectRatio: false
+  maintainAspectRatio: false,
 };
 
 export function ChartPolar() {
-  return <Doughnut width={741} height={300} options={polarOptions} data={polarData} />;
+  return (
+    <Doughnut
+      width={741}
+      height={300}
+      options={polarOptions}
+      data={polarData}
+    />
+  );
 }
 
 // **************************************************************************************************************
@@ -6019,38 +6587,36 @@ export function LineEChart() {
       right: "0%",
       bottom: "0%",
       top: "10%",
-      containLabel: true
+      containLabel: true,
     },
     splitLine: {
       lineStyle: {
-        color: "rgba(142, 156, 173,0.1)"
-      }
+        color: "rgba(142, 156, 173,0.1)",
+      },
     },
     axisLine: {
       lineStyle: {
-        color: "#8c9097"
-      }
+        color: "#8c9097",
+      },
     },
     xAxis: {
-      type: 'category',
-      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-
+      type: "category",
+      data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
     },
     yAxis: {
-      type: 'value',
+      type: "value",
     },
     series: [
       {
         data: [150, 230, 224, 218, 135, 147, 260],
-        type: 'line'
-      }
+        type: "line",
+      },
     ],
-    color: "#6366f1"
-
+    color: "#6366f1",
   };
 
-  return (<ReactEcharts className="chartsh" option={options} />);
-};
+  return <ReactEcharts className="chartsh" option={options} />;
+}
 export function SmoothLineEChart() {
   const options = {
     grid: {
@@ -6058,37 +6624,37 @@ export function SmoothLineEChart() {
       right: "0%",
       bottom: "0%",
       top: "10%",
-      containLabel: true
+      containLabel: true,
     },
     splitLine: {
       lineStyle: {
-        color: "rgba(142, 156, 173,0.1)"
-      }
+        color: "rgba(142, 156, 173,0.1)",
+      },
     },
     axisLine: {
       lineStyle: {
-        color: "#8c9097"
-      }
+        color: "#8c9097",
+      },
     },
     xAxis: {
-      type: 'category',
-      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+      type: "category",
+      data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
     },
     yAxis: {
-      type: 'value'
+      type: "value",
     },
     series: [
       {
         data: [820, 932, 901, 934, 1290, 1330, 1320],
-        type: 'line',
-        smooth: true
-      }
+        type: "line",
+        smooth: true,
+      },
     ],
-    color: "#6366f1"
+    color: "#6366f1",
   };
 
-  return (<ReactEcharts className="chartsh" option={options} />);
-};
+  return <ReactEcharts className="chartsh" option={options} />;
+}
 export function AreaEChart() {
   const options = {
     grid: {
@@ -6096,38 +6662,38 @@ export function AreaEChart() {
       right: "0%",
       bottom: "0%",
       top: "10%",
-      containLabel: true
+      containLabel: true,
     },
     splitLine: {
       lineStyle: {
-        color: "rgba(142, 156, 173,0.1)"
-      }
+        color: "rgba(142, 156, 173,0.1)",
+      },
     },
     axisLine: {
       lineStyle: {
-        color: "#8c9097"
-      }
+        color: "#8c9097",
+      },
     },
     xAxis: {
-      type: 'category',
+      type: "category",
       boundaryGap: false,
-      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+      data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
     },
     yAxis: {
-      type: 'value',
+      type: "value",
     },
     series: [
       {
         data: [820, 932, 901, 934, 1290, 1330, 1320],
-        type: 'line',
-        areaStyle: {}
-      }
+        type: "line",
+        areaStyle: {},
+      },
     ],
-    color: "#6366f1"
+    color: "#6366f1",
   };
 
-  return (<ReactEcharts className="chartsh" option={options} />);
-};
+  return <ReactEcharts className="chartsh" option={options} />;
+}
 export function StackedLineEChart() {
   const options = {
     grid: {
@@ -6138,357 +6704,354 @@ export function StackedLineEChart() {
       containLabel: true,
     },
     tooltip: {
-      trigger: 'axis'
+      trigger: "axis",
     },
     legend: {
-      data: ['Email', 'Union Ads', 'Video Ads', 'Direct', 'Search Engine'],
+      data: ["Email", "Union Ads", "Video Ads", "Direct", "Search Engine"],
       textStyle: {
-        color: 'rgb(119, 119, 142)'
-      }
+        color: "rgb(119, 119, 142)",
+      },
     },
     toolbox: {
       feature: {
-        saveAsImage: {}
-      }
+        saveAsImage: {},
+      },
     },
     splitLine: {
       lineStyle: {
-        color: "rgba(142, 156, 173,0.1)"
-      }
+        color: "rgba(142, 156, 173,0.1)",
+      },
     },
     axisLine: {
       lineStyle: {
-        color: "#8c9097"
-      }
+        color: "#8c9097",
+      },
     },
     xAxis: {
-      type: 'category',
+      type: "category",
       boundaryGap: false,
-      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-
+      data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
     },
     yAxis: {
-      type: 'value',
+      type: "value",
     },
     series: [
       {
-        name: 'Email',
-        type: 'line',
-        stack: 'Total',
-        data: [120, 132, 101, 134, 90, 230, 210]
+        name: "Email",
+        type: "line",
+        stack: "Total",
+        data: [120, 132, 101, 134, 90, 230, 210],
       },
       {
-        name: 'Union Ads',
-        type: 'line',
-        stack: 'Total',
-        data: [220, 182, 191, 234, 290, 330, 310]
+        name: "Union Ads",
+        type: "line",
+        stack: "Total",
+        data: [220, 182, 191, 234, 290, 330, 310],
       },
       {
-        name: 'Video Ads',
-        type: 'line',
-        stack: 'Total',
-        data: [150, 232, 201, 154, 190, 330, 410]
+        name: "Video Ads",
+        type: "line",
+        stack: "Total",
+        data: [150, 232, 201, 154, 190, 330, 410],
       },
       {
-        name: 'Direct',
-        type: 'line',
-        stack: 'Total',
-        data: [320, 332, 301, 334, 390, 330, 320]
+        name: "Direct",
+        type: "line",
+        stack: "Total",
+        data: [320, 332, 301, 334, 390, 330, 320],
       },
       {
-        name: 'Search Engine',
-        type: 'line',
-        stack: 'Total',
-        data: [820, 932, 901, 934, 1290, 1330, 1320]
-      }
+        name: "Search Engine",
+        type: "line",
+        stack: "Total",
+        data: [820, 932, 901, 934, 1290, 1330, 1320],
+      },
     ],
-    color: ["#6366f1", "#60a5fa", "#eab308", "#f43f5e", "#22c55e"]
+    color: ["#6366f1", "#60a5fa", "#eab308", "#f43f5e", "#22c55e"],
   };
 
-  return (<ReactEcharts className="chartsh" option={options} />);
-};
+  return <ReactEcharts className="chartsh" option={options} />;
+}
 export function StackedAreaEChart() {
   const options = {
     tooltip: {
-      trigger: 'axis',
+      trigger: "axis",
       axisPointer: {
-        type: 'cross',
+        type: "cross",
         label: {
-          backgroundColor: '#6a7985'
-        }
-      }
+          backgroundColor: "#6a7985",
+        },
+      },
     },
     legend: {
-      data: ['Email', 'Union Ads', 'Video Ads', 'Direct', 'Search Engine'],
+      data: ["Email", "Union Ads", "Video Ads", "Direct", "Search Engine"],
       textStyle: {
-        color: 'rgb(119, 119, 142)'
-      }
+        color: "rgb(119, 119, 142)",
+      },
     },
     toolbox: {
       feature: {
-        saveAsImage: {}
-      }
+        saveAsImage: {},
+      },
     },
     grid: {
-      left: '0%',
-      right: '0%',
-      bottom: '0%',
-      top: '10%',
-      containLabel: true
+      left: "0%",
+      right: "0%",
+      bottom: "0%",
+      top: "10%",
+      containLabel: true,
     },
     splitLine: {
       lineStyle: {
-        color: "rgba(142, 156, 173,0.1)"
-      }
+        color: "rgba(142, 156, 173,0.1)",
+      },
     },
     axisLine: {
       lineStyle: {
-        color: "#8c9097"
-      }
+        color: "#8c9097",
+      },
     },
     xAxis: [
       {
-        type: 'category',
+        type: "category",
         boundaryGap: false,
-        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-      }
+        data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+      },
     ],
     yAxis: [
       {
-        type: 'value',
-      }
+        type: "value",
+      },
     ],
     series: [
       {
-        name: 'Email',
-        type: 'line',
-        stack: 'Total',
+        name: "Email",
+        type: "line",
+        stack: "Total",
         areaStyle: {},
         emphasis: {
-          focus: 'series'
+          focus: "series",
         },
-        data: [120, 132, 101, 134, 90, 230, 210]
+        data: [120, 132, 101, 134, 90, 230, 210],
       },
       {
-        name: 'Union Ads',
-        type: 'line',
-        stack: 'Total',
+        name: "Union Ads",
+        type: "line",
+        stack: "Total",
         areaStyle: {},
         emphasis: {
-          focus: 'series'
+          focus: "series",
         },
-        data: [220, 182, 191, 234, 290, 330, 310]
+        data: [220, 182, 191, 234, 290, 330, 310],
       },
       {
-        name: 'Video Ads',
-        type: 'line',
-        stack: 'Total',
+        name: "Video Ads",
+        type: "line",
+        stack: "Total",
         areaStyle: {},
         emphasis: {
-          focus: 'series'
+          focus: "series",
         },
-        data: [150, 232, 201, 154, 190, 330, 410]
+        data: [150, 232, 201, 154, 190, 330, 410],
       },
       {
-        name: 'Direct',
-        type: 'line',
-        stack: 'Total',
+        name: "Direct",
+        type: "line",
+        stack: "Total",
         areaStyle: {},
         emphasis: {
-          focus: 'series'
+          focus: "series",
         },
-        data: [320, 332, 301, 334, 390, 330, 320]
+        data: [320, 332, 301, 334, 390, 330, 320],
       },
       {
-        name: 'Search Engine',
-        type: 'line',
-        stack: 'Total',
+        name: "Search Engine",
+        type: "line",
+        stack: "Total",
         label: {
           show: true,
-          position: 'top'
+          position: "top",
         },
         areaStyle: {},
         emphasis: {
-          focus: 'series'
+          focus: "series",
         },
-        data: [820, 932, 901, 934, 1290, 1330, 1320]
-      }
+        data: [820, 932, 901, 934, 1290, 1330, 1320],
+      },
     ],
-    color: ["#6366f1", "#60a5fa", "#eab308", "#f43f5e", "#22c55e"]
+    color: ["#6366f1", "#60a5fa", "#eab308", "#f43f5e", "#22c55e"],
   };
 
-  return (<ReactEcharts className="chartsh" option={options} />);
-};
+  return <ReactEcharts className="chartsh" option={options} />;
+}
 export function StepLineEChart() {
   const options = {
     tooltip: {
-      trigger: 'axis'
+      trigger: "axis",
     },
     legend: {
-      data: ['Step Start', 'Step Middle', 'Step End'],
+      data: ["Step Start", "Step Middle", "Step End"],
       textStyle: {
-        color: 'rgb(119, 119, 142)'
-      }
+        color: "rgb(119, 119, 142)",
+      },
     },
     grid: {
-      left: '0%',
-      right: '0%',
-      bottom: '0%',
-      top: '10%',
-      containLabel: true
+      left: "0%",
+      right: "0%",
+      bottom: "0%",
+      top: "10%",
+      containLabel: true,
     },
     toolbox: {
       feature: {
-        saveAsImage: {}
-      }
+        saveAsImage: {},
+      },
     },
     splitLine: {
       lineStyle: {
-        color: "rgba(142, 156, 173,0.1)"
-      }
+        color: "rgba(142, 156, 173,0.1)",
+      },
     },
     axisLine: {
       lineStyle: {
-        color: "#8c9097"
-      }
+        color: "#8c9097",
+      },
     },
     xAxis: {
-      type: 'category',
-      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+      type: "category",
+      data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
     },
     yAxis: {
-      type: 'value',
+      type: "value",
     },
     series: [
       {
-        name: 'Step Start',
-        type: 'line',
-        step: 'start',
-        data: [120, 132, 101, 134, 90, 230, 210]
+        name: "Step Start",
+        type: "line",
+        step: "start",
+        data: [120, 132, 101, 134, 90, 230, 210],
       },
       {
-        name: 'Step Middle',
-        type: 'line',
-        step: 'middle',
-        data: [220, 282, 201, 234, 290, 430, 410]
+        name: "Step Middle",
+        type: "line",
+        step: "middle",
+        data: [220, 282, 201, 234, 290, 430, 410],
       },
       {
-        name: 'Step End',
-        type: 'line',
-        step: 'end',
-        data: [450, 432, 401, 454, 590, 530, 510]
-      }
+        name: "Step End",
+        type: "line",
+        step: "end",
+        data: [450, 432, 401, 454, 590, 530, 510],
+      },
     ],
-    color: ["#6366f1", "#60a5fa", "#eab308", "#f43f5e", "#22c55e"]
+    color: ["#6366f1", "#60a5fa", "#eab308", "#f43f5e", "#22c55e"],
   };
 
-  return (<ReactEcharts className="chartsh" option={options} />);
-};
+  return <ReactEcharts className="chartsh" option={options} />;
+}
 export function BarEChart() {
   const options = {
     grid: {
-      left: '0%',
-      right: '0%',
-      bottom: '0%',
-      top: '10%',
-      containLabel: true
+      left: "0%",
+      right: "0%",
+      bottom: "0%",
+      top: "10%",
+      containLabel: true,
     },
     splitLine: {
       lineStyle: {
-        color: "rgba(142, 156, 173,0.1)"
-      }
+        color: "rgba(142, 156, 173,0.1)",
+      },
     },
     axisLine: {
       lineStyle: {
-        color: "#8c9097"
-      }
+        color: "#8c9097",
+      },
     },
     xAxis: {
-      type: 'category',
-      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+      type: "category",
+      data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
     },
     yAxis: {
-      type: 'value',
-
+      type: "value",
     },
     series: [
       {
         data: [120, 200, 150, 80, 70, 110, 130],
-        type: 'bar'
-      }
+        type: "bar",
+      },
     ],
-    color: "#6366f1"
+    color: "#6366f1",
   };
 
-  return (<ReactEcharts className="chartsh" option={options} />);
-};
+  return <ReactEcharts className="chartsh" option={options} />;
+}
 export function BarWithBackgroundEChart() {
   const options = {
     grid: {
-      left: '0%',
-      right: '0%',
-      bottom: '0%',
-      top: '10%',
-      containLabel: true
+      left: "0%",
+      right: "0%",
+      bottom: "0%",
+      top: "10%",
+      containLabel: true,
     },
     splitLine: {
       lineStyle: {
-        color: "rgba(142, 156, 173,0.1)"
-      }
+        color: "rgba(142, 156, 173,0.1)",
+      },
     },
     axisLine: {
       lineStyle: {
-        color: "#8c9097"
-      }
+        color: "#8c9097",
+      },
     },
     xAxis: {
-      type: 'category',
-      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-
+      type: "category",
+      data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
     },
     yAxis: {
-      type: 'value',
+      type: "value",
     },
     series: [
       {
         data: [120, 200, 150, 80, 70, 110, 130],
-        type: 'bar',
+        type: "bar",
         showBackground: true,
         backgroundStyle: {
-          color: 'rgba(180, 180, 180, 0.2)'
-        }
-      }
+          color: "rgba(180, 180, 180, 0.2)",
+        },
+      },
     ],
-    color: "#6366f1"
+    color: "#6366f1",
   };
 
-  return (<ReactEcharts className="chartsh" option={options} />);
-};
+  return <ReactEcharts className="chartsh" option={options} />;
+}
 export function StyleForASingleBarEChart() {
   const options = {
     grid: {
-      left: '0%',
-      right: '0%',
-      bottom: '0%',
-      top: '10%',
-      containLabel: true
+      left: "0%",
+      right: "0%",
+      bottom: "0%",
+      top: "10%",
+      containLabel: true,
     },
     splitLine: {
       lineStyle: {
-        color: "rgba(142, 156, 173,0.1)"
-      }
+        color: "rgba(142, 156, 173,0.1)",
+      },
     },
     axisLine: {
       lineStyle: {
-        color: "#8c9097"
-      }
+        color: "#8c9097",
+      },
     },
     xAxis: {
-      type: 'category',
-      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+      type: "category",
+      data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
     },
     yAxis: {
-      type: 'value',
+      type: "value",
     },
     series: [
       {
@@ -6497,150 +7060,150 @@ export function StyleForASingleBarEChart() {
           {
             value: 200,
             itemStyle: {
-              color: '#60a5fa'
-            }
+              color: "#60a5fa",
+            },
           },
           150,
           80,
           70,
           110,
-          130
+          130,
         ],
-        type: 'bar'
-      }
+        type: "bar",
+      },
     ],
-    color: "#6366f1"
+    color: "#6366f1",
   };
 
-  return (<ReactEcharts className="chartsh" option={options} />);
-};
+  return <ReactEcharts className="chartsh" option={options} />;
+}
 export function WaterFallEChart() {
   const options = {
     tooltip: {
-      trigger: 'axis',
+      trigger: "axis",
       axisPointer: {
-        type: 'shadow'
+        type: "shadow",
       },
-      formatter: function (params:any) {
+      formatter: function (params: any) {
         var tar = params[1];
-        return tar.name + '<br/>' + tar.seriesName + ' : ' + tar.value;
-      }
+        return tar.name + "<br/>" + tar.seriesName + " : " + tar.value;
+      },
     },
     grid: {
-      left: '0%',
-      right: '0%',
-      bottom: '0%',
-      top: '10%',
-      containLabel: true
+      left: "0%",
+      right: "0%",
+      bottom: "0%",
+      top: "10%",
+      containLabel: true,
     },
     splitLine: {
       lineStyle: {
-        color: "rgba(142, 156, 173,0.1)"
-      }
+        color: "rgba(142, 156, 173,0.1)",
+      },
     },
     axisLine: {
       lineStyle: {
-        color: "#8c9097"
-      }
+        color: "#8c9097",
+      },
     },
     xAxis: {
-      type: 'category',
-      data: ['Total', 'Rent', 'Utilities', 'Transportation', 'Meals', 'Other'],
+      type: "category",
+      data: ["Total", "Rent", "Utilities", "Transportation", "Meals", "Other"],
     },
     yAxis: {
-      type: 'value',
+      type: "value",
     },
     series: [
       {
-        name: 'Placeholder',
-        type: 'bar',
-        stack: 'Total',
+        name: "Placeholder",
+        type: "bar",
+        stack: "Total",
         itemStyle: {
-          borderColor: 'transparent',
-          color: 'transparent'
+          borderColor: "transparent",
+          color: "transparent",
         },
         emphasis: {
           itemStyle: {
-            borderColor: 'transparent',
-            color: 'transparent'
-          }
+            borderColor: "transparent",
+            color: "transparent",
+          },
         },
-        data: [0, 1700, 1400, 1200, 300, 0]
+        data: [0, 1700, 1400, 1200, 300, 0],
       },
       {
-        name: 'Life Cost',
-        type: 'bar',
-        stack: 'Total',
+        name: "Life Cost",
+        type: "bar",
+        stack: "Total",
         label: {
           show: true,
-          position: 'inside'
+          position: "inside",
         },
-        data: [2900, 1200, 300, 200, 900, 300]
-      }
+        data: [2900, 1200, 300, 200, 900, 300],
+      },
     ],
-    color: "#6366f1"
+    color: "#6366f1",
   };
 
-  return (<ReactEcharts className="chartsh" option={options} />);
-};
+  return <ReactEcharts className="chartsh" option={options} />;
+}
 export function BarWithNegativeValuesEChart() {
   const labelRight = {
-    position: 'right'
+    position: "right",
   };
   const options = {
     tooltip: {
-      trigger: 'axis',
+      trigger: "axis",
       axisPointer: {
-        type: 'shadow'
-      }
+        type: "shadow",
+      },
     },
     grid: {
-      left: '0%',
-      right: '0%',
-      bottom: '0%',
-      top: '10%',
-      containLabel: true
+      left: "0%",
+      right: "0%",
+      bottom: "0%",
+      top: "10%",
+      containLabel: true,
     },
     splitLine: {
       lineStyle: {
-        type: 'dashed',
-        color: "rgba(142, 156, 173,0.1)"
-      }
+        type: "dashed",
+        color: "rgba(142, 156, 173,0.1)",
+      },
     },
     axisLine: {
       lineStyle: {
-        color: "#8c9097"
-      }
+        color: "#8c9097",
+      },
     },
     xAxis: {
-      type: 'value',
-      position: 'top',
+      type: "value",
+      position: "top",
     },
     yAxis: {
-      type: 'category',
+      type: "category",
       axisLabel: { show: false },
       axisTick: { show: false },
       data: [
-        'ten',
-        'nine',
-        'eight',
-        'seven',
-        'six',
-        'five',
-        'four',
-        'three',
-        'two',
-        'one'
+        "ten",
+        "nine",
+        "eight",
+        "seven",
+        "six",
+        "five",
+        "four",
+        "three",
+        "two",
+        "one",
       ],
     },
     series: [
       {
-        name: 'Cost',
-        type: 'bar',
-        stack: 'Total',
+        name: "Cost",
+        type: "bar",
+        stack: "Total",
         label: {
           show: true,
-          formatter: '{b}'
+          formatter: "{b}",
         },
         data: [
           { value: -0.07, label: labelRight },
@@ -6652,278 +7215,273 @@ export function BarWithNegativeValuesEChart() {
           { value: -0.17, label: labelRight },
           0.47,
           { value: -0.36, label: labelRight },
-          0.18
-        ]
-      }
+          0.18,
+        ],
+      },
     ],
-    color: "#6366f1"
+    color: "#6366f1",
   };
 
-  return (<ReactEcharts className="chartsh" option={options} />);
-};
+  return <ReactEcharts className="chartsh" option={options} />;
+}
 
 export function HorizontalBarEChart() {
-
   const options = {
     tooltip: {
-      trigger: 'axis',
+      trigger: "axis",
       axisPointer: {
-        type: 'shadow'
-      }
+        type: "shadow",
+      },
     },
     legend: {
       textStyle: {
-        color: 'rgb(119, 119, 142)'
-      }
+        color: "rgb(119, 119, 142)",
+      },
     },
     grid: {
-      left: '0%',
-      right: '0%',
-      bottom: '0%',
-      top: '10%',
-      containLabel: true
+      left: "0%",
+      right: "0%",
+      bottom: "0%",
+      top: "10%",
+      containLabel: true,
     },
     splitLine: {
       lineStyle: {
-        color: "rgba(142, 156, 173,0.1)"
-      }
+        color: "rgba(142, 156, 173,0.1)",
+      },
     },
     xAxis: {
-      type: 'value',
-      boundaryGap: [0, 0.01]
+      type: "value",
+      boundaryGap: [0, 0.01],
     },
     yAxis: {
-      type: 'category',
-      data: ['Brazil', 'Indonesia', 'USA', 'India', 'China', 'World'],
+      type: "category",
+      data: ["Brazil", "Indonesia", "USA", "India", "China", "World"],
       axisLine: {
         lineStyle: {
-          color: "#8c9097"
-        }
-      }
+          color: "#8c9097",
+        },
+      },
     },
     series: [
       {
-        name: '2011',
-        type: 'bar',
-        data: [18203, 23489, 29034, 104970, 131744, 630230]
+        name: "2011",
+        type: "bar",
+        data: [18203, 23489, 29034, 104970, 131744, 630230],
       },
       {
-        name: '2012',
-        type: 'bar',
-        data: [19325, 23438, 31000, 121594, 134141, 681807]
-      }
+        name: "2012",
+        type: "bar",
+        data: [19325, 23438, 31000, 121594, 134141, 681807],
+      },
     ],
-    color: ["#6366f1", "#60a5fa"]
+    color: ["#6366f1", "#60a5fa"],
   };
 
-  return (<ReactEcharts className="chartsh" option={options} />);
-};
+  return <ReactEcharts className="chartsh" option={options} />;
+}
 export function HorizontalStackedBarEChart() {
-
   const options = {
     tooltip: {
-      trigger: 'axis',
+      trigger: "axis",
       axisPointer: {
         // Use axis to trigger tooltip
-        type: 'shadow' // 'shadow' as default; can also be 'line' or 'shadow'
-      }
+        type: "shadow", // 'shadow' as default; can also be 'line' or 'shadow'
+      },
     },
     legend: {
       textStyle: {
-        color: 'rgb(119, 119, 142)'
-      }
+        color: "rgb(119, 119, 142)",
+      },
     },
     grid: {
-      left: '0%',
-      right: '0%',
-      bottom: '0%',
-      top: '10%',
-      containLabel: true
+      left: "0%",
+      right: "0%",
+      bottom: "0%",
+      top: "10%",
+      containLabel: true,
     },
     splitLine: {
       lineStyle: {
-        color: "rgba(142, 156, 173,0.1)"
-      }
+        color: "rgba(142, 156, 173,0.1)",
+      },
     },
     xAxis: {
-      type: 'value'
+      type: "value",
     },
     yAxis: {
-      type: 'category',
-      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+      type: "category",
+      data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
       axisLine: {
         lineStyle: {
-          color: "#8c9097"
-        }
-      }
+          color: "#8c9097",
+        },
+      },
     },
     series: [
       {
-        name: 'Direct',
-        type: 'bar',
-        stack: 'total',
+        name: "Direct",
+        type: "bar",
+        stack: "total",
         label: {
-          show: true
+          show: true,
         },
         emphasis: {
-          focus: 'series'
+          focus: "series",
         },
-        data: [320, 302, 301, 334, 390, 330, 320]
+        data: [320, 302, 301, 334, 390, 330, 320],
       },
       {
-        name: 'Mail Ad',
-        type: 'bar',
-        stack: 'total',
+        name: "Mail Ad",
+        type: "bar",
+        stack: "total",
         label: {
-          show: true
+          show: true,
         },
         emphasis: {
-          focus: 'series'
+          focus: "series",
         },
-        data: [120, 132, 101, 134, 90, 230, 210]
+        data: [120, 132, 101, 134, 90, 230, 210],
       },
       {
-        name: 'Affiliate Ad',
-        type: 'bar',
-        stack: 'total',
+        name: "Affiliate Ad",
+        type: "bar",
+        stack: "total",
         label: {
-          show: true
+          show: true,
         },
         emphasis: {
-          focus: 'series'
+          focus: "series",
         },
-        data: [220, 182, 191, 234, 290, 330, 310]
+        data: [220, 182, 191, 234, 290, 330, 310],
       },
       {
-        name: 'Video Ad',
-        type: 'bar',
-        stack: 'total',
+        name: "Video Ad",
+        type: "bar",
+        stack: "total",
         label: {
-          show: true
+          show: true,
         },
         emphasis: {
-          focus: 'series'
+          focus: "series",
         },
-        data: [150, 212, 201, 154, 190, 330, 410]
+        data: [150, 212, 201, 154, 190, 330, 410],
       },
       {
-        name: 'Search Engine',
-        type: 'bar',
-        stack: 'total',
+        name: "Search Engine",
+        type: "bar",
+        stack: "total",
         label: {
-          show: true
+          show: true,
         },
         emphasis: {
-          focus: 'series'
+          focus: "series",
         },
-        data: [820, 832, 901, 934, 1290, 1330, 1320]
-      }
+        data: [820, 832, 901, 934, 1290, 1330, 1320],
+      },
     ],
-    color: ["#6366f1", "#60a5fa", "#eab308", "#22c55e", "#f43f5e"]
+    color: ["#6366f1", "#60a5fa", "#eab308", "#22c55e", "#f43f5e"],
   };
 
-  return (<ReactEcharts className="chartsh" option={options} />);
-};
+  return <ReactEcharts className="chartsh" option={options} />;
+}
 export function PieEChart() {
-
   const options = {
     tooltip: {
-      trigger: 'item'
+      trigger: "item",
     },
     legend: {
-      orient: 'vertical',
-      left: 'left',
+      orient: "vertical",
+      left: "left",
       textStyle: {
-        color: 'rgb(119, 119, 142)'
-      }
+        color: "rgb(119, 119, 142)",
+      },
     },
     series: [
       {
-        name: 'Access From',
-        type: 'pie',
-        radius: '50%',
+        name: "Access From",
+        type: "pie",
+        radius: "50%",
         data: [
-          { value: 1048, name: 'Search Engine' },
-          { value: 735, name: 'Direct' },
-          { value: 580, name: 'Email' },
-          { value: 484, name: 'Union Ads' },
-          { value: 300, name: 'Video Ads' }
+          { value: 1048, name: "Search Engine" },
+          { value: 735, name: "Direct" },
+          { value: 580, name: "Email" },
+          { value: 484, name: "Union Ads" },
+          { value: 300, name: "Video Ads" },
         ],
         emphasis: {
           itemStyle: {
             shadowBlur: 10,
             shadowOffsetX: 0,
-            shadowColor: 'rgba(0, 0, 0, 0.5)'
-          }
-        }
-      }
+            shadowColor: "rgba(0, 0, 0, 0.5)",
+          },
+        },
+      },
     ],
-    color: ["#6366f1", "#60a5fa", "#eab308", "#22c55e", "#f43f5e"]
+    color: ["#6366f1", "#60a5fa", "#eab308", "#22c55e", "#f43f5e"],
   };
 
-  return (<ReactEcharts className="chartsh" option={options} />);
-};
+  return <ReactEcharts className="chartsh" option={options} />;
+}
 export function DoughnutEChart() {
-
   const options = {
     tooltip: {
-      trigger: 'item'
+      trigger: "item",
     },
     legend: {
-      top: '0%',
-      left: 'center',
+      top: "0%",
+      left: "center",
       textStyle: {
-        color: 'rgb(119, 119, 142)'
-      }
+        color: "rgb(119, 119, 142)",
+      },
     },
     series: [
       {
-        name: 'Access From',
-        type: 'pie',
-        radius: ['40%', '70%'],
+        name: "Access From",
+        type: "pie",
+        radius: ["40%", "70%"],
         avoidLabelOverlap: false,
         label: {
           show: false,
-          position: 'center'
+          position: "center",
         },
         emphasis: {
           label: {
             show: true,
-            fontSize: '17',
-            fontWeight: 'bold'
-          }
+            fontSize: "17",
+            fontWeight: "bold",
+          },
         },
         labelLine: {
-          show: false
+          show: false,
         },
         data: [
-          { value: 1048, name: 'Search Engine' },
-          { value: 735, name: 'Direct' },
-          { value: 580, name: 'Email' },
-          { value: 484, name: 'Union Ads' },
-          { value: 300, name: 'Video Ads' }
-        ]
-      }
+          { value: 1048, name: "Search Engine" },
+          { value: 735, name: "Direct" },
+          { value: 580, name: "Email" },
+          { value: 484, name: "Union Ads" },
+          { value: 300, name: "Video Ads" },
+        ],
+      },
     ],
-    color: ["#6366f1", "#60a5fa", "#eab308", "#22c55e", "#f43f5e"]
+    color: ["#6366f1", "#60a5fa", "#eab308", "#22c55e", "#f43f5e"],
   };
 
-  return (<ReactEcharts className="chartsh" option={options} />);
-};
+  return <ReactEcharts className="chartsh" option={options} />;
+}
 export function BasicScatterEChart() {
-
   const options = {
     grid: {
-      left: '0%',
-      right: '0%',
-      bottom: '0%',
-      top: '10%',
-      containLabel: true
+      left: "0%",
+      right: "0%",
+      bottom: "0%",
+      top: "10%",
+      containLabel: true,
     },
     splitLine: {
       lineStyle: {
-        color: "rgba(142, 156, 173,0.1)"
-      }
+        color: "rgba(142, 156, 173,0.1)",
+      },
     },
     // yAxis: {
     //     axisLine: {
@@ -6957,48 +7515,48 @@ export function BasicScatterEChart() {
           [12.0, 6.26],
           [12.0, 8.84],
           [7.08, 5.82],
-          [5.02, 5.68]
+          [5.02, 5.68],
         ],
-        type: 'scatter'
-      }
+        type: "scatter",
+      },
     ],
-    color: ["#6366f1"]
+    color: ["#6366f1"],
   };
 
-  return (<ReactEcharts className="chartsh" option={options} />);
-};
+  return <ReactEcharts className="chartsh" option={options} />;
+}
 
 export function CandlestickEChart() {
   const options = {
     grid: {
-      left: '5%',
-      right: '0%',
-      bottom: '10%',
-      top: '10%'
+      left: "5%",
+      right: "0%",
+      bottom: "10%",
+      top: "10%",
     },
     splitLine: {
       lineStyle: {
-        color: "rgba(142, 156, 173,0.1)"
-      }
+        color: "rgba(142, 156, 173,0.1)",
+      },
     },
     xAxis: {
-      data: ['2017-10-24', '2017-10-25', '2017-10-26', '2017-10-27'],
+      data: ["2017-10-24", "2017-10-25", "2017-10-26", "2017-10-27"],
     },
     yAxis: {
       axisLine: {
         lineStyle: {
-          color: "#8c9097"
-        }
-      }
+          color: "#8c9097",
+        },
+      },
     },
     series: [
       {
-        type: 'candlestick',
+        type: "candlestick",
         data: [
           [20, 34, 10, 38],
           [40, 35, 30, 50],
           [31, 38, 33, 44],
-          [38, 15, 5, 42]
+          [38, 15, 5, 42],
         ],
         itemStyle: {
           normal: {
@@ -7006,276 +7564,271 @@ export function CandlestickEChart() {
             color0: "#60a5fa",
             borderColor: "#6366f1",
             borderColor0: "#60a5fa",
-          }
-        }
-      }
-    ]
+          },
+        },
+      },
+    ],
   };
 
-  return (<ReactEcharts className="chartsh" option={options} />);
-};
+  return <ReactEcharts className="chartsh" option={options} />;
+}
 export function RadarEChart() {
   const options = {
     legend: {
-      data: ['Allocated Budget', 'Actual Spending'],
-      left: '0%',
-      top: '0%',
+      data: ["Allocated Budget", "Actual Spending"],
+      left: "0%",
+      top: "0%",
       textStyle: {
-        color: 'rgb(119, 119, 142)'
-      }
+        color: "rgb(119, 119, 142)",
+      },
     },
     radar: {
       indicator: [
-        { name: 'Sales', max: 6500 },
-        { name: 'Administration', max: 16000 },
-        { name: 'Information Technology', max: 30000 },
-        { name: 'Customer Support', max: 38000 },
-        { name: 'Development', max: 52000 },
-        { name: 'Marketing', max: 25000 }
-      ]
+        { name: "Sales", max: 6500 },
+        { name: "Administration", max: 16000 },
+        { name: "Information Technology", max: 30000 },
+        { name: "Customer Support", max: 38000 },
+        { name: "Development", max: 52000 },
+        { name: "Marketing", max: 25000 },
+      ],
     },
     series: [
       {
-        name: 'Budget vs spending',
-        type: 'radar',
+        name: "Budget vs spending",
+        type: "radar",
         data: [
           {
             value: [4200, 3000, 20000, 35000, 50000, 18000],
-            name: 'Allocated Budget'
+            name: "Allocated Budget",
           },
           {
             value: [5000, 14000, 28000, 26000, 42000, 21000],
-            name: 'Actual Spending'
-          }
-        ]
-      }
+            name: "Actual Spending",
+          },
+        ],
+      },
     ],
-    color: ["#6366f1", "#60a5fa"]
+    color: ["#6366f1", "#60a5fa"],
   };
 
-  return (<ReactEcharts className="chartsh" option={options} />);
-};
+  return <ReactEcharts className="chartsh" option={options} />;
+}
 export function HeatmapEChart() {
-
   const options = {
     title: {
       top: 30,
-      left: 'center',
-      text: 'Daily Step Count'
+      left: "center",
+      text: "Daily Step Count",
     },
     tooltip: {},
     visualMap: {
       min: 0,
       max: 10000,
-      type: 'piecewise',
-      orient: 'horizontal',
-      left: 'center',
-      top: 65
+      type: "piecewise",
+      orient: "horizontal",
+      left: "center",
+      top: 65,
     },
     calendar: {
       top: 120,
       left: 30,
       right: 30,
-      cellSize: ['auto', 13],
-      range: '2016',
+      cellSize: ["auto", 13],
+      range: "2016",
       itemStyle: {
-        borderWidth: 0.5
+        borderWidth: 0.5,
       },
-      yearLabel: { show: false }
+      yearLabel: { show: false },
     },
     series: {
-      type: 'heatmap',
-      coordinateSystem: 'calendar',
-      data: ('2016')
-    }
+      type: "heatmap",
+      coordinateSystem: "calendar",
+      data: "2016",
+    },
   };
 
-  return (<ReactEcharts className="chartsh" option={options} />);
-};
+  return <ReactEcharts className="chartsh" option={options} />;
+}
 export function TreemapEChart() {
-
   const options = {
     series: [
       {
-        type: 'treemap',
+        type: "treemap",
         data: [
           {
-            name: 'nodeA',
+            name: "nodeA",
             value: 10,
             children: [
               {
-                name: 'nodeAa',
-                value: 4
+                name: "nodeAa",
+                value: 4,
               },
               {
-                name: 'nodeAb',
-                value: 6
-              }
-            ]
+                name: "nodeAb",
+                value: 6,
+              },
+            ],
           },
           {
-            name: 'nodeB',
+            name: "nodeB",
             value: 20,
             children: [
               {
-                name: 'nodeBa',
+                name: "nodeBa",
                 value: 20,
                 children: [
                   {
-                    name: 'nodeBa1',
-                    value: 20
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      }
+                    name: "nodeBa1",
+                    value: 20,
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
     ],
-    color: ["#6366f1", "#60a5fa"]
+    color: ["#6366f1", "#60a5fa"],
   };
 
-  return (<ReactEcharts className="chartsh" option={options} />);
-};
+  return <ReactEcharts className="chartsh" option={options} />;
+}
 export function FunnelEChart() {
-
   const options = {
     tooltip: {
-      trigger: 'item',
-      formatter: '{a} <br/>{b} : {c}%'
+      trigger: "item",
+      formatter: "{a} <br/>{b} : {c}%",
     },
     toolbox: {
       feature: {
         dataView: { readOnly: false },
         restore: {},
-        saveAsImage: {}
-      }
+        saveAsImage: {},
+      },
     },
     legend: {
-      data: ['Show', 'Click', 'Visit', 'Inquiry', 'Order'],
+      data: ["Show", "Click", "Visit", "Inquiry", "Order"],
       textStyle: {
-        color: 'rgb(119, 119, 142)'
-      }
+        color: "rgb(119, 119, 142)",
+      },
     },
     series: [
       {
-        name: 'Funnel',
-        type: 'funnel',
-        left: '10%',
+        name: "Funnel",
+        type: "funnel",
+        left: "10%",
         top: 60,
         bottom: 60,
-        width: '80%',
+        width: "80%",
         min: 0,
         max: 100,
-        minSize: '0%',
-        maxSize: '100%',
-        sort: 'descending',
+        minSize: "0%",
+        maxSize: "100%",
+        sort: "descending",
         gap: 2,
         label: {
           show: true,
-          position: 'inside'
+          position: "inside",
         },
         labelLine: {
           length: 10,
           lineStyle: {
             width: 1,
-            type: 'solid'
-          }
+            type: "solid",
+          },
         },
         itemStyle: {
-          borderColor: '#fff',
-          borderWidth: 1
+          borderColor: "#fff",
+          borderWidth: 1,
         },
         emphasis: {
           label: {
-            fontSize: 20
-          }
+            fontSize: 20,
+          },
         },
         data: [
-          { value: 60, name: 'Visit' },
-          { value: 40, name: 'Inquiry' },
-          { value: 20, name: 'Order' },
-          { value: 80, name: 'Click' },
-          { value: 100, name: 'Show' }
-        ]
-      }
+          { value: 60, name: "Visit" },
+          { value: 40, name: "Inquiry" },
+          { value: 20, name: "Order" },
+          { value: 80, name: "Click" },
+          { value: 100, name: "Show" },
+        ],
+      },
     ],
-    color: ["#6366f1", "#60a5fa", "#eab308", "#22c55e", "#f43f5e"]
+    color: ["#6366f1", "#60a5fa", "#eab308", "#22c55e", "#f43f5e"],
   };
 
-  return (<ReactEcharts className="chartsh" option={options} />);
-};
+  return <ReactEcharts className="chartsh" option={options} />;
+}
 export function BasicGaugeEChart() {
-
   const options = {
     tooltip: {
-      formatter: '{a} <br/>{b} : {c}%'
+      formatter: "{a} <br/>{b} : {c}%",
     },
     series: [
       {
-        name: 'Pressure',
-        type: 'gauge',
+        name: "Pressure",
+        type: "gauge",
         progress: {
-          show: true
+          show: true,
         },
         detail: {
           valueAnimation: true,
-          formatter: '{value}'
+          formatter: "{value}",
         },
         data: [
           {
             value: 50,
-            name: 'SCORE'
-          }
-        ]
-      }
+            name: "SCORE",
+          },
+        ],
+      },
     ],
-    color: ["#6366f1"]
+    color: ["#6366f1"],
   };
 
-  return (<ReactEcharts className="chartsh" option={options} />);
-};
+  return <ReactEcharts className="chartsh" option={options} />;
+}
 export function SimpleGraphEChart() {
-
   const options = {
     tooltip: {},
     animationDurationUpdate: 1500,
-    animationEasingUpdate: 'quinticInOut',
+    animationEasingUpdate: "quinticInOut",
     series: [
       {
-        type: 'graph',
-        layout: 'none',
+        type: "graph",
+        layout: "none",
         symbolSize: 50,
         roam: true,
         label: {
-          show: true
+          show: true,
         },
-        edgeSymbol: ['circle', 'arrow'],
+        edgeSymbol: ["circle", "arrow"],
         edgeSymbolSize: [4, 10],
         edgeLabel: {
-          fontSize: 20
+          fontSize: 20,
         },
         data: [
           {
-            name: 'Node 1',
+            name: "Node 1",
             x: 300,
-            y: 300
+            y: 300,
           },
           {
-            name: 'Node 2',
+            name: "Node 2",
             x: 800,
-            y: 300
+            y: 300,
           },
           {
-            name: 'Node 3',
+            name: "Node 3",
             x: 550,
-            y: 100
+            y: 100,
           },
           {
-            name: 'Node 4',
+            name: "Node 4",
             x: 550,
-            y: 500
-          }
+            y: 500,
+          },
         ],
         links: [
           {
@@ -7283,55 +7836,54 @@ export function SimpleGraphEChart() {
             target: 1,
             symbolSize: [5, 20],
             label: {
-              show: true
+              show: true,
             },
             lineStyle: {
               width: 5,
-              curveness: 0.2
-            }
+              curveness: 0.2,
+            },
           },
           {
-            source: 'Node 2',
-            target: 'Node 1',
+            source: "Node 2",
+            target: "Node 1",
             label: {
-              show: true
+              show: true,
             },
             lineStyle: {
-              curveness: 0.2
-            }
+              curveness: 0.2,
+            },
           },
           {
-            source: 'Node 1',
-            target: 'Node 3'
+            source: "Node 1",
+            target: "Node 3",
           },
           {
-            source: 'Node 2',
-            target: 'Node 3'
+            source: "Node 2",
+            target: "Node 3",
           },
           {
-            source: 'Node 2',
-            target: 'Node 4'
+            source: "Node 2",
+            target: "Node 4",
           },
           {
-            source: 'Node 1',
-            target: 'Node 4'
-          }
+            source: "Node 1",
+            target: "Node 4",
+          },
         ],
         lineStyle: {
           opacity: 0.9,
           width: 2,
-          curveness: 0
-        }
-      }
+          curveness: 0,
+        },
+      },
     ],
-    color: ["#6366f1"]
+    color: ["#6366f1"],
   };
 
-  return (<ReactEcharts className="chartsh" option={options} />);
-};
+  return <ReactEcharts className="chartsh" option={options} />;
+}
 
 // **************************************************************************************************************
-
 
 // **************************************************************************************************************
 
@@ -7342,7 +7894,6 @@ export class TotalAmount extends Component<{}, spark3> {
     super(props);
 
     this.state = {
-
       series: [
         {
           data: [34, 55, 41, 67, 22, 43, 21],
@@ -7395,26 +7946,31 @@ export class TotalAmount extends Component<{}, spark3> {
             stops: [0, 98],
           },
         },
-      }
+      },
     };
   }
 
   render() {
     return (
-
-      <div id="chart" >
-        <ReactApexChart height={50} width={100} className="min-w-fit" options={this.state.options} series={this.state.series} type="line" />
+      <div id="chart">
+        <ReactApexChart
+          height={50}
+          width={100}
+          className="min-w-fit"
+          options={this.state.options}
+          series={this.state.series}
+          type="line"
+        />
       </div>
-    )
+    );
   }
-};
+}
 
 export class InvestmentNum extends Component<{}, spark3> {
   constructor(props: {} | Readonly<{}>) {
     super(props);
 
     this.state = {
-
       series: [
         {
           data: [34, 55, 41, 47, 32, 53, 31],
@@ -7467,26 +8023,31 @@ export class InvestmentNum extends Component<{}, spark3> {
             stops: [0, 98],
           },
         },
-      }
+      },
     };
   }
 
   render() {
     return (
-
-      <div id="chart" >
-        <ReactApexChart height={50} width={100} className="min-w-fit" options={this.state.options} series={this.state.series} type="line" />
+      <div id="chart">
+        <ReactApexChart
+          height={50}
+          width={100}
+          className="min-w-fit"
+          options={this.state.options}
+          series={this.state.series}
+          type="line"
+        />
       </div>
-    )
+    );
   }
-};
+}
 
 export class PortfolioValue extends Component<{}, spark3> {
   constructor(props: {} | Readonly<{}>) {
     super(props);
 
     this.state = {
-
       series: [
         {
           data: [31, 53, 32, 47, 41, 55, 44],
@@ -7545,20 +8106,25 @@ export class PortfolioValue extends Component<{}, spark3> {
 
   render() {
     return (
-
-      <div id="chart" >
-        <ReactApexChart height={50} width={100} className="min-w-fit" options={this.state.options} series={this.state.series} type="line" />
+      <div id="chart">
+        <ReactApexChart
+          height={50}
+          width={100}
+          className="min-w-fit"
+          options={this.state.options}
+          series={this.state.series}
+          type="line"
+        />
       </div>
-    )
+    );
   }
-};
+}
 
 export class ReturnsRate extends Component<{}, spark3> {
   constructor(props: {} | Readonly<{}>) {
     super(props);
 
     this.state = {
-
       series: [
         {
           data: [21, 43, 22, 45, 35, 55, 34],
@@ -7617,25 +8183,27 @@ export class ReturnsRate extends Component<{}, spark3> {
 
   render() {
     return (
-
-      <div id="chart" >
-        <ReactApexChart height={50} width={100} className="min-w-fit" options={this.state.options} series={this.state.series} type="line" />
+      <div id="chart">
+        <ReactApexChart
+          height={50}
+          width={100}
+          className="min-w-fit"
+          options={this.state.options}
+          series={this.state.series}
+          type="line"
+        />
       </div>
-    )
+    );
   }
-};
-
+}
 
 const fileData = {
-  type: 'doughnut',
-  label: 'My First Dataset',
+  type: "doughnut",
+  label: "My First Dataset",
   datasets: [
     {
       data: [75, 25],
-      backgroundColor: [
-        'rgb(94, 166, 142)',
-        'rgb(249, 250, 251)'
-      ],
+      backgroundColor: ["rgb(94, 166, 142)", "rgb(249, 250, 251)"],
       borderWidth: 0,
     },
   ],
@@ -7653,5 +8221,12 @@ const fileOptions = {
 };
 
 export function FileChart() {
-  return <Doughnut className="chartjs-chart w-full" data={fileData} options={fileOptions} height={250} />;
+  return (
+    <Doughnut
+      className="chartjs-chart w-full"
+      data={fileData}
+      options={fileOptions}
+      height={250}
+    />
+  );
 }

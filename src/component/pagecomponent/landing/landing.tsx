@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import ALLImages from "@/common/imagesdata";
-import { SpacebetweenSwiper } from "./landingpagecarousel";
-import CountUp from "react-countup";
+// import { SpacebetweenSwiper } from "./landingpagecarousel";
+// import CountUp from "react-countup";
 import { connect } from "react-redux";
 import { ThemeChanger } from "@/redux/Action";
 import store from "@/redux/store";
@@ -215,7 +215,7 @@ const Landing = ({ ThemeChanger }: datatype) => {
               <nav className="main-menu-container nav nav-pills flex-column sub-open">
                 <div className="landing-logo-container my-auto hidden lg:block">
                   <div className="responsive-logo">
-                    <Link
+                    {/* <Link
                       className="responsive-logo-light"
                       to="#"
                       // to={`${import.meta.env.BASE_URL}dashboards/sales/`}
@@ -226,7 +226,7 @@ const Landing = ({ ThemeChanger }: datatype) => {
                         alt="logo"
                         className="mx-auto"
                       />
-                    </Link>
+                    </Link> */}
                     <Link
                       className="responsive-logo-dark"
                       to={`${import.meta.env.BASE_URL}dashboards/sales/`}
@@ -264,9 +264,12 @@ const Landing = ({ ThemeChanger }: datatype) => {
                 </div>
                 <div className="lg:flex hidden space-x-2 rtl:space-x-reverse">
                   <Link
+                    // to={`${
+                    //   import.meta.env.BASE_URL
+                    // }Authentication/signup/basic/`}
                     to={`${
                       import.meta.env.BASE_URL
-                    }Authentication/signup/basic/`}
+                    }Authentication/signup/addindividualaccount/`}
                     className="ti-btn w-[6.375rem] ti-btn-dark m-0 p-2"
                   >
                     Sign Up
@@ -277,14 +280,14 @@ const Landing = ({ ThemeChanger }: datatype) => {
                   >
                     Login
                   </Link>
-                  <Link
+                  {/* <Link
                     aria-label="anchor"
                     to="#"
                     className="ti-btn m-0 p-2 px-3 ti-btn-secondary"
                     data-hs-overlay="#hs-overlay-switcher"
                   >
                     <i className="ri-settings-2-line animate-spin"></i>
-                  </Link>
+                  </Link> */}
                 </div>
               </nav>
             </div>
@@ -292,7 +295,7 @@ const Landing = ({ ThemeChanger }: datatype) => {
         </aside>
 
         <div className="main-content landing-main !p-0" onClick={handleClick}>
-          <div className="landing-wrapper" id="home">
+          {/* <div className="landing-wrapper" id="home">
             <div className="container lg:pt-40 lg:pb-24 pt-28 pb-12 relative z-10 mx-auto">
               <div className="grid grid-cols-12 lg:gap-0 gap-6">
                 <div className="col-span-12 xxl:col-span-7 my-auto">
@@ -340,9 +343,9 @@ const Landing = ({ ThemeChanger }: datatype) => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
 
-          <div className="" id="services">
+          <div className="py-10" id="services">
             <div className="section container mx-auto space-y-6">
               <div className="text-center max-w-[80rem] mx-auto mb-12">
                 <h2 className="justify-center section-title text-center text-3xl font-bold text-gray-800 dark:text-white md:text-4xl lg:text-5xl">
@@ -476,7 +479,7 @@ const Landing = ({ ThemeChanger }: datatype) => {
             </div>
           </div>
 
-          <div className="bg-white dark:bg-bgdark" id="about">
+          {/* <div className="bg-white dark:bg-bgdark" id="about">
             <div className="section container mx-auto">
               <div className="grid lg:grid-cols-2 gap-6">
                 <div className="relative bg-gradient-radial from-gray-100 to-white dark:from-black/20 dark:to-bgdark">
@@ -528,9 +531,9 @@ const Landing = ({ ThemeChanger }: datatype) => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
 
-          <div className="" id="our-mission">
+          {/* <div className="" id="our-mission">
             <div className="section container mx-auto">
               <div className="grid lg:grid-cols-2 gap-6">
                 <div className="my-auto">
@@ -579,9 +582,9 @@ const Landing = ({ ThemeChanger }: datatype) => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
 
-          <div className="section flex relative bg-[url('../img/landing/1.jpg')] bg-cover before:bg-primary/90 before:absolute before:w-full before:h-full before:top-0 before:inset-x-0">
+          {/* <div className="section flex relative bg-[url('../img/landing/1.jpg')] bg-cover before:bg-primary/90 before:absolute before:w-full before:h-full before:top-0 before:inset-x-0">
             <div className="container mx-auto z-[0] text-center">
               <h2 className="section-title text-center text-3xl font-bold text-white md:text-4xl lg:text-5xl justify-center">
                 We Design and Develop For your business.
@@ -601,9 +604,9 @@ const Landing = ({ ThemeChanger }: datatype) => {
                 Contact Us
               </Link>
             </div>
-          </div>
+          </div> */}
 
-          <div className="bg-white dark:bg-bgdark" id="features">
+          {/* <div className="bg-white dark:bg-bgdark" id="features">
             <div className="section container mx-auto space-y-6">
               <div className="text-center max-w-[80rem] mx-auto mb-12">
                 <h2 className="justify-center section-title text-center text-3xl font-bold text-gray-800 dark:text-white md:text-4xl lg:text-5xl">
@@ -985,9 +988,9 @@ const Landing = ({ ThemeChanger }: datatype) => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
 
-          <div
+          {/* <div
             id="statistics"
             className="section flex relative bg-[url('../img/landing/1.jpg')] bg-cover before:bg-primary/90 before:absolute before:w-full before:h-full before:top-0 before:inset-x-0"
           >
@@ -1056,9 +1059,9 @@ const Landing = ({ ThemeChanger }: datatype) => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
 
-          <div className="" id="testimonials">
+          {/* <div className="" id="testimonials">
             <div className="section container mx-auto">
               <div className="text-center max-w-[80rem] mx-auto mb-12">
                 <h2 className="justify-center section-title text-center text-3xl font-bold text-gray-800 dark:text-white md:text-4xl lg:text-5xl">
@@ -1079,9 +1082,9 @@ const Landing = ({ ThemeChanger }: datatype) => {
 
               <div className="swiper-pagination !relative !bottom-0"></div>
             </div>
-          </div>
+          </div> */}
 
-          <div className="bg-white dark:bg-bgdark" id="pricing">
+          {/* <div className="bg-white dark:bg-bgdark" id="pricing">
             <div className="section container mx-auto">
               <div className="grid grid-cols-12 gap-6">
                 <div className="col-span-12 lg:col-span-4 my-auto">
@@ -1383,9 +1386,9 @@ const Landing = ({ ThemeChanger }: datatype) => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
 
-          <div className="" id="team">
+          {/* <div className="" id="team">
             <div className="section container mx-auto">
               <div className="text-center max-w-[80rem] mx-auto mb-12">
                 <h2 className="justify-center section-title text-center text-3xl font-bold text-gray-800 dark:text-white md:text-4xl lg:text-5xl">
@@ -1556,9 +1559,9 @@ const Landing = ({ ThemeChanger }: datatype) => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
 
-          <div className="bg-white dark:bg-bgdark" id="faq">
+          {/* <div className="bg-white dark:bg-bgdark" id="faq">
             <div className="section container mx-auto">
               <div className="text-center max-w-[80rem] mx-auto mb-12">
                 <h2 className="justify-center section-title text-center text-3xl font-bold text-gray-800 dark:text-white md:text-4xl lg:text-5xl">
@@ -2123,9 +2126,9 @@ const Landing = ({ ThemeChanger }: datatype) => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
 
-          <div className="" id="blogs">
+          {/* <div className="" id="blogs">
             <div className="section container mx-auto">
               <div className="text-center max-w-[80rem] mx-auto mb-12">
                 <h2 className="justify-center section-title text-center text-3xl font-bold text-gray-800 dark:text-white md:text-4xl lg:text-5xl">
@@ -2308,9 +2311,9 @@ const Landing = ({ ThemeChanger }: datatype) => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
 
-          <div className="bg-white dark:bg-bgdark" id="contact">
+          {/* <div className="bg-white dark:bg-bgdark" id="contact">
             <div className="section container mx-auto space-y-6">
               <div className="text-center max-w-[80rem] mx-auto mb-12">
                 <h2 className="justify-center section-title text-center text-3xl font-bold text-gray-800 dark:text-white md:text-4xl lg:text-5xl">
@@ -2405,8 +2408,8 @@ const Landing = ({ ThemeChanger }: datatype) => {
                 </div>
               </div>
             </div>
-          </div>
-
+          </div> */}
+          {/* 
           <div className="section flex relative bg-[url('../img/landing/1.jpg')] bg-cover before:bg-primary/90 before:absolute before:w-full before:h-full before:top-0 before:inset-x-0">
             <div className="container mx-auto z-[0] text-center space-y-5">
               <h2 className="section-title text-center text-3xl font-bold text-white md:text-4xl lg:text-5xl justify-center">
@@ -2434,7 +2437,7 @@ const Landing = ({ ThemeChanger }: datatype) => {
                 </Link>
               </div>
             </div>
-          </div>
+          </div> */}
 
           <footer className="section !pb-0 bg-bgdark">
             <div className=" border-b border-white/10 dark:border-white/10 pb-8">
@@ -2448,13 +2451,13 @@ const Landing = ({ ThemeChanger }: datatype) => {
                         </h6>
                         <hr className="w-10 border-t-4 border-primary inline-block mx-auto" />
                       </div> */}
-                      <img
+                      {/* <img
                         src={ALLImages("logoWhite")}
                         className="w-auto"
                         alt="img"
-                      />
+                      /> */}
                       <p className="text-base text-gray-400 dark:text-gray-400">
-                        บริษัท ฟินันเซีย ดิจิทัล แอสสเซต จำกัด.
+                        ดิจิทัล แอสเซต
                       </p>
                       <p className="text-white text-lg pt-4">Community</p>
                       <div className="flex space-x-1 rtl:space-x-reverse">
@@ -2579,30 +2582,30 @@ const Landing = ({ ThemeChanger }: datatype) => {
                           {" "}
                           <Link to="#" className="inline-flex">
                             <i className="text-white ri-mail-line ltr:mr-2 rtl:ml-2"></i>
-                            info@finansiada.com
+                            info@admin.com
                           </Link>
                         </li>
                         <li>
                           {" "}
                           <Link to="#" className="inline-flex">
                             <i className="text-white ri-phone-line ltr:mr-2 rtl:ml-2"></i>{" "}
-                            02 088 4699
+                            02 345 6789
                           </Link>
                         </li>
-                        <li>
+                        {/* <li>
                           {" "}
                           <Link to="#" className="inline-flex">
                             <i className="text-white ri-printer-line ltr:mr-2 rtl:ml-2"></i>{" "}
                             02 088 4699
                           </Link>{" "}
-                        </li>
-                        <li>
+                        </li> */}
+                        {/* <li>
                           {" "}
                           <Link to="#" className="inline-flex">
                             <i className="text-white ri-global-line ltr:mr-2 rtl:ml-2"></i>
                             https://finansiada.com
                           </Link>{" "}
-                        </li>
+                        </li> */}
                       </ul>
                     </div>
                   </div>
@@ -2696,7 +2699,7 @@ const Landing = ({ ThemeChanger }: datatype) => {
                 Copyright © <span id="year">2024</span>{" "}
                 <Link to="#" className="text-primary">
                   {" "}
-                  Finansia Digital Asset
+                  Digital Asset
                 </Link>
                 {/* . Designed with{" "}
                 <span className="ri ri-heart-fill text-red-500"></span> by{" "}

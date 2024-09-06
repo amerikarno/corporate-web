@@ -29,22 +29,24 @@ export default function AddIndividualAccount() {
   });
 
   const navigate = useNavigate();
-  const calculateAge = (birthDate: Date) => {
-    const today = new Date();
-    const age = today.getFullYear() - birthDate.getFullYear();
-    const monthDiff = today.getMonth() - birthDate.getMonth();
-    if (
-      monthDiff < 0 ||
-      (monthDiff === 0 && today.getDate() < birthDate.getDate())
-    ) {
-      return age - 1;
-    }
-    return age;
-  };
+  // const calculateAge = (birthDate: Date) => {
+  //   const today = new Date();
+  //   const age = today.getFullYear() - birthDate.getFullYear();
+  //   const monthDiff = today.getMonth() - birthDate.getMonth();
+  //   if (
+  //     monthDiff < 0 ||
+  //     (monthDiff === 0 && today.getDate() < birthDate.getDate())
+  //   ) {
+  //     return age - 1;
+  //   }
+  //   return age;
+  // };
 
   const onSubmit = async (data: TIndividualAccount) => {
-    let body = { ...data, birthDate: new Date(data.birthDate), pageId: 100 };
-    console.log(body);
+    console.log(data);
+    // let body = { ...data, birthDate: new Date(data.birthDate), pageId: 100 };
+    // console.log(body);
+    navigate(`${import.meta.env.BASE_URL}Authentication/signup/basicinfo`);
     // try {
     //   const token = getCookies();
     //   const res = await axios.post("/api/v1/individual/precreate", body, {
@@ -76,8 +78,8 @@ export default function AddIndividualAccount() {
   };
 
   return (
-    <div className="p-4">
-      <Card>
+    <div className="p-4 flex justify-center">
+      <Card className="w-1/2">
         <CardContent>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-8 p-8">
             <div className="space-y-4 pt-8">

@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import Webcam from "react-webcam";
 import { Camera } from "lucide-react";
-import idCardOverlay from "@/assets/images/ID_Card_overlay.svg";
+// import idCardOverlay from "@/assets/_images/ID_Card_overlay.svg";
 import { Button } from "../../components/ui/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { setIdCardImage } from "@/redux/Action";
+import { useNavigate } from "react-router-dom";
+// import ALLImages from "@/common/imagesdata";
 
 const layoutWidth = 514;
 const layoutHeight = 326;
@@ -20,6 +22,7 @@ export default function IDCardCapture() {
   const [imageSrc, setImageSrc] = useState<string | null | undefined>();
   const livenessOcr = useSelector((state: any) => state.livenessOcr);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (livenessOcr.idCardImage && livenessOcr.idCardImage !== null) {
@@ -36,9 +39,13 @@ export default function IDCardCapture() {
   };
 
   const handleSubmit = async () => {
-    console.log("face image", livenessOcr.faceImage);
-    console.log("id image", livenessOcr.idCardImage);
-    console.log("sent image to server");
+    console.log(imageSrc);
+    // console.log("face image", livenessOcr.faceImage);
+    // console.log("id image", livenessOcr.idCardImage);
+    // console.log("sent image to server");
+    navigate(
+      `${import.meta.env.BASE_URL}Authentication/signup/identityverification`
+    );
   };
 
   return (
@@ -54,12 +61,12 @@ export default function IDCardCapture() {
           videoConstraints={videoConstraints}
         />
         <div className="absolute top-0">
-          <img
-            src={idCardOverlay}
+          {/* <img
+            src={ALLImages("idOverlay")}
             alt="ID Card Overlay"
             width={layoutWidth}
             height={layoutHeight}
-          />
+          /> */}
         </div>
       </div>
       <h2>
@@ -75,11 +82,16 @@ export default function IDCardCapture() {
           <Button onClick={() => handleSubmit()}>Submit</Button>
         </div>
       )} */}
-      {imageSrc && imageSrc !== null && (
+      {
         <div className="flex justify-center">
           <Button onClick={() => handleSubmit()}>Next</Button>
         </div>
-      )}
+      }
+      {/* {imageSrc && imageSrc !== null && (
+        <div className="flex justify-center">
+          <Button onClick={() => handleSubmit()}>Next</Button>
+        </div>
+      )} */}
     </div>
   );
 }

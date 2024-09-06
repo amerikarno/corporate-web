@@ -1,7 +1,6 @@
 import { Button } from "../../components/ui/Button";
 import { Card, CardContent } from "../../components/ui/Card";
 import { useNavigate } from "react-router-dom";
-import idCardImage from "@/assets/images/id_card.svg";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -12,6 +11,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "../../components/ui/alert-dialog";
+import ALLImages from "@/common/imagesdata";
 
 export function CardWebcamInstructions() {
   const navigate = useNavigate();
@@ -54,8 +54,8 @@ export function CardWebcamInstructions() {
   };
 
   return (
-    <div className="p-10">
-      <Card>
+    <div className="p-10 flex justify-center">
+      <Card className="w-1/2">
         <CardContent>
           <h1 className="py-2 font-bold">
             ถ่ายรูปบัตรประชาชนเพื่อประกอบการยืนยันตัวตน
@@ -67,7 +67,7 @@ export function CardWebcamInstructions() {
               <li>3.ระวังแสงสะท้อนบนบัตรประชาชนขณะถ่ายบัตร</li>
             </ol>
             <div className="py-6">
-              <img src={idCardImage} alt="" />
+              <img src={ALLImages("idCard")} alt="" />
             </div>
             <div className="py-4">
               <p className="font-bold">หมายเหตุ</p>
@@ -84,7 +84,10 @@ export function CardWebcamInstructions() {
             <Button
               type="button"
               onClick={() =>
-                navigate("/create-job/added-individual-account/card-capture")
+                // navigate("/create-job/added-individual-account/card-capture")
+                navigate(
+                  `${import.meta.env.BASE_URL}Authentication/signup/cardcapture`
+                )
               }
             >
               ตกลง
