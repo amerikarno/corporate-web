@@ -111,7 +111,7 @@ const Firebaselogin = () => {
                 className="mx-auto hidden dark:block"
               />
             </Link> */}
-            <div className="mt-7">
+            <div className="my-10 py-10 border border-gray-300 rounded-md">
               {/* <nav className="!block px-6" aria-label="Tabs">
                 <div className="flex justify-center space-x-2">
                   <button
