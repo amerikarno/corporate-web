@@ -66,7 +66,7 @@ export function CardWebcamInstructions() {
               <li>2.อยู่ในพื้นที่ที่มีแสงสว่างเพียงพอ</li>
               <li>3.ระวังแสงสะท้อนบนบัตรประชาชนขณะถ่ายบัตร</li>
             </ol>
-            <div className="py-6">
+            <div className="my-6">
               <img src={ALLImages("idCard")} alt="" />
             </div>
             <div className="py-4">
