@@ -2574,8 +2574,7 @@ const Landing = ({ ThemeChanger }: datatype) => {
                           {" "}
                           <Link to="#" className="inline-flex">
                             <i className="text-white ri-home-8-line ltr:mr-2 rtl:ml-2"></i>{" "}
-                            48/29 อาคาร ทิสโก้ ทาวเวอร์ ชั้น 16 ถนนสาทรเหนือ
-                            แขวงสีลม เขตบางรัก กรุงเทพ 10500
+                            ที่อยู่
                           </Link>{" "}
                         </li>
                         <li>
@@ -2589,7 +2588,7 @@ const Landing = ({ ThemeChanger }: datatype) => {
                           {" "}
                           <Link to="#" className="inline-flex">
                             <i className="text-white ri-phone-line ltr:mr-2 rtl:ml-2"></i>{" "}
-                            02 345 6789
+                            xx xxx xxxx
                           </Link>
                         </li>
                         {/* <li>
