@@ -2574,7 +2574,8 @@ const Landing = ({ ThemeChanger }: datatype) => {
                           {" "}
                           <Link to="#" className="inline-flex">
                             <i className="text-white ri-home-8-line ltr:mr-2 rtl:ml-2"></i>{" "}
-                            ที่อยู่
+                            xx/xx อาคาร xxx ชั้น xx ถนน xx แขวง xx เขต xx
+                            กรุงเทพ 1xxxx
                           </Link>{" "}
                         </li>
                         <li>
