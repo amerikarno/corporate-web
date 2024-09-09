@@ -148,7 +148,7 @@ export default function Liveness() {
           mouth[18],
           mouth[19],
         ]);
-        if (mouthDist > 35 && trackIsCenter) {
+        if (mouthDist > 30 && trackIsCenter) {
           console.log("Mouth opened");
           setIsMouthOpen(true);
           trackIsMouthOpen = true;
@@ -274,12 +274,6 @@ export default function Liveness() {
       detection: faceapi.FaceDetection;
     }>
   ) => {
-    // Get the screen width and height
-    // let screenWidth = windowWidth;
-    // let screenHeight = windowHeight;
-    // const screenWidth = 640;
-    // const screenHeight = 480;
-
     if (screenWidth > 640) {
       screenWidth = 640;
       screenHeight = 480;
@@ -287,15 +281,11 @@ export default function Liveness() {
       screenHeight = screenWidth / aspectRatio;
     }
 
-    console.log(screenWidth, screenHeight);
-
     // Resize canvas to match screen dimensions
     if (videoRef && videoRef.current !== null && canvasRef.current !== null) {
       faceapi.matchDimensions(canvasRef.current, {
         width: screenWidth,
         height: screenHeight,
-        // width: videoRef.current.videoWidth,
-        // height: videoRef.current.videoHeight,
       });
     }
     const canvas = canvasRef.current;
