@@ -63,14 +63,14 @@ export default function SuitTestFatca() {
     //   };
     //   console.log(body);
     //   navigate(
-    //     `${import.meta.env.BASE_URL}Authentication/signup/identityverification`
+    //     `${import.meta.env.BASE_URL}authentication/signup/identityverification`
     //   );
     // } else {
     //   alert("Please Do the Suit Test First.");
     //   window.scrollTo({ top: 0, behavior: "smooth" });
     // }
     navigate(
-      `${import.meta.env.BASE_URL}Authentication/signup/otpemailconfirm`
+      `${import.meta.env.BASE_URL}authentication/signup/otpemailconfirm`
     );
   };
 

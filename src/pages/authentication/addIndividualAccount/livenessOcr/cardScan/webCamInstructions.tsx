@@ -86,7 +86,7 @@ export function CardWebcamInstructions() {
               onClick={() =>
                 // navigate("/create-job/added-individual-account/card-capture")
                 navigate(
-                  `${import.meta.env.BASE_URL}Authentication/signup/cardcapture`
+                  `${import.meta.env.BASE_URL}authentication/signup/cardcapture`
                 )
               }
             >

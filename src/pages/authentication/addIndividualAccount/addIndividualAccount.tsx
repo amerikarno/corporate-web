@@ -46,7 +46,7 @@ export default function AddIndividualAccount() {
     console.log(data);
     // let body = { ...data, birthDate: new Date(data.birthDate), pageId: 100 };
     // console.log(body);
-    navigate(`${import.meta.env.BASE_URL}Authentication/signup/basicinfo`);
+    navigate(`${import.meta.env.BASE_URL}authentication/signup/basicinfo`);
     // try {
     //   const token = getCookies();
     //   const res = await axios.post("/api/v1/individual/precreate", body, {
@@ -309,7 +309,5 @@ export default function AddIndividualAccount() {
         </CardContent>
       </Card>
     </div>
-    // <Liveness />
-    // <OtpEmailConfirm />
   );
 }

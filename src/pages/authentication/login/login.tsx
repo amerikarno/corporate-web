@@ -172,7 +172,7 @@ const Login = () => {
                         // }firebase/firebaseregister`}
                         to={`${
                           import.meta.env.BASE_URL
-                        }Authentication/signup/addindividualaccount`}
+                        }authentication/signup/addindividualaccount`}
                       >
                         Sign up here
                       </Link>
@@ -299,10 +299,10 @@ const Login = () => {
                         className="text-primary decoration-2 hover:underline font-medium"
                         to={`${
                           import.meta.env.BASE_URL
-                        }Authentication/signup/addindividualaccount`}
+                        }authentication/signup/addindividualaccount`}
                         // to={`${
                         //   import.meta.env.BASE_URL
-                        // }Authentication/signup/cover2`}
+                        // }authentication/signup/cover2`}
                       >
                         Sign up here
                       </Link>

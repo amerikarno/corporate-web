@@ -20,6 +20,7 @@
     "@simonwep/pickr": "^1.9.0",
     "@types/react-datepicker": "^4.19.0",
     "axios": "^1.7.7",
+    "class-variance-authority": "^0.7.0",
     "face-api.js": "^0.22.2",
     "filepond": "^4.30.4",
     "filepond-plugin-image-exif-orientation": "^1.0.11",
@@ -29,6 +30,7 @@
     "node-fetch": "^3.3.2",
     "preline": "^2.4.1",
     "quill": "^2.0.2",
+    "radix-ui": "^1.0.1",
     "rc-slider": "^10.3.1",
     "react": "^18.3.1",
     "react-calendar": "^4.6.0",
@@ -53,6 +55,7 @@
     "suneditor": "^2.45.1",
     "suneditor-react": "^3.6.1",
     "swiper": "^11.1.14",
+    "tailwind-merge": "^2.5.2",
     "zod": "^3.23.8"
   },
   "devDependencies": {

@@ -43,7 +43,7 @@ export default function IDCardCapture() {
     // console.log("id image", livenessOcr.idCardImage);
     // console.log("sent image to server");
     navigate(
-      `${import.meta.env.BASE_URL}Authentication/signup/identityverification`
+      `${import.meta.env.BASE_URL}authentication/signup/identityverification`
     );
   };
 

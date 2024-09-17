@@ -1,14 +1,7 @@
-import { Button } from "../../../../components/ui/Button";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-} from "../../../../components/ui/Card";
-import { Input } from "../../../../components/ui/Input";
+import { Button } from "@components/ui/Button";
+import { Card, CardContent, CardFooter, CardHeader } from "@components/ui/Card";
+import { Input } from "@components/ui/Input";
 import { useDispatch, useSelector } from "react-redux";
-// import phoneIcon from "@/assets/_images/otp-phone.svg";
-// import mailIcon from "@/assets/_images/otp-mail.svg";
 import { useEffect, useRef, useState } from "react";
 import {
   AlertDialog,
@@ -16,11 +9,12 @@ import {
   AlertDialogTitle,
   AlertDialogDescription,
   AlertDialogAction,
-} from "../../../../components/ui/alert-dialog";
-import { sleep } from "../lib/utils";
+} from "@components/ui/alert-dialog";
+import { sleep } from "@/util/util";
 import { setIndividualEmail, setIndividualMobile } from "@/redux/Action";
 import { useNavigate } from "react-router-dom";
 import ALLImages from "@/util/imageData";
+
 export function OtpEmailConfirm() {
   const initialTime = 10;
   const userData = useSelector((state: any) => state.addIndividual);
@@ -223,7 +217,7 @@ export function OtpEmailConfirm() {
             <Button
               onClick={() =>
                 navigate(
-                  `${import.meta.env.BASE_URL}Authentication/signup/livenessocr`
+                  `${import.meta.env.BASE_URL}authentication/signup/livenessocr`
                 )
               }
             >

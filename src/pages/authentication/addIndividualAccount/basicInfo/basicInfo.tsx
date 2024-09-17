@@ -130,7 +130,7 @@ export default function BasicInfo() {
       pageID: 300,
     };
     console.log(body);
-    navigate(`${import.meta.env.BASE_URL}Authentication/signup/suittestfatca`);
+    navigate(`${import.meta.env.BASE_URL}authentication/signup/suittestfatca`);
   };
 
   const handleAddressRadioChange = (value: string) => {

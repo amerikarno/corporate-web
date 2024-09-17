@@ -419,7 +419,7 @@ export default function Liveness() {
 
   const handleSubmit = async () => {
     navigate(
-      `${import.meta.env.BASE_URL}Authentication/signup/webcaminstructions`
+      `${import.meta.env.BASE_URL}authentication/signup/webcaminstructions`
     );
     // navigate("/create-job/added-individual-account/card-instructions");
   };
