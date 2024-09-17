@@ -49,7 +49,7 @@ const Landing = ({ ThemeChanger }: datatype) => {
   }
 
   return (
-    <div id="responsive-overlay">
+    <div>
       <div className="landing-page-wrapper relative">
         <header className="header custom-sticky !top-0 !w-full lg:hidden">
           <nav className="main-header" aria-label="Global">
