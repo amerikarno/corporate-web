@@ -77,8 +77,8 @@ export default function SuitTestFatca() {
   return (
     <div className="flex justify-center p-10">
       <div className="space-y-8 p-4 w-1/2">
-        <div className="mx-16 mt-16">
-          <div className="text-xl font-bold text-slate-800">
+        <div className="">
+          <div className="text-2xl font-bold text-slate-800 ">
             แบบประเมินความเหมาะสมในการลงทุน
           </div>
           {/* <div className="p-8 space-x-4 flex items-center">
@@ -100,7 +100,7 @@ export default function SuitTestFatca() {
           </div> */}
         </div>
         <SubSuitTest onSuitTestDone={handleSuitTestSuccess} />
-        <Card>
+        <Card className="bg-white">
           <CardContent>
             <div className="p-4 space-y-4 pr-8 pl-8 flex flex-col">
               <span className="text-xl font-bold mb-4">กรอกข้อมูล FATCA</span>
@@ -197,7 +197,7 @@ export default function SuitTestFatca() {
             </div>
           </CardContent>
         </Card>
-        <Card>
+        <Card className="bg-white">
           <CardContent>
             <div className="p-4 pl-8">
               <div>

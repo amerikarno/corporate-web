@@ -1,11 +1,10 @@
-import { Dispatch } from 'redux';
+import { Dispatch } from "redux";
 
 export const ThemeChanger = (value: string) => async (dispatch: Dispatch) => {
   dispatch({
     type: "ThemeChanger",
     payload: value,
   });
-  
 };
 
 export const setCid = (cid: string) => {
@@ -46,5 +45,26 @@ export const setIdCardImage = (idCardImage: string | null) => {
   return {
     type: "setIdCardImage",
     payload: idCardImage,
+  };
+};
+
+export const setAuthenToken = (token: string) => {
+  return {
+    type: "setAuthenToken",
+    payload: token,
+  };
+};
+
+export const setAuthenUser = (user: any) => {
+  return {
+    type: "setAuthenUser",
+    payload: user,
+  };
+};
+
+export const setAuthenEmail = (email: string) => {
+  return {
+    type: "setAuthenEmail",
+    payload: email,
   };
 };

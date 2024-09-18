@@ -11,7 +11,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "../../../../../components/ui/alert-dialog";
-import ALLImages from "@/util/imageData";
+import getImages from "@/common/imagesData";
 
 export function CardWebcamInstructions() {
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ export function CardWebcamInstructions() {
     return (
       <AlertDialog>
         <AlertDialogTrigger>ที่นี่</AlertDialogTrigger>
-        <AlertDialogContent>
+        <AlertDialogContent className="bg-white">
           <AlertDialogHeader>
             <AlertDialogTitle>วิธีการตั้งค่าเปิดกล้อง</AlertDialogTitle>
             <AlertDialogDescription>
@@ -55,7 +55,7 @@ export function CardWebcamInstructions() {
 
   return (
     <div className="p-10 flex justify-center">
-      <Card className="w-1/2">
+      <Card className="w-1/2 bg-white">
         <CardContent>
           <h1 className="py-2 font-bold">
             ถ่ายรูปบัตรประชาชนเพื่อประกอบการยืนยันตัวตน
@@ -67,7 +67,7 @@ export function CardWebcamInstructions() {
               <li>3.ระวังแสงสะท้อนบนบัตรประชาชนขณะถ่ายบัตร</li>
             </ol>
             <div className="my-6">
-              <img src={ALLImages("idCard")} alt="" />
+              <img src={getImages("idCard")} alt="" />
             </div>
             <div className="py-4">
               <p className="font-bold">หมายเหตุ</p>

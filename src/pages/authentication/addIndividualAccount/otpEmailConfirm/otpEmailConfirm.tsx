@@ -9,14 +9,16 @@ import {
   AlertDialogTitle,
   AlertDialogDescription,
   AlertDialogAction,
+  AlertDialogCancel,
 } from "@components/ui/alert-dialog";
 import { sleep } from "@/util/util";
 import { setIndividualEmail, setIndividualMobile } from "@/redux/Action";
 import { useNavigate } from "react-router-dom";
-import ALLImages from "@/util/imageData";
+import getImages from "@/common/imagesData";
+import { normalStyleInput } from "@/assets/css/normalStyleInput";
 
 export function OtpEmailConfirm() {
-  const initialTime = 10;
+  const initialTime = 300;
   const userData = useSelector((state: any) => state.addIndividual);
   const dispatch = useDispatch();
   const [disableMobile, setDisableMobile] = useState(true);
@@ -113,17 +115,17 @@ export function OtpEmailConfirm() {
 
   return (
     <div className="flex justify-center p-10">
-      <Card className="w-1/2">
+      <Card className="w-1/2 bg-white">
         <CardHeader className="font-bold text-2xl">
           กรุณายืนยัน "หมายเลขโทรศัพท์" และ "อีเมล" ของท่าน
         </CardHeader>
         <CardContent className="py-6">
           <div className="flex flex-row my-6">
             <div className="px-5">
-              <img src={ALLImages("phoneIcon")} />
+              <img src={getImages("phoneIcon")} />
             </div>
             <div className="flex flex-col justify-start w-full">
-              <h1 className="col-span-2">
+              <h1 className="col-span-2 py-4">
                 1. ยืนยันหมายเลขโทรศัพท์ของท่านผ่าน OTP
                 <span className="text-red-500"> * </span>
               </h1>
@@ -133,6 +135,8 @@ export function OtpEmailConfirm() {
                     name="mobile"
                     value={userData.mobile}
                     onChange={handleInput}
+                    label="หมายเลขโทรศัพท์"
+                    className={normalStyleInput}
                     // disabled={disableMobile}
                   />
                 </div>
@@ -153,10 +157,10 @@ export function OtpEmailConfirm() {
 
           <div className="flex flex-row my-6">
             <div className="px-5">
-              <img src={ALLImages("mailIcon")} />
+              <img src={getImages("mailIcon")} />
             </div>
             <div className="flex flex-col justify-start w-full">
-              <h1 className="col-span-2">
+              <h1 className="col-span-2 py-4">
                 2. ยืนยันอีเมลของท่าน
                 <span className="text-red-500"> * </span>
               </h1>
@@ -166,6 +170,8 @@ export function OtpEmailConfirm() {
                     name="email"
                     value={userData.email}
                     onChange={handleInput}
+                    label="อีเมล"
+                    className={normalStyleInput}
                     // disabled={disableEmail}
                   />
                 </div>
@@ -181,39 +187,9 @@ export function OtpEmailConfirm() {
               </div>
             </div>
           </div>
-          {/* <div className="grid grid-cols-12 items-end justify-start space-x-4">
-            <div className="col-span-1 w-20">
-              <img src={mailIcon} />
-            </div>
-            <div className="col-span-11">
-              <div className="grid grid-cols-3 gap-x-6 gap-y-2">
-                <h1 className="col-span-2">
-                  2. ยืนยันอีเมลของท่าน
-                  <span className="text-red-500"> * </span>
-                </h1>
-                <div className="col-span-2">
-                  <Input
-                    name="email"
-                    value={userData.email}
-                    onChange={handleInput}
-                    disabled={disableEmail}
-                  />
-                </div>
-                <div className="grid grid-cols-2 gap-x-4">
-                  <Button
-                    onClick={() => setDisableEmail(false)}
-                    disabled={!disableEmail}
-                  >
-                    แก้ไข
-                  </Button>
-                  <Button onClick={() => handleConfirm("email")}>ยืนยัน</Button>
-                </div>
-              </div>
-            </div>
-          </div> */}
         </CardContent>
         <CardFooter>
-          <div className="w-full flex justify-end">
+          <div className="w-full flex justify-end px-9">
             <Button
               onClick={() =>
                 navigate(
@@ -228,7 +204,7 @@ export function OtpEmailConfirm() {
       </Card>
 
       <AlertDialog open={isDialogOpen}>
-        <AlertDialogContent>
+        <AlertDialogContent className="bg-white">
           <AlertDialogTitle>
             กรุณายืนยันรหัส OTP 6 หลัก ระบบได้ทำการส่งรหัส OTP ไปยังหมายเลข{" "}
             {hideOtpNumber(userData.mobile)} แล้ว
@@ -236,7 +212,7 @@ export function OtpEmailConfirm() {
           <AlertDialogTitle>ref code : {refCode.current}</AlertDialogTitle>
           <AlertDialogDescription>
             <div>
-              <div className="pb-10">
+              <div className="pb-10 space-y-4">
                 <p>
                   รหัส OTP 6 หลัก<span className="text-red-500"> * </span>
                 </p>
@@ -256,6 +232,7 @@ export function OtpEmailConfirm() {
             </div>
           </AlertDialogDescription>
           <AlertDialogAction
+            className="w-full"
             onClick={() => {
               clearInterval(intervalId.current!);
               setIsDialogOpen(false);
@@ -263,6 +240,15 @@ export function OtpEmailConfirm() {
           >
             Confirm
           </AlertDialogAction>
+          <AlertDialogCancel
+            className="w-full"
+            onClick={() => {
+              clearInterval(intervalId.current!);
+              setIsDialogOpen(false);
+            }}
+          >
+            Cancle
+          </AlertDialogCancel>
         </AlertDialogContent>
       </AlertDialog>
     </div>

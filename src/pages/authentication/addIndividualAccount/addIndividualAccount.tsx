@@ -1,18 +1,19 @@
 // import { isAllowedPage } from "@/lib/utils";
 // import UnAuthorize from "@/pages/unAuthorizePage/unAuthorize";
 // import Liveness from "./livenessOcr/livenessOcr";
-import { Card, CardContent } from "../../../components/ui/Card";
+import { Card, CardContent } from "@components/ui/Card";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import {
   TIndividualAccount,
   individualAccountSchema,
 } from "./constant/schemas";
-import { Input } from "../../../components/ui/Input";
-import { Button } from "../../../components/ui/Button";
+import { Input } from "@components/ui/Input";
+import { Button } from "@components/ui/Button";
 // import { getCookies } from "@/lib/Cookies";
 // import axios from "@/api/axios";
 import { useNavigate } from "react-router-dom";
+import { normalStyleInput } from "@assets/css/normalStyleInput";
 // import { OtpEmailConfirm } from "./otpEmailConfirm/otpEmailConfirm";
 
 export default function AddIndividualAccount() {
@@ -79,7 +80,7 @@ export default function AddIndividualAccount() {
 
   return (
     <div className="p-4 flex justify-center">
-      <Card className="w-1/2">
+      <Card className="w-1/2 bg-white">
         <CardContent>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-8 p-8">
             <div className="space-y-4 pt-8">
@@ -114,9 +115,9 @@ export default function AddIndividualAccount() {
                   <Input
                     type="text"
                     {...register("thName")}
-                    placeholder="ชื่อ (ภาษาไทย)"
                     id="thName"
-                    className="ti-form-input"
+                    label="ชื่อ (ภาษาไทย)"
+                    className={normalStyleInput}
                   />
                   {errors.thName && (
                     <span className="text-red-500">
@@ -128,9 +129,9 @@ export default function AddIndividualAccount() {
                   <Input
                     type="text"
                     {...register("thSurname")}
-                    placeholder="ชื่อสกุล (ภาษาไทย)"
                     id="thSurname"
-                    className="ti-form-input"
+                    label="ชื่อสกุล (ภาษาไทย)"
+                    className={normalStyleInput}
                   />
                   {errors.thSurname && (
                     <span className="text-red-500">
@@ -165,9 +166,9 @@ export default function AddIndividualAccount() {
                   <Input
                     type="text"
                     {...register("engName")}
-                    placeholder="ชื่อ (ภาษาอังกฤษ)"
                     id="engName"
-                    className="ti-form-input"
+                    label="ชื่อ (ภาษาอังกฤษ)"
+                    className={normalStyleInput}
                   />
                   {errors.engName && (
                     <span className="text-red-500">
@@ -180,9 +181,9 @@ export default function AddIndividualAccount() {
                   <Input
                     type="text"
                     {...register("engSurname")}
-                    placeholder="ชื่อสกุล (ภาษาอังกฤษ)"
                     id="engSurname"
-                    className="ti-form-input"
+                    label="ชื่อสกุล (ภาษาอังกฤษ)"
+                    className={normalStyleInput}
                   />
                   {errors.engSurname && (
                     <span className="text-red-500">
@@ -197,9 +198,9 @@ export default function AddIndividualAccount() {
                 <Input
                   type="text"
                   {...register("email")}
-                  placeholder="อีเมลล์"
                   id="email"
-                  className="ti-form-input"
+                  label="อีเมล"
+                  className={normalStyleInput}
                 />
                 {errors.email && (
                   <span className="text-red-500">{errors.email.message}</span>
@@ -210,9 +211,9 @@ export default function AddIndividualAccount() {
                 <Input
                   type="text"
                   {...register("mobile")}
-                  placeholder="หมายเลขโทรศัพท์มือถือ"
                   id="mobile"
-                  className="ti-form-input"
+                  label="หมายเลขโทรศัพท์มือถือ"
+                  className={normalStyleInput}
                 />
                 {errors.mobile && (
                   <span className="text-red-500">{errors.mobile.message}</span>
@@ -238,7 +239,7 @@ export default function AddIndividualAccount() {
               <div className="flex  flex-col w-1/2">
                 <select
                   {...register("mariageStatus")}
-                  className="cursor-pointer border px-2.5 py-3 rounded border-gray-700 text-gray-600 pl-2 hover:bg-slate-100"
+                  className="cursor-pointer border px-2.5 py-3 rounded text-gray-600 pl-2 hover:bg-slate-100 focus:border-blue-700"
                 >
                   <option value="">สถานะ</option>
                   <option value="โสด">Single</option>
@@ -258,9 +259,9 @@ export default function AddIndividualAccount() {
                 <Input
                   type="text"
                   {...register("citizenId")}
-                  placeholder="หมายเลขบัตรประชาชน"
                   id="citizenId"
-                  className="ti-form-input"
+                  label="หมายเลขบัตรประชาชน"
+                  className={normalStyleInput}
                 />
                 {errors.citizenId && (
                   <span className="text-red-500">
@@ -273,9 +274,9 @@ export default function AddIndividualAccount() {
                 <Input
                   type="text"
                   {...register("laserCode")}
-                  placeholder="เลขหลังบัตรประชาชน (Laser Code)"
                   id="lasorCode"
-                  className="ti-form-input"
+                  label="เลขหลังบัตรประชาชน (Laser Code)"
+                  className={normalStyleInput}
                 />
                 {errors.laserCode && (
                   <span className="text-red-500">

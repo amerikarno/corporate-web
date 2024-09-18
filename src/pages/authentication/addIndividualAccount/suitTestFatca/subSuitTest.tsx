@@ -238,10 +238,10 @@ export default function SubSuitTest({ onSuitTestDone }: SubSuitTestProps) {
 
   return (
     <div className="">
-      <div className="md:px-16 flex flex-col space-y-8">
+      <div className="flex flex-col space-y-8">
         {questions.map((question, questionIndex) =>
           questionIndex + 1 === 3 ? (
-            <Card className="p-4" key={questionIndex}>
+            <Card className="bg-white" key={questionIndex}>
               <div className="flex flex-col space-y-4 p-8">
                 <p className="font-bold">
                   {questionIndex + 1}.{question.question}
@@ -276,7 +276,7 @@ export default function SubSuitTest({ onSuitTestDone }: SubSuitTestProps) {
               </div>
             </Card>
           ) : (
-            <Card className="p-4" key={questionIndex}>
+            <Card className="bg-white" key={questionIndex}>
               {questionIndex === 0 && (
                 <div className="flex text-gray-400 text-l p-4">
                   <h2>

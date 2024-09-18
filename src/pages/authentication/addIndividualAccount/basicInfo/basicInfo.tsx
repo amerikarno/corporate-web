@@ -1,9 +1,7 @@
-import { Card, CardContent } from "../../../../components/ui/Card";
-// import { isAllowedPage } from "../lib/utils";
-// import UnAuthorize from "@/pages/unAuthorizePage/unAuthorize";
+import { Card, CardContent } from "@components/ui/Card";
 import { TiHome } from "react-icons/ti";
-import { Input } from "../../../../components/ui/Input";
-import { Button } from "../../../../components/ui/Button";
+import { Input } from "@components/ui/Input";
+import { Button } from "@components/ui/Button";
 import { MdLocationPin } from "react-icons/md";
 import { useEffect, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -150,7 +148,7 @@ export default function BasicInfo() {
   return (
     <div className="p-4 flex justify-center">
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-8 p-4 w-1/2">
-        <Card className="">
+        <Card className="bg-white">
           <CardContent>
             <div className="p-4 space-y-4">
               <div className="flex gap-2 items-center text-[25px]">
@@ -298,7 +296,7 @@ export default function BasicInfo() {
             </div>
           </CardContent>
         </Card>
-        <Card className="p-4">
+        <Card className="p-4 bg-white">
           <CardContent>
             <div className="space-y-4 ">
               <div className="flex items-center justify-between">
@@ -465,19 +463,19 @@ export default function BasicInfo() {
             </div>
           </CardContent>
         </Card>
-        <Card className="p-4">
+        <Card className="p-4 bg-white">
           <CardContent>
             <div className="flex flex-col space-y-4">
               <div className="flex gap-2 items-center text-[25px]">
                 <MdLocationPin />
                 อาชีพปัจจุบันและแหล่งที่มาของเงินลงทุน
               </div>
-              <div className="flex space-x-6 ">
+              <div className="flex space-x-6">
                 <div className="flex w-1/2">
                   <select
                     {...register("occupation.education")}
-                    className="px-2.5 pb-2.5 pt-4 cursor-pointer border border-gray-700 text-gray-600 pl-2 hover:bg-slate-100
-                                text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full h-full dark:bg-gray-700 dark:border-gray-600
+                    className=" px-2.5 pb-2.5 pt-4 cursor-pointer text-gray-600 pl-2 hover:bg-slate-100
+                                text-sm rounded-lg focus:ring-gray-700 focus:border-blue-700 block w-full h-full dark:bg-gray-700 dark:border-gray-600
                                 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-700 dark:focus:border-gray-700"
                   >
                     <option value="">ระดับการศึกษาสูงสุด</option>
@@ -491,8 +489,8 @@ export default function BasicInfo() {
                 <div className="w-1/2">
                   <select
                     {...register("occupation.sourceOfIncome")}
-                    className="px-2.5 pb-2.5 pt-4 cursor-pointer border border-gray-700 text-gray-600 pl-2 hover:bg-slate-100
-                                text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full h-full dark:bg-gray-700 dark:border-gray-600
+                    className="px-2.5 pb-2.5 pt-4 cursor-pointer text-gray-600 pl-2 hover:bg-slate-100
+                                text-sm rounded-lg focus:ring-gray-700 focus:border-blue-700 block w-full h-full dark:bg-gray-700 dark:border-gray-600
                                 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-700 dark:focus:border-gray-700"
                   >
                     <option value="">แหล่งที่มาของเงินลงทุน</option>
@@ -508,8 +506,8 @@ export default function BasicInfo() {
                 <div className="w-1/2">
                   <select
                     {...register("occupation.currentOccupation")}
-                    className="px-2.5 pb-2.5 pt-4 cursor-pointer border border-gray-700 text-gray-600 pl-2 hover:bg-slate-100
-                                    text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full h-full dark:bg-gray-700 dark:border-gray-600
+                    className="px-2.5 pb-2.5 pt-4 cursor-pointer text-gray-600 pl-2 hover:bg-slate-100
+                                    text-sm rounded-lg focus:ring-gray-700 focus:border-blue-700 block w-full h-full dark:bg-gray-700 dark:border-gray-600
                                     dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-700 dark:focus:border-gray-700"
                   >
                     <option value="">อาชีพปัจจุบัน</option>
@@ -542,8 +540,8 @@ export default function BasicInfo() {
                   <div className="w-1/2">
                     <select
                       {...register("occupation.salaryRange")}
-                      className="px-2.5 pb-2.5 pt-4 cursor-pointer border border-gray-700 text-gray-600 pl-2 hover:bg-slate-100
-                                        text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full h-full dark:bg-gray-700 dark:border-gray-600
+                      className="px-2.5 pb-2.5 pt-4 cursor-pointer text-gray-600 pl-2 hover:bg-slate-100
+                                        text-sm rounded-lg focus:ring-gray-700 focus:border-blue-700 block w-full h-full dark:bg-gray-700 dark:border-gray-600
                                         dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-700 dark:focus:border-gray-700"
                     >
                       <option value="">รายได้ต่อเดือน</option>
@@ -561,8 +559,8 @@ export default function BasicInfo() {
                   <div className="w-1/2">
                     <select
                       {...register("occupation.typeOfBusiness")}
-                      className="px-2.5 pb-2.5 pt-4 cursor-pointer border border-gray-700 text-gray-600 pl-2 hover:bg-slate-100
-                                        text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full h-full dark:bg-gray-700 dark:border-gray-600
+                      className="px-2.5 pb-2.5 pt-4 cursor-pointer text-gray-600 pl-2 hover:bg-slate-100
+                                        text-sm rounded-lg focus:ring-gray-700 focus:border-blue-700 block w-full h-full dark:bg-gray-700 dark:border-gray-600
                                         dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-700 dark:focus:border-gray-700"
                     >
                       <option value="">ประเภทธุระกิจ</option>
@@ -579,8 +577,8 @@ export default function BasicInfo() {
                   <div className="w-1/2">
                     <select
                       {...register("occupation.salaryRange")}
-                      className="px-2.5 pb-2.5 pt-4 cursor-pointer border border-gray-700 text-gray-600 pl-2 hover:bg-slate-100
-                                        text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full h-full dark:bg-gray-700 dark:border-gray-600
+                      className="px-2.5 pb-2.5 pt-4 cursor-pointer text-gray-600 pl-2 hover:bg-slate-100
+                                        text-sm rounded-lg focus:ring-gray-700 focus:border-blue-700 block w-full h-full dark:bg-gray-700 dark:border-gray-600
                                         dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-700 dark:focus:border-gray-700"
                     >
                       <option value="">รายได้ต่อเดือน</option>
@@ -610,8 +608,8 @@ export default function BasicInfo() {
                   <div className="w-1/2">
                     <select
                       {...register("occupation.salaryRange")}
-                      className="px-2.5 pb-2.5 pt-4 cursor-pointer border border-gray-700 text-gray-600 pl-2 hover:bg-slate-100
-                                        text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full h-full dark:bg-gray-700 dark:border-gray-600
+                      className="px-2.5 pb-2.5 pt-4 cursor-pointer text-gray-600 pl-2 hover:bg-slate-100
+                                        text-sm rounded-lg focus:ring-gray-700 focus:border-blue-700 block w-full h-full dark:bg-gray-700 dark:border-gray-600
                                         dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-700 dark:focus:border-gray-700"
                     >
                       <option value="">รายได้ต่อเดือน</option>
@@ -628,7 +626,7 @@ export default function BasicInfo() {
             </div>
           </CardContent>
         </Card>
-        <Card className="p-4">
+        <Card className="p-4 bg-white">
           <CardContent>
             <div className="space-y-4 ">
               <div className="flex items-center justify-between">
@@ -807,7 +805,7 @@ export default function BasicInfo() {
             </div>
           </CardContent>
         </Card>
-        <Card>
+        <Card className="bg-white">
           <CardContent>
             <div className="p-4 space-y-4">
               <div className="flex gap-2 items-center text-[25px]">
@@ -863,14 +861,14 @@ export default function BasicInfo() {
             </div>
           </CardContent>
         </Card>
-        <Card>
+        <Card className="bg-white">
           <CardContent>
             <div className="p-4 space-y-4">
               <div>
                 <div className="flex gap-2 items-center text-[25px]">
                   บัญชีธนาคารของท่าน (เพื่อใช้ในการถอนเงิน)
                 </div>
-                <div className="flex items-center text-[15px] text-gray-400">
+                <div className="flex items-center text-[15px] text-gray-400 pt-4">
                   <span className="text-red-500">*</span>
                   กรุณาระบุชื่อธนาคารก่อนกรอกชื่อสาขา
                 </div>
@@ -879,8 +877,8 @@ export default function BasicInfo() {
                 <div className="flex space-x-4">
                   <select
                     {...register("firstBankAccount.bankName")}
-                    className="px-2.5 pb-2.5 pt-4 cursor-pointer border border-gray-700 text-gray-600 pl-2 hover:bg-slate-100
-                                            text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full h-full dark:bg-gray-700 dark:border-gray-600
+                    className="px-2.5 pb-2.5 pt-4 cursor-pointer text-gray-600 pl-2 hover:bg-slate-100
+                                            text-sm rounded-lg focus:ring-gray-700 focus:border-blue-700 block w-full h-full dark:bg-gray-700 dark:border-gray-600
                                             dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-700 dark:focus:border-gray-700"
                   >
                     <option value="">กรุณาเลือกธนาคาร</option>
@@ -937,7 +935,7 @@ export default function BasicInfo() {
                   </div>
                 </div>
                 {addBankValue === "radio-6" && (
-                  <div className="flex items-center text-[15px] text-gray-400">
+                  <div className="flex items-center text-[15px] text-gray-400 pt-4">
                     <span className="text-red-500">*</span>
                     กรุณาระบุชื่อธนาคารก่อนกรอกชื่อสาขา
                   </div>
@@ -947,8 +945,8 @@ export default function BasicInfo() {
                     <div className="flex space-x-4">
                       <select
                         {...register("secondBankAccountBody.bankName")}
-                        className="px-2.5 pb-2.5 pt-4 cursor-pointer border border-gray-700 text-gray-600 pl-2 hover:bg-slate-100
-                                            text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full h-full dark:bg-gray-700 dark:border-gray-600
+                        className="px-2.5 pb-2.5 pt-4 cursor-pointer  text-gray-600 pl-2 hover:bg-slate-100
+                                            text-sm rounded-lg focus:ring-gray-700 focus:border-blue-700 block w-full h-full dark:bg-gray-700 dark:border-gray-600
                                             dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-700 dark:focus:border-gray-700"
                       >
                         <option value="">กรุณาเลือกธนาคาร</option>

@@ -5,7 +5,7 @@ import { Button } from "../../../../../components/ui/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { setIdCardImage } from "@/redux/Action";
 import { useNavigate } from "react-router-dom";
-import ALLImages from "@/util/imageData";
+import getImages from "@/common/imagesData";
 
 const layoutWidth = 514;
 const layoutHeight = 326;
@@ -63,7 +63,7 @@ export default function IDCardCapture() {
             />
             <div className="absolute top-0">
               <img
-                src={ALLImages("idOverlay")}
+                src={getImages("idOverlay")}
                 alt="ID Card Overlay"
                 width={layoutWidth}
                 height={layoutHeight}

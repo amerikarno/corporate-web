@@ -22,7 +22,7 @@ export default function IdentityVerification() {
           หลังการยืนยันตัวตน ท่านจะได้รับ Username & Password ผ่านทางอีเมลล์
         </span>
       </div>
-      <Card className="flex items-center space-x-4 p-4 pb-20 md:w-3/4 relative">
+      <Card className="flex items-center space-x-4 p-4 pb-20 md:w-3/4 relative bg-white">
         <div className="m-8 w-28 flex-shrink-0 flex">
           <img src={ndid} alt="NDID" />
         </div>
@@ -49,7 +49,7 @@ export default function IdentityVerification() {
           />
         </div>
       </Card>
-      <Card className="flex items-center space-x-4 p-4 pb-20 md:w-3/4 relative">
+      <Card className="flex items-center space-x-4 p-4 pb-20 md:w-3/4 relative bg-white">
         <div className="m-8 w-32 h-32 flex-shrink-0 flex">
           <img src={thaiid} alt="THAIID" />
         </div>
