@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import Webcam from "react-webcam";
 import { Camera } from "lucide-react";
-import { Button } from "../../../../../components/ui/Button";
+import { Button } from "@/components/ui/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { setIdCardImage } from "@/redux/Action";
 import { useNavigate } from "react-router-dom";

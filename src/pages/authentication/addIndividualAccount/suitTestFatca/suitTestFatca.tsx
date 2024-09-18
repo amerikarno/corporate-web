@@ -81,23 +81,6 @@ export default function SuitTestFatca() {
           <div className="text-2xl font-bold text-slate-800 ">
             แบบประเมินความเหมาะสมในการลงทุน
           </div>
-          {/* <div className="p-8 space-x-4 flex items-center">
-            <select
-              className="cursor-pointer p-1.5 block px-0 w-1/2 text-base text-black bg-transparent border-0 border-b-2
-               border-gray-500 dark:text-gray-400
-               dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-500 peer"
-            >
-              <option value="">ระดับความเสี่ยงในการลงทุนของท่าน</option>
-              <option value="choice1">choice1</option>
-              <option value="นาง">choice2</option>
-              <option value="นางสาว">choice3</option>
-            </select>
-            <div className="w-1/4 flex justify-center">
-              <span className="cursor-pointer text-orange-500 underline  underline-offset-2 mt-4">
-                ศึกษาหรือแก้ไขรายละเอียดแบบประเมิน
-              </span>
-            </div>
-          </div> */}
         </div>
         <SubSuitTest onSuitTestDone={handleSuitTestSuccess} />
         <Card className="bg-white">

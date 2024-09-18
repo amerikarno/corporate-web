@@ -324,8 +324,8 @@ export default function SubSuitTest({ onSuitTestDone }: SubSuitTestProps) {
           )}
         </div>
         {suitTestDone && (
-          <div className="md:relative flex md:flex-row flex-col w-full m-8">
-            <div className="flex md:w-1/4 flex-col items-center space-y-4 border-t-4 md:border-l-4 md:border-t-0 p-4 pt-4">
+          <div className="md:relative flex md:flex-row flex-col w-full">
+            <div className="flex md:w-1/4 flex-col items-center space-y-4 md:border-l-4 md:border-t-0 pt-4">
               <div className="">
                 <span className="font-bold">ผลคะแนนที่ทำได้</span>
               </div>
@@ -371,16 +371,14 @@ export default function SubSuitTest({ onSuitTestDone }: SubSuitTestProps) {
                 <span className="font-bold text-xl text-slate-800">
                   ท่านเป็นนักลงทุนประเภท
                 </span>
-                <span className="font-bold text-xl text-slate-800">
-                  {investorType}
-                </span>
+                <u className="py-4 text-xl text-slate-800">{investorType}</u>
               </div>
             </div>
             <div className="flex flex-col md:w-1/2 items-center p-4 space-y-4-8 gap-4">
               <div className="flex pl-8">
                 <span className="font-bold">ประเภทตราสารที่สามารถลงทุนได้</span>
               </div>
-              <div className="flex justify-center gap-8">
+              <div className="flex justify-center gap-8 items-end">
                 <div className="flex flex-col space-y-4 justify-center font-bold">
                   <span>ตราสารหนี้</span>
                   <span>ตราสารทุนบางส่วน</span>
