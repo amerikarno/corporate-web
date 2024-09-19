@@ -71,7 +71,7 @@ const LandingHeader = ({ ThemeChanger, children }: datatype) => {
                 <div className="responsive-logo">
                   <div className="flex flex-row items-center space-x-4">
                     <img src={getImages("logo")} alt="" className="w-[40px]" />
-                    <h1 className="text-3xl font-bold">Digital Asset</h1>
+                    <h1 className="text-2xl font-bold">Digital Asset</h1>
                   </div>
                 </div>
               </div>
