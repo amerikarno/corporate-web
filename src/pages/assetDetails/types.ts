@@ -1,3 +1,22 @@
+type TDetail = {
+  header: string;
+  content: string;
+};
+
+type TFaq = {
+  question: string;
+  answer: string;
+};
+
+type TMember = {
+  picture: string;
+  firstName: string;
+  midName: string;
+  lastName: string;
+  position: string;
+  history: string;
+};
+
 export interface TAssetData {
   asset: {
     id: string;
@@ -13,21 +32,18 @@ export interface TAssetData {
     minimum: string;
   };
   info: {
-    totalIssuance: number;
-    totalAmountRaised: number;
+    totalIssuance: string;
+    totalAmountRaised: string;
     contractInfomation: string;
-    minimumInvestmentAmount: number;
-    minimumInvestmentQuantity: number;
-    issueUnitPrice: number;
+    minimumInvestmentAmount: string;
+    minimumInvestmentQuantity: string;
+    issueUnitPrice: string;
   };
-  details: string;
+  details: TDetail[];
   documents: string[];
   images: string[];
   videos: string[];
-  faq: {
-    question: string;
-    answer: string;
-  }[];
+  faq: TFaq[];
   keyInformation: {
     network: string;
     precision: string;
@@ -40,7 +56,7 @@ export interface TAssetData {
   };
   issuanceTerms: {
     investmentPeriod: string;
-    dividenYeild: string;
+    dividendYield: string;
     grossmargin: string;
     equityMultiple: string;
     profit: string;
@@ -48,12 +64,5 @@ export interface TAssetData {
     investmentStructure: string;
     distributionFrequency: string;
   };
-  companyMembers: {
-    picture: string;
-    firstName: string;
-    midName: string;
-    lastName: string;
-    position: string;
-    history: string;
-  }[];
+  companyMembers: TMember[];
 }

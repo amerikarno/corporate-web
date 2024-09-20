@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 import { ThemeChanger } from "@/redux/Action";
 import store from "@/redux/store";
@@ -16,6 +16,8 @@ interface datatype {
 }
 
 const Landing = ({ ThemeChanger }: datatype) => {
+  const navigate = useNavigate();
+
   useEffect(() => {
     function handleResize() {
       if (window.innerWidth <= 992) {
@@ -52,14 +54,20 @@ const Landing = ({ ThemeChanger }: datatype) => {
         <div className="py-10" id="hot tokens">
           <div className="section container mx-auto space-y-6">
             <div className="text-center max-w-[80rem] mx-auto mb-12">
-              <h2 className="justify-center section-title text-left text-3xl font-bold text-gray-800 dark:text-white md:text-4xl lg:text-5xl">
+              <h2 className="justify-center section-title text-left text-3xl font-bold text-gray-800 dark:text-white">
                 <span className="">Hot</span>
               </h2>
             </div>
             <ul className="flex gap-28 flex-wrap justify-center">
               {dataForHot.map((item, index) => (
                 <li key={index}>
-                  <CustomCard data={item} />
+                  <div
+                    onClick={() =>
+                      navigate(`${import.meta.env.BASE_URL}asset/${index + 1}`)
+                    }
+                  >
+                    <CustomCard data={item} />
+                  </div>
                 </li>
               ))}
             </ul>
@@ -69,14 +77,20 @@ const Landing = ({ ThemeChanger }: datatype) => {
         <div className="py-10" id="recommended tokens">
           <div className="section container mx-auto space-y-6">
             <div className="text-center max-w-[80rem] mx-auto mb-12">
-              <h2 className="justify-center section-title text-left text-3xl font-bold text-gray-800 dark:text-white md:text-4xl lg:text-5xl">
+              <h2 className="justify-center section-title text-left text-3xl font-bold text-gray-800 dark:text-white">
                 <span className="">Recomended</span>
               </h2>
             </div>
             <ul className="flex gap-28 flex-wrap justify-center">
               {dataForRecomended.map((item, index) => (
                 <li key={index}>
-                  <CustomCard data={item} />
+                  <div
+                    onClick={() =>
+                      navigate(`${import.meta.env.BASE_URL}asset/${index + 1}`)
+                    }
+                  >
+                    <CustomCard data={item} />
+                  </div>
                 </li>
               ))}
             </ul>
@@ -86,14 +100,20 @@ const Landing = ({ ThemeChanger }: datatype) => {
         <div className="py-10" id="all tokens">
           <div className="section container mx-auto space-y-6">
             <div className="text-center max-w-[80rem] mx-auto mb-12">
-              <h2 className="justify-center section-title text-left text-3xl font-bold text-gray-800 dark:text-white md:text-4xl lg:text-5xl">
+              <h2 className="justify-center section-title text-left text-3xl font-bold text-gray-800 dark:text-white">
                 <span className="">All</span>
               </h2>
             </div>
             <ul className="flex gap-28 flex-wrap justify-center">
               {dataAll.map((item, index) => (
                 <li key={index}>
-                  <CustomCard data={item} />
+                  <div
+                    onClick={() =>
+                      navigate(`${import.meta.env.BASE_URL}asset/${index + 1}`)
+                    }
+                  >
+                    <CustomCard data={item} />
+                  </div>
                 </li>
               ))}
             </ul>

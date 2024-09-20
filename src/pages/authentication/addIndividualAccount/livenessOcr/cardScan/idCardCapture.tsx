@@ -63,7 +63,7 @@ export default function IDCardCapture() {
             />
             <div className="absolute top-0">
               <img
-                src={getImages("idOverlay")}
+                src={getImages("idOverLay")}
                 alt="ID Card Overlay"
                 width={layoutWidth}
                 height={layoutHeight}
