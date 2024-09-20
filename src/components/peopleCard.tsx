@@ -15,8 +15,8 @@ export function PeopleCard({
   picture,
 }: TPeopleCardProps) {
   return (
-    <div className="w-full flex flex-row gap-4">
-      <img src={picture} alt="" className="w-12 h-12" />
+    <div className="w-full flex flex-row gap-4 py-2">
+      <img src={picture} alt="" className="w-12 h-12 rounded-full" />
       <div className="flex flex-col flex-grow">
         <p className="text-black font-bold">
           {firstName} {middleName} {lastName}
