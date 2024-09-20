@@ -2,6 +2,8 @@ version: 0.2
 env:
   variables:
     ECR_REPO_NAME: corporate-web
+    AWS_ACCOUNT_ID: "549007798570"
+    AWS_REGION: "eu-north-1"
   # parameter-store:
   #   DOCKERHUB_TOKEN: /sit-cw-ps/token
   #   DOCKERHUB_USER: /sit-cw-ps/user
