@@ -67,7 +67,7 @@ export function AssetDetails() {
                       />
                       <div className="flex-grow flex-col px-4 space-y-2">
                         <h1 className={`text-xl font-bold ${darkText}`}>
-                          {assetData.asset.title}
+                          {assetData.asset.name}
                         </h1>
                         <p className={cn("line-clamp-2", normalText)}>
                           {assetData.asset.description}

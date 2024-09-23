@@ -8,7 +8,7 @@ export const mockAssetData: TAssetData = {
     logo: getImages("png1"),
     issueBy: "Issue By Digital Asset",
     image: getImages("example"),
-    name: "Adipiscing Elit",
+    name: "THGG",
     description:
       "duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur excepteur sint occaecat cupidatat non proident sunt in culpa",
     catagory: "Healthcare",

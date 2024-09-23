@@ -70,8 +70,10 @@ const LandingHeader = ({ ThemeChanger, children }: datatype) => {
               <div className="landing-logo-container my-auto hidden lg:block">
                 <div className="responsive-logo">
                   <div className="flex flex-row items-center space-x-4">
-                    <img src={getImages("logo2")} alt="" className="w-[40px]" />
-                    <h1 className="text-2xl font-bold">Digital Asset</h1>
+                    <img src={getImages("logo")} alt="" className="h-16" />
+                    <h1 className="text-3xl font-bold px-5">
+                      Elite Consulting
+                    </h1>
                   </div>
                 </div>
               </div>

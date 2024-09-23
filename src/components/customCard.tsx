@@ -13,8 +13,10 @@ export function CustomCard({ data }: TCustomCardProps) {
       <div className="w-[360px] h-[500px] px-[10px] py-[10px] flex flex-col justify-evenly">
         <div className="w-full p-4 space-y-4">
           <div className="flex flex-row items-center space-x-4">
-            <img src={data.logo} alt="" className="w-[25px]" />
-            <h1 className={`text-xl font-bold ${darkText}`}>{data.title}</h1>
+            <img src={data.logo} alt="" className="h-[25px]" />
+            <h1 className={`text-xl font-bold ${darkText}`}>
+              Elite Consulting
+            </h1>
           </div>
           <h2 className={normalText}>{data.issueBy}</h2>
           <div className="border-b border-gray-200"></div>
