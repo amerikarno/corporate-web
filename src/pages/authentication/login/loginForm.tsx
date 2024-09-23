@@ -13,6 +13,7 @@ import api from "@/api/axios";
 import { setAuthenEmail, setAuthenToken, setAuthenUser } from "@/redux/Action";
 import { TUser } from "./types";
 import { normalStyleInput } from "@/assets/css/normalStyleInput";
+import axios from "@/api/axios";
 
 const LoginForm = () => {
   const token = useSelector((state: any) => state.token);
@@ -35,7 +36,7 @@ const LoginForm = () => {
     resolver: zodResolver(auth),
   });
 
-  const onSubmit: SubmitHandler<AuthForm> = (data) => {
+  const onSubmit: SubmitHandler<AuthForm> = async (data) => {
     if (data.email && data.password) {
       const dataStr = `${data.email},${data.password}`;
       const base64 = btoa(dataStr);
@@ -43,6 +44,33 @@ const LoginForm = () => {
 
       const decodeStr = atob(base64);
       console.log(decodeStr);
+
+      try {
+        const res = await axios.post(
+          "/api/v1/customers/login",
+          {},
+          {
+            headers: {
+              Authorization: `Basic ${base64}`,
+            },
+          }
+        );
+
+        if (res.status === 200) {
+          console.log(res.data);
+          // setCookies(res.data.accessToken);
+          // const user: TUser = jwtDecode(res.data.accessToken);
+          // localStorage.clear();
+          // dispatch(setAuthenUser(user));
+          // navigate(`${import.meta.env.BASE_URL}dashboard/personal`);
+        } else {
+          setError("root", { message: res.data.message });
+          console.log("error", { message: res.data });
+        }
+      } catch (error) {
+        console.log(error);
+      }
+
       // dispatch(setAuthenEmail(data.email));
       // const hashedUsername = CryptoJs.SHA256(data.email).toString();
       // const hashedPassword = CryptoJs.SHA256(data.password).toString();
