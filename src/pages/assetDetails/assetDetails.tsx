@@ -35,162 +35,172 @@ export function AssetDetails() {
   }
 
   const normalText = "text-gray-400";
-  const darkText = "text-black";
+  const darkText = "text-gray-900 font-bold";
 
   return (
     <LandingHeader>
-      <div className="flex flex-row space-x-6 px-[350px] pt-10">
-        <div
-          className="w-8 h-8 border-2 border-gray-800 rounded-md mx-2 flex items-center justify-center hover:cursor-pointer"
-          onClick={() => navigate("/")}
-        >
-          <ArrowLeft color="black" className="w-4" />
+      <div className="w-full flex md:justify-center">
+        <div className="flex flex-row space-x-6 md:w-3/4 pt-10">
+          <div
+            className="w-8 h-8 border-2 border-gray-800 rounded-md px-2 flex items-center justify-center hover:cursor-pointer"
+            onClick={() => navigate("/")}
+          >
+            <ArrowLeft color="black" className="w-4" />
+          </div>
+          <p className={`font-bold text-xl ${darkText}`}>Investment Details</p>
         </div>
-        <p className={`font-bold text-xl ${darkText}`}>Investment Details</p>
       </div>
-      <div className="w-[1200px] flex mx-auto space-x-6">
-        <div className="w-2/3 py-10 space-y-10">
-          <Card className="bg-white rounded-xl">
-            <CardHeader className="flex flex-row">
-              <div className="h-28 w-full px-6 border-b border-gray-300">
-                <div className="flex flex-row">
-                  <img
-                    src={assetData.asset.logo}
-                    alt=""
-                    className="w-16 h-16"
-                  />
-                  <div className="flex-grow flex-col px-4 space-y-2">
-                    <h1 className={`text-xl font-bold ${darkText}`}>
-                      {assetData.asset.title}
-                    </h1>
-                    <p className={cn("line-clamp-2", normalText)}>
-                      {assetData.asset.description}
-                    </p>
+      <div className="w-full flex justify-center">
+        <div className="md:w-3/4">
+          <div className="flex flex-col md:flex-row">
+            <div className="md:w-2/3 py-10 space-y-10 px-2">
+              <Card className="bg-white rounded-xl">
+                <CardHeader className="flex flex-row">
+                  <div className="h-28 w-full px-6 border-b border-gray-300">
+                    <div className="flex flex-row">
+                      <img
+                        src={assetData.asset.logo}
+                        alt=""
+                        className="w-16 h-16"
+                      />
+                      <div className="flex-grow flex-col px-4 space-y-2">
+                        <h1 className={`text-xl font-bold ${darkText}`}>
+                          {assetData.asset.title}
+                        </h1>
+                        <p className={cn("line-clamp-2", normalText)}>
+                          {assetData.asset.description}
+                        </p>
+                      </div>
+                      <Button className="w-64">Invest</Button>
+                    </div>
                   </div>
-                  <Button className="w-64">Invest</Button>
-                </div>
-              </div>
-            </CardHeader>
-            <CardContent>
-              <div className="w-full p-6 grid grid-cols-3 gap-10">
-                <div className="space-y-4">
-                  <h1 className={normalText}>Total Issuance</h1>
-                  <p className={darkText}>{assetData.info.totalIssuance}</p>
-                </div>
+                </CardHeader>
+                <CardContent>
+                  <div className="w-full p-6 grid grid-cols-3 gap-10">
+                    <div className="space-y-4">
+                      <h1 className={normalText}>Total Issuance</h1>
+                      <p className={darkText}>{assetData.info.totalIssuance}</p>
+                    </div>
 
-                <div className="space-y-4">
-                  <h1 className={normalText}>Total Amount Raised</h1>
-                  <p className={darkText}>{assetData.info.totalAmountRaised}</p>
-                </div>
-
-                <div className="space-y-4 line-clamp-1">
-                  <h1 className={normalText}>Contract Information</h1>
-                  <p className={darkText}>
-                    {assetData.info.contractInfomation}
-                  </p>
-                </div>
-
-                <div className="space-y-4">
-                  <h1 className={normalText}>Minimum Investment Amount</h1>
-                  <p className={darkText}>
-                    {assetData.info.minimumInvestmentAmount}
-                  </p>
-                </div>
-
-                <div className="space-y-4">
-                  <h1 className={normalText}>Minimum Investment Quantity</h1>
-                  <p className={darkText}>
-                    {assetData.info.minimumInvestmentQuantity}
-                  </p>
-                </div>
-
-                <div className="space-y-4">
-                  <h1 className={normalText}>Issue Unit Price</h1>
-                  <p className={darkText}>{assetData.info.issueUnitPrice}</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-white rounded-xl">
-            <CardContent>
-              <div className="box-body">
-                <div className="border-b-2 border-gray-200 dark:border-white/10">
-                  <nav className="-mb-0.5 flex space-x-6 rtl:space-x-reverse">
-                    <Link
-                      className={`py-4 px-1 inline-flex items-center gap-2 border-b-[3px] border-transparent text-sm whitespace-nowrap text-gray-500 dark:text-white/70 hover:text-primary ${
-                        tab === 1
-                          ? "hs-tab-active:font-semibold hs-tab-active:border-primary hs-tab-active:text-primary active"
-                          : ""
-                      }`}
-                      to="#"
-                      id="underline-item-1"
-                      data-hs-tab="#underline-1"
-                      aria-controls="underline-1"
-                      onClick={() => setTab(1)}
-                    >
-                      Details
-                    </Link>
-                    <Link
-                      className={`py-4 px-1 inline-flex items-center gap-2 border-b-[3px] border-transparent text-sm whitespace-nowrap text-gray-500 dark:text-white/70 hover:text-primary ${
-                        tab === 2
-                          ? "hs-tab-active:font-semibold hs-tab-active:border-primary hs-tab-active:text-primary active"
-                          : ""
-                      }`}
-                      to="#"
-                      id="underline-item-2"
-                      data-hs-tab="#underline-2"
-                      aria-controls="underline-2"
-                      onClick={() => setTab(2)}
-                    >
-                      FAQ
-                    </Link>
-                  </nav>
-                </div>
-
-                <div className="mt-3">
-                  {tab === 1 && (
-                    <div
-                      id="underline-1"
-                      role="tabpanel"
-                      aria-labelledby="underline-item-1"
-                    >
-                      <p className="text-gray-500 dark:text-white/70 p-5 border rounded-sm dark:border-white/10 border-gray-200">
-                        {assetData.details.map((item, index) => (
-                          <div className="py-6">
-                            <ContentDetails
-                              key={index}
-                              header={item.header}
-                              content={item.content}
-                            />
-                          </div>
-                        ))}
+                    <div className="space-y-4">
+                      <h1 className={normalText}>Total Amount Raised</h1>
+                      <p className={darkText}>
+                        {assetData.info.totalAmountRaised}
                       </p>
                     </div>
-                  )}
-                  {tab === 2 && (
-                    <div
-                      id="underline-2"
-                      role="tabpanel"
-                      aria-labelledby="underline-item-2"
-                    >
-                      <div
-                        className="hs-accordion-group"
-                        data-hs-accordion-always-open
-                      >
-                        {assetData.faq.map((item, index) => (
-                          <div className="py-2">
-                            <FaqAccordion
-                              key={index}
-                              question={item.question}
-                              asnwer={item.answer}
-                              onSet={(i) => setFaq(i)}
-                              questionIndex={index}
-                              selectedFaq={faq}
-                            />
-                          </div>
-                        ))}
-                        {/* <div
+
+                    <div className="space-y-4 line-clamp-1">
+                      <h1 className={normalText}>Contract Information</h1>
+                      <p className={darkText}>
+                        {assetData.info.contractInfomation}
+                      </p>
+                    </div>
+
+                    <div className="space-y-4">
+                      <h1 className={normalText}>Minimum Investment Amount</h1>
+                      <p className={darkText}>
+                        {assetData.info.minimumInvestmentAmount}
+                      </p>
+                    </div>
+
+                    <div className="space-y-4">
+                      <h1 className={normalText}>
+                        Minimum Investment Quantity
+                      </h1>
+                      <p className={darkText}>
+                        {assetData.info.minimumInvestmentQuantity}
+                      </p>
+                    </div>
+
+                    <div className="space-y-4">
+                      <h1 className={normalText}>Issue Unit Price</h1>
+                      <p className={darkText}>
+                        {assetData.info.issueUnitPrice}
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-white rounded-xl">
+                <CardContent>
+                  <div className="box-body">
+                    <div className="border-b-2 border-gray-200 dark:border-white/10">
+                      <nav className="-mb-0.5 flex space-x-6 rtl:space-x-reverse">
+                        <Link
+                          className={`py-4 px-1 inline-flex items-center gap-2 border-b-[3px] border-transparent text-sm whitespace-nowrap text-gray-500 dark:text-white/70 hover:text-primary ${
+                            tab === 1
+                              ? "hs-tab-active:font-semibold hs-tab-active:border-primary hs-tab-active:text-primary active"
+                              : ""
+                          }`}
+                          to="#"
+                          id="underline-item-1"
+                          data-hs-tab="#underline-1"
+                          aria-controls="underline-1"
+                          onClick={() => setTab(1)}
+                        >
+                          Details
+                        </Link>
+                        <Link
+                          className={`py-4 px-1 inline-flex items-center gap-2 border-b-[3px] border-transparent text-sm whitespace-nowrap text-gray-500 dark:text-white/70 hover:text-primary ${
+                            tab === 2
+                              ? "hs-tab-active:font-semibold hs-tab-active:border-primary hs-tab-active:text-primary active"
+                              : ""
+                          }`}
+                          to="#"
+                          id="underline-item-2"
+                          data-hs-tab="#underline-2"
+                          aria-controls="underline-2"
+                          onClick={() => setTab(2)}
+                        >
+                          FAQ
+                        </Link>
+                      </nav>
+                    </div>
+
+                    <div className="mt-3">
+                      {tab === 1 && (
+                        <div
+                          id="underline-1"
+                          role="tabpanel"
+                          aria-labelledby="underline-item-1"
+                        >
+                          <p className="text-gray-500 dark:text-white/70 p-5 border rounded-sm dark:border-white/10 border-gray-200">
+                            {assetData.details.map((item, index) => (
+                              <div className="py-6">
+                                <ContentDetails
+                                  key={index}
+                                  header={item.header}
+                                  content={item.content}
+                                />
+                              </div>
+                            ))}
+                          </p>
+                        </div>
+                      )}
+                      {tab === 2 && (
+                        <div
+                          id="underline-2"
+                          role="tabpanel"
+                          aria-labelledby="underline-item-2"
+                        >
+                          <div
+                            className="hs-accordion-group"
+                            data-hs-accordion-always-open
+                          >
+                            {assetData.faq.map((item, index) => (
+                              <div className="py-2">
+                                <FaqAccordion
+                                  key={index}
+                                  question={item.question}
+                                  asnwer={item.answer}
+                                  onSet={(i) => setFaq(i)}
+                                  questionIndex={index}
+                                  selectedFaq={faq}
+                                />
+                              </div>
+                            ))}
+                            {/* <div
                           className={`hs-accordion ${
                             faq === 1 ? "active" : ""
                           }`}
@@ -393,145 +403,106 @@ export function AssetDetails() {
                             </p>
                           </div>
                         </div> */}
-                      </div>
+                          </div>
+                        </div>
+                      )}
                     </div>
-                  )}
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-        <div className="w-1/3 mt-10">
-          <h1
-            className={`w-full text-center py-4 font-bold text-2xl ${darkText}`}
-          >
-            Invest Safty With Us
-          </h1>
-          <div className="bg-white border-t border-l border-r border-gray-200 rounded-[28px] space-y-10">
-            <div className="w-full p-6 flex flex-col space-y-4">
-              <h1 className={cn("text-center", normalText)}>
-                Create your investment portfolio on a regulated platform and
-                start trading digital securities.
-              </h1>
-              <Button
-                className="w-full"
-                onClick={() =>
-                  navigate(
-                    `${
-                      import.meta.env.BASE_URL
-                    }authentication/signup/addindividualaccount`
-                  )
-                }
-              >
-                Create Account
-              </Button>
-              <Button
-                className="w-full"
-                variant={"outline"}
-                onClick={() =>
-                  navigate(`${import.meta.env.BASE_URL}authentication/login`)
-                }
-              >
-                Log In
-              </Button>
+                  </div>
+                </CardContent>
+              </Card>
             </div>
-            <div className="bg-white rounded-[30px] border-t-2 border-gray-200 shadow-md p-6 space-y-20">
-              <div className="space-y-4 pt-10">
-                <h1 className={`w-full text-left text-lg ${darkText}`}>
-                  Key Information
-                </h1>
-                <RowInfo
-                  title="Network"
-                  value={assetData.keyInformation.network}
-                />
-                <RowInfo
-                  title="Precision"
-                  value={assetData.keyInformation.precision}
-                />
-                <RowInfo
-                  title="Capital Structure"
-                  value={assetData.keyInformation.capitalStructure}
-                />
-                <RowInfo
-                  title="Classification"
-                  value={assetData.keyInformation.classification}
-                />
-                <RowInfo
-                  title="Product Type"
-                  value={assetData.keyInformation.productType}
-                />
-                <RowInfo
-                  title="Creation Time"
-                  value={assetData.keyInformation.creationTime}
-                />
-                <RowInfo
-                  title="Release Time"
-                  value={assetData.keyInformation.releaseTime}
-                />
-                <RowInfo
-                  title="Completion Time"
-                  value={assetData.keyInformation.compleationTime}
-                />
-                {/* {Object.keys(assetData.keyInformation).map(
-                  ([key, value], index) => (
-                    <div className="w-full">
-                      <RowInfo key={index} title={key} value={value} />
-                    </div>
-                  )
-                )} */}
-              </div>
-              <div className="space-y-4">
-                <h1 className={`w-full text-left text-lg ${darkText}`}>
-                  Issuance Terms
-                </h1>
-                <RowInfo
-                  title="Investment Preriod"
-                  value={assetData.issuanceTerms.investmentPeriod}
-                />
-                <RowInfo
-                  title="Dividend Yeild"
-                  value={assetData.issuanceTerms.dividendYield}
-                />
-                <RowInfo
-                  title="Gross Margin"
-                  value={assetData.issuanceTerms.grossmargin}
-                />
-                <RowInfo
-                  title="Equity Multiple"
-                  value={assetData.issuanceTerms.equityMultiple}
-                />
-                <RowInfo
-                  title="Profit"
-                  value={assetData.issuanceTerms.profit}
-                />
-                <RowInfo
-                  title="Leverage"
-                  value={assetData.issuanceTerms.leverage}
-                />
-                <RowInfo
-                  title="Investment Structure"
-                  value={assetData.issuanceTerms.investmentStructure}
-                />
-                <RowInfo
-                  title="DIstribution Frequency"
-                  value={assetData.issuanceTerms.distributionFrequency}
-                />
-              </div>
-              <div className="space-y-4 pb-20">
-                <h1 className={`w-full text-left text-lg ${darkText}`}>
-                  Company Members
-                </h1>
-                {assetData.companyMembers.map((member, index) => (
-                  <PeopleCard
-                    key={index}
-                    firstName={member.firstName}
-                    lastName={member.lastName}
-                    middleName={member.midName}
-                    position={member.position}
-                    history={member.history}
-                    picture={member.picture}
+            <div className="md:w-1/3 pt-10 px-2">
+              <div className="bg-white rounded-[30px] border-t-2 border-gray-200 shadow-md p-6 space-y-20">
+                <div className="space-y-4 pt-10">
+                  <h1 className={`w-full text-left text-lg ${darkText}`}>
+                    Key Information
+                  </h1>
+                  <RowInfo
+                    title="Network"
+                    value={assetData.keyInformation.network}
                   />
-                ))}
+                  <RowInfo
+                    title="Precision"
+                    value={assetData.keyInformation.precision}
+                  />
+                  <RowInfo
+                    title="Capital Structure"
+                    value={assetData.keyInformation.capitalStructure}
+                  />
+                  <RowInfo
+                    title="Classification"
+                    value={assetData.keyInformation.classification}
+                  />
+                  <RowInfo
+                    title="Product Type"
+                    value={assetData.keyInformation.productType}
+                  />
+                  <RowInfo
+                    title="Creation Time"
+                    value={assetData.keyInformation.creationTime}
+                  />
+                  <RowInfo
+                    title="Release Time"
+                    value={assetData.keyInformation.releaseTime}
+                  />
+                  <RowInfo
+                    title="Completion Time"
+                    value={assetData.keyInformation.compleationTime}
+                  />
+                </div>
+                <div className="space-y-4">
+                  <h1 className={`w-full text-left text-lg ${darkText}`}>
+                    Issuance Terms
+                  </h1>
+                  <RowInfo
+                    title="Investment Preriod"
+                    value={assetData.issuanceTerms.investmentPeriod}
+                  />
+                  <RowInfo
+                    title="Dividend Yeild"
+                    value={assetData.issuanceTerms.dividendYield}
+                  />
+                  <RowInfo
+                    title="Gross Margin"
+                    value={assetData.issuanceTerms.grossmargin}
+                  />
+                  <RowInfo
+                    title="Equity Multiple"
+                    value={assetData.issuanceTerms.equityMultiple}
+                  />
+                  <RowInfo
+                    title="Profit"
+                    value={assetData.issuanceTerms.profit}
+                  />
+                  <RowInfo
+                    title="Leverage"
+                    value={assetData.issuanceTerms.leverage}
+                  />
+                  <RowInfo
+                    title="Investment Structure"
+                    value={assetData.issuanceTerms.investmentStructure}
+                  />
+                  <RowInfo
+                    title="DIstribution Frequency"
+                    value={assetData.issuanceTerms.distributionFrequency}
+                  />
+                </div>
+                <div className="space-y-4 pb-20">
+                  <h1 className={`w-full text-left text-lg ${darkText}`}>
+                    Company Members
+                  </h1>
+                  {assetData.companyMembers.map((member, index) => (
+                    <PeopleCard
+                      key={index}
+                      firstName={member.firstName}
+                      lastName={member.lastName}
+                      middleName={member.midName}
+                      position={member.position}
+                      history={member.history}
+                      picture={member.picture}
+                    />
+                  ))}
+                </div>
               </div>
             </div>
           </div>

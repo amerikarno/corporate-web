@@ -14,8 +14,8 @@ export function ContentDetails({
 }: TConstenDetails) {
   return (
     <>
-      <h1 className={cn("text-black", headClass)}>{header}</h1>
-      <br />
+      <h1 className={cn("text-gray-900 font-bold", headClass)}>{header}</h1>
+      <div className="h-2"></div>
       <span className={cn("pl-10 text-gray-400", contentClass)}>{content}</span>
     </>
   );

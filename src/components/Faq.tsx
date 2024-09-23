@@ -68,7 +68,7 @@ export function FaqAccordion({
         } w-full overflow-hidden transition-[height] duration-300`}
         aria-labelledby="hs-basic-always-open-heading-three"
       >
-        <p className="text-gray-800 dark:text-gray-200 pl-6 pt-2">{asnwer}</p>
+        <p className="text-gray-900 dark:text-gray-200 pl-6 pt-2">{asnwer}</p>
       </div>
     </div>
   );
