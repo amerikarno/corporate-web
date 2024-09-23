@@ -60,9 +60,20 @@ const LoginForm = () => {
           console.log(res.data);
           // setCookies(res.data.accessToken);
           // const user: TUser = jwtDecode(res.data.accessToken);
-          // localStorage.clear();
           // dispatch(setAuthenUser(user));
-          // navigate(`${import.meta.env.BASE_URL}dashboard/personal`);
+          // localStorage.clear();
+          if (res.data.secret !== "") {
+            localStorage.setItem("secret", res.data.secret);
+            navigate(
+              `${import.meta.env.BASE_URL}authentication/login/google-authen/qr`
+            );
+          } else {
+            navigate(
+              `${
+                import.meta.env.BASE_URL
+              }authentication/login/google-authen/verify`
+            );
+          }
         } else {
           setError("root", { message: res.data.message });
           console.log("error", { message: res.data });
