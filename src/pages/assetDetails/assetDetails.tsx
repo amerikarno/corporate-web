@@ -40,21 +40,23 @@ export function AssetDetails() {
   return (
     <LandingHeader>
       <div className="w-full flex md:justify-center">
-        <div className="flex flex-row space-x-6 md:w-3/4 pt-10">
+        <div className="flex flex-row md:space-x-6 md:w-3/4 pt-10">
           <div
-            className="w-8 h-8 border-2 border-gray-800 rounded-md px-2 flex items-center justify-center hover:cursor-pointer"
+            className="w-8 h-8 border-2 border-gray-800 rounded-md flex items-center justify-center hover:cursor-pointer"
             onClick={() => navigate("/")}
           >
             <ArrowLeft color="black" className="w-4" />
           </div>
-          <p className={`font-bold text-xl ${darkText}`}>Investment Details</p>
+          <p className={`font-bold text-xl pl-2 ${darkText}`}>
+            Investment Details
+          </p>
         </div>
       </div>
       <div className="w-full flex justify-center">
-        <div className="md:w-3/4">
-          <div className="flex flex-col md:flex-row">
-            <div className="md:w-2/3 py-10 space-y-10 px-2">
-              <Card className="bg-white rounded-xl">
+        <div className="mx-10 md:w-3/4">
+          <div className="flex flex-col md:flex-row md:space-x-4">
+            <div className="md:w-2/3 py-10 space-y-10">
+              <Card className="bg-white rounded-[30px]">
                 <CardHeader className="flex flex-row">
                   <div className="h-28 w-full px-6 border-b border-gray-300">
                     <div className="flex flex-row">
@@ -122,7 +124,7 @@ export function AssetDetails() {
                 </CardContent>
               </Card>
 
-              <Card className="bg-white rounded-xl">
+              <Card className="bg-white rounded-[30px]">
                 <CardContent>
                   <div className="box-body">
                     <div className="border-b-2 border-gray-200 dark:border-white/10">
@@ -411,9 +413,9 @@ export function AssetDetails() {
                 </CardContent>
               </Card>
             </div>
-            <div className="md:w-1/3 pt-10 px-2">
-              <div className="bg-white rounded-[30px] border-t-2 border-gray-200 shadow-md p-6 space-y-20">
-                <div className="space-y-4 pt-10">
+            <div className="md:w-1/3 py-10 mx-10">
+              <Card className="bg-white rounded-[30px] px-4 space-y-20">
+                <div className="space-y-4 pt-5">
                   <h1 className={`w-full text-left text-lg ${darkText}`}>
                     Key Information
                   </h1>
@@ -450,6 +452,7 @@ export function AssetDetails() {
                     value={assetData.keyInformation.compleationTime}
                   />
                 </div>
+
                 <div className="space-y-4">
                   <h1 className={`w-full text-left text-lg ${darkText}`}>
                     Issuance Terms
@@ -487,7 +490,7 @@ export function AssetDetails() {
                     value={assetData.issuanceTerms.distributionFrequency}
                   />
                 </div>
-                <div className="space-y-4 pb-20">
+                <div className="space-y-4 pb-5">
                   <h1 className={`w-full text-left text-lg ${darkText}`}>
                     Company Members
                   </h1>
@@ -503,7 +506,7 @@ export function AssetDetails() {
                     />
                   ))}
                 </div>
-              </div>
+              </Card>
             </div>
           </div>
         </div>

@@ -16,7 +16,9 @@ export function ContentDetails({
     <>
       <h1 className={cn("text-gray-900 font-bold", headClass)}>{header}</h1>
       <div className="h-2"></div>
-      <span className={cn("pl-10 text-gray-400", contentClass)}>{content}</span>
+      <span className={cn("md:pl-10 text-gray-400", contentClass)}>
+        {content}
+      </span>
     </>
   );
 }
