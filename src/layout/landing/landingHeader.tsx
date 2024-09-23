@@ -80,7 +80,7 @@ const LandingHeader = ({ ThemeChanger, children }: datatype) => {
                 <Link
                   to={`${
                     import.meta.env.BASE_URL
-                  }authentication/signup/addindividualaccount/`}
+                  }authentication/signup/type/`}
                   className="ti-btn w-[6.375rem] ti-btn-dark m-0 p-2"
                 >
                   Sign Up
