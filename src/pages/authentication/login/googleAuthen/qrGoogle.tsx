@@ -40,10 +40,18 @@ export default function GoogleQr() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     axios
-      .post("/api/v1/customers/verify", {
-        otp: userOtp,
-        // token: userToken,
-      })
+      .post(
+        "/api/v1/customers/verify",
+        {
+          otp: userOtp,
+          // token: userToken,
+        },
+        {
+          headers: {
+            Authorization: `Basic ${localStorage.getItem("basic")}`,
+          },
+        }
+      )
       .then((response) => {
         if (response.status === 200) {
           setMessage("totp is valid");

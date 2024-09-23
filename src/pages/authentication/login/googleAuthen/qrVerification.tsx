@@ -80,10 +80,18 @@ export default function QrVerification() {
     console.log(otpStr, typeof otpStr);
 
     axios
-      .post("/api/v1/customers/verify", {
-        otp: otpStr,
-        // token: userToken,
-      })
+      .post(
+        "/api/v1/customers/verify",
+        {
+          otp: otpStr,
+          // token: userToken,
+        },
+        {
+          headers: {
+            Authorization: `Basic ${localStorage.getItem("basic")}`,
+          },
+        }
+      )
       .then((response) => {
         if (response.status === 200) {
           dispatch(setAuthenToken(response.data.accessToken));

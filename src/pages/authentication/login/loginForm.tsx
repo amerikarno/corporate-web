@@ -64,6 +64,7 @@ const LoginForm = () => {
           // localStorage.clear();
           if (res.data.secret !== "") {
             localStorage.setItem("secret", res.data.secret);
+            localStorage.setItem("basic", base64);
             navigate(
               `${import.meta.env.BASE_URL}authentication/login/google-authen/qr`
             );
