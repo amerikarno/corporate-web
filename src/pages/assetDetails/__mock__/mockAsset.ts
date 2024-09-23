@@ -4,7 +4,7 @@ import { TAssetData } from "../types";
 export const mockAssetData: TAssetData = {
   asset: {
     id: "1",
-    title: "Digital Asset",
+    title: "eliteconsulting",
     logo: getImages("example"),
     issueBy: "Issue By Digital Asset",
     image: getImages("example"),
