@@ -53,12 +53,12 @@ const Landing = ({ ThemeChanger }: datatype) => {
       <div className="main-content landing-main !p-0" onClick={handleClick}>
         <div className="py-10" id="hot tokens">
           <div className="section container mx-auto space-y-6">
-            <div className="text-center max-w-[80rem] mx-auto mb-12">
+            <div className="text-center max-w-[84rem] mx-auto mb-12">
               <h2 className="justify-center section-title text-left text-3xl font-bold text-gray-800 dark:text-white">
                 <span className="">Hot</span>
               </h2>
             </div>
-            <ul className="flex gap-28 flex-wrap justify-center">
+            <ul className="max-w-[84rem] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-20">
               {dataForHot.map((item, index) => (
                 <li key={index}>
                   <div
@@ -76,12 +76,12 @@ const Landing = ({ ThemeChanger }: datatype) => {
 
         <div className="py-10" id="recommended tokens">
           <div className="section container mx-auto space-y-6">
-            <div className="text-center max-w-[80rem] mx-auto mb-12">
+            <div className="text-center max-w-[84rem] mx-auto mb-12">
               <h2 className="justify-center section-title text-left text-3xl font-bold text-gray-800 dark:text-white">
                 <span className="">Recomended</span>
               </h2>
             </div>
-            <ul className="flex gap-28 flex-wrap justify-center">
+            <ul className="max-w-[84rem] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-20">
               {dataForRecomended.map((item, index) => (
                 <li key={index}>
                   <div
@@ -99,12 +99,13 @@ const Landing = ({ ThemeChanger }: datatype) => {
 
         <div className="py-10" id="all tokens">
           <div className="section container mx-auto space-y-6">
-            <div className="text-center max-w-[80rem] mx-auto mb-12">
+            <div className="text-center max-w-[84rem] mx-auto mb-12">
               <h2 className="justify-center section-title text-left text-3xl font-bold text-gray-800 dark:text-white">
                 <span className="">All</span>
               </h2>
             </div>
-            <ul className="flex gap-28 flex-wrap justify-center">
+            <ul className="max-w-[84rem] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-20">
+              {/* <ul className="flex gap-28 flex-wrap justify-center"> */}
               {dataAll.map((item, index) => (
                 <li key={index}>
                   <div
