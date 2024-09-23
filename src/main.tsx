@@ -45,12 +45,10 @@ createRoot(document.getElementById("root")!).render(
               element={<Login />}
             />
             <Route
-              path={`${
-                import.meta.env.BASE_URL
-              }authentication/signup/type`}
+              path={`${import.meta.env.BASE_URL}authentication/signup/type`}
               element={<SignUpType />}
             />
-                        <Route
+            <Route
               path={`${
                 import.meta.env.BASE_URL
               }authentication/signup/addcorporateaccount`}

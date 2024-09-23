@@ -37,43 +37,49 @@ const LoginForm = () => {
 
   const onSubmit: SubmitHandler<AuthForm> = (data) => {
     if (data.email && data.password) {
-      dispatch(setAuthenEmail(data.email));
-      const hashedUsername = CryptoJs.SHA256(data.email).toString();
-      const hashedPassword = CryptoJs.SHA256(data.password).toString();
-      console.log(hashedUsername);
-      console.log(hashedPassword);
+      const dataStr = `${data.email},${data.password}`;
+      const base64 = btoa(dataStr);
+      console.log(base64);
 
-      api
-        .post(
-          "/api/v1/authen/login",
-          {
-            hashedUsername: `${hashedUsername}`,
-            hashedPassword: `${hashedPassword}`,
-          },
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
-            withCredentials: true,
-          }
-        )
-        .then((res) => {
-          console.log(res);
-          dispatch(setAuthenToken(res.data.accessToken));
-          setCookies(res.data.accessToken);
-          const user: TUser = jwtDecode(res.data.accessToken);
-          localStorage.clear();
-          dispatch(setAuthenUser(user));
-          navigate(`${import.meta.env.BASE_URL}dashboard/personal`);
-        })
-        .catch((err) => {
-          setError("root", { message: err.message });
-        });
-      console.log(token);
-      if (token) {
-        const decoded = jwtDecode(token);
-        console.log(decoded);
-      }
+      const decodeStr = atob(base64);
+      console.log(decodeStr);
+      // dispatch(setAuthenEmail(data.email));
+      // const hashedUsername = CryptoJs.SHA256(data.email).toString();
+      // const hashedPassword = CryptoJs.SHA256(data.password).toString();
+      // console.log(hashedUsername);
+      // console.log(hashedPassword);
+      //
+      // api
+      //   .post(
+      //     "/api/v1/authen/login",
+      //     {
+      //       hashedUsername: `${hashedUsername}`,
+      //       hashedPassword: `${hashedPassword}`,
+      //     },
+      //     {
+      //       headers: {
+      //         "Content-Type": "application/json",
+      //       },
+      //       withCredentials: true,
+      //     }
+      //   )
+      //   .then((res) => {
+      //     console.log(res);
+      //     dispatch(setAuthenToken(res.data.accessToken));
+      //     setCookies(res.data.accessToken);
+      //     const user: TUser = jwtDecode(res.data.accessToken);
+      //     localStorage.clear();
+      //     dispatch(setAuthenUser(user));
+      //     navigate(`${import.meta.env.BASE_URL}dashboard/personal`);
+      //   })
+      //   .catch((err) => {
+      //     setError("root", { message: err.message });
+      //   });
+      // console.log(token);
+      // if (token) {
+      //   const decoded = jwtDecode(token);
+      //   console.log(decoded);
+      // }
     }
   };
 
