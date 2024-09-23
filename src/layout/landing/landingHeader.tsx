@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { ThemeChanger } from "@/redux/Action";
 import store from "@/redux/store";
-// import getImages from "@/common/imagesData";
+import getImages from "@/common/imagesData";
 import { Helmet } from "react-helmet-async";
 
 interface datatype {
@@ -70,8 +70,10 @@ const LandingHeader = ({ ThemeChanger, children }: datatype) => {
               <div className="landing-logo-container my-auto hidden lg:block">
                 <div className="responsive-logo">
                   <div className="flex flex-row items-center space-x-4">
-                    <img src="./src/assets/e.png" alt="" className="w-[40px]" />
-                    <h1 className="text-2xl font-bold">eliteconsulting</h1>
+                    <img src={getImages("logo")} alt="" className="h-16" />
+                    <h1 className="text-3xl font-bold px-5">
+                      Elite Consulting
+                    </h1>
                   </div>
                 </div>
               </div>
@@ -80,7 +82,7 @@ const LandingHeader = ({ ThemeChanger, children }: datatype) => {
                 <Link
                   to={`${
                     import.meta.env.BASE_URL
-                  }authentication/signup/addindividualaccount/`}
+                  }authentication/signup/type/`}
                   className="ti-btn w-[6.375rem] ti-btn-dark m-0 p-2"
                 >
                   Sign Up
