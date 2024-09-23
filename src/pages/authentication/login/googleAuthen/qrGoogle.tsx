@@ -40,7 +40,7 @@ export default function GoogleQr() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     axios
-      .post("/api/v1/authen/customers/verify", {
+      .post("/api/v1/customers/verify", {
         otp: userOtp,
         // token: userToken,
       })

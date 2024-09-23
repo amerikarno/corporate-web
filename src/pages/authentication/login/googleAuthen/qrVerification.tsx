@@ -80,7 +80,7 @@ export default function QrVerification() {
     console.log(otpStr, typeof otpStr);
 
     axios
-      .post("/api/v1/authen/customers/verify", {
+      .post("/api/v1/customers/verify", {
         otp: otpStr,
         // token: userToken,
       })
