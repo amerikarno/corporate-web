@@ -9,7 +9,6 @@ import { setCookies } from "@/util/Cookies";
 import { TUser } from "../types";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
-import { set } from "react-hook-form";
 
 export default function GoogleQr() {
   const [secret, setSecret] = useState("");
