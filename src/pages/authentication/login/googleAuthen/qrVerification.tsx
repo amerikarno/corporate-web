@@ -8,65 +8,60 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { TUser } from "../types";
-// import { Link } from "react-router-dom";
 
 export default function QrVerification() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [otp, setOtp] = useState<(number | null)[]>([
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-  ]);
+  const [otp, setOtp] = useState<string[]>(["", "", "", "", "", ""]);
+  const [error, setError] = useState<string>("");
+  // const filter = {/[^0-9]/g}
 
   const handleOtp = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
-    let tmp: (number | null)[] = [];
-
+    console.log(value, name);
+    let tmp: string[] = [];
+    if (error !== "") setError("");
     switch (name) {
       case "one":
         tmp = [...otp];
-        tmp[0] = parseInt(value);
+        tmp[0] = value.slice(-1);
         setOtp(tmp);
-        document.getElementById("two")?.focus();
+        value !== "" && document.getElementById("two")?.focus();
         break;
 
       case "two":
         tmp = [...otp];
-        tmp[1] = parseInt(value);
+        tmp[1] = value.slice(-1);
         setOtp(tmp);
-        document.getElementById("three")?.focus();
+        value !== "" && document.getElementById("three")?.focus();
         break;
 
       case "three":
         tmp = [...otp];
-        tmp[2] = parseInt(value);
+        tmp[2] = value.slice(-1);
         setOtp(tmp);
-        document.getElementById("four")?.focus();
+        value !== "" && document.getElementById("four")?.focus();
         break;
 
       case "four":
         tmp = [...otp];
-        tmp[3] = parseInt(value);
+        tmp[3] = value.slice(-1);
         setOtp(tmp);
-        document.getElementById("five")?.focus();
+        value !== "" && document.getElementById("five")?.focus();
         break;
 
       case "five":
         tmp = [...otp];
-        tmp[4] = parseInt(value);
+        tmp[4] = value.slice(-1);
         setOtp(tmp);
-        document.getElementById("six")?.focus();
+        value !== "" && document.getElementById("six")?.focus();
         break;
 
       case "six":
         tmp = [...otp];
-        tmp[5] = parseInt(value);
+        tmp[5] = value.slice(-1);
         setOtp(tmp);
-        document.getElementById("btn-submit")?.focus();
+        value !== "" && document.getElementById("btn-submit")?.focus();
         break;
 
       default:
@@ -77,14 +72,12 @@ export default function QrVerification() {
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
     const otpStr = otp.join("");
-    console.log(otpStr, typeof otpStr);
 
     axios
       .post(
         "/api/v1/customers/verify",
         {
           otp: otpStr,
-          // token: userToken,
         },
         {
           headers: {
@@ -100,16 +93,19 @@ export default function QrVerification() {
           localStorage.clear();
           dispatch(setAuthenUser(user));
           navigate(`${import.meta.env.BASE_URL}dashboard/personal`);
+        } else {
+          setError("Network Error");
         }
       })
       .catch((error) => {
         console.error("Error verifying totp:", error);
+        setError(error.response.data.message);
       });
   };
 
   return (
     <div className="w-full flex justify-center">
-      <div className="w-1/3">
+      <div className="w-1/2">
         <Card className="mt-10 py-10 bg-white rounded-sm shadow-sm dark:bg-bgdark">
           <div className="p-4 sm:p-7">
             <div className="text-center">
@@ -132,8 +128,9 @@ export default function QrVerification() {
                       required
                       id="one"
                       name="one"
-                      maxLength={1}
+                      // maxLength={1}
                       onChange={handleOtp}
+                      value={otp[0]}
                     />
                     <input
                       type="text"
@@ -141,8 +138,9 @@ export default function QrVerification() {
                       required
                       id="two"
                       name="two"
-                      maxLength={1}
+                      // maxLength={1}
                       onChange={handleOtp}
+                      value={otp[1]}
                     />
                     <input
                       type="text"
@@ -150,8 +148,9 @@ export default function QrVerification() {
                       required
                       id="three"
                       name="three"
-                      maxLength={1}
+                      // maxLength={1}
                       onChange={handleOtp}
+                      value={otp[2]}
                     />
                     <input
                       type="text"
@@ -159,8 +158,9 @@ export default function QrVerification() {
                       required
                       id="four"
                       name="four"
-                      maxLength={1}
+                      // maxLength={1}
                       onChange={handleOtp}
+                      value={otp[3]}
                     />
                     <input
                       type="text"
@@ -168,8 +168,9 @@ export default function QrVerification() {
                       required
                       id="five"
                       name="five"
-                      maxLength={1}
+                      // maxLength={1}
                       onChange={handleOtp}
+                      value={otp[4]}
                     />
                     <input
                       type="text"
@@ -177,17 +178,24 @@ export default function QrVerification() {
                       required
                       id="six"
                       name="six"
-                      maxLength={1}
+                      // maxLength={1}
                       onChange={handleOtp}
+                      value={otp[5]}
                     />
                   </div>
-                  <Button
-                    id="btn-submit"
-                    type="submit"
-                    className="mt-4 w-full py-2 px-3 inline-flex justify-center items-center gap-2 rounded-sm border border-transparent font-semibold bg-primary text-white hover:bg-primary focus:outline-none focus:ring-0 focus:ring-primary focus:ring-offset-0 transition-all text-sm dark:focus:ring-offset-white/10"
-                  >
-                    Confirm
-                  </Button>
+                  <div className="w-full flex justify-center">
+                    <Button
+                      id="btn-submit"
+                      type="submit"
+                      className="mx-auto w-1/2 bg-gray-600 text-white py-2 px-2 rounded-md hover:bg-blue-600 focus:bg-blue-600 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-blue-50"
+                      // className="mt-4 w-1/2 py-2 px-3 inline-flex justify-center items-center gap-2 rounded-sm border border-transparent font-semibold bg-primary text-white hover:bg-primary focus:outline-none focus:ring-0 focus:ring-primary focus:ring-offset-0 transition-all text-sm dark:focus:ring-offset-white/10"
+                    >
+                      Verify
+                    </Button>
+                  </div>
+                  <div className="w-full flex justify-center">
+                    <p className="text-sm text-red-400">{error}</p>
+                  </div>
                 </div>
               </form>
             </div>

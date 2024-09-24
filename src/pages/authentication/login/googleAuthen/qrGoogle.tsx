@@ -9,33 +9,69 @@ import { setCookies } from "@/util/Cookies";
 import { TUser } from "../types";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
+import { set } from "react-hook-form";
 
 export default function GoogleQr() {
   const [secret, setSecret] = useState("");
-  const [userOtp, setUserOtp] = useState("");
   const [message, setMessage] = useState("");
   const [secretError, setSecretError] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // Fetch the TOTP secret when the component mounts
-  useEffect(() => {
-    const secret = localStorage.getItem("secret");
-    if (secret) {
-      setSecret(secret);
-      // axios
-      //   .post("/api/v1/authen/totp/generate")
-      //   .then((response) => {
-      //     setSecret(response.data.secret);
-      //   })
-      //   .catch((error) => {
-      //     console.error("Error fetching secret:", error);
-      //     setSecretError(error.message);
-      //   });
-    } else {
-      setSecretError("Secret not found, Please login again!");
+  const [otp, setOtp] = useState<string[]>(["", "", "", "", "", ""]);
+
+  const handleOtp = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value, name } = e.target;
+    console.log(value, name);
+    let tmp: string[] = [];
+    if (message !== "") setMessage("");
+    switch (name) {
+      case "one":
+        tmp = [...otp];
+        tmp[0] = value.slice(-1);
+        setOtp(tmp);
+        value !== "" && document.getElementById("two")?.focus();
+        break;
+
+      case "two":
+        tmp = [...otp];
+        tmp[1] = value.slice(-1);
+        setOtp(tmp);
+        value !== "" && document.getElementById("three")?.focus();
+        break;
+
+      case "three":
+        tmp = [...otp];
+        tmp[2] = value.slice(-1);
+        setOtp(tmp);
+        value !== "" && document.getElementById("four")?.focus();
+        break;
+
+      case "four":
+        tmp = [...otp];
+        tmp[3] = value.slice(-1);
+        setOtp(tmp);
+        value !== "" && document.getElementById("five")?.focus();
+        break;
+
+      case "five":
+        tmp = [...otp];
+        tmp[4] = value.slice(-1);
+        setOtp(tmp);
+        value !== "" && document.getElementById("six")?.focus();
+        break;
+
+      case "six":
+        tmp = [...otp];
+        tmp[5] = value.slice(-1);
+        setOtp(tmp);
+        value !== "" && document.getElementById("btn-submit")?.focus();
+        break;
+
+      default:
+        break;
     }
-  }, []);
+  };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -43,8 +79,7 @@ export default function GoogleQr() {
       .post(
         "/api/v1/customers/verify",
         {
-          otp: userOtp,
-          // token: userToken,
+          otp: otp.join(""),
         },
         {
           headers: {
@@ -67,8 +102,19 @@ export default function GoogleQr() {
       })
       .catch((error) => {
         console.error("Error verifying totp:", error);
+        setMessage(error.response.data.message);
       });
   };
+
+  // Fetch the TOTP secret when the component mounts
+  useEffect(() => {
+    const secret = localStorage.getItem("secret");
+    if (secret) {
+      setSecret(secret);
+    } else {
+      setSecretError("Token not found, Please login again!");
+    }
+  }, []);
 
   return (
     <div className="w-full flex justify-center my-10">
@@ -96,23 +142,78 @@ export default function GoogleQr() {
           <label htmlFor="userToken" className="flex justify-center py-5">
             Enter TOTP Token:
           </label>
-          <input
-            className="mx-auto w-1/2 border-2 py-2 px-2 rounded-md focus:border-blue-500 hover:border-blue-500 text-center my-5"
-            id="userToken"
-            type="text"
-            value={userOtp}
-            onChange={(e) => setUserOtp(e.target.value)}
-            required
-          />
+          <div className="py-10">
+            <div className="grid gap-y-4">
+              <div className="grid grid-cols-6 gap-4 max-w-[20rem] mx-auto">
+                <input
+                  type="text"
+                  className="text-center py-2 px-3 block w-full border-gray-200 rounded-sm text-sm focus:border-primary focus:ring-primary dark:bg-bgdark dark:border-white/10 dark:text-white/70"
+                  required
+                  id="one"
+                  name="one"
+                  onChange={handleOtp}
+                  value={otp[0]}
+                />
+                <input
+                  type="text"
+                  className="text-center py-2 px-3 block w-full border-gray-200 rounded-sm text-sm focus:border-primary focus:ring-primary dark:bg-bgdark dark:border-white/10 dark:text-white/70"
+                  required
+                  id="two"
+                  name="two"
+                  onChange={handleOtp}
+                  value={otp[1]}
+                />
+                <input
+                  type="text"
+                  className="text-center py-2 px-3 block w-full border-gray-200 rounded-sm text-sm focus:border-primary focus:ring-primary dark:bg-bgdark dark:border-white/10 dark:text-white/70"
+                  required
+                  id="three"
+                  name="three"
+                  onChange={handleOtp}
+                  value={otp[2]}
+                />
+                <input
+                  type="text"
+                  className="text-center py-2 px-3 block w-full border-gray-200 rounded-sm text-sm focus:border-primary focus:ring-primary dark:bg-bgdark dark:border-white/10 dark:text-white/70"
+                  required
+                  id="four"
+                  name="four"
+                  onChange={handleOtp}
+                  value={otp[3]}
+                />
+                <input
+                  type="text"
+                  className="text-center py-2 px-3 block w-full border-gray-200 rounded-sm text-sm focus:border-primary focus:ring-primary dark:bg-bgdark dark:border-white/10 dark:text-white/70"
+                  required
+                  id="five"
+                  name="five"
+                  onChange={handleOtp}
+                  value={otp[4]}
+                />
+                <input
+                  type="text"
+                  className="text-center py-2 px-3 block w-full border-gray-200 rounded-sm text-sm focus:border-primary focus:ring-primary dark:bg-bgdark dark:border-white/10 dark:text-white/70"
+                  required
+                  id="six"
+                  name="six"
+                  onChange={handleOtp}
+                  value={otp[5]}
+                />
+              </div>
+            </div>
+          </div>
           <Button
-            className="mx-auto w-1/2 bg-blue-600 text-white py-2 px-2 rounded-md hover:bg-gray-600"
+            id="btn-submit"
+            className="mx-auto w-1/2 bg-gray-600 text-white py-2 px-2 rounded-md hover:bg-blue-600 focus:bg-blue-600 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-blue-50"
             type="submit"
           >
-            Verify Token
+            Verify
           </Button>
         </form>
 
-        {message && <p>{message}</p>}
+        <div className="w-full flex justify-center pt-6">
+          <p className="text-sm text-red-400">{message}</p>
+        </div>
       </Card>
     </div>
   );
