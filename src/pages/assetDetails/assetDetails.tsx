@@ -39,7 +39,7 @@ export function AssetDetails() {
 
   return (
     <LandingHeader>
-      <div className="w-full flex md:justify-center">
+      <div className="w-full flex md:justify-center animate-fade">
         <div className="flex flex-row md:space-x-6 md:w-3/4 pt-10">
           <div
             className="w-8 h-8 border-2 border-gray-800 rounded-md flex items-center justify-center hover:cursor-pointer"
@@ -52,7 +52,7 @@ export function AssetDetails() {
           </p>
         </div>
       </div>
-      <div className="w-full flex justify-center">
+      <div className="w-full flex justify-center animate-fade">
         <div className="mx-10 md:w-3/4">
           <div className="flex flex-col md:flex-row md:space-x-4">
             <div className="md:w-2/3 py-10 space-y-10">

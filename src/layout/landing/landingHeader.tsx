@@ -63,7 +63,7 @@ const LandingHeader = ({ ThemeChanger, children }: datatype) => {
         }}
       />
 
-      <div className="w-full border-b border-gray-300">
+      <div className="w-full border-b border-gray-300 animate-fade">
         <div className="container mx-auto lg:p-6 !p-0">
           <div className="main-sidebar">
             <nav className="main-menu-container nav nav-pills sub-open">
@@ -80,9 +80,7 @@ const LandingHeader = ({ ThemeChanger, children }: datatype) => {
 
               <div className="lg:flex hidden space-x-2 rtl:space-x-reverse">
                 <Link
-                  to={`${
-                    import.meta.env.BASE_URL
-                  }authentication/signup/type/`}
+                  to={`${import.meta.env.BASE_URL}authentication/signup/type/`}
                   className="ti-btn w-[6.375rem] ti-btn-dark m-0 p-2"
                 >
                   Sign Up

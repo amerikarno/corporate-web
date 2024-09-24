@@ -54,7 +54,7 @@ export function CardWebcamInstructions() {
   };
 
   return (
-    <div className="p-10 flex justify-center">
+    <div className="p-10 flex justify-center animate-fade">
       <Card className="w-1/2 bg-white">
         <CardContent>
           <h1 className="py-2 font-bold">

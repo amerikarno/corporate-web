@@ -10,7 +10,7 @@ import { CustomModal } from "@/components/customModal/customModal";
 export default function IdentityVerification() {
   const navigate = useNavigate();
   return (
-    <div className="flex flex-col items-center p-8 pt-16 space-y-8 md:mx-16">
+    <div className="flex flex-col items-center p-8 pt-16 space-y-8 md:mx-16 animate-fade">
       <div className="flex flex-col items-center text-slate-800">
         <span className="font-bold text-2xl">
           ท่านสามารถเลือก "ยืนยันตัวตน" ดังนี้

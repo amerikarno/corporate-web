@@ -114,7 +114,7 @@ export function OtpEmailConfirm() {
   }, [count]);
 
   return (
-    <div className="flex justify-center p-10">
+    <div className="flex justify-center p-10 animate-fade">
       <Card className="w-1/2 bg-white">
         <CardHeader className="font-bold text-2xl">
           กรุณายืนยัน "หมายเลขโทรศัพท์" และ "อีเมล" ของท่าน
