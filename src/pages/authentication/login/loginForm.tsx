@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 // import AzureForm from "./azureForm";
 import { normalStyleInput } from "@/assets/css/normalStyleInput";
 import axios from "@/api/axios";
+import { AxiosError } from "axios";
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -38,7 +39,7 @@ const LoginForm = () => {
 
       try {
         const res = await axios.post(
-          "/api/v1/authen/customers/login",
+          "/api/v1/authen/customers/login2",
           {},
           {
             headers: {
@@ -67,6 +68,9 @@ const LoginForm = () => {
           console.log("error", { message: res.data });
         }
       } catch (error) {
+        if (error instanceof AxiosError) {
+          setError("root", { message: error.response?.data.message });
+        }
         console.log(error);
       }
     }
