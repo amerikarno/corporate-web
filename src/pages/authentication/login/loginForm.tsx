@@ -38,7 +38,7 @@ const LoginForm = () => {
 
       try {
         const res = await axios.post(
-          "/api/v1/customers/login",
+          "/api/v1/authen/customers/login",
           {},
           {
             headers: {

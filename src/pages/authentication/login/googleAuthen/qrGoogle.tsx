@@ -76,7 +76,7 @@ export default function GoogleQr() {
     event.preventDefault();
     axios
       .post(
-        "/api/v1/customers/verify",
+        "/api/v1/authen/customers/verify",
         {
           otp: otp.join(""),
         },

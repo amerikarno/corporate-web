@@ -75,7 +75,7 @@ export default function QrVerification() {
 
     axios
       .post(
-        "/api/v1/customers/verify",
+        "/api/v1/authen/customers/verify",
         {
           otp: otpStr,
         },
