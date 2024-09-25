@@ -1,0 +1,30 @@
+version: 0.2
+env:
+  variables:
+    ECR_REPO_NAME: corporate-web
+    AWS_ACCOUNT_ID: "549007798570"
+    AWS_REGION: "eu-north-1"
+  # parameter-store:
+  #   DOCKERHUB_TOKEN: /sit-cw-ps/token
+  #   DOCKERHUB_USER: /sit-cw-ps/user
+phases:
+  pre_build:
+    commands:
+      # ECR login
+      - ECR_MAIN_URI="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com"
+      # aws ecr get-login-password --region eu-north-1 | docker login --username AWS --password-stdin 549007798570.dkr.ecr.eu-north-1.amazonaws.com
+      - aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${ECR_MAIN_URI}
+
+      - ECR_IMAGE_URI="${ECR_MAIN_URI}/${ECR_REPO_NAME}:latest"
+  build:
+    commands:
+      - docker build -t corporate-web:latest .
+  post_build:
+    commands:
+      - docker tag corporate-web:latest ${ECR_IMAGE_URI}
+      - docker push ${ECR_IMAGE_URI}
+      - printf '[{"name":"cw-container","imageUri":"%s"}]' ${ECR_IMAGE_URI} > imagedefinitions.json
+
+artifacts:
+  files:
+    - imagedefinitions.json
