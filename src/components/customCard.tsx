@@ -9,7 +9,7 @@ export function CustomCard({ data }: TCustomCardProps) {
   const darkText = "text-gray-800";
 
   return (
-    <div className="w-[380px] h-[520px] border border-gray-200 rounded-[30px] hover:cursor-pointer bg-white shadow-md animate-fade">
+    <div className="w-[380px] h-[520px] border border-gray-200 rounded-[30px] hover:cursor-pointer bg-white shadow-md">
       <div className="w-[360px] h-[500px] px-[10px] py-[10px] flex flex-col justify-evenly">
         <div className="w-full p-4 space-y-4">
           <div className="flex flex-row items-center space-x-4">

@@ -75,7 +75,7 @@ export default function SuitTestFatca() {
   };
 
   return (
-    <div className="flex justify-center p-10 animate-fade">
+    <div className="flex justify-center p-10">
       <div className="space-y-8 p-4 w-1/2">
         <div className="">
           <div className="text-2xl font-bold text-slate-800 ">

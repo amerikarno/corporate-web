@@ -429,7 +429,7 @@ export default function Liveness() {
   }
 
   return (
-    <div className="flex justify-center animate-fade">
+    <div className="flex justify-center">
       <div className="w-[640px]">
         <div className="relative w-fit h-[480px]">
           <video

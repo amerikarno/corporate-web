@@ -48,7 +48,7 @@ export default function IDCardCapture() {
   };
 
   return (
-    <div className="flex justify-center animate-fade">
+    <div className="flex justify-center">
       <div className="w-1/2">
         <div className="p-10 space-y-8 w-[514px]">
           <h1>โปรดอยู่ในที่แสงสว่างเพียงพอ หรือไม่มีแสงสะท้อน</h1>

@@ -146,7 +146,7 @@ export default function BasicInfo() {
   };
 
   return (
-    <div className="p-4 flex justify-center animate-fade">
+    <div className="p-4 flex justify-center">
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-8 p-4 w-1/2">
         <Card className="bg-white">
           <CardContent>

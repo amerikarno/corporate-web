@@ -63,7 +63,7 @@ const LandingHeader = ({ ThemeChanger, children }: datatype) => {
         }}
       />
 
-      <div className="w-full border-b border-gray-300 animate-fade">
+      <div className="w-full border-b border-gray-300">
         <div className="container mx-auto lg:p-6 !p-0">
           <div className="main-sidebar">
             <nav className="main-menu-container nav nav-pills sub-open">
