@@ -37,6 +37,7 @@
     "lucide-react": "^0.441.0",
     "node-fetch": "^3.3.2",
     "preline": "^2.4.1",
+    "qrcode.react": "^4.0.1",
     "quill": "^2.0.2",
     "radix-ui": "^1.0.1",
     "rc-slider": "^10.3.1",

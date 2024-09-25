@@ -22,6 +22,8 @@ import LandingHeader from "./layout/landing/landingHeader.tsx";
 import { AssetDetails } from "./pages/assetDetails/assetDetails.tsx";
 import SignUpType from "./pages/signUpType/SignUpType.tsx";
 import SignUpCorporate from "./pages/signUpType/SignUpCorporate.tsx";
+import GoogleQr from "./pages/authentication/login/googleAuthen/qrGoogle.tsx";
+import QrVerification from "./pages/authentication/login/googleAuthen/qrVerification.tsx";
 
 let helmetContext = {};
 
@@ -45,12 +47,10 @@ createRoot(document.getElementById("root")!).render(
               element={<Login />}
             />
             <Route
-              path={`${
-                import.meta.env.BASE_URL
-              }authentication/signup/type`}
+              path={`${import.meta.env.BASE_URL}authentication/signup/type`}
               element={<SignUpType />}
             />
-                        <Route
+            <Route
               path={`${
                 import.meta.env.BASE_URL
               }authentication/signup/addcorporateaccount`}
@@ -117,6 +117,18 @@ createRoot(document.getElementById("root")!).render(
             <Route
               path={`${import.meta.env.BASE_URL}asset/:id`}
               element={<AssetDetails />}
+            />
+            <Route
+              path={`${
+                import.meta.env.BASE_URL
+              }/authentication/login/google-authen/qr`}
+              element={<GoogleQr />}
+            />
+            <Route
+              path={`${
+                import.meta.env.BASE_URL
+              }/authentication/login/google-authen/verify`}
+              element={<QrVerification />}
             />
           </Routes>
         </Provider>

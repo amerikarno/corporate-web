@@ -1,22 +1,15 @@
 import { Input } from "@components/ui/Input";
-import CryptoJs from "crypto-js";
-import { jwtDecode } from "jwt-decode";
-import { useDispatch, useSelector } from "react-redux";
 import { z } from "zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@components/ui/Button";
 import { useNavigate } from "react-router-dom";
-import { setCookies } from "@/util/Cookies";
-import api from "@/api/axios";
 // import AzureForm from "./azureForm";
-import { setAuthenEmail, setAuthenToken, setAuthenUser } from "@/redux/Action";
-import { TUser } from "./types";
 import { normalStyleInput } from "@/assets/css/normalStyleInput";
+import axios from "@/api/axios";
+import { AxiosError } from "axios";
 
 const LoginForm = () => {
-  const token = useSelector((state: any) => state.token);
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const auth = z.object({
@@ -35,44 +28,50 @@ const LoginForm = () => {
     resolver: zodResolver(auth),
   });
 
-  const onSubmit: SubmitHandler<AuthForm> = (data) => {
+  const onSubmit: SubmitHandler<AuthForm> = async (data) => {
     if (data.email && data.password) {
-      dispatch(setAuthenEmail(data.email));
-      const hashedUsername = CryptoJs.SHA256(data.email).toString();
-      const hashedPassword = CryptoJs.SHA256(data.password).toString();
-      console.log(hashedUsername);
-      console.log(hashedPassword);
+      const dataStr = `${data.email},${data.password}`;
+      const base64 = btoa(dataStr);
+      console.log(base64);
 
-      api
-        .post(
-          "/api/v1/authen/login",
-          {
-            hashedUsername: `${hashedUsername}`,
-            hashedPassword: `${hashedPassword}`,
-          },
+      const decodeStr = atob(base64);
+      console.log(decodeStr);
+
+      try {
+        const res = await axios.post(
+          "/api/v1/authen/customers/login",
+          {},
           {
             headers: {
-              "Content-Type": "application/json",
+              Authorization: `Basic ${base64}`,
             },
-            withCredentials: true,
           }
-        )
-        .then((res) => {
-          console.log(res);
-          dispatch(setAuthenToken(res.data.accessToken));
-          setCookies(res.data.accessToken);
-          const user: TUser = jwtDecode(res.data.accessToken);
-          localStorage.clear();
-          dispatch(setAuthenUser(user));
-          navigate(`${import.meta.env.BASE_URL}dashboard/personal`);
-        })
-        .catch((err) => {
-          setError("root", { message: err.message });
-        });
-      console.log(token);
-      if (token) {
-        const decoded = jwtDecode(token);
-        console.log(decoded);
+        );
+
+        if (res.status === 200) {
+          console.log(res.data);
+          localStorage.setItem("basic", base64);
+          if (res.data.secret !== "") {
+            localStorage.setItem("secret", res.data.secret);
+            navigate(
+              `${import.meta.env.BASE_URL}authentication/login/google-authen/qr`
+            );
+          } else {
+            navigate(
+              `${
+                import.meta.env.BASE_URL
+              }authentication/login/google-authen/verify`
+            );
+          }
+        } else {
+          setError("root", { message: res.data.message });
+          console.log("error", { message: res.data });
+        }
+      } catch (error) {
+        if (error instanceof AxiosError) {
+          setError("root", { message: error.response?.data.message });
+        }
+        console.log(error);
       }
     }
   };
