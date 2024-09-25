@@ -1,6 +1,11 @@
-import { Button } from "@components/ui/Button";
-import { Card, CardContent, CardFooter, CardHeader } from "@components/ui/Card";
-import { Input } from "@components/ui/Input";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useRef, useState } from "react";
 import {
@@ -11,7 +16,7 @@ import {
   AlertDialogAction,
   AlertDialogCancel,
 } from "@components/ui/alert-dialog";
-import { sleep } from "@/util/util";
+import { sleep } from "@/lib/utils";
 import { setIndividualEmail, setIndividualMobile } from "@/redux/Action";
 import { useNavigate } from "react-router-dom";
 import getImages from "@/common/imagesData";

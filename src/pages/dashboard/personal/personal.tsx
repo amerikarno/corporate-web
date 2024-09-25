@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import getImages from "@/common/imagesData";
 import { Statistic } from "@/common/chartdata";
+import LandingHeader from "@/layout/landing/landingHeader";
 
 const Personal = () => {
   return (
@@ -10,8 +11,9 @@ const Personal = () => {
         activepage="Home"
         mainpage="Personal Dashboard"
       /> */}
+      <LandingHeader />
 
-      <div className="grid grid-cols-12 gap-x-5">
+      <div className="grid grid-cols-12 gap-x-5 p-10">
         <div className="col-span-12 xxl:col-span-9">
           <div className="grid grid-cols-12 gap-x-5">
             <div className="col-span-12 md:col-span-4">
@@ -895,7 +897,7 @@ const Personal = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-12 gap-x-5">
+      <div className="grid grid-cols-12 gap-x-5 p-10">
         <div className="col-span-12 md:col-span-6 xxl:col-span-3">
           <div className="box">
             <div className="box-header">
@@ -1579,7 +1581,7 @@ const Personal = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-12 gap-x-6">
+      <div className="grid grid-cols-12 gap-x-6 p-10">
         <div className="col-span-12">
           <div className="box">
             <div className="box-header">

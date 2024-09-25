@@ -1,14 +1,17 @@
 type TDetail = {
+  id: string;
   header: string;
   content: string;
 };
 
 type TFaq = {
+  id: string;
   question: string;
   answer: string;
 };
 
 type TMember = {
+  id: string;
   picture: string;
   firstName: string;
   midName: string;
@@ -18,6 +21,7 @@ type TMember = {
 };
 
 export interface TAssetData {
+  id: number;
   asset: {
     id: string;
     title: string;
@@ -32,6 +36,7 @@ export interface TAssetData {
     minimum: string;
   };
   info: {
+    id: string;
     totalIssuance: string;
     totalAmountRaised: string;
     contractInfomation: string;
@@ -45,6 +50,7 @@ export interface TAssetData {
   videos: string[];
   faq: TFaq[];
   keyInformation: {
+    id: string;
     network: string;
     precision: string;
     capitalStructure: string;
@@ -55,6 +61,7 @@ export interface TAssetData {
     compleationTime: string;
   };
   issuanceTerms: {
+    id: string;
     investmentPeriod: string;
     dividendYield: string;
     grossmargin: string;

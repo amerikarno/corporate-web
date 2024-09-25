@@ -9,11 +9,11 @@
 import reducer from "./reducer";
 
 import { configureStore } from "@reduxjs/toolkit";
-import { logger } from "redux-logger";
+// import { logger } from "redux-logger";
 
 const store = configureStore({
   reducer: reducer,
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
+  // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });
 
 export default store;

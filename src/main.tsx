@@ -10,7 +10,6 @@ import store from "./redux/store.tsx";
 import AddIndividualAccount from "./pages/authentication/addIndividualAccount/addIndividualAccount.tsx";
 import BasicInfo from "./pages/authentication/addIndividualAccount/basicInfo/basicInfo.tsx";
 import SuitTestFatca from "./pages/authentication/addIndividualAccount/suitTestFatca/suitTestFatca.tsx";
-import { OtpEmailConfirm } from "./pages/authentication/addIndividualAccount/otpEmailConfirm/otpEmailConfirm.tsx";
 import Liveness from "./pages/authentication/addIndividualAccount/livenessOcr/livenessOcr.tsx";
 import { CardWebcamInstructions } from "./pages/authentication/addIndividualAccount/livenessOcr/cardScan/webCamInstructions.tsx";
 import IDCardCapture from "./pages/authentication/addIndividualAccount/livenessOcr/cardScan/idCardCapture.tsx";
@@ -18,12 +17,13 @@ import IdentityVerification from "./pages/authentication/addIndividualAccount/id
 import Personal from "./pages/dashboard/personal/personal.tsx";
 import ScrollToTop from "./components/ScrollToTop/ScrolltoTop.tsx";
 import Login from "./pages/authentication/login/login.tsx";
-import LandingHeader from "./layout/landing/landingHeader.tsx";
 import { AssetDetails } from "./pages/assetDetails/assetDetails.tsx";
 import SignUpType from "./pages/signUpType/SignUpType.tsx";
 import SignUpCorporate from "./pages/signUpType/SignUpCorporate.tsx";
 import GoogleQr from "./pages/authentication/login/googleAuthen/qrGoogle.tsx";
 import QrVerification from "./pages/authentication/login/googleAuthen/qrVerification.tsx";
+import { OtpEmailConfirm } from "./pages/authentication/addIndividualAccount/otpEmailConfirm/otpEmailConfirm.tsx";
+import OrderTrade from "./pages/orderTrade/orderTrade.tsx";
 
 let helmetContext = {};
 
@@ -34,14 +34,7 @@ createRoot(document.getElementById("root")!).render(
         <ScrollToTop />
         <Provider store={store}>
           <Routes>
-            <Route
-              index
-              element={
-                <LandingHeader>
-                  <Landing />
-                </LandingHeader>
-              }
-            />
+            <Route index element={<Landing />} />
             <Route
               path={`${import.meta.env.BASE_URL}authentication/login`}
               element={<Login />}
@@ -111,7 +104,7 @@ createRoot(document.getElementById("root")!).render(
               element={<IdentityVerification />}
             />
             <Route
-              path={`${import.meta.env.BASE_URL}dashboard/personal`}
+              path={`${import.meta.env.BASE_URL}market`}
               element={<Personal />}
             />
             <Route
@@ -129,6 +122,10 @@ createRoot(document.getElementById("root")!).render(
                 import.meta.env.BASE_URL
               }/authentication/login/google-authen/verify`}
               element={<QrVerification />}
+            />
+            <Route
+              path={`${import.meta.env.BASE_URL}/order-trade`}
+              element={<OrderTrade />}
             />
           </Routes>
         </Provider>

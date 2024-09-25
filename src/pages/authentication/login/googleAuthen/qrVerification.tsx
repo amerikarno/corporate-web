@@ -1,8 +1,8 @@
 import axios from "@/api/axios";
-import { Button } from "@/components/ui/Button";
-import { Card } from "@/components/ui/Card";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import { setAuthenToken, setAuthenUser } from "@/redux/Action";
-import { setCookies } from "@/util/Cookies";
+import { setCookies } from "@/lib/cookies";
 import { jwtDecode } from "jwt-decode";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -92,7 +92,7 @@ export default function QrVerification() {
           const user: TUser = jwtDecode(response.data.accessToken);
           localStorage.clear();
           dispatch(setAuthenUser(user));
-          navigate(`${import.meta.env.BASE_URL}dashboard/personal`);
+          navigate(`/`);
         } else {
           setError("Network Error");
         }

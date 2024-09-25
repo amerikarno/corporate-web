@@ -1,4 +1,4 @@
-import { cn } from "@/util/util";
+import { cn } from "@/lib/utils";
 
 type TConstenDetails = {
   header: string;

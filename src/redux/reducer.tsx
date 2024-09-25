@@ -1,4 +1,4 @@
-import { getCookies } from "@/util/Cookies";
+import { getCookies } from "@/lib/cookies";
 
 let initialState = {
   lang: "en",

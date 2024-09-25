@@ -1,8 +1,8 @@
-import { Input } from "@components/ui/Input";
+import { Input } from "@/components/ui/input";
 import { z } from "zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "@components/ui/Button";
+import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 // import AzureForm from "./azureForm";
 import { normalStyleInput } from "@/assets/css/normalStyleInput";

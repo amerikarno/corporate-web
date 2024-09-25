@@ -3,9 +3,9 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { mockAssetData } from "./__mock__/mockAsset";
 import { TAssetData } from "./types";
 import LandingHeader from "@/layout/landing/landingHeader";
-import { Card, CardContent, CardHeader } from "@/components/ui/Card";
-import { cn } from "@/util/util";
-import { Button } from "@/components/ui/Button";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 import { PeopleCard } from "@/components/peopleCard";
 import { RowInfo } from "@/components/rowLableInfo";
 import { ArrowLeft } from "lucide-react";
@@ -38,7 +38,8 @@ export function AssetDetails() {
   const darkText = "text-gray-900 font-bold";
 
   return (
-    <LandingHeader>
+    <>
+      <LandingHeader />
       <div className="w-full flex md:justify-center">
         <div className="flex flex-row md:space-x-6 md:w-3/4 pt-10">
           <div
@@ -167,9 +168,9 @@ export function AssetDetails() {
                           role="tabpanel"
                           aria-labelledby="underline-item-1"
                         >
-                          <p className="text-gray-500 dark:text-white/70 p-5 border rounded-sm dark:border-white/10 border-gray-200">
+                          <div className="text-gray-500 dark:text-white/70 p-5 border rounded-sm dark:border-white/10 border-gray-200">
                             {assetData.details.map((item, index) => (
-                              <div className="py-6">
+                              <div className="py-6" key={index}>
                                 <ContentDetails
                                   key={index}
                                   header={item.header}
@@ -177,7 +178,7 @@ export function AssetDetails() {
                                 />
                               </div>
                             ))}
-                          </p>
+                          </div>
                         </div>
                       )}
                       {tab === 2 && (
@@ -191,7 +192,7 @@ export function AssetDetails() {
                             data-hs-accordion-always-open
                           >
                             {assetData.faq.map((item, index) => (
-                              <div className="py-2">
+                              <div className="py-2" key={index}>
                                 <FaqAccordion
                                   key={index}
                                   question={item.question}
@@ -511,6 +512,6 @@ export function AssetDetails() {
           </div>
         </div>
       </div>
-    </LandingHeader>
+    </>
   );
 }

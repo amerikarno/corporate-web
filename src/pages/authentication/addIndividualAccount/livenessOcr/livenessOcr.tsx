@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import * as faceapi from "face-api.js";
 import { Camera } from "lucide-react";
-import { Button } from "../../../../components/ui/Button";
+import { Button } from "../../../../components/ui/button";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setFaceImage } from "@/redux/Action";
-import { sleep } from "@/util/util";
+import { sleep } from "@/lib/utils";
 
 export default function Liveness() {
   type TActionMessage = {

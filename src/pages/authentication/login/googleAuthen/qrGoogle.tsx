@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "@/api/axios";
 import { QRCodeSVG as QRCode } from "qrcode.react";
-import { Button } from "@/components/ui/Button";
-import { Card } from "@/components/ui/Card";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import { useDispatch } from "react-redux";
 import { setAuthenToken, setAuthenUser } from "@/redux/Action";
-import { setCookies } from "@/util/Cookies";
+import { setCookies } from "@/lib/cookies";
 import { TUser } from "../types";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";

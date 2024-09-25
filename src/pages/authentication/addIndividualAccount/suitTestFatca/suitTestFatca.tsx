@@ -1,5 +1,5 @@
-import { Button } from "../../../../components/ui/Button";
-import { Card, CardContent } from "../../../../components/ui/Card";
+import { Button } from "../../../../components/ui/button";
+import { Card, CardContent } from "../../../../components/ui/card";
 import { useState } from "react";
 import SubSuitTest from "./subSuitTest";
 import KnowLedgeTest from "./knowLedgeTest";
