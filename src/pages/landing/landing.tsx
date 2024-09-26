@@ -56,13 +56,13 @@ const Landing = ({ ThemeChanger }: datatype) => {
       <div className="landing-page-wrapper relative">
         <div className="main-content landing-main !p-0" onClick={handleClick}>
           <div className="py-10" id="hot tokens">
-            <div className="section container mx-auto space-y-6">
-              <div className="text-center w-[380px] md:w-[85rem] mx-auto">
+            <div className="mx-auto space-y-6">
+              <div className="section container text-center w-[380px] md:w-[85rem] mx-auto">
                 <h2 className="section-title text-left text-3xl md:text-xl font-bold text-gray-800 dark:text-white">
                   <span className="text-[1.5rem] md:text-3xl">Hot</span>
                 </h2>
               </div>
-              <ul className="max-w-[85rem] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-10 md:gap-y-20">
+              <ul className="max-w-[85rem] mx-auto grid grid-cols-auto md:grid-cols-2 lg:grid-cols-3 gap-y-10 md:gap-y-20">
                 {dataForHot.map((item, index) => (
                   <li key={index}>
                     <div
