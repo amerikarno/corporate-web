@@ -20,7 +20,7 @@ export const mockAssetData: TAssetData = {
     id: "1",
     totalIssuance: "1000.00 DA",
     totalAmountRaised: "50000.00 USD",
-    contractInfomation: "0xC92Ff5e3A94...89e7e8a5b378b",
+    contractInfomation: "0x0000000000000000000000000000000000000000",
     minimumInvestmentAmount: "1000.00 USD",
     minimumInvestmentQuantity: "100.00 DA",
     issueUnitPrice: "100.00 USD",

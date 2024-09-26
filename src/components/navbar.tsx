@@ -83,7 +83,7 @@ const NavBar = ({ ThemeChanger }: datatype) => {
       <div className="w-full border-b border-gray-300 lg:block">
         <div className="container mx-auto lg:p-6 !p-0">
           {/* <div className="container mx-auto lg:p-6 !p-0"> */}
-          <div className="py-6">
+          <div className="p-2 md:p-6">
             {/* <div className="main-sidebar"> */}
             <nav className="flex flex-row justify-between">
               {/* <nav className="main-menu-container nav nav-pills sub-open"> */}
@@ -155,13 +155,13 @@ const NavBar = ({ ThemeChanger }: datatype) => {
                     to={`${
                       import.meta.env.BASE_URL
                     }authentication/signup/type/`}
-                    className="ti-btn w-[6.375rem] ti-btn-dark m-0 p-2 h-12"
+                    className="ti-btn md:w-[6.375rem] ti-btn-dark m-0 p-2 md:h-12 text-[0.8rem] md:text-[1.5rem]"
                   >
                     Sign Up
                   </Link>
                   <Link
                     to={`${import.meta.env.BASE_URL}authentication/login`}
-                    className="ti-btn w-[6.375rem] m-0 p-2 ti-btn-primary h-12"
+                    className="ti-btn md:w-[6.375rem] m-0 p-2 ti-btn-primary md:h-12 text-[0.8rem] md:text-base"
                   >
                     Login
                   </Link>

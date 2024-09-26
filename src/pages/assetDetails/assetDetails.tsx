@@ -41,7 +41,7 @@ export function AssetDetails() {
     <>
       <NavBar />
       <div className="w-full flex md:justify-center">
-        <div className="flex flex-row md:space-x-6 md:w-3/4 pt-10">
+        <div className="w-[380px] mx-auto flex flex-row px-2 md:px-0 md:space-x-6 md:w-3/4 pt-5 md:pt-10">
           <div
             className="w-8 h-8 border-2 border-gray-800 rounded-md flex items-center justify-center hover:cursor-pointer"
             onClick={() => navigate("/")}
@@ -53,33 +53,37 @@ export function AssetDetails() {
           </p>
         </div>
       </div>
-      <div className="w-full flex justify-center">
-        <div className="mx-10 md:w-3/4">
+      <div className="w-[380px] md:w-full flex justify-center mx-auto">
+        <div className="md:mx-10 md:w-3/4">
           <div className="flex flex-col md:flex-row md:space-x-4">
             <div className="md:w-2/3 py-10 space-y-10">
               <Card className="bg-white rounded-[30px]">
                 <CardHeader className="flex flex-row">
-                  <div className="h-28 w-full px-6 border-b border-gray-300">
-                    <div className="flex flex-row">
-                      <img
-                        src={assetData.asset.logo}
-                        alt=""
-                        className="w-16 h-16"
-                      />
-                      <div className="flex-grow flex-col px-4 space-y-2">
-                        <h1 className={`text-xl font-bold ${darkText}`}>
-                          {assetData.asset.name}
-                        </h1>
-                        <p className={cn("line-clamp-2", normalText)}>
-                          {assetData.asset.description}
-                        </p>
+                  <div className="w-full px-6 border-b border-gray-300">
+                    <div className="flex flex-col space-y-2 md:pb-0 md:space-y-0 xl:flex-row">
+                      <div className="flex flex-row">
+                        <img
+                          src={assetData.asset.logo}
+                          alt=""
+                          className="w-12 h-12 md:w-16 md:h-16"
+                        />
+                        <div className="flex-grow flex-col px-4 space-y-2">
+                          <h1 className={`text-xl font-bold ${darkText}`}>
+                            {assetData.asset.name}
+                          </h1>
+                          <p className={cn("line-clamp-2", normalText)}>
+                            {assetData.asset.description}
+                          </p>
+                        </div>
                       </div>
-                      <Button className="w-64">Invest</Button>
+                      <div className="w-full flex justify-center py-4">
+                        <Button className="w-64">Invest</Button>
+                      </div>
                     </div>
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <div className="w-full p-6 grid grid-cols-3 gap-10">
+                  <div className="w-full p-6 grid grid-cols-1 md:grid-cols-3 gap-10">
                     <div className="space-y-4">
                       <h1 className={normalText}>Total Issuance</h1>
                       <p className={darkText}>{assetData.info.totalIssuance}</p>
@@ -92,9 +96,11 @@ export function AssetDetails() {
                       </p>
                     </div>
 
-                    <div className="space-y-4 line-clamp-1">
+                    <div className="space-y-4">
                       <h1 className={normalText}>Contract Information</h1>
-                      <p className={darkText}>
+                      <p
+                        className={`overflow-hidden text-ellipsis whitespace-nowrap ${darkText}`}
+                      >
                         {assetData.info.contractInfomation}
                       </p>
                     </div>
@@ -168,7 +174,8 @@ export function AssetDetails() {
                           role="tabpanel"
                           aria-labelledby="underline-item-1"
                         >
-                          <div className="text-gray-500 dark:text-white/70 p-5 border rounded-sm dark:border-white/10 border-gray-200">
+                          <div className="hs-accordion-group">
+                            {/* <div className="text-gray-500 dark:text-white/70 p-5 border rounded-sm dark:border-white/10 border-gray-200"> */}
                             {assetData.details.map((item, index) => (
                               <div className="py-6" key={index}>
                                 <ContentDetails
@@ -203,209 +210,6 @@ export function AssetDetails() {
                                 />
                               </div>
                             ))}
-                            {/* <div
-                          className={`hs-accordion ${
-                            faq === 1 ? "active" : ""
-                          }`}
-                          id="hs-basic-always-open-heading-one"
-                        >
-                          <button
-                            className="hs-accordion-toggle hs-accordion-active:text-primary hs-accordion-active:pb-3 py-0  inline-flex items-center gap-x-3 w-full font-semibold text-start text-gray-800 transition hover:text-gray-500 dark:hs-accordion-active:text-primary dark:text-gray-200 dark:hover:text-white/80"
-                            aria-controls="hs-basic-always-open-collapse-one"
-                            type="button"
-                            onClick={() => setFaq(1)}
-                          >
-                            <svg
-                              className="hs-accordion-active:hidden hs-accordion-active:text-primary hs-accordion-active:group-hover:text-primary block w-3 h-3 text-gray-600 group-hover:text-gray-500 dark:text-white/70"
-                              width="16"
-                              height="16"
-                              viewBox="0 0 16 16"
-                              fill="none"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                d="M2.62421 7.86L13.6242 7.85999"
-                                stroke="currentColor"
-                                strokeWidth={2}
-                                strokeLinecap="round"
-                              />
-                              <path
-                                d="M8.12421 13.36V2.35999"
-                                stroke="currentColor"
-                                strokeWidth={2}
-                                strokeLinecap="round"
-                              />
-                            </svg>
-                            <svg
-                              className="hs-accordion-active:block hs-accordion-active:text-primary hs-accordion-active:group-hover:text-primary hidden w-3 h-3 text-gray-600 group-hover:text-gray-500 dark:text-white/70"
-                              width="16"
-                              height="16"
-                              viewBox="0 0 16 16"
-                              fill="none"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                d="M2.62421 7.86L13.6242 7.85999"
-                                stroke="currentColor"
-                                strokeWidth={2}
-                                strokeLinecap="round"
-                              />
-                            </svg>
-                            Accordion #1
-                          </button>
-                          <div
-                            id="hs-basic-always-open-collapse-one"
-                            className={`hs-accordion-content ${
-                              faq === 1 ? "block" : "hidden"
-                            } w-full overflow-hidden transition-[height] duration-300`}
-                            aria-labelledby="hs-basic-always-open-heading-one"
-                          >
-                            <p className="text-gray-800 dark:text-gray-200">
-                              <em>This is the third item's accordion body.</em>{" "}
-                              It is hidden by default, until the collapse plugin
-                              adds the appropriate classes that we use to style
-                              each element. These classes control the overall
-                              appearance, as well as the showing and hiding via
-                              CSS transitions.
-                            </p>
-                          </div>
-                        </div>
-
-                        <div
-                          className={`hs-accordion ${
-                            faq === 2 ? "active" : ""
-                          }`}
-                          // id="hs-basic-always-open-heading-two"
-                        >
-                          <button
-                            className="hs-accordion-toggle hs-accordion-active:text-primary hs-accordion-active:pb-3 pb-0 pt-3 inline-flex items-center gap-x-3 w-full font-semibold text-start text-gray-800 transition hover:text-gray-500 dark:hs-accordion-active:text-primary dark:text-gray-200 dark:hover:text-white/80"
-                            aria-controls="hs-basic-always-open-collapse-two"
-                            type="button"
-                            onClick={() => setFaq(2)}
-                          >
-                            <svg
-                              className="hs-accordion-active:hidden hs-accordion-active:text-primary hs-accordion-active:group-hover:text-primary block w-3 h-3 text-gray-600 group-hover:text-gray-500 dark:text-white/70"
-                              width="16"
-                              height="16"
-                              viewBox="0 0 16 16"
-                              fill="none"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                d="M2.62421 7.86L13.6242 7.85999"
-                                stroke="currentColor"
-                                strokeWidth={2}
-                                strokeLinecap="round"
-                              />
-                              <path
-                                d="M8.12421 13.36V2.35999"
-                                stroke="currentColor"
-                                strokeWidth={2}
-                                strokeLinecap="round"
-                              />
-                            </svg>
-                            <svg
-                              className="hs-accordion-active:block hs-accordion-active:text-primary hs-accordion-active:group-hover:text-primary hidden w-3 h-3 text-gray-600 group-hover:text-gray-500 dark:text-white/70"
-                              width="16"
-                              height="16"
-                              viewBox="0 0 16 16"
-                              fill="none"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                d="M2.62421 7.86L13.6242 7.85999"
-                                stroke="currentColor"
-                                strokeWidth={2}
-                                strokeLinecap="round"
-                              />
-                            </svg>
-                            Accordion #2
-                          </button>
-                          <div
-                            // id="hs-basic-always-open-collapse-two"
-                            className={`hs-accordion-content ${
-                              faq === 2 ? "block" : "hidden"
-                            } w-full overflow-hidden transition-[height] duration-300`}
-                            aria-labelledby="hs-basic-always-open-heading-two"
-                          >
-                            <p className="text-gray-800 dark:text-gray-200">
-                              <em>This is the second item's accordion body.</em>{" "}
-                              It is hidden by default, until the collapse plugin
-                              adds the appropriate classes that we use to style
-                              each element. These classes control the overall
-                              appearance, as well as the showing and hiding via
-                              CSS transitions.
-                            </p>
-                          </div>
-                        </div>
-
-                        <div
-                          className={`hs-accordion ${
-                            faq === 3 ? "active" : ""
-                          }`}
-                          // id="hs-basic-always-open-heading-three"
-                        >
-                          <button
-                            className="hs-accordion-toggle hs-accordion-active:text-primary hs-accordion-active:pb-3 pb-0 pt-3 inline-flex items-center gap-x-3 w-full font-semibold text-start text-gray-800 transition hover:text-gray-500 dark:hs-accordion-active:text-primary dark:text-gray-200 dark:hover:text-white/80"
-                            aria-controls="hs-basic-always-open-collapse-three"
-                            type="button"
-                            onClick={() => setFaq(3)}
-                          >
-                            <svg
-                              className="hs-accordion-active:hidden hs-accordion-active:text-primary hs-accordion-active:group-hover:text-primary block w-3 h-3 text-gray-600 group-hover:text-gray-500 dark:text-white/70"
-                              width="16"
-                              height="16"
-                              viewBox="0 0 16 16"
-                              fill="none"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                d="M2.62421 7.86L13.6242 7.85999"
-                                stroke="currentColor"
-                                strokeWidth={2}
-                                strokeLinecap="round"
-                              />
-                              <path
-                                d="M8.12421 13.36V2.35999"
-                                stroke="currentColor"
-                                strokeWidth={2}
-                                strokeLinecap="round"
-                              />
-                            </svg>
-                            <svg
-                              className="hs-accordion-active:block hs-accordion-active:text-primary hs-accordion-active:group-hover:text-primary hidden w-3 h-3 text-gray-600 group-hover:text-gray-500 dark:text-white/70"
-                              width="16"
-                              height="16"
-                              viewBox="0 0 16 16"
-                              fill="none"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                d="M2.62421 7.86L13.6242 7.85999"
-                                stroke="currentColor"
-                                strokeWidth={2}
-                                strokeLinecap="round"
-                              />
-                            </svg>
-                            Accordion #3
-                          </button>
-                          <div
-                            // id="hs-basic-always-open-collapse-three"
-                            className={`hs-accordion-content ${
-                              faq === 3 ? "block" : "hidden"
-                            } w-full overflow-hidden transition-[height] duration-300`}
-                            aria-labelledby="hs-basic-always-open-heading-three"
-                          >
-                            <p className="text-gray-800 dark:text-gray-200">
-                              <em>This is the first item's accordion body.</em>{" "}
-                              It is hidden by default, until the collapse plugin
-                              adds the appropriate classes that we use to style
-                              each element. These classes control the overall
-                              appearance, as well as the showing and hiding via
-                              CSS transitions.
-                            </p>
-                          </div>
-                        </div> */}
                           </div>
                         </div>
                       )}
@@ -414,9 +218,9 @@ export function AssetDetails() {
                 </CardContent>
               </Card>
             </div>
-            <div className="md:w-1/3 py-10 mx-10">
+            <div className="w-[380px] md:w-1/3 py-10">
               <Card className="bg-white rounded-[30px] px-4 space-y-20">
-                <div className="space-y-4 pt-5">
+                <div className="space-y-4 pt-10">
                   <h1 className={`w-full text-left text-lg ${darkText}`}>
                     Key Information
                   </h1>

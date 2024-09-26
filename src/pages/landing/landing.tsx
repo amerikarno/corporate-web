@@ -57,15 +57,16 @@ const Landing = ({ ThemeChanger }: datatype) => {
         <div className="main-content landing-main !p-0" onClick={handleClick}>
           <div className="py-10" id="hot tokens">
             <div className="section container mx-auto space-y-6">
-              <div className="text-center max-w-[84rem] mx-auto mb-12">
-                <h2 className="justify-center section-title text-left text-3xl font-bold text-gray-800 dark:text-white">
-                  <span className="">Hot</span>
+              <div className="text-center w-[380px] md:w-[85rem] mx-auto">
+                <h2 className="section-title text-left text-3xl md:text-xl font-bold text-gray-800 dark:text-white">
+                  <span className="text-[1.5rem] md:text-3xl">Hot</span>
                 </h2>
               </div>
-              <ul className="max-w-[84rem] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-20">
+              <ul className="max-w-[85rem] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-10 md:gap-y-20">
                 {dataForHot.map((item, index) => (
                   <li key={index}>
                     <div
+                      className="flex justify-center"
                       onClick={() =>
                         navigate(
                           `${import.meta.env.BASE_URL}asset/${index + 1}`
@@ -82,15 +83,16 @@ const Landing = ({ ThemeChanger }: datatype) => {
 
           <div className="py-10" id="recommended tokens">
             <div className="section container mx-auto space-y-6">
-              <div className="text-center max-w-[84rem] mx-auto mb-12">
+              <div className="text-center w-[380px] md:w-[85rem] mx-auto md:px-5">
                 <h2 className="justify-center section-title text-left text-3xl font-bold text-gray-800 dark:text-white">
-                  <span className="">Recomended</span>
+                  <span className="text-[1.5rem] md:text-3xl">Recomended</span>
                 </h2>
               </div>
-              <ul className="max-w-[84rem] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-20">
+              <ul className="max-w-[85rem] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-20">
                 {dataForRecomended.map((item, index) => (
                   <li key={index}>
                     <div
+                      className="flex justify-center"
                       onClick={() =>
                         navigate(
                           `${import.meta.env.BASE_URL}asset/${index + 1}`
@@ -107,16 +109,17 @@ const Landing = ({ ThemeChanger }: datatype) => {
 
           <div className="py-10" id="all tokens">
             <div className="section container mx-auto space-y-6">
-              <div className="text-center max-w-[84rem] mx-auto mb-12">
+              <div className="text-center w-[380px] md:w-[85rem] mx-auto md:px-5">
                 <h2 className="justify-center section-title text-left text-3xl font-bold text-gray-800 dark:text-white">
-                  <span className="">All</span>
+                  <span className="text-[1.5rem] md:text-3xl">All</span>
                 </h2>
               </div>
-              <ul className="max-w-[84rem] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-20">
+              <ul className="max-w-[85rem] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-20">
                 {/* <ul className="flex gap-28 flex-wrap justify-center"> */}
                 {dataAll.map((item, index) => (
                   <li key={index}>
                     <div
+                      className="flex justify-center"
                       onClick={() =>
                         navigate(
                           `${import.meta.env.BASE_URL}asset/${index + 1}`
