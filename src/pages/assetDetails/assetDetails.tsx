@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { mockAssetData } from "./__mock__/mockAsset";
 import { TAssetData } from "./types";
-import LandingHeader from "@/layout/landing/landingHeader";
+import NavBar from "@/components/navbar";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -39,7 +39,7 @@ export function AssetDetails() {
 
   return (
     <>
-      <LandingHeader />
+      <NavBar />
       <div className="w-full flex md:justify-center">
         <div className="flex flex-row md:space-x-6 md:w-3/4 pt-10">
           <div

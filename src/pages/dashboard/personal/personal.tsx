@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import getImages from "@/common/imagesData";
 import { Statistic } from "@/common/chartdata";
-import LandingHeader from "@/layout/landing/landingHeader";
+import NavBar from "@/components/navbar";
 
 const Personal = () => {
   return (
@@ -11,7 +11,7 @@ const Personal = () => {
         activepage="Home"
         mainpage="Personal Dashboard"
       /> */}
-      <LandingHeader />
+      <NavBar />
 
       <div className="grid grid-cols-12 gap-x-5 p-10">
         <div className="col-span-12 xxl:col-span-9">

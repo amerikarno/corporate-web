@@ -11,23 +11,22 @@ import axios from "@/api/axios";
 import DataTable, { TableColumn } from "react-data-table-component";
 import { MdCurrencyExchange } from "react-icons/md";
 import { IoReceiptOutline } from "react-icons/io5";
-import LandingHeader from "@/layout/landing/landingHeader";
+import NavBar from "@/components/navbar";
 
 export default function OrderTrade() {
   const [buySell, setBuySell] = useState<string>("buy");
-  const [selectedCorporateCode, setSelectedCorporateCode] = useState<
-    number | null
-  >(null);
-  console.log(selectedCorporateCode);
+  // const [selectedCorporateCode, setSelectedCorporateCode] = useState<
+  //   number | null
+  // >(null);
   const [selectedTradingPair, setSelectedTradingPair] =
     useState<string>("THB/USDT");
   const [mockedCorporateCodes, setFetchedCorporateCodes] = useState<
     { corporateCode: number }[]
   >([]);
   const [choosedEditData, setChoosedEditData] = useState<TOrderTrade>();
-  const clearChoosedEditData = () => {
-    setChoosedEditData(undefined);
-  };
+  // const clearChoosedEditData = () => {
+  //   setChoosedEditData(undefined);
+  // };
   const [sellCurrency, setSellCurrency] = useState<string>("");
   const tradingPair = [{ name: "THB/USDT" }, { name: "THB/USDC" }];
   const buyCurrency = [{ name: "THB" }, { name: "USD" }];
@@ -48,61 +47,60 @@ export default function OrderTrade() {
   };
 
   const fetchCorporateCodes = async () => {
-    try {
-      const token = getCookies();
-
-      const res = await axios.post(
-        "/api/v1/corporate/query/all",
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      if (res.status === 200) {
-        const corporateCodes = res.data.map((item: any) => ({
-          corporateCode: item.CorporateCode,
-        }));
-        setFetchedCorporateCodes(corporateCodes);
-      } else {
-        console.log("Failed to fetch corporate codes");
-      }
-    } catch (error) {
-      console.log("Error fetching corporate codes:", error);
-    }
+    // try {
+    //   const token = getCookies();
+    //   const res = await axios.post(
+    //     "/api/v1/corporate/query/all",
+    //     {},
+    //     {
+    //       headers: {
+    //         Authorization: `Bearer ${token}`,
+    //       },
+    //     }
+    //   );
+    //   if (res.status === 200) {
+    //     const corporateCodes = res.data.map((item: any) => ({
+    //       corporateCode: item.CorporateCode,
+    //     }));
+    //     setFetchedCorporateCodes(corporateCodes);
+    //   } else {
+    //     console.log("Failed to fetch corporate codes");
+    //   }
+    // } catch (error) {
+    //   console.log("Error fetching corporate codes:", error);
+    // }
   };
 
   const fetchOrderList = async () => {
-    try {
-      const token = getCookies();
-      const res = await axios.get("/api/v1/transaction/order/get", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      if (res.status === 200) {
-        // console.log(res.data);
-        // const orderTrades = res.data || [];
-        // const uniqueOrderTrades = orderTrades.filter(
-        //   (order: any, index: any, self: any) =>
-        //     index === self.findIndex((t: any) => t.id === order.id)
-        // );
-        // const adjustedOrderTrades = uniqueOrderTrades.map(
-        //   (order: TOrderTrade) => ({
-        //     ...order,
-        //     cryptoAmount: (Number(order.cryptoAmount) / 100000).toString(),
-        //     cryptoPrice: (Number(order.cryptoPrice) / 100000).toString(),
-        //     fiatAmount: (Number(order.fiatAmount) / 100000).toString(),
-        //   })
-        // );
-        // console.log("OrderTrade data fetched successfully.", uniqueOrderTrades);
-      } else {
-        console.log("Failed to fetch orderTrade");
-      }
-    } catch (error) {
-      console.log("Fetching order list of this role error!", error);
-    }
+    // try {
+    //   const token = getCookies();
+    //   const res = await axios.get("/api/v1/transaction/order/get", {
+    //     headers: {
+    //       Authorization: `Bearer ${token}`,
+    //     },
+    //   });
+    //   if (res.status === 200) {
+    //     // console.log(res.data);
+    //     // const orderTrades = res.data || [];
+    //     // const uniqueOrderTrades = orderTrades.filter(
+    //     //   (order: any, index: any, self: any) =>
+    //     //     index === self.findIndex((t: any) => t.id === order.id)
+    //     // );
+    //     // const adjustedOrderTrades = uniqueOrderTrades.map(
+    //     //   (order: TOrderTrade) => ({
+    //     //     ...order,
+    //     //     cryptoAmount: (Number(order.cryptoAmount) / 100000).toString(),
+    //     //     cryptoPrice: (Number(order.cryptoPrice) / 100000).toString(),
+    //     //     fiatAmount: (Number(order.fiatAmount) / 100000).toString(),
+    //     //   })
+    //     // );
+    //     // console.log("OrderTrade data fetched successfully.", uniqueOrderTrades);
+    //   } else {
+    //     console.log("Failed to fetch orderTrade");
+    //   }
+    // } catch (error) {
+    //   console.log("Fetching order list of this role error!", error);
+    // }
   };
 
   const getStatus = (status?: number) => {
@@ -245,47 +243,47 @@ export default function OrderTrade() {
     console.log(choosedEditData);
     console.log(body);
 
-    try {
-      const token = getCookies();
-      if (body.id) {
-        const res = await axios.post("/api/v1/transaction/order/edit", body, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        if (res.status === 200) {
-          reset();
-          clearChoosedEditData();
-          setSelectedCorporateCode(null);
-          console.log("edit successful");
-          fetchOrderList();
-        } else {
-          console.log("edit failed");
-        }
-      } else {
-        const res = await axios.post("/api/v1/transaction/order/create", body, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        if (res.status === 200) {
-          reset();
-          clearChoosedEditData();
-          setSelectedCorporateCode(null);
-          console.log("save successful");
-          fetchOrderList();
-        } else {
-          console.log("save failed");
-        }
-      }
-    } catch (error) {
-      console.log(error);
-    }
+    // try {
+    //   const token = getCookies();
+    //   if (body.id) {
+    //     const res = await axios.post("/api/v1/transaction/order/edit", body, {
+    //       headers: {
+    //         Authorization: `Bearer ${token}`,
+    //       },
+    //     });
+    //     if (res.status === 200) {
+    //       reset();
+    //       clearChoosedEditData();
+    //       setSelectedCorporateCode(null);
+    //       console.log("edit successful");
+    //       fetchOrderList();
+    //     } else {
+    //       console.log("edit failed");
+    //     }
+    //   } else {
+    //     const res = await axios.post("/api/v1/transaction/order/create", body, {
+    //       headers: {
+    //         Authorization: `Bearer ${token}`,
+    //       },
+    //     });
+    //     if (res.status === 200) {
+    //       reset();
+    //       clearChoosedEditData();
+    //       setSelectedCorporateCode(null);
+    //       console.log("save successful");
+    //       fetchOrderList();
+    //     } else {
+    //       console.log("save failed");
+    //     }
+    //   }
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
 
   return (
     <>
-      <LandingHeader />
+      <NavBar />
       <div className="w-full flex justify-center">
         <div className="w-2/3 md:px-4 flex flex-col justify-center space-y-4 py-10">
           <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
@@ -455,7 +453,7 @@ export default function OrderTrade() {
                     )}
                   </div>
                 </div>
-                <div className="flex justify-end">
+                <div className="flex justify-end py-6">
                   <Button type="submit" disabled={isSubmitting}>
                     {isSubmitting ? "Submitting..." : "Submit"}
                   </Button>

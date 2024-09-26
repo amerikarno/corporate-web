@@ -10,7 +10,7 @@ import {
   dataForHot,
   dataForRecomended,
 } from "./__mock__/mockCustomCardData";
-import LandingHeader from "@/layout/landing/landingHeader";
+import NavBar from "@/components/navbar";
 import getImages from "@/common/imagesData";
 
 interface datatype {
@@ -52,7 +52,7 @@ const Landing = ({ ThemeChanger }: datatype) => {
 
   return (
     <>
-      <LandingHeader />
+      <NavBar />
       <div className="landing-page-wrapper relative">
         <div className="main-content landing-main !p-0" onClick={handleClick}>
           <div className="py-10" id="hot tokens">

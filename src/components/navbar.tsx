@@ -19,7 +19,7 @@ interface datatype {
   ThemeChanger: any;
 }
 
-const LandingHeader = ({ ThemeChanger }: datatype) => {
+const NavBar = ({ ThemeChanger }: datatype) => {
   const token = getCookies();
   const navigate = useNavigate();
 
@@ -80,14 +80,14 @@ const LandingHeader = ({ ThemeChanger }: datatype) => {
         }}
       />
 
-      <div className="w-full border-b border-gray-300 hidden lg:block">
+      <div className="w-full border-b border-gray-300 lg:block">
         <div className="container mx-auto lg:p-6 !p-0">
           {/* <div className="container mx-auto lg:p-6 !p-0"> */}
           <div className="py-6">
             {/* <div className="main-sidebar"> */}
             <nav className="flex flex-row justify-between">
               {/* <nav className="main-menu-container nav nav-pills sub-open"> */}
-              <div className="landing-logo-container my-auto hidden lg:block">
+              <div className="landing-logo-container my-auto hidden md:block">
                 <div className="responsive-logo">
                   <div className="flex flex-row items-center space-x-6 ">
                     <img src={getImages("logo")} alt="" className="h-16" />
@@ -97,7 +97,7 @@ const LandingHeader = ({ ThemeChanger }: datatype) => {
               </div>
 
               {token ? (
-                <div className="lg:flex hidden space-x-6 rtl:space-x-reverse items-center">
+                <div className="lg:flex space-x-6 rtl:space-x-reverse items-center pl-4">
                   <DropdownMenu>
                     <DropdownMenuTrigger className="flex pr-4 space-x-2 outline-none">
                       <Avatar className="w-16 h-16">
@@ -150,7 +150,7 @@ const LandingHeader = ({ ThemeChanger }: datatype) => {
                   </DropdownMenu>
                 </div>
               ) : (
-                <div className="lg:flex hidden space-x-6 rtl:space-x-reverse items-center">
+                <div className="lg:flex space-x-6 rtl:space-x-reverse items-center pl-4">
                   <Link
                     to={`${
                       import.meta.env.BASE_URL
@@ -179,4 +179,4 @@ const mapStateToProps = (state: any) => ({
   local_varaiable: state,
 });
 
-export default connect(mapStateToProps, { ThemeChanger })(LandingHeader);
+export default connect(mapStateToProps, { ThemeChanger })(NavBar);

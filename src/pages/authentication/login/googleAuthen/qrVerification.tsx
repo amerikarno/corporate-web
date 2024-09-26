@@ -4,7 +4,7 @@ import { Card } from "@/components/ui/card";
 import { setAuthenToken, setAuthenUser } from "@/redux/Action";
 import { setCookies } from "@/lib/cookies";
 import { jwtDecode } from "jwt-decode";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { TUser } from "../types";
@@ -18,7 +18,6 @@ export default function QrVerification() {
 
   const handleOtp = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
-    console.log(value, name);
     let tmp: string[] = [];
     if (error !== "") setError("");
     switch (name) {
@@ -102,6 +101,10 @@ export default function QrVerification() {
         setError(error.response.data.message);
       });
   };
+
+  useEffect(() => {
+    document.getElementById("one")?.focus();
+  }, []);
 
   return (
     <div className="w-full flex justify-center">
