@@ -1,6 +1,6 @@
 import axios from "@/api/axios";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/Button";
+import { Card } from "@/components/ui/Card";
 import { setAuthenToken, setAuthenUser } from "@/redux/Action";
 import { setCookies } from "@/lib/cookies";
 import { jwtDecode } from "jwt-decode";

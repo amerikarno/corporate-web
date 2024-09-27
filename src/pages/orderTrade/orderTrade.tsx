@@ -1,13 +1,11 @@
-import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/Card";
+import { Input } from "@/components/ui/Input";
+import { Button } from "@/components/ui/Button";
 import { TOrderTrade } from "./constant/type";
 import { orderTradeSchema } from "./constant/schemas";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
-import { getCookies } from "@/lib/cookies";
-import axios from "@/api/axios";
 import DataTable, { TableColumn } from "react-data-table-component";
 import { MdCurrencyExchange } from "react-icons/md";
 import { IoReceiptOutline } from "react-icons/io5";
@@ -23,6 +21,7 @@ export default function OrderTrade() {
   const [mockedCorporateCodes, setFetchedCorporateCodes] = useState<
     { corporateCode: number }[]
   >([]);
+  setFetchedCorporateCodes([]);
   const [choosedEditData, setChoosedEditData] = useState<TOrderTrade>();
   // const clearChoosedEditData = () => {
   //   setChoosedEditData(undefined);

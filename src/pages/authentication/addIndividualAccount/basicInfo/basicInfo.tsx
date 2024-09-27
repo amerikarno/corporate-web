@@ -1,7 +1,7 @@
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/Card";
 import { TiHome } from "react-icons/ti";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/Input";
+import { Button } from "@/components/ui/Button";
 import { MdLocationPin } from "react-icons/md";
 import { useEffect, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";

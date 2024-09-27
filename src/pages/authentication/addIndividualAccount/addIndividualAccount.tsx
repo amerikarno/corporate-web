@@ -1,15 +1,15 @@
 // import { isAllowedPage } from "@/lib/utils";
 // import UnAuthorize from "@/pages/unAuthorizePage/unAuthorize";
 // import Liveness from "./livenessOcr/livenessOcr";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/Card";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import {
   TIndividualAccount,
   individualAccountSchema,
 } from "./constant/schemas";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/Input";
+import { Button } from "@/components/ui/Button";
 // import { getCookies } from "@/lib/Cookies";
 // import axios from "@/api/axios";
 import { useNavigate } from "react-router-dom";

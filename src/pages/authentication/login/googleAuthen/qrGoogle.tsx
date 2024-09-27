@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "@/api/axios";
 import { QRCodeSVG as QRCode } from "qrcode.react";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/Button";
+import { Card } from "@/components/ui/Card";
 import { useDispatch } from "react-redux";
 import { setAuthenToken, setAuthenUser } from "@/redux/Action";
 import { setCookies } from "@/lib/cookies";
