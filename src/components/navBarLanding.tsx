@@ -20,7 +20,7 @@ interface datatype {
   ThemeChanger: any;
 }
 
-const NavBar = ({ ThemeChanger }: datatype) => {
+const NavBarLanding = ({ ThemeChanger }: datatype) => {
   const token = getCookies();
   const navigate = useNavigate();
 
@@ -82,14 +82,14 @@ const NavBar = ({ ThemeChanger }: datatype) => {
       />
 
       <div className="w-full border-b border-gray-300">
-        <div className="w-full lg:max-w-[1240px] mx-auto">
-          <div className="px-2 py-6">
+        <div className="max-w-[380px] md:max-w-screen-md xl:max-w-screen-xl mx-auto py-6 xl:px-4">
+          <div className="">
             <div className="flex flex-row">
               <div className="w-1/2 lg:w-1/3">
-                <img src={getImages("logo")} alt="" className="h-10" />
+                <img src={getImages("logo")} alt="" className="h-12 md:h-16" />
               </div>
-              <div className="hidden lg:flex lg:w-1/3 items-center">
-                <u className="lg:text-2xl xl:text-3xl font-bold text-black">
+              <div className="hidden xl:flex xl:w-1/3 items-center">
+                <u className="xl:text-3xl font-bold text-black">
                   Elite Consulting
                 </u>
               </div>
@@ -148,15 +148,15 @@ const NavBar = ({ ThemeChanger }: datatype) => {
                   </DropdownMenu>
                 </div>
               ) : (
-                <div className="w-1/2 lg:w-1/3 flex justify-end">
+                <div className="w-1/2 lg:w-1/3 flex justify-end space-x-6">
                   <Button
-                    className="bg-[rgba(90,102,241,1)] min-w-12 mx-2 h-10"
+                    className="bg-[rgba(90,102,241,1)] min-w-12"
                     onClick={() => navigate("/authentication/signup/type/")}
                   >
                     Sign Up
                   </Button>
                   <Button
-                    className="bg-gray-900 min-w-12 h-10"
+                    className="bg-gray-900 min-w-12"
                     onClick={() => navigate("/authentication/login")}
                   >
                     Login
@@ -175,4 +175,4 @@ const mapStateToProps = (state: any) => ({
   local_varaiable: state,
 });
 
-export default connect(mapStateToProps, { ThemeChanger })(NavBar);
+export default connect(mapStateToProps, { ThemeChanger })(NavBarLanding);
