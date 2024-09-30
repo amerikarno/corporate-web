@@ -3,7 +3,33 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
-      colors: {},
+      colors: {
+        primary: "rgb(90, 102, 241)",
+        secondary: "rgb(96, 165, 250)",
+        success: "rgb(34, 197, 94)",
+        info: "rgb(76, 117, 207)",
+        warning: "rgb(234, 179, 8)",
+        danger: "rgb(244, 63, 94)",
+        "body-bg": {
+          light: "rgb(242, 246, 249)",
+          dark: "rgb(41, 53, 73)",
+        },
+        "default-text-color": "rgb(71, 85, 105)",
+        "default-border": "rgb(243, 243, 243)",
+        muted: "rgb(140, 144, 151)",
+        "dark-rgb": "rgb(14, 16, 20)",
+        "menu-bg": "rgb(255, 255, 255)",
+        "menu-border-color": "rgb(243, 243, 243)",
+        "menu-prime-color": "rgb(100, 116, 139)",
+        "header-bg": "rgb(255, 255, 255)",
+        "header-prime-color": "rgb(100, 116, 139)",
+        "header-border-color": "rgb(243, 243, 243)",
+        "dark-bg": "rgb(30, 41, 59)",
+        "dark-bg2": {
+          light: "rgb(249, 250, 251)",
+          dark: "rgb(30, 41, 59)",
+        },
+      },
       screens: {
         xs: "480px",
         sm: "640px",
