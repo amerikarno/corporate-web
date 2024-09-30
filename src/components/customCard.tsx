@@ -24,14 +24,12 @@ export function CustomCard({ data }: TCustomCardProps) {
 
         <div className="w-full p-2 md:p-4">
           <div className="flex flex-row bg-gray-100 rounded-2xl space-x-4 border border-gray-100">
-            <div className="w-[140px] h-full">
+            <div className="w-1/3 h-full">
               <img src={data.image} alt="" className="rounded-2xl" />
             </div>
-            <div className="w-full justify-between pt-2 space-y-2">
-              <div className={`${darkText} h-1/3 w-[140px]`}>{data.name}</div>
-              <div
-                className={`${normalText} flex-grow h-2/3 line-clamp-2 md:line-clamp-3`}
-              >
+            <div className="w-2/3 pt-2 space-y-2]">
+              <div className={`${darkText} break-words`}>{data.name}</div>
+              <div className={`${normalText} break-words`}>
                 {data.description}
               </div>
             </div>

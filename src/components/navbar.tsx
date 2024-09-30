@@ -18,9 +18,10 @@ import { Button } from "@/components/ui/Button";
 
 interface datatype {
   ThemeChanger: any;
+  children: React.ReactNode;
 }
 
-const NavBar = ({ ThemeChanger }: datatype) => {
+const NavBar = ({ ThemeChanger, children }: datatype) => {
   const token = getCookies();
   const navigate = useNavigate();
 
@@ -81,21 +82,20 @@ const NavBar = ({ ThemeChanger }: datatype) => {
         }}
       />
 
-      <div className="w-full border-b border-gray-300">
+      <div id="header" className="border-b border-gray-300 shadow-sm">
         <div className="w-full lg:max-w-[1240px] mx-auto">
-          <div className="px-2 py-6">
-            <div className="flex flex-row">
-              <div className="w-1/2 lg:w-1/3">
-                <img src={getImages("logo")} alt="" className="h-10" />
-              </div>
-              <div className="hidden lg:flex lg:w-1/3 items-center">
-                <u className="lg:text-2xl xl:text-3xl font-bold text-black">
-                  Elite Consulting
-                </u>
-              </div>
-
-              {token ? (
-                <div className="lg:flex space-x-6 rtl:space-x-reverse items-center pl-4">
+          <div className="w-full flex flex-row py-4 px-4">
+            <div className="w-1/2 items-center lg:w-1/3">
+              <img src={getImages("logo")} alt="" className="h-12" />
+            </div>
+            <div className="hidden lg:block lg:w-1/3 lg:items-center">
+              <p className="bg-gradient-to-r from-gold-light via-gold-mid to-gold-dark text-transparent bg-clip-text s2:text-3xl font-bold">
+                Elite Consulting
+              </p>
+            </div>
+            {token ? (
+              <div className="w-1/2 lg:w-1/3 flex justify-end">
+                <div className="flex flex-row space-x-2">
                   <DropdownMenu>
                     <DropdownMenuTrigger className="flex pr-4 space-x-2 outline-none">
                       <Avatar className="w-16 h-16">
@@ -147,26 +147,28 @@ const NavBar = ({ ThemeChanger }: datatype) => {
                     </DropdownMenuContent>
                   </DropdownMenu>
                 </div>
-              ) : (
-                <div className="w-1/2 lg:w-1/3 flex justify-end">
-                  <Button
-                    className="bg-[rgba(90,102,241,1)] min-w-12 mx-2 h-10"
-                    onClick={() => navigate("/authentication/signup/type/")}
-                  >
-                    Sign Up
-                  </Button>
-                  <Button
-                    className="bg-gray-900 min-w-12 h-10"
-                    onClick={() => navigate("/authentication/login")}
-                  >
-                    Login
-                  </Button>
-                </div>
-              )}
-            </div>
+              </div>
+            ) : (
+              <div className="w-1/2 s3:w-1/3 flex justify-end items-center space-x-4">
+                <Button
+                  className="bg-[rgba(90,102,241,1)] min-w-24 max-w-24"
+                  onClick={() => navigate("/authentication/signup/type/")}
+                >
+                  Sign Up
+                </Button>
+                <Button
+                  className="min-w-24 max-w-24 bg-slate-900"
+                  onClick={() => navigate("/authentication/login")}
+                >
+                  Login
+                </Button>
+              </div>
+            )}
           </div>
         </div>
       </div>
+
+      {children}
     </>
   );
 };

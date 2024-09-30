@@ -29,6 +29,12 @@ export default {
           light: "rgb(249, 250, 251)",
           dark: "rgb(30, 41, 59)",
         },
+        gold: {
+          light: "rgb(235,209,151)",
+          mid: "rgb(180,136,17)",
+          mid2: "rgb(162,121,13)",
+          dark: "rgb(187,155,73)",
+        },
       },
       screens: {
         xs: "480px",
