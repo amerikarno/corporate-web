@@ -18,10 +18,8 @@ export default function OrderTrade() {
   // >(null);
   const [selectedTradingPair, setSelectedTradingPair] =
     useState<string>("THB/USDT");
-  const [mockedCorporateCodes, setFetchedCorporateCodes] = useState<
-    { corporateCode: number }[]
-  >([]);
-  setFetchedCorporateCodes([]);
+  const [mockedCorporateCodes, _] = useState<{ corporateCode: number }[]>([]);
+  // setFetchedCorporateCodes([]);
   const [choosedEditData, setChoosedEditData] = useState<TOrderTrade>();
   // const clearChoosedEditData = () => {
   //   setChoosedEditData(undefined);
@@ -166,29 +164,29 @@ export default function OrderTrade() {
     },
   ];
 
-  useEffect(() => {
-    const orderListDatatoInputField = choosedEditData || {
-      corporateCode: null,
-      cryptoAmount: null,
-      cryptoPrice: null,
-      currency: "",
-      fiatAmount: null,
-    };
-    reset(orderListDatatoInputField);
-    if (choosedEditData?.operations === "buy") {
-      setBuySell("buy");
-    } else if (choosedEditData?.operations === "sell") {
-      setBuySell("sell");
-      if (choosedEditData) {
-        const cur = choosedEditData.pair.split("/");
-        setSellCurrency(cur[1]);
-      }
-    } else {
-      setBuySell("buy");
-    }
+  // useEffect(() => {
+  //   const orderListDatatoInputField = choosedEditData || {
+  //     corporateCode: null,
+  //     cryptoAmount: null,
+  //     cryptoPrice: null,
+  //     currency: "",
+  //     fiatAmount: null,
+  //   };
+  //   reset(orderListDatatoInputField);
+  //   if (choosedEditData?.operations === "buy") {
+  //     setBuySell("buy");
+  //   } else if (choosedEditData?.operations === "sell") {
+  //     setBuySell("sell");
+  //     if (choosedEditData) {
+  //       const cur = choosedEditData.pair.split("/");
+  //       setSellCurrency(cur[1]);
+  //     }
+  //   } else {
+  //     setBuySell("buy");
+  //   }
 
-    console.log("use effect", orderListDatatoInputField);
-  }, [choosedEditData]);
+  //   console.log("use effect", orderListDatatoInputField);
+  // }, [choosedEditData]);
 
   const handleBuySell = (value: string) => {
     setBuySell(value);
@@ -282,21 +280,23 @@ export default function OrderTrade() {
 
   return (
     <>
-      <NavBar />
-      <div className="w-full flex justify-center">
-        <div className="w-2/3 md:px-4 flex flex-col justify-center space-y-4 py-10">
-          <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
-            <div className="w-full flex justify-center">
-              <Card className="bg-white w-full p-4 md:space-y-4 md:p-10">
-                <span className="flex justify-start items-center font-bold md:text-xl py-2 gap-2">
-                  Orders / Trades
-                  <span>
-                    <IoReceiptOutline />
-                  </span>
-                </span>
-                <div className="w-full flex justify-center items-center">
-                  <div className="w-2/3">
-                    {/* <Input
+      <NavBar
+        isFullWidth
+        children={
+          <div className="w-full flex justify-center">
+            <div className="w-2/3 md:px-4 flex flex-col justify-center space-y-4 py-10">
+              <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
+                <div className="w-full flex justify-center">
+                  <Card className="bg-white w-full p-4 md:space-y-4 md:p-10">
+                    <span className="flex justify-start items-center font-bold md:text-xl py-2 gap-2">
+                      Orders / Trades
+                      <span>
+                        <IoReceiptOutline />
+                      </span>
+                    </span>
+                    <div className="w-full flex justify-center items-center">
+                      <div className="w-2/3">
+                        {/* <Input
                       {...register("corporateCode")}
                       label="Corporate Code"
                       data-testid="Corporate Code"
@@ -318,162 +318,164 @@ export default function OrderTrade() {
                         {errors.corporateCode.message}
                       </p>
                     )} */}
-                    <datalist id="corporateCodes">
-                      {mockedCorporateCodes.map((code, index) => (
-                        <option key={index} value={code.corporateCode}>
-                          {code.corporateCode}
-                        </option>
-                      ))}
-                    </datalist>
-                  </div>
-                </div>
-                <div className="flex items-center justify-center pt-4">
-                  <div className="w-1/2 ">
-                    <div className="relative">
-                      {/* <label className="absolute bg-white text-xs rounded-full border-none -top-4">Pairs</label> */}
-                      <select
-                        id="pair"
-                        {...register("pair")}
-                        value={selectedTradingPair}
-                        onChange={handleTradingPairChange}
-                        disabled={isSubmitting}
-                        className="h-11 cursor-pointer bg-slate-700 focus:ring-gray-200 hover:bg-slate-900 border border-slate-800 text-white text-base rounded-md block w-full py-2.5 px-4 focus:outline-none appearance-none"
-                      >
-                        <option value="THB/USTD" disabled>
-                          THB/USDT
-                        </option>
-                        {tradingPair.map((pair, index) => (
-                          <option key={index} value={pair.name}>
-                            {pair.name}
-                          </option>
-                        ))}
-                      </select>
-                      <MdCurrencyExchange className="absolute text-xl right-4 top-1/2 transform -translate-y-1/2 pointer-events-none text-white" />
+                        <datalist id="corporateCodes">
+                          {mockedCorporateCodes.map((code, index) => (
+                            <option key={index} value={code.corporateCode}>
+                              {code.corporateCode}
+                            </option>
+                          ))}
+                        </datalist>
+                      </div>
                     </div>
-                    {errors.pair && (
-                      <p className="text-red-500 text-sm px-2">
-                        {errors.pair.message}
-                      </p>
-                    )}
-                  </div>
-                </div>
-                <div className="flex flex-row justify-center pb-4">
-                  <div
-                    className={`flex justify-center select-none cursor-default w-1/4 text-white px-4 py-2 rounded-l transition-colors duration-300 ${
-                      buySell === "buy" ? "bg-slate-800" : "bg-slate-500"
-                    }`}
-                    onClick={() => handleBuySell("buy")}
-                  >
-                    Buy
-                  </div>
-                  <div
-                    className={`flex justify-center select-none cursor-default w-1/4 text-white px-4 py-2 rounded-r transition-colors duration-300 ${
-                      buySell === "sell" ? "bg-slate-800" : "bg-slate-500"
-                    }`}
-                    onClick={() => handleBuySell("sell")}
-                  >
-                    Sell
-                  </div>
-                </div>
-                <div className="flex gap-4 items-center ">
-                  <div className="w-1/2 space-y-4">
-                    <Input
-                      {...register("cryptoAmount")}
-                      label="Crypto Amount"
-                      data-testid="Crypto Amount"
-                      id="cryptoAmount"
-                      disabled={isSubmitting}
-                      step="0.00001"
-                      type="number"
-                    />
-                    {errors.cryptoAmount && (
-                      <p className="text-red-500 text-sm px-2">
-                        {errors.cryptoAmount.message}
-                      </p>
-                    )}
-                    <Input
-                      {...register("fiatAmount")}
-                      label="Fiat Amount"
-                      data-testid="Fiat Amount"
-                      id="fiatAmount"
-                      disabled={isSubmitting}
-                      step="0.00001"
-                      type="number"
-                    />
-                    {errors.fiatAmount && (
-                      <p className="text-red-500 text-sm px-2">
-                        {errors.fiatAmount.message}
-                      </p>
-                    )}
-                  </div>
-                  <div className="w-1/2 space-y-4">
-                    <Input
-                      {...register("cryptoPrice")}
-                      label="Crypto Price"
-                      data-testid="Crypto Price"
-                      id="cryptoPrice"
-                      disabled={isSubmitting}
-                      step="0.00001"
-                      type="number"
-                    />
-                    {errors.cryptoPrice && (
-                      <p className="text-red-500 text-sm px-2">
-                        {errors.cryptoPrice.message}
-                      </p>
-                    )}
-                    <select
-                      {...register("currency")}
-                      value={watch("currency")}
-                      onChange={(e) => {
-                        setValue("currency", e.target.value);
-                      }}
-                      data-testid="currency-combobox"
-                      className="px-2.5 pb-2.5 pt-4 cursor-pointer border border-gray-700 text-gray-600 pl-2 hover:bg-slate-100
+                    <div className="flex items-center justify-center pt-4">
+                      <div className="w-1/2 ">
+                        <div className="relative">
+                          {/* <label className="absolute bg-white text-xs rounded-full border-none -top-4">Pairs</label> */}
+                          <select
+                            id="pair"
+                            {...register("pair")}
+                            value={selectedTradingPair}
+                            onChange={handleTradingPairChange}
+                            disabled={isSubmitting}
+                            className="h-11 cursor-pointer bg-slate-700 focus:ring-gray-200 hover:bg-slate-900 border border-slate-800 text-white text-base rounded-md block w-full py-2.5 px-4 focus:outline-none appearance-none"
+                          >
+                            <option value="THB/USTD" disabled>
+                              THB/USDT
+                            </option>
+                            {tradingPair.map((pair, index) => (
+                              <option key={index} value={pair.name}>
+                                {pair.name}
+                              </option>
+                            ))}
+                          </select>
+                          <MdCurrencyExchange className="absolute text-xl right-4 top-1/2 transform -translate-y-1/2 pointer-events-none text-white" />
+                        </div>
+                        {errors.pair && (
+                          <p className="text-red-500 text-sm px-2">
+                            {errors.pair.message}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                    <div className="flex flex-row justify-center pb-4">
+                      <div
+                        className={`flex justify-center select-none cursor-default w-1/4 text-white px-4 py-2 rounded-l transition-colors duration-300 ${
+                          buySell === "buy" ? "bg-slate-800" : "bg-slate-500"
+                        }`}
+                        onClick={() => handleBuySell("buy")}
+                      >
+                        Buy
+                      </div>
+                      <div
+                        className={`flex justify-center select-none cursor-default w-1/4 text-white px-4 py-2 rounded-r transition-colors duration-300 ${
+                          buySell === "sell" ? "bg-slate-800" : "bg-slate-500"
+                        }`}
+                        onClick={() => handleBuySell("sell")}
+                      >
+                        Sell
+                      </div>
+                    </div>
+                    <div className="flex gap-4 items-center ">
+                      <div className="w-1/2 space-y-4">
+                        <Input
+                          {...register("cryptoAmount")}
+                          label="Crypto Amount"
+                          data-testid="Crypto Amount"
+                          id="cryptoAmount"
+                          disabled={isSubmitting}
+                          step="0.00001"
+                          type="number"
+                        />
+                        {errors.cryptoAmount && (
+                          <p className="text-red-500 text-sm px-2">
+                            {errors.cryptoAmount.message}
+                          </p>
+                        )}
+                        <Input
+                          {...register("fiatAmount")}
+                          label="Fiat Amount"
+                          data-testid="Fiat Amount"
+                          id="fiatAmount"
+                          disabled={isSubmitting}
+                          step="0.00001"
+                          type="number"
+                        />
+                        {errors.fiatAmount && (
+                          <p className="text-red-500 text-sm px-2">
+                            {errors.fiatAmount.message}
+                          </p>
+                        )}
+                      </div>
+                      <div className="w-1/2 space-y-4">
+                        <Input
+                          {...register("cryptoPrice")}
+                          label="Crypto Price"
+                          data-testid="Crypto Price"
+                          id="cryptoPrice"
+                          disabled={isSubmitting}
+                          step="0.00001"
+                          type="number"
+                        />
+                        {errors.cryptoPrice && (
+                          <p className="text-red-500 text-sm px-2">
+                            {errors.cryptoPrice.message}
+                          </p>
+                        )}
+                        <select
+                          {...register("currency")}
+                          value={watch("currency")}
+                          onChange={(e) => {
+                            setValue("currency", e.target.value);
+                          }}
+                          data-testid="currency-combobox"
+                          className="px-2.5 pb-2.5 pt-4 cursor-pointer border border-gray-700 text-gray-600 pl-2 hover:bg-slate-100
                 text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full h-full dark:bg-gray-700 dark:border-gray-600
                  dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-700 dark:focus:border-gray-700"
-                    >
-                      <option value="">Currency</option>
-                      {/* <option value="THB">THB</option>
+                        >
+                          <option value="">Currency</option>
+                          {/* <option value="THB">THB</option>
                     <option value="USD">USD</option> */}
-                      {buySell === "buy" ? (
-                        buyCurrency.map((currency, index) => (
-                          <option key={index} value={currency.name}>
-                            {currency.name}
-                          </option>
-                        ))
-                      ) : (
-                        <option value={sellCurrency}>{sellCurrency}</option>
-                      )}
-                    </select>
-                    {errors.currency && (
-                      <p className="text-red-500 text-sm px-2">
-                        {errors.currency.message}
-                      </p>
-                    )}
-                  </div>
+                          {buySell === "buy" ? (
+                            buyCurrency.map((currency, index) => (
+                              <option key={index} value={currency.name}>
+                                {currency.name}
+                              </option>
+                            ))
+                          ) : (
+                            <option value={sellCurrency}>{sellCurrency}</option>
+                          )}
+                        </select>
+                        {errors.currency && (
+                          <p className="text-red-500 text-sm px-2">
+                            {errors.currency.message}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                    <div className="flex justify-end py-6">
+                      <Button type="submit" disabled={isSubmitting}>
+                        {isSubmitting ? "Submitting..." : "Submit"}
+                      </Button>
+                    </div>
+                  </Card>
                 </div>
-                <div className="flex justify-end py-6">
-                  <Button type="submit" disabled={isSubmitting}>
-                    {isSubmitting ? "Submitting..." : "Submit"}
-                  </Button>
-                </div>
+              </form>
+              <Card className="p-4 w-full bg-white">
+                <DataTable
+                  title="Rejected Orders / Trades Lists"
+                  columns={columnsOrderTrade}
+                  data={dataMocked}
+                  // data={orderTradeData.map((orderTrade, index) => ({
+                  //   ...orderTrade,
+                  //   key: index,
+                  // }))}
+                  clearSelectedRows
+                />
               </Card>
             </div>
-          </form>
-          <Card className="p-4 w-full bg-white">
-            <DataTable
-              title="Rejected Orders / Trades Lists"
-              columns={columnsOrderTrade}
-              data={dataMocked}
-              // data={orderTradeData.map((orderTrade, index) => ({
-              //   ...orderTrade,
-              //   key: index,
-              // }))}
-              clearSelectedRows
-            />
-          </Card>
-        </div>
-      </div>
+          </div>
+        }
+      />
     </>
   );
 }

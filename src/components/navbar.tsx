@@ -19,9 +19,10 @@ import { Button } from "@/components/ui/Button";
 interface datatype {
   ThemeChanger: any;
   children: React.ReactNode;
+  isFullWidth?: boolean;
 }
 
-const NavBar = ({ ThemeChanger, children }: datatype) => {
+const NavBar = ({ ThemeChanger, children, isFullWidth }: datatype) => {
   const token = getCookies();
   const navigate = useNavigate();
 
@@ -83,17 +84,19 @@ const NavBar = ({ ThemeChanger, children }: datatype) => {
       />
 
       <div id="header" className="border-b border-gray-300 shadow-sm">
-        <div className="w-full lg:max-w-[1240px] mx-auto">
+        <div
+          className={`w-full ${isFullWidth ? "" : "lg:max-w-[1240px]"} mx-auto`}
+        >
           <div className="w-full flex flex-row py-4 px-4">
             <div className="w-1/2 items-center lg:w-1/3">
               <img src={getImages("logo")} alt="" className="h-12" />
             </div>
             <div className="hidden lg:block lg:w-1/3 lg:items-center">
-              <p className="bg-gradient-to-r from-gold-light via-gold-mid to-gold-dark text-transparent bg-clip-text s2:text-3xl font-bold">
+              <p className="bg-gradient-to-r from-gold-light via-gold-mid to-gold-dark text-transparent bg-clip-text s2:text-3xl font-bold text-center">
                 Elite Consulting
               </p>
             </div>
-            {token ? (
+            {!token ? (
               <div className="w-1/2 lg:w-1/3 flex justify-end">
                 <div className="flex flex-row space-x-2">
                   <DropdownMenu>

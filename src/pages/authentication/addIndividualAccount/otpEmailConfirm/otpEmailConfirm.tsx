@@ -1,10 +1,5 @@
 import { Button } from "@/components/ui/Button";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-} from "@/components/ui/Card";
+import { Card, CardContent, CardHeader } from "@/components/ui/Card";
 import { Input } from "@/components/ui/Input";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useRef, useState } from "react";
@@ -119,23 +114,23 @@ export function OtpEmailConfirm() {
   }, [count]);
 
   return (
-    <div className="flex justify-center p-10">
-      <Card className="w-1/2 bg-white">
-        <CardHeader className="font-bold text-2xl">
-          กรุณายืนยัน "หมายเลขโทรศัพท์" และ "อีเมล" ของท่าน
-        </CardHeader>
-        <CardContent className="py-6">
-          <div className="flex flex-row my-6">
-            <div className="px-5">
-              <img src={getImages("phoneIcon")} />
-            </div>
-            <div className="flex flex-col justify-start w-full">
-              <h1 className="col-span-2 py-4">
-                1. ยืนยันหมายเลขโทรศัพท์ของท่านผ่าน OTP
-                <span className="text-red-500"> * </span>
-              </h1>
-              <div className="flex flex-row">
-                <div className="w-2/3">
+    <div className="flex p-4 xl:p-10 bg-slate-100 h-screen">
+      <div className="w-full flex flex-col space-y-10">
+        <Card className="w-full lg:w-4/5 xl:w-1/2 bg-white mx-auto">
+          <CardHeader className="font-bold text-xl lg:text-2xl">
+            กรุณายืนยัน "หมายเลขโทรศัพท์" และ "อีเมล" ของท่าน
+          </CardHeader>
+          <CardContent className="py-6">
+            <div className="">
+              <div className="flex flex-row items-center space-x-2">
+                <img src={getImages("phoneIcon")} className="w-10 h-10" />
+                <h1 className="py-4">
+                  1. ยืนยันหมายเลขโทรศัพท์ของท่านผ่าน OTP
+                  <span className="text-red-500"> * </span>
+                </h1>
+              </div>
+              <div className="flex flex-col space-y-4 md:space-y-0 md:flex-row pl-12">
+                <div className="md:w-2/3">
                   <Input
                     name="mobile"
                     value={userData.mobile}
@@ -145,7 +140,7 @@ export function OtpEmailConfirm() {
                     // disabled={disableMobile}
                   />
                 </div>
-                <div className="px-5 space-x-5 flex flex-row w-1/3">
+                <div className="md:px-4 space-x-4 flex flex-row md:w-1/3 md:pr-4">
                   <Button
                     onClick={() => setDisableMobile(false)}
                     disabled={!disableMobile}
@@ -158,19 +153,17 @@ export function OtpEmailConfirm() {
                 </div>
               </div>
             </div>
-          </div>
 
-          <div className="flex flex-row my-6">
-            <div className="px-5">
-              <img src={getImages("mailIcon")} />
-            </div>
-            <div className="flex flex-col justify-start w-full">
-              <h1 className="col-span-2 py-4">
-                2. ยืนยันอีเมลของท่าน
-                <span className="text-red-500"> * </span>
-              </h1>
-              <div className="flex flex-row">
-                <div className="w-2/3">
+            <div className="">
+              <div className="flex flex-row items-center space-x-2">
+                <img src={getImages("mailIcon")} className="w-10 h-10" />
+                <h1 className="py-4">
+                  2. ยืนยันอีเมลของท่าน
+                  <span className="text-red-500"> * </span>
+                </h1>
+              </div>
+              <div className="flex flex-col space-y-4 md:space-y-0 md:flex-row pl-12">
+                <div className="md:w-2/3">
                   <Input
                     name="email"
                     value={userData.email}
@@ -180,7 +173,7 @@ export function OtpEmailConfirm() {
                     // disabled={disableEmail}
                   />
                 </div>
-                <div className="px-5 space-x-5 flex flex-row w-1/3">
+                <div className="md:px-4 md:pr-4 space-x-4 flex flex-row md:w-1/3">
                   <Button
                     onClick={() => setDisableEmail(false)}
                     disabled={!disableEmail}
@@ -191,71 +184,69 @@ export function OtpEmailConfirm() {
                 </div>
               </div>
             </div>
-          </div>
-        </CardContent>
-        <CardFooter>
-          <div className="w-full flex justify-end px-9">
-            <Button
-              onClick={() =>
-                navigate(
-                  `${import.meta.env.BASE_URL}authentication/signup/livenessocr`
-                )
-              }
-            >
-              Next
-            </Button>
-          </div>
-        </CardFooter>
-      </Card>
+          </CardContent>
+        </Card>
+        <div className="w-full lg:w-4/5 xl:w-1/2 flex justify-end mx-auto">
+          <Button
+            onClick={() =>
+              navigate(
+                `${import.meta.env.BASE_URL}authentication/signup/livenessocr`
+              )
+            }
+          >
+            Next
+          </Button>
+        </div>
 
-      <AlertDialog open={isDialogOpen}>
-        <AlertDialogContent className="bg-white">
-          <AlertDialogTitle>
-            กรุณายืนยันรหัส OTP 6 หลัก ระบบได้ทำการส่งรหัส OTP ไปยังหมายเลข{" "}
-            {hideOtpNumber(userData.mobile)} แล้ว
-          </AlertDialogTitle>{" "}
-          <AlertDialogTitle>ref code : {refCode.current}</AlertDialogTitle>
-          <AlertDialogDescription>
-            <div>
-              <div className="pb-10 space-y-4">
+        <AlertDialog open={isDialogOpen}>
+          <AlertDialogContent className="bg-white">
+            <AlertDialogTitle>
+              กรุณายืนยันรหัส OTP 6 หลัก ระบบได้ทำการส่งรหัส OTP ไปยังหมายเลข{" "}
+              {hideOtpNumber(userData.mobile)} แล้ว
+            </AlertDialogTitle>{" "}
+            <AlertDialogTitle>ref code : {refCode.current}</AlertDialogTitle>
+            <AlertDialogDescription>
+              <div>
+                <div className="pb-10 space-y-4">
+                  <p>
+                    รหัส OTP 6 หลัก<span className="text-red-500"> * </span>
+                  </p>
+                  <Input name="otp" onChange={handleInput} />
+                </div>
+                <p>กรุณาตรวจสอบรหัส OTP บนโทรศัพย์มือถือของท่านภายใน 5 นาที</p>
                 <p>
-                  รหัส OTP 6 หลัก<span className="text-red-500"> * </span>
+                  หากท่านไม่ได้รับรหัส OTP{" "}
+                  {isCountDone ? (
+                    <u className="hover:cursor-pointer" onClick={resentOtp}>
+                      คลิก
+                    </u>
+                  ) : (
+                    <u>กรุณารอ {convertTimeToString(count)} นาที</u>
+                  )}
                 </p>
-                <Input name="otp" onChange={handleInput} />
               </div>
-              <p>กรุณาตรวจสอบรหัส OTP บนโทรศัพย์มือถือของท่านภายใน 5 นาที</p>
-              <p>
-                หากท่านไม่ได้รับรหัส OTP{" "}
-                {isCountDone ? (
-                  <u className="hover:cursor-pointer" onClick={resentOtp}>
-                    คลิก
-                  </u>
-                ) : (
-                  <u>กรุณารอ {convertTimeToString(count)} นาที</u>
-                )}
-              </p>
-            </div>
-          </AlertDialogDescription>
-          <AlertDialogAction
-            className="w-full"
-            onClick={() => {
-              clearInterval(intervalId.current!);
-              setIsDialogOpen(false);
-            }}
-          >
-            Confirm
-          </AlertDialogAction>
-          <AlertDialogCancel
-            className="w-full"
-            onClick={() => {
-              clearInterval(intervalId.current!);
-              setIsDialogOpen(false);
-            }}
-          >
-            Cancle
-          </AlertDialogCancel>
-        </AlertDialogContent>
-      </AlertDialog>
+            </AlertDialogDescription>
+            <AlertDialogAction
+              className="w-full"
+              onClick={() => {
+                clearInterval(intervalId.current!);
+                setIsDialogOpen(false);
+              }}
+            >
+              Confirm
+            </AlertDialogAction>
+            <AlertDialogCancel
+              className="w-full"
+              onClick={() => {
+                clearInterval(intervalId.current!);
+                setIsDialogOpen(false);
+              }}
+            >
+              Cancle
+            </AlertDialogCancel>
+          </AlertDialogContent>
+        </AlertDialog>
+      </div>
     </div>
   );
 }
