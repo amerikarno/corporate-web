@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setFaceImage } from "@/redux/Action";
 import { sleep } from "@/lib/utils";
+import { useWindowSize } from "@/lib/useWindowSize";
 
 export default function Liveness() {
   type TActionMessage = {
@@ -42,8 +43,15 @@ export default function Liveness() {
 
   let customerCode = 90000001;
 
-  let screenWidth = window.innerWidth;
-  let screenHeight = window.innerHeight;
+  // let screenWidth = window.innerWidth;
+  // let screenHeight = window.innerHeight;
+
+  const { width, height } = useWindowSize();
+  // const [videoConstraints, setVideoConstraints] = useState({
+  //   width: width,
+  //   height: height,
+  //   facingMode: "user",
+  // });
 
   useEffect(() => {
     const loadModels = async () => {
@@ -86,8 +94,8 @@ export default function Liveness() {
   }, [isModelsLoaded]);
 
   const startVideo = async () => {
-    const w = screenWidth > 360 ? 360 : screenWidth;
-    const h = screenWidth > 360 ? 270 : screenWidth / aspectRatio;
+    const w = width > 360 ? 360 : width;
+    const h = width > 360 ? 270 : width / aspectRatio;
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
         video: {
@@ -148,7 +156,7 @@ export default function Liveness() {
           mouth[18],
           mouth[19],
         ]);
-        if (mouthDist > 30 && trackIsCenter) {
+        if (mouthDist > 25 && trackIsCenter) {
           console.log("Mouth opened");
           setIsMouthOpen(true);
           trackIsMouthOpen = true;
@@ -274,11 +282,14 @@ export default function Liveness() {
       detection: faceapi.FaceDetection;
     }>
   ) => {
-    if (screenWidth > 360) {
+    let screenWidth = innerWidth;
+    let screenHeight = innerHeight;
+
+    if (width > 360) {
       screenWidth = 360;
       screenHeight = 270;
     } else {
-      screenHeight = screenWidth / aspectRatio;
+      screenHeight = width / aspectRatio;
     }
 
     // Resize canvas to match screen dimensions
@@ -377,6 +388,7 @@ export default function Liveness() {
     } else {
       console.log("actions incomplete");
     }
+    navigate("/authentication/signup/webcaminstructions");
   };
 
   const getMessage = () => {
@@ -417,9 +429,9 @@ export default function Liveness() {
     }
   };
 
-  const handleSubmit = async () => {
-    navigate("/authentication/signup/webcaminstructions");
-  };
+  // const handleSubmit = async () => {
+  //   navigate("/authentication/signup/webcaminstructions");
+  // };
 
   if (!isModelsLoaded) {
     return <p>Loading models...</p>;
@@ -428,13 +440,11 @@ export default function Liveness() {
   return (
     <div className="flex justify-center">
       <div className="w-[360px]">
-        <div className="relative w-fit h-[270px]">
+        <div className="relative">
           <video
             ref={videoRef}
             onPlay={handleVideoPlay}
             className={`${isModelsLoaded ? "block" : "hidden"}`}
-            width="360"
-            height="270"
             autoPlay
             muted
           />
@@ -447,7 +457,7 @@ export default function Liveness() {
         {isModelsLoaded && (
           <div
             className={`${
-              innerHeight >= 768 ? "py-10" : ""
+              height >= 768 ? "py-10" : ""
             } w-[360px] flex justify-center text-green-500 text-xl font-bold`}
           >
             {getMessage()}
@@ -457,7 +467,7 @@ export default function Liveness() {
         {isModelsLoaded && (
           <div
             className={`${
-              innerHeight >= 768 ? "py-10" : "py-2"
+              height >= 768 ? "py-10" : "py-2"
             } w-[360px] flex justify-center`}
             onClick={() => takePhoto()}
           >
