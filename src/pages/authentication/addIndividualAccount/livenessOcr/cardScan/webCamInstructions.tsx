@@ -54,8 +54,8 @@ export function CardWebcamInstructions() {
   };
 
   return (
-    <div className="p-10 flex justify-center">
-      <Card className="w-1/2 bg-white">
+    <div className="lg:p-6 xl:p-10 flex justify-center">
+      <Card className="border-none shadow-none w-full lg:w-4/5 xl:w-1/2 bg-white">
         <CardContent>
           <h1 className="py-2 font-bold">
             ถ่ายรูปบัตรประชาชนเพื่อประกอบการยืนยันตัวตน
@@ -83,12 +83,7 @@ export function CardWebcamInstructions() {
             </div>
             <Button
               type="button"
-              onClick={() =>
-                // navigate("/create-job/added-individual-account/card-capture")
-                navigate(
-                  `${import.meta.env.BASE_URL}authentication/signup/cardcapture`
-                )
-              }
+              onClick={() => navigate("/authentication/signup/cardcapture")}
             >
               ตกลง
             </Button>

@@ -1,6 +1,7 @@
 import logo from "@assets/logo_ecg-03.png";
 import example from "@assets/drawIcon/example.png";
 import idOverLay from "@assets/ID_Card_overlay.svg";
+import verticalIdOvleray from "@assets/vertical_id_overlay.svg";
 import idCardPic from "@assets/id_card.svg";
 import whiteBg from "@assets/drawIcon/white.png";
 import png1 from "@/assets/images/png1.png";
@@ -27,6 +28,7 @@ const getImages = (img: string) => {
     example,
     idCardPic,
     idOverLay,
+    verticalIdOvleray,
     png1,
     png2,
     png3,

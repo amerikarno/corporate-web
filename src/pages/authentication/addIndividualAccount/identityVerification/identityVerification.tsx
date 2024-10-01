@@ -5,10 +5,46 @@ import { FaPhoneAlt } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/Button";
-import { CustomModal } from "@/components/customModal/customModal";
+import {
+  AlertDialog,
+  AlertDialogTrigger,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogAction,
+  AlertDialogCancel,
+} from "@/components/ui/alert-dialog";
 
 export default function IdentityVerification() {
   const navigate = useNavigate();
+
+  const ConfirmBtn = () => {
+    return (
+      <AlertDialog>
+        <AlertDialogTrigger className="bg-primary p-2 rounded-md text-white hover:bg-primary/90">
+          ตกลง
+        </AlertDialogTrigger>
+        <AlertDialogContent className="bg-white">
+          <AlertDialogHeader>
+            <AlertDialogTitle>คุณแน่ใจใช่ไหม?</AlertDialogTitle>
+            <AlertDialogDescription>
+              <span>
+                หมายเหตุ ถ้าทำรายการไม่สำเร็จต้องรอ 1 ชม.
+                จึงจะเปลี่ยนวิธียืนยันตัวตนแบบอื่นได้
+              </span>
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel className="w-32">ปิด</AlertDialogCancel>
+            <AlertDialogAction className="w-32">ยืนยัน</AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+    );
+  };
+
   return (
     <div className="flex flex-col items-center p-8 pt-16 space-y-8 md:mx-16">
       <div className="flex flex-col items-center text-slate-800">
@@ -22,8 +58,8 @@ export default function IdentityVerification() {
           หลังการยืนยันตัวตน ท่านจะได้รับ Username & Password ผ่านทางอีเมลล์
         </span>
       </div>
-      <Card className="flex items-center space-x-4 p-4 pb-20 md:w-3/4 relative bg-white">
-        <div className="m-8 w-28 flex-shrink-0 flex">
+      <Card className="flex flex-col md:flex-row md:items-center md:space-x-4 p-4 lg:w-3/4 bg-white">
+        <div className="md:m-8 max-w-32 max-h-32 flex flex-shrink-0">
           <img src={ndid} alt="NDID" />
         </div>
         <div className="flex flex-col">
@@ -40,19 +76,24 @@ export default function IdentityVerification() {
             ถ้าทำรายการไม่สำเร็จต้องรอ 1 ชม.
             จึงจะเปลี่ยนวิธียืนยันตัวตนแบบอื่นได้
           </span>
-          <CustomModal
+          {/* <CustomModal
             title="คุณแน่ใจมั้ย?"
             description="หมายเหตุ ถ้าทำรายการไม่สำเร็จต้องรอ 1 ชม. จึงจะเปลี่ยนวิธียืนยันตัวตนแบบอื่นได้"
             textClose="ยกเลิก"
             textSave="ยืนยัน"
             onSave={() => {}}
-          />
+          /> */}
+          <div className="flex justify-center py-4">
+            <ConfirmBtn />
+          </div>
         </div>
       </Card>
-      <Card className="flex items-center space-x-4 p-4 pb-20 md:w-3/4 relative bg-white">
-        <div className="m-8 w-32 h-32 flex-shrink-0 flex">
+
+      <Card className="flex flex-col md:flex-row md:items-center md:space-x-4 p-4 lg:w-3/4 bg-white">
+        <div className="md:m-8 max-w-32 max-h-32 flex flex-shrink-0">
           <img src={thaiid} alt="THAIID" />
         </div>
+
         <div className="flex flex-col">
           <span className="text-slate-800 font-bold py-4 text-2xl ">
             2.THAID
@@ -64,13 +105,16 @@ export default function IdentityVerification() {
             ถ้าทำรายการไม่สำเร็จต้องรอ 1 ชม.
             จึงจะเปลี่ยนวิธียืนยันตัวตนแบบอื่นได้
           </span>
-          <CustomModal
+          {/* <CustomModal
             title="คุณแน่ใจมั้ย?"
             description="หมายเหตุ ถ้าทำรายการไม่สำเร็จต้องรอ 1 ชม. จึงจะเปลี่ยนวิธียืนยันตัวตนแบบอื่นได้"
             textClose="ยกเลิก"
             textSave="ยืนยัน"
             onSave={() => {}}
-          />
+          /> */}
+          <div className="flex justify-center py-4">
+            <ConfirmBtn />
+          </div>
         </div>
       </Card>
 
