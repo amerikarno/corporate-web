@@ -114,9 +114,9 @@ export function OtpEmailConfirm() {
   }, [count]);
 
   return (
-    <div className="flex p-4 xl:p-10 bg-slate-100 h-screen">
+    <div className="flex md:p-4 xl:p-10 h-screen">
       <div className="w-full flex flex-col space-y-10">
-        <Card className="w-full lg:w-4/5 xl:w-1/2 bg-white mx-auto">
+        <Card className="w-full lg:w-4/5 xl:w-1/2 bg-white mx-auto border-none shadow-none md:border-gray-300 md:shadow-md">
           <CardHeader className="font-bold text-xl lg:text-2xl">
             กรุณายืนยัน "หมายเลขโทรศัพท์" และ "อีเมล" ของท่าน
           </CardHeader>
@@ -186,7 +186,7 @@ export function OtpEmailConfirm() {
             </div>
           </CardContent>
         </Card>
-        <div className="w-full lg:w-4/5 xl:w-1/2 flex justify-end mx-auto">
+        <div className="w-full lg:w-4/5 xl:w-1/2 flex justify-end mx-auto px-2 md:px-0">
           <Button
             onClick={() =>
               navigate(
@@ -204,8 +204,10 @@ export function OtpEmailConfirm() {
               กรุณายืนยันรหัส OTP 6 หลัก ระบบได้ทำการส่งรหัส OTP ไปยังหมายเลข{" "}
               {hideOtpNumber(userData.mobile)} แล้ว
             </AlertDialogTitle>{" "}
-            <AlertDialogTitle>ref code : {refCode.current}</AlertDialogTitle>
-            <AlertDialogDescription>
+            <AlertDialogTitle className="bg-white">
+              ref code : {refCode.current}
+            </AlertDialogTitle>
+            <AlertDialogDescription className="bg-white">
               <div>
                 <div className="pb-10 space-y-4">
                   <p>
@@ -213,8 +215,10 @@ export function OtpEmailConfirm() {
                   </p>
                   <Input name="otp" onChange={handleInput} />
                 </div>
-                <p>กรุณาตรวจสอบรหัส OTP บนโทรศัพย์มือถือของท่านภายใน 5 นาที</p>
-                <p>
+                <div>
+                  กรุณาตรวจสอบรหัส OTP บนโทรศัพย์มือถือของท่านภายใน 5 นาที
+                </div>
+                <div>
                   หากท่านไม่ได้รับรหัส OTP{" "}
                   {isCountDone ? (
                     <u className="hover:cursor-pointer" onClick={resentOtp}>
@@ -223,7 +227,7 @@ export function OtpEmailConfirm() {
                   ) : (
                     <u>กรุณารอ {convertTimeToString(count)} นาที</u>
                   )}
-                </p>
+                </div>
               </div>
             </AlertDialogDescription>
             <AlertDialogAction

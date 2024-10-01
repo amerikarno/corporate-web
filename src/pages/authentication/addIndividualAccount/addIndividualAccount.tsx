@@ -79,8 +79,8 @@ export default function AddIndividualAccount() {
   };
 
   return (
-    <div className="p-4 flex justify-center">
-      <Card className="lg:w-2/3 bg-white shadow-md">
+    <div className="md:p-4 flex justify-center">
+      <Card className="border-none shadow-none md:shadow-md md:border-gray-300 lg:w-2/3 bg-white">
         <CardContent>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-8 p-8">
             <div className="space-y-2 pt-8">

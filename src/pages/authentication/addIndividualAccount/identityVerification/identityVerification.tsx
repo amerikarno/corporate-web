@@ -23,7 +23,7 @@ export default function IdentityVerification() {
   const ConfirmBtn = () => {
     return (
       <AlertDialog>
-        <AlertDialogTrigger className="bg-primary p-2 rounded-md text-white hover:bg-primary/90">
+        <AlertDialogTrigger className="bg-primary p-2 rounded-md text-white hover:bg-primary/90 w-28">
           ตกลง
         </AlertDialogTrigger>
         <AlertDialogContent className="bg-white">
@@ -36,7 +36,7 @@ export default function IdentityVerification() {
               </span>
             </AlertDialogDescription>
           </AlertDialogHeader>
-          <AlertDialogFooter>
+          <AlertDialogFooter className="flex items-center justify-center">
             <AlertDialogCancel className="w-32">ปิด</AlertDialogCancel>
             <AlertDialogAction className="w-32">ยืนยัน</AlertDialogAction>
           </AlertDialogFooter>
@@ -46,92 +46,96 @@ export default function IdentityVerification() {
   };
 
   return (
-    <div className="flex flex-col items-center p-8 pt-16 space-y-8 md:mx-16">
-      <div className="flex flex-col items-center text-slate-800">
-        <span className="font-bold text-2xl">
-          ท่านสามารถเลือก "ยืนยันตัวตน" ดังนี้
-        </span>
-        <span className="text-lg">
-          กรุณาเลือกช่องทางการยืนยันตัวตนที่ท่านสะดวกอย่างใดอย่างหนึ่ง
-        </span>
-        <span className="text-lg">
-          หลังการยืนยันตัวตน ท่านจะได้รับ Username & Password ผ่านทางอีเมลล์
-        </span>
-      </div>
-      <Card className="flex flex-col md:flex-row md:items-center md:space-x-4 p-4 lg:w-3/4 bg-white">
-        <div className="md:m-8 max-w-32 max-h-32 flex flex-shrink-0">
-          <img src={ndid} alt="NDID" />
+    <div className="w-full">
+      <div className="flex flex-col items-center p-8 pt-16 space-y-8 md:mx-16">
+        <div className="flex flex-col items-center text-slate-800">
+          <span className="font-bold text-2xl">
+            ท่านสามารถเลือก "ยืนยันตัวตน" ดังนี้
+          </span>
+          <span className="text-lg">
+            กรุณาเลือกช่องทางการยืนยันตัวตนที่ท่านสะดวกอย่างใดอย่างหนึ่ง
+          </span>
+          <span className="text-lg">
+            หลังการยืนยันตัวตน ท่านจะได้รับ Username & Password ผ่านทางอีเมลล์
+          </span>
         </div>
-        <div className="flex flex-col">
-          <span className="text-slate-800 font-bold py-4 text-2xl ">
-            1.NDID
-          </span>
-          <span>
-            1. ยืนยันตัวตนและสมัคร NDID
-            กับธนาคารที่ท่านใช้บริการเรียบร้อยแล้วเท่านั้น
-          </span>
-          <span>2. ทำรายการให้สำเร็จภายใน 1 ชม.</span>
-          <span className="p-4 pl-0 md:pl-4">
-            <span className="underline font-bold pr-4">หมายเหตุ</span>
-            ถ้าทำรายการไม่สำเร็จต้องรอ 1 ชม.
-            จึงจะเปลี่ยนวิธียืนยันตัวตนแบบอื่นได้
-          </span>
-          {/* <CustomModal
+        <Card className="flex flex-col md:flex-row md:items-center md:space-x-4 p-4 lg:w-3/4 bg-white">
+          <div className="md:m-8 max-w-32 max-h-32 flex flex-shrink-0">
+            <img src={ndid} alt="NDID" />
+          </div>
+          <div className="flex flex-col">
+            <span className="text-slate-800 font-bold py-4 text-2xl ">
+              1.NDID
+            </span>
+            <span>
+              1. ยืนยันตัวตนและสมัคร NDID
+              กับธนาคารที่ท่านใช้บริการเรียบร้อยแล้วเท่านั้น
+            </span>
+            <span>2. ทำรายการให้สำเร็จภายใน 1 ชม.</span>
+            <span className="p-4 pl-0 md:pl-4">
+              <span className="underline font-bold pr-4">หมายเหตุ</span>
+              ถ้าทำรายการไม่สำเร็จต้องรอ 1 ชม.
+              จึงจะเปลี่ยนวิธียืนยันตัวตนแบบอื่นได้
+            </span>
+            {/* <CustomModal
             title="คุณแน่ใจมั้ย?"
             description="หมายเหตุ ถ้าทำรายการไม่สำเร็จต้องรอ 1 ชม. จึงจะเปลี่ยนวิธียืนยันตัวตนแบบอื่นได้"
             textClose="ยกเลิก"
             textSave="ยืนยัน"
             onSave={() => {}}
           /> */}
-          <div className="flex justify-center py-4">
-            <ConfirmBtn />
+            <div className="flex justify-start py-4">
+              <ConfirmBtn />
+            </div>
           </div>
-        </div>
-      </Card>
+        </Card>
 
-      <Card className="flex flex-col md:flex-row md:items-center md:space-x-4 p-4 lg:w-3/4 bg-white">
-        <div className="md:m-8 max-w-32 max-h-32 flex flex-shrink-0">
-          <img src={thaiid} alt="THAIID" />
-        </div>
+        <Card className="flex flex-col md:flex-row md:items-center md:space-x-4 p-4 lg:w-3/4 bg-white">
+          <div className="md:m-8 max-w-32 max-h-32 flex flex-shrink-0">
+            <img src={thaiid} alt="THAIID" />
+          </div>
 
-        <div className="flex flex-col">
-          <span className="text-slate-800 font-bold py-4 text-2xl ">
-            2.THAID
-          </span>
-          <span>1. ยืนยันตัวตนผ่าน THAID</span>
-          <span>2. ทำรายการให้สำเร็จภายใน 1 วัน</span>
-          <span className="p-4 pl-0 md:pl-4">
-            <span className="underline font-bold pr-4">หมายเหตุ</span>
-            ถ้าทำรายการไม่สำเร็จต้องรอ 1 ชม.
-            จึงจะเปลี่ยนวิธียืนยันตัวตนแบบอื่นได้
-          </span>
-          {/* <CustomModal
+          <div className="flex flex-col">
+            <span className="text-slate-800 font-bold py-4 text-2xl ">
+              2.THAID
+            </span>
+            <span>1. ยืนยันตัวตนผ่าน THAID</span>
+            <span>2. ทำรายการให้สำเร็จภายใน 1 วัน</span>
+            <span className="p-4 pl-0 md:pl-4">
+              <span className="underline font-bold pr-4">หมายเหตุ</span>
+              ถ้าทำรายการไม่สำเร็จต้องรอ 1 ชม.
+              จึงจะเปลี่ยนวิธียืนยันตัวตนแบบอื่นได้
+            </span>
+            {/* <CustomModal
             title="คุณแน่ใจมั้ย?"
             description="หมายเหตุ ถ้าทำรายการไม่สำเร็จต้องรอ 1 ชม. จึงจะเปลี่ยนวิธียืนยันตัวตนแบบอื่นได้"
             textClose="ยกเลิก"
             textSave="ยืนยัน"
             onSave={() => {}}
           /> */}
-          <div className="flex justify-center py-4">
-            <ConfirmBtn />
+            <div className="flex justify-start py-4">
+              <ConfirmBtn />
+            </div>
           </div>
-        </div>
-      </Card>
+        </Card>
 
-      <Button onClick={() => navigate("/")}>Done</Button>
-      <div className="flex flex-col md:text-lg font-bold">
-        <div className="flex justify-center">
-          <span className="font-normal">สอบถามข้อมูลเพิ่มเติม</span>
-        </div>
-        <div className="flex space-x-4 md:flex-row flex-col md:space-x-4 items-center">
-          <span className="flex items-center">
-            <FaPhoneAlt />
-            023456789
-          </span>
-          <span className="flex items-center">
-            <MdEmail />
-            callcenter@admin.com
-          </span>
+        <Button onClick={() => navigate("/")} className="w-28">
+          Done
+        </Button>
+        <div className="flex flex-col items-center space-y-2 lg:w-3/4 md:text-lg font-bold">
+          <div className="flex justify-center">
+            <span className="font-normal">สอบถามข้อมูลเพิ่มเติม</span>
+          </div>
+          <div className="flex space-x-4 md:flex-row flex-col md:space-x-4 items-center">
+            <span className="flex items-center">
+              <FaPhoneAlt />
+              023456789
+            </span>
+            <span className="flex items-center">
+              <MdEmail />
+              callcenter@admin.com
+            </span>
+          </div>
         </div>
       </div>
     </div>

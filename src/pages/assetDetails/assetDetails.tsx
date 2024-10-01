@@ -38,7 +38,7 @@ export function AssetDetails() {
 
   return (
     <>
-      <div className="ml-1 bg-slate-100">
+      <div className="ml-1">
         <NavBar
           children={
             <div className=" w-full lg:max-w-[1240px] flex flex-col lg:flex-row space-y-4 lg:mx-auto pb-10">

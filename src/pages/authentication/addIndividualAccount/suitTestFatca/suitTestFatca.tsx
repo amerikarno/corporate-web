@@ -69,14 +69,12 @@ export default function SuitTestFatca() {
     //   alert("Please Do the Suit Test First.");
     //   window.scrollTo({ top: 0, behavior: "smooth" });
     // }
-    navigate(
-      `${import.meta.env.BASE_URL}authentication/signup/otpemailconfirm`
-    );
+    navigate("/authentication/signup/otpemailconfirm");
   };
 
   return (
-    <div className="flex justify-center py-4 lg:py-10 bg-slate-100">
-      <div className="space-y-8 xl:p-4 w-full xl:w-4/5">
+    <div className="flex justify-center py-4 lg:py-10">
+      <div className="space-y-8 p-4 w-full xl:w-4/5">
         <div className="px-2 text-xl xl:text-2xl font-bold text-slate-800 ">
           แบบประเมินความเหมาะสมในการลงทุน
         </div>
@@ -209,8 +207,6 @@ export default function SuitTestFatca() {
               </div>
               {knowLedgeTest === "knowLedgeTest-1" && (
                 <KnowLedgeTest onTestSuccess={handleKnowLedgeTestSuccess} />
-                // <div>
-                // </div>
               )}
             </div>
           </CardContent>

@@ -292,7 +292,7 @@ export default function KnowLedgeTest({ onTestSuccess }: KnowLedgeTestProps) {
         </div>
       </div>
 
-      <Card className="">
+      <Card className="border-none shadow-none">
         <CardContent className="p-1 m-0">
           <div className="space-y-4 flex flex-col">
             <div id={`page-${currentPage}`}>{renderQuestions()}</div>

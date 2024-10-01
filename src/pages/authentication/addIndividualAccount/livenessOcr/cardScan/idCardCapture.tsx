@@ -76,11 +76,11 @@ export default function IDCardCapture() {
   }, [width, height]);
 
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center h-screen w-full">
       <div className="max-w-[525px]">
         <div className="lg:p-10 lg:space-y-8">
           <h1
-            className={height >= 768 ? "py-4 w-[326px] md:w-[516px]" : "hidden"}
+            className={height >= 768 ? "py-4 w-[326px] md:w-[514px]" : "hidden"}
           >
             โปรดอยู่ในที่แสงสว่างเพียงพอ หรือไม่มีแสงสะท้อน
           </h1>
@@ -111,7 +111,7 @@ export default function IDCardCapture() {
             />
           </div>
           <h2
-            className={height >= 768 ? "py-4 w-[326px] md:w-[516px]" : "hidden"}
+            className={height >= 768 ? "py-4 w-[326px] md:w-[514px]" : "hidden"}
           >
             วางด้านหน้าบัตรประชาชนให้อยู่ในกรอบที่กำหนด และหลีกเลี่ยงแสงสะท้อน
             เห็นข้อมูลบนบัตรชัดเจน

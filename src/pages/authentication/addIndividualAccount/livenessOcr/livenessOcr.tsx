@@ -86,8 +86,8 @@ export default function Liveness() {
   }, [isModelsLoaded]);
 
   const startVideo = async () => {
-    const w = screenWidth > 640 ? 640 : screenWidth;
-    const h = screenWidth > 640 ? 480 : screenWidth / aspectRatio;
+    const w = screenWidth > 360 ? 360 : screenWidth;
+    const h = screenWidth > 360 ? 270 : screenWidth / aspectRatio;
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
         video: {
@@ -274,9 +274,9 @@ export default function Liveness() {
       detection: faceapi.FaceDetection;
     }>
   ) => {
-    if (screenWidth > 640) {
-      screenWidth = 640;
-      screenHeight = 480;
+    if (screenWidth > 360) {
+      screenWidth = 360;
+      screenHeight = 270;
     } else {
       screenHeight = screenWidth / aspectRatio;
     }
@@ -427,14 +427,14 @@ export default function Liveness() {
 
   return (
     <div className="flex justify-center">
-      <div className="w-[640px]">
-        <div className="relative w-fit h-[480px]">
+      <div className="w-[360px]">
+        <div className="relative w-fit h-[270px]">
           <video
             ref={videoRef}
             onPlay={handleVideoPlay}
             className={`${isModelsLoaded ? "block" : "hidden"}`}
-            width="640"
-            height="480"
+            width="360"
+            height="270"
             autoPlay
             muted
           />
@@ -445,39 +445,25 @@ export default function Liveness() {
         </div>
 
         {isModelsLoaded && (
-          <div className="py-10 w-[640px] flex justify-center text-green-500 text-xl font-bold">
+          <div
+            className={`${
+              innerHeight >= 768 ? "py-10" : ""
+            } w-[360px] flex justify-center text-green-500 text-xl font-bold`}
+          >
             {getMessage()}
           </div>
         )}
 
         {isModelsLoaded && (
           <div
-            className="py-10 w-[640px] flex justify-center"
+            className={`${
+              innerHeight >= 768 ? "py-10" : "py-2"
+            } w-[360px] flex justify-center`}
             onClick={() => takePhoto()}
           >
             <Camera className="w-10 h-10" />
           </div>
         )}
-
-        {/* {isModelsLoaded && image && (
-        <div className="w-1/2 pb-20">
-          <img src={image} alt="Screenshot" />
-          <div className="flex justify-center py-5">
-            <Button onClick={() => handleSubmit()}>Next</Button>
-          </div>
-        </div>
-      )} */}
-
-        {isModelsLoaded && (
-          <div className="w-[640px] flex justify-center">
-            <Button onClick={() => handleSubmit()}>Next</Button>
-          </div>
-        )}
-        {/* {isModelsLoaded && image && (
-        <div className="w-[640px] flex justify-center">
-          <Button onClick={() => handleSubmit()}>Next</Button>
-        </div>
-      )} */}
       </div>
     </div>
   );

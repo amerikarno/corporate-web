@@ -68,7 +68,7 @@ const Landing = ({ ThemeChanger }: datatype) => {
 
   return (
     <>
-      <div className="w-full bg-slate-100">
+      <div className="w-full">
         <div id="header" className="border-b border-gray-300 shadow-sm">
           <div className="max-w-screen-s1 s2:max-w-[980px] s3:max-w-[1280px] mx-auto s2:px-[10px]">
             <div className="w-full flex flex-row py-4 px-4">

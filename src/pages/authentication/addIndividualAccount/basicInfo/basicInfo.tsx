@@ -149,14 +149,14 @@ export default function BasicInfo() {
     "flex flex-col space-y-2 lg:space-y-0 lg:flex-row lg:space-x-4";
 
   return (
-    <div className="p-4 flex justify-center bg-slate-100">
+    <div className="md:p-4 flex justify-center">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="space-y-8 p-4 w-full lg:w-4/5 xl:w-3/4"
+        className="space-y-8 md:p-4 w-full lg:w-4/5 xl:w-3/4"
       >
-        <Card className="bg-white">
+        <Card className="border-none shadow-none md:border-gray-300 md:shadow-md bg-white">
           <CardContent>
-            <div className="p-4 space-y-4">
+            <div className="md:p-4 space-y-4">
               <div className="flex gap-2 items-center text-[25px]">
                 <TiHome />
                 ที่อยู่บัตรประชาชน
@@ -300,9 +300,9 @@ export default function BasicInfo() {
           </CardContent>
         </Card>
 
-        <Card className="bg-white">
+        <Card className="border-none shadow-none md:border-gray-300 md:shadow-md bg-white">
           <CardContent>
-            <div className="p-4 space-y-4 ">
+            <div className="md:p-4 space-y-4">
               <div className="flex flex-col space-y-6 lg:space-y-0 lg:flex-row lg:items-center lg:justify-between">
                 <div className="flex items-center text-[25px]">
                   <MdLocationPin />
@@ -468,9 +468,9 @@ export default function BasicInfo() {
           </CardContent>
         </Card>
 
-        <Card className="bg-white">
+        <Card className="border-none shadow-none md:border-gray-300 md:shadow-md bg-white">
           <CardContent>
-            <div className="flex flex-col space-y-4 p-4">
+            <div className="flex flex-col space-y-4 md:p-4">
               <div className="flex gap-2 items-center text-[25px]">
                 <MdLocationPin />
                 อาชีพปัจจุบันและแหล่งที่มาของเงินลงทุน
@@ -632,9 +632,9 @@ export default function BasicInfo() {
           </CardContent>
         </Card>
 
-        <Card className="bg-white">
+        <Card className="border-none shadow-none md:border-gray-300 md:shadow-md bg-white">
           <CardContent>
-            <div className="space-y-4 p-4">
+            <div className="space-y-4 md:p-4">
               <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
                 <div className="flex gap-2 items-center text-[25px]">
                   <MdLocationPin />
@@ -812,7 +812,7 @@ export default function BasicInfo() {
           </CardContent>
         </Card>
 
-        <Card className="bg-white">
+        <Card className="border-none shadow-none md:border-gray-300 md:shadow-md bg-white">
           <CardContent>
             <div className="p-4 space-y-4">
               <div className="flex gap-2 items-center text-[25px]">
@@ -869,9 +869,9 @@ export default function BasicInfo() {
           </CardContent>
         </Card>
 
-        <Card className="bg-white">
+        <Card className="border-none shadow-none md:border-gray-300 md:shadow-md bg-white">
           <CardContent>
-            <div className="p-4 space-y-4">
+            <div className="md:p-4 space-y-4">
               <div>
                 <div className="flex gap-2 items-center text-[25px]">
                   บัญชีธนาคารของท่าน (เพื่อใช้ในการถอนเงิน)
