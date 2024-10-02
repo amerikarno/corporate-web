@@ -18,7 +18,7 @@ export default function OrderTrade() {
   // >(null);
   const [selectedTradingPair, setSelectedTradingPair] =
     useState<string>("THB/USDT");
-  const [mockedCorporateCodes, _] = useState<{ corporateCode: number }[]>([]);
+  // const [mockedCorporateCodes, _] = useState<{ corporateCode: number }[]>([]);
   // setFetchedCorporateCodes([]);
   const [choosedEditData, setChoosedEditData] = useState<TOrderTrade>();
   // const clearChoosedEditData = () => {
