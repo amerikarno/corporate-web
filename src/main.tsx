@@ -98,7 +98,7 @@ createRoot(document.getElementById("root")!).render(
               element={<IdentityVerification />}
             />
             <Route
-              path={`${import.meta.env.BASE_URL}market`}
+              path={`${import.meta.env.BASE_URL}dashboard/personal`}
               element={<Personal />}
             />
             <Route
