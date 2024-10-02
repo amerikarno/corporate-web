@@ -102,6 +102,10 @@ createRoot(document.getElementById("root")!).render(
               element={<Personal />}
             />
             <Route
+              path={`${import.meta.env.BASE_URL}market`}
+              element={<Personal />}
+            />
+            <Route
               path={`${import.meta.env.BASE_URL}asset/:id`}
               element={<AssetDetails />}
             />
