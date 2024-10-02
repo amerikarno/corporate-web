@@ -116,7 +116,7 @@ const NavBar = ({ ThemeChanger, children, isFullWidth }: datatype) => {
                   </DropdownMenuTrigger>
                   <DropdownMenuContent className="mr-12 bg-white space-y-2">
                     <DropdownMenuItem
-                      className="cursor-pointer hover:bg-gray-300 hover:font-bold"
+                      className="cursor-pointer hover:bg-gray-300 hover:font-bold w-[200px]"
                       onClick={() => {
                         navigate("/");
                       }}
@@ -124,7 +124,7 @@ const NavBar = ({ ThemeChanger, children, isFullWidth }: datatype) => {
                       Profile
                     </DropdownMenuItem>
                     <DropdownMenuItem
-                      className="cursor-pointer hover:bg-gray-300 hover:font-bold"
+                      className="cursor-pointer hover:bg-gray-300 hover:font-bold w-[200px]"
                       onClick={() => {
                         navigate("/dashboard/personal");
                       }}
@@ -132,7 +132,7 @@ const NavBar = ({ ThemeChanger, children, isFullWidth }: datatype) => {
                       Personal
                     </DropdownMenuItem>
                     <DropdownMenuItem
-                      className="cursor-pointer hover:bg-gray-300 hover:font-bold"
+                      className="cursor-pointer hover:bg-gray-300 hover:font-bold w-[200px]"
                       onClick={() => {
                         navigate("/order-trade");
                       }}
@@ -140,7 +140,7 @@ const NavBar = ({ ThemeChanger, children, isFullWidth }: datatype) => {
                       Invest
                     </DropdownMenuItem>
                     <DropdownMenuItem
-                      className="cursor-pointer hover:bg-gray-300 hover:font-bold"
+                      className="cursor-pointer hover:bg-gray-300 hover:font-bold w-[200px]"
                       onClick={() => {
                         navigate("/");
                       }}
@@ -148,7 +148,7 @@ const NavBar = ({ ThemeChanger, children, isFullWidth }: datatype) => {
                       Portfolio
                     </DropdownMenuItem>
                     <DropdownMenuItem
-                      className="cursor-pointer hover:bg-gray-300 hover:font-bold"
+                      className="cursor-pointer hover:bg-gray-300 hover:font-bold w-[200px]"
                       onClick={() => {
                         navigate("/deposite-withdraw");
                       }}
@@ -156,7 +156,7 @@ const NavBar = ({ ThemeChanger, children, isFullWidth }: datatype) => {
                       Deposite / Withdraw
                     </DropdownMenuItem>
                     <DropdownMenuItem
-                      className="cursor-pointer hover:bg-gray-300 hover:font-bold"
+                      className="cursor-pointer hover:bg-gray-300 hover:font-bold w-[200px]"
                       onClick={() => handleLogout()}
                     >
                       Log out
