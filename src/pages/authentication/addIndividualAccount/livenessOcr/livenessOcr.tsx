@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import * as faceapi from "face-api.js";
 import { Camera } from "lucide-react";
-import { Button } from "../../../../components/ui/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setFaceImage } from "@/redux/Action";

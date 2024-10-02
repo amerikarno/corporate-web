@@ -96,7 +96,7 @@ const NavBar = ({ ThemeChanger, children, isFullWidth }: datatype) => {
                 Elite Consulting
               </p>
             </div>
-            {!token ? (
+            {token ? (
               <div className="w-1/2 lg:w-1/3 flex justify-end">
                 <div className="flex flex-row space-x-2">
                   <DropdownMenu>
