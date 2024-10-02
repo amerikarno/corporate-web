@@ -1,15 +1,15 @@
 // import { isAllowedPage } from "@/lib/utils";
 // import UnAuthorize from "@/pages/unAuthorizePage/unAuthorize";
 // import Liveness from "./livenessOcr/livenessOcr";
-import { Card, CardContent } from "@components/ui/Card";
+import { Card, CardContent } from "@/components/ui/Card";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import {
   TIndividualAccount,
   individualAccountSchema,
 } from "./constant/schemas";
-import { Input } from "@components/ui/Input";
-import { Button } from "@components/ui/Button";
+import { Input } from "@/components/ui/Input";
+import { Button } from "@/components/ui/Button";
 // import { getCookies } from "@/lib/Cookies";
 // import axios from "@/api/axios";
 import { useNavigate } from "react-router-dom";
@@ -79,39 +79,35 @@ export default function AddIndividualAccount() {
   };
 
   return (
-    <div className="p-4 flex justify-center">
-      <Card className="w-1/2 bg-white">
+    <div className="md:p-4 flex justify-center">
+      <Card className="border-none shadow-none md:shadow-md md:border-gray-300 lg:w-2/3 bg-white">
         <CardContent>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-8 p-8">
-            <div className="space-y-4 pt-8">
+            <div className="space-y-2 pt-8">
               <h1 className="text-lg font-bold underline-offset-1 underline pb-4">
                 กรอกข้อมูลส่วนตัว
               </h1>
-              <div className="flex flex-col">
-                <div className="flex space-x-4">
-                  <div className="w-1/2">
-                    <div>
-                      <select
-                        {...register("thTitle")}
-                        className="cursor-pointer hover:bg-slate-100 block px-2.5 w-full text-sm text-gray-600 bg-white py-3 rounded"
-                      >
-                        <option value="">คำนำหน้าชื่อ (ภาษาไทย)</option>
-                        <option value="นาย">นาย</option>
-                        <option value="นาง">นาง</option>
-                        <option value="นางสาว">นางสาว</option>
-                      </select>
-                    </div>
-                    {errors.thTitle && (
-                      <span className="text-red-500">
-                        {errors.thTitle.message}
-                      </span>
-                    )}
-                  </div>
-                  <div className="w-1/2"></div>
+              <div className="flex flex-col space-y-2 lg:space-y-0 lg:flex-row lg:space-x-4">
+                <div className="lg:w-1/2">
+                  <select
+                    {...register("thTitle")}
+                    className="border border-gray-700 cursor-pointer hover:bg-slate-100 block px-2.5 w-full text-sm text-gray-600 bg-white py-3 rounded-md"
+                  >
+                    <option value="">คำนำหน้าชื่อ (ภาษาไทย)</option>
+                    <option value="นาย">นาย</option>
+                    <option value="นาง">นาง</option>
+                    <option value="นางสาว">นางสาว</option>
+                  </select>
+                  {errors.thTitle && (
+                    <span className="text-red-500">
+                      {errors.thTitle.message}
+                    </span>
+                  )}
                 </div>
+                <div className="hidden lg:block lg:w-1/2"></div>
               </div>
-              <div className="flex space-x-4">
-                <div className="w-1/2">
+              <div className="flex flex-col space-y-2 lg:space-y-0 lg:flex-row lg:space-x-4">
+                <div className="lg:w-1/2">
                   <Input
                     type="text"
                     {...register("thName")}
@@ -125,7 +121,7 @@ export default function AddIndividualAccount() {
                     </span>
                   )}
                 </div>
-                <div className="w-1/2">
+                <div className="lg:w-1/2">
                   <Input
                     type="text"
                     {...register("thSurname")}
@@ -141,12 +137,13 @@ export default function AddIndividualAccount() {
                 </div>
               </div>
             </div>
-            <div className="space-y-4">
-              <div className="flex space-x-4">
-                <div className="w-1/2">
+
+            <div className="space-y-2">
+              <div className="flex flex-col space-y-2 lg:space-y-0 lg:flex-row lg:space-x-4">
+                <div className="lg:w-1/2">
                   <select
                     {...register("engTitle")}
-                    className="cursor-pointer hover:bg-slate-100 block px-2.5 py-3 rounded w-full text-sm text-gray-600 bg-white"
+                    className="border border-gray-700 cursor-pointer hover:bg-slate-100 block px-2.5 py-3 rounded-md w-full text-sm text-gray-600 bg-white"
                   >
                     <option value="">คำนำหน้าชื่อ (ภาษาอังกฤษ)</option>
                     <option value="Mr.">Mr.</option>
@@ -159,10 +156,10 @@ export default function AddIndividualAccount() {
                     </span>
                   )}
                 </div>
-                <div className="w-1/2"></div>
+                <div className="hidden lg:block lg:w-1/2"></div>
               </div>
-              <div className="flex space-x-4">
-                <div className="w-1/2">
+              <div className="flex flex-col space-y-2 lg:space-y-0 lg:flex-row lg:space-x-4">
+                <div className="lg:w-1/2">
                   <Input
                     type="text"
                     {...register("engName")}
@@ -177,7 +174,7 @@ export default function AddIndividualAccount() {
                   )}
                 </div>
 
-                <div className="w-1/2">
+                <div className="lg:w-1/2">
                   <Input
                     type="text"
                     {...register("engSurname")}
@@ -193,8 +190,9 @@ export default function AddIndividualAccount() {
                 </div>
               </div>
             </div>
-            <div className="flex space-x-4 pt-8">
-              <div className="w-1/2">
+
+            <div className="flex flex-col space-y-2 lg:space-y-0 lg:flex-row lg:space-x-4">
+              <div className="lg:w-1/2">
                 <Input
                   type="text"
                   {...register("email")}
@@ -207,7 +205,7 @@ export default function AddIndividualAccount() {
                 )}
               </div>
 
-              <div className="w-1/2">
+              <div className="lg:w-1/2">
                 <Input
                   type="text"
                   {...register("mobile")}
@@ -221,13 +219,13 @@ export default function AddIndividualAccount() {
               </div>
             </div>
 
-            <div className="flex space-x-4">
-              <div className="w-1/2">
+            <div className="flex flex-col space-y-2 lg:space-y-0 lg:flex-row lg:space-x-4">
+              <div className="lg:w-1/2">
                 <Input
                   type="date"
                   {...register("birthDate")}
                   placeholder="วัน/เดือน/ปี เกิด"
-                  className="ti-form-input"
+                  className="w-full border border-gray-700 cursor-pointer px-2.5 py-3 rounded-md text-gray-600 pl-2 hover:bg-slate-100 focus:border-blue-700"
                 />
                 {errors.birthDate && (
                   <span className="text-red-500">
@@ -236,10 +234,10 @@ export default function AddIndividualAccount() {
                 )}
               </div>
 
-              <div className="flex  flex-col w-1/2">
+              <div className="flex flex-col lg:w-1/2">
                 <select
                   {...register("mariageStatus")}
-                  className="cursor-pointer border px-2.5 py-3 rounded text-gray-600 pl-2 hover:bg-slate-100 focus:border-blue-700"
+                  className="border border-gray-700 cursor-pointer px-2.5 py-3 rounded-md text-gray-600 pl-2 hover:bg-slate-100 focus:border-blue-700"
                 >
                   <option value="">สถานะ</option>
                   <option value="โสด">Single</option>
@@ -254,8 +252,8 @@ export default function AddIndividualAccount() {
               </div>
             </div>
 
-            <div className="flex space-x-4">
-              <div className="w-1/2">
+            <div className="flex flex-col space-y-2 lg:space-y-0 lg:flex-row lg:space-x-4">
+              <div className="lg:w-1/2">
                 <Input
                   type="text"
                   {...register("citizenId")}
@@ -270,7 +268,7 @@ export default function AddIndividualAccount() {
                 )}
               </div>
 
-              <div className="w-1/2">
+              <div className="lg:w-1/2">
                 <Input
                   type="text"
                   {...register("laserCode")}

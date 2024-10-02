@@ -1,7 +1,7 @@
-import { Card, CardContent } from "@components/ui/Card";
+import { Card, CardContent } from "@/components/ui/Card";
 import { TiHome } from "react-icons/ti";
-import { Input } from "@components/ui/Input";
-import { Button } from "@components/ui/Button";
+import { Input } from "@/components/ui/Input";
+import { Button } from "@/components/ui/Button";
 import { MdLocationPin } from "react-icons/md";
 import { useEffect, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -145,30 +145,33 @@ export default function BasicInfo() {
     setAddBankValue(value);
   };
 
+  const responsiveClass =
+    "flex flex-col space-y-2 lg:space-y-0 lg:flex-row lg:space-x-4";
+
   return (
-    <div className="p-4 flex justify-center">
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-8 p-4 w-1/2">
-        <Card className="bg-white">
+    <div className="md:p-4 flex justify-center">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="space-y-8 md:p-4 w-full lg:w-4/5 xl:w-3/4"
+      >
+        <Card className="border-none shadow-none md:border-gray-300 md:shadow-md bg-white">
           <CardContent>
-            <div className="p-4 space-y-4">
+            <div className="md:p-4 space-y-4">
               <div className="flex gap-2 items-center text-[25px]">
                 <TiHome />
                 ที่อยู่บัตรประชาชน
               </div>
               <div className="space-y-4">
-                <div className="flex space-x-4">
-                  <div className={`w-1/2`}>
+                <div className={responsiveClass}>
+                  <div className="lg:w-1/2">
                     <Input
                       type="text"
                       label="Address Number"
                       id="addressNoIDCard"
                       {...register("registeredAddress.homeNumber")}
-                      className={
-                        "block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border border-gray-600 appearance-none dark:text-white dark:border-gray-500 dark:focus:border-gray-500 focus:outline-none focus:ring-0 focus:border-gray-600 peer"
-                      }
                     />
                   </div>
-                  <div className="w-1/2">
+                  <div className="lg:w-1/2">
                     <Input
                       type="text"
                       label="Floor"
@@ -182,8 +185,8 @@ export default function BasicInfo() {
                     )}
                   </div>
                 </div>
-                <div className="flex space-x-4">
-                  <div className="w-1/2">
+                <div className={responsiveClass}>
+                  <div className="lg:w-1/2">
                     <Input
                       type="text"
                       label="Moo"
@@ -196,7 +199,7 @@ export default function BasicInfo() {
                       </span>
                     )}
                   </div>
-                  <div className="w-1/2">
+                  <div className="lg:w-1/2">
                     <Input
                       type="text"
                       label="Soi"
@@ -205,8 +208,8 @@ export default function BasicInfo() {
                     />
                   </div>
                 </div>
-                <div className="flex space-x-4">
-                  <div className="w-1/2">
+                <div className={responsiveClass}>
+                  <div className="lg:w-1/2">
                     <Input
                       type="text"
                       label="Road"
@@ -214,7 +217,7 @@ export default function BasicInfo() {
                       {...register("registeredAddress.streetName")}
                     />
                   </div>
-                  <div className="w-1/2">
+                  <div className="lg:w-1/2">
                     <Input
                       type="text"
                       label="Tambon"
@@ -232,8 +235,8 @@ export default function BasicInfo() {
                     </datalist>
                   </div>
                 </div>
-                <div className="flex space-x-4">
-                  <div className="w-1/2">
+                <div className={responsiveClass}>
+                  <div className="lg:w-1/2">
                     <Input
                       type="text"
                       label="Amphoe"
@@ -247,7 +250,7 @@ export default function BasicInfo() {
                       ))}
                     </datalist>
                   </div>
-                  <div className="w-1/2">
+                  <div className="lg:w-1/2">
                     <Input
                       type="text"
                       label="Province"
@@ -262,8 +265,8 @@ export default function BasicInfo() {
                     </datalist>
                   </div>
                 </div>
-                <div className="flex space-x-4">
-                  <div className="w-1/2">
+                <div className={responsiveClass}>
+                  <div className="lg:w-1/2">
                     <Input
                       type="text"
                       label="Postal Code"
@@ -277,7 +280,7 @@ export default function BasicInfo() {
                       ))}
                     </datalist>
                   </div>
-                  <div className="w-1/2">
+                  <div className="lg:w-1/2">
                     <Input
                       type="text"
                       label="Country"
@@ -296,15 +299,16 @@ export default function BasicInfo() {
             </div>
           </CardContent>
         </Card>
-        <Card className="p-4 bg-white">
+
+        <Card className="border-none shadow-none md:border-gray-300 md:shadow-md bg-white">
           <CardContent>
-            <div className="space-y-4 ">
-              <div className="flex items-center justify-between">
-                <div className="flex gap-2 items-center text-[25px]">
+            <div className="md:p-4 space-y-4">
+              <div className="flex flex-col space-y-6 lg:space-y-0 lg:flex-row lg:items-center lg:justify-between">
+                <div className="flex items-center text-[25px]">
                   <MdLocationPin />
                   ที่อยู่ปัจจุบัน
                 </div>
-                <div className="flex space-x-6">
+                <div className="flex flex-col pl-1 space-y-4 lg:space-y-0 lg:flex-row lg:space-x-6">
                   <div className="space-x-2">
                     <input
                       id="radio-1"
@@ -335,8 +339,8 @@ export default function BasicInfo() {
               </div>
               {radioAddressValue === "radio-2" && (
                 <div className="space-y-4">
-                  <div className="flex space-x-4">
-                    <div className="w-1/2">
+                  <div className={responsiveClass}>
+                    <div className="lg:w-1/2">
                       <Input
                         type="text"
                         label="Address Number"
@@ -344,7 +348,7 @@ export default function BasicInfo() {
                         {...register("currentAddress.homeNumber")}
                       />
                     </div>
-                    <div className="w-1/2">
+                    <div className="lg:w-1/2">
                       <Input
                         type="text"
                         label="Floor"
@@ -353,8 +357,8 @@ export default function BasicInfo() {
                       />
                     </div>
                   </div>
-                  <div className="flex space-x-4">
-                    <div className="w-1/2">
+                  <div className={responsiveClass}>
+                    <div className="lg:w-1/2">
                       <Input
                         type="text"
                         label="Moo"
@@ -362,7 +366,7 @@ export default function BasicInfo() {
                         {...register("currentAddress.villageName")}
                       />
                     </div>
-                    <div className="w-1/2">
+                    <div className="lg:w-1/2">
                       <Input
                         type="text"
                         label="Soi"
@@ -371,8 +375,8 @@ export default function BasicInfo() {
                       />
                     </div>
                   </div>
-                  <div className="flex space-x-4">
-                    <div className="w-1/2">
+                  <div className={responsiveClass}>
+                    <div className="lg:w-1/2">
                       <Input
                         type="text"
                         label="Road"
@@ -380,7 +384,7 @@ export default function BasicInfo() {
                         {...register("currentAddress.streetName")}
                       />
                     </div>
-                    <div className="w-1/2">
+                    <div className="lg:w-1/2">
                       <Input
                         type="text"
                         label="Tambon"
@@ -398,8 +402,8 @@ export default function BasicInfo() {
                       </datalist>
                     </div>
                   </div>
-                  <div className="flex space-x-4">
-                    <div className="w-1/2">
+                  <div className={responsiveClass}>
+                    <div className="lg:w-1/2">
                       <Input
                         type="text"
                         label="Amphoe"
@@ -413,7 +417,7 @@ export default function BasicInfo() {
                         ))}
                       </datalist>
                     </div>
-                    <div className="w-1/2">
+                    <div className="lg:w-1/2">
                       <Input
                         type="text"
                         label="Province"
@@ -428,8 +432,8 @@ export default function BasicInfo() {
                       </datalist>
                     </div>
                   </div>
-                  <div className="flex space-x-4">
-                    <div className="w-1/2">
+                  <div className={responsiveClass}>
+                    <div className="lg:w-1/2">
                       <Input
                         type="text"
                         label="Postal Code"
@@ -443,7 +447,7 @@ export default function BasicInfo() {
                         ))}
                       </datalist>
                     </div>
-                    <div className="w-1/2">
+                    <div className="lg:w-1/2">
                       <Input
                         type="text"
                         label="Country"
@@ -463,18 +467,19 @@ export default function BasicInfo() {
             </div>
           </CardContent>
         </Card>
-        <Card className="p-4 bg-white">
+
+        <Card className="border-none shadow-none md:border-gray-300 md:shadow-md bg-white">
           <CardContent>
-            <div className="flex flex-col space-y-4">
+            <div className="flex flex-col space-y-4 md:p-4">
               <div className="flex gap-2 items-center text-[25px]">
                 <MdLocationPin />
                 อาชีพปัจจุบันและแหล่งที่มาของเงินลงทุน
               </div>
-              <div className="flex space-x-6">
-                <div className="flex w-1/2">
+              <div className={responsiveClass}>
+                <div className="lg:w-1/2">
                   <select
                     {...register("occupation.education")}
-                    className=" px-2.5 pb-2.5 pt-4 cursor-pointer text-gray-600 pl-2 hover:bg-slate-100
+                    className="border border-gray-200 px-2.5 pb-2.5 pt-4 cursor-pointer text-gray-600 pl-2 hover:bg-slate-100
                                 text-sm rounded-lg focus:ring-gray-700 focus:border-blue-700 block w-full h-full dark:bg-gray-700 dark:border-gray-600
                                 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-700 dark:focus:border-gray-700"
                   >
@@ -486,10 +491,10 @@ export default function BasicInfo() {
                     ))}
                   </select>
                 </div>
-                <div className="w-1/2">
+                <div className="lg:w-1/2">
                   <select
                     {...register("occupation.sourceOfIncome")}
-                    className="px-2.5 pb-2.5 pt-4 cursor-pointer text-gray-600 pl-2 hover:bg-slate-100
+                    className="border border-gray-200 px-2.5 pb-2.5 pt-4 cursor-pointer text-gray-600 pl-2 hover:bg-slate-100
                                 text-sm rounded-lg focus:ring-gray-700 focus:border-blue-700 block w-full h-full dark:bg-gray-700 dark:border-gray-600
                                 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-700 dark:focus:border-gray-700"
                   >
@@ -502,11 +507,11 @@ export default function BasicInfo() {
                   </select>
                 </div>
               </div>
-              <div className="flex space-x-6">
-                <div className="w-1/2">
+              <div className={responsiveClass}>
+                <div className="lg:w-1/2">
                   <select
                     {...register("occupation.currentOccupation")}
-                    className="px-2.5 pb-2.5 pt-4 cursor-pointer text-gray-600 pl-2 hover:bg-slate-100
+                    className="border border-gray-200 px-2.5 pb-2.5 pt-4 cursor-pointer text-gray-600 pl-2 hover:bg-slate-100
                                     text-sm rounded-lg focus:ring-gray-700 focus:border-blue-700 block w-full h-full dark:bg-gray-700 dark:border-gray-600
                                     dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-700 dark:focus:border-gray-700"
                   >
@@ -519,7 +524,7 @@ export default function BasicInfo() {
                   </select>
                 </div>
                 {showWorkplace ? (
-                  <div className="w-1/2">
+                  <div className="lg:w-1/2">
                     <Input
                       type="text"
                       label="ชื่อสถานที่ทำงาน"
@@ -528,7 +533,7 @@ export default function BasicInfo() {
                     />
                   </div>
                 ) : showWorkPosition ? (
-                  <div className="w-1/2">
+                  <div className="lg:w-1/2">
                     <Input
                       type="text"
                       label="ตำแหน่งงาน"
@@ -537,10 +542,10 @@ export default function BasicInfo() {
                     />
                   </div>
                 ) : (
-                  <div className="w-1/2">
+                  <div className="lg:w-1/2">
                     <select
                       {...register("occupation.salaryRange")}
-                      className="px-2.5 pb-2.5 pt-4 cursor-pointer text-gray-600 pl-2 hover:bg-slate-100
+                      className="border border-gray-200 px-2.5 pb-2.5 pt-4 cursor-pointer text-gray-600 pl-2 hover:bg-slate-100
                                         text-sm rounded-lg focus:ring-gray-700 focus:border-blue-700 block w-full h-full dark:bg-gray-700 dark:border-gray-600
                                         dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-700 dark:focus:border-gray-700"
                     >
@@ -554,12 +559,12 @@ export default function BasicInfo() {
                   </div>
                 )}
               </div>
-              <div className="flex space-x-6">
+              <div className={responsiveClass}>
                 {showBusinessType ? (
-                  <div className="w-1/2">
+                  <div className="lg:w-1/2">
                     <select
                       {...register("occupation.typeOfBusiness")}
-                      className="px-2.5 pb-2.5 pt-4 cursor-pointer text-gray-600 pl-2 hover:bg-slate-100
+                      className="border border-gray-200 px-2.5 pb-2.5 pt-4 cursor-pointer text-gray-600 pl-2 hover:bg-slate-100
                                         text-sm rounded-lg focus:ring-gray-700 focus:border-blue-700 block w-full h-full dark:bg-gray-700 dark:border-gray-600
                                         dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-700 dark:focus:border-gray-700"
                     >
@@ -572,12 +577,12 @@ export default function BasicInfo() {
                     </select>
                   </div>
                 ) : !showBusinessType && !showWorkPosition && !showWorkplace ? (
-                  <div className="w-1/2"></div>
+                  <div className="lg:w-1/2"></div>
                 ) : (
-                  <div className="w-1/2">
+                  <div className="lg:w-1/2">
                     <select
                       {...register("occupation.salaryRange")}
-                      className="px-2.5 pb-2.5 pt-4 cursor-pointer text-gray-600 pl-2 hover:bg-slate-100
+                      className="border border-gray-200 px-2.5 pb-2.5 pt-4 cursor-pointer text-gray-600 pl-2 hover:bg-slate-100
                                         text-sm rounded-lg focus:ring-gray-700 focus:border-blue-700 block w-full h-full dark:bg-gray-700 dark:border-gray-600
                                         dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-700 dark:focus:border-gray-700"
                     >
@@ -591,7 +596,7 @@ export default function BasicInfo() {
                   </div>
                 )}
                 {showWorkPosition && showWorkplace ? (
-                  <div className="w-1/2">
+                  <div className="lg:w-1/2">
                     <Input
                       type="text"
                       label="ตำแหน่งงาน"
@@ -600,15 +605,15 @@ export default function BasicInfo() {
                     />
                   </div>
                 ) : (
-                  <div className="w-1/2"></div>
+                  <div className="lg:w-1/2"></div>
                 )}
               </div>
               {showBusinessType && (
-                <div className="flex space-x-6">
-                  <div className="w-1/2">
+                <div className={responsiveClass}>
+                  <div className="lg:w-1/2">
                     <select
                       {...register("occupation.salaryRange")}
-                      className="px-2.5 pb-2.5 pt-4 cursor-pointer text-gray-600 pl-2 hover:bg-slate-100
+                      className="border border-gray-200 px-2.5 pb-2.5 pt-4 cursor-pointer text-gray-600 pl-2 hover:bg-slate-100
                                         text-sm rounded-lg focus:ring-gray-700 focus:border-blue-700 block w-full h-full dark:bg-gray-700 dark:border-gray-600
                                         dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-700 dark:focus:border-gray-700"
                     >
@@ -620,22 +625,23 @@ export default function BasicInfo() {
                       ))}
                     </select>
                   </div>
-                  <div className="w-1/2"></div>
+                  <div className="lg:w-1/2"></div>
                 </div>
               )}
             </div>
           </CardContent>
         </Card>
-        <Card className="p-4 bg-white">
+
+        <Card className="border-none shadow-none md:border-gray-300 md:shadow-md bg-white">
           <CardContent>
-            <div className="space-y-4 ">
-              <div className="flex items-center justify-between">
+            <div className="space-y-4 md:p-4">
+              <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
                 <div className="flex gap-2 items-center text-[25px]">
                   <MdLocationPin />
                   ที่ตั้งที่ทำงาน
                 </div>
-                <div className="flex space-x-6">
-                  <div className="space-x-2">
+                <div className="flex flex-col pl-1 lg:flex-row lg:space-x-6">
+                  <div className="space-x-2 pt-2 lg:pt-0">
                     <input
                       id="radio-3"
                       name="radio-for-work"
@@ -645,7 +651,7 @@ export default function BasicInfo() {
                     />
                     <label htmlFor="radio-3">ที่อยู่บัตรประชาชน</label>
                   </div>
-                  <div className="space-x-2">
+                  <div className="space-x-2 pt-2 lg:pt-0">
                     <input
                       id="radio-4"
                       name="radio-for-work"
@@ -655,7 +661,7 @@ export default function BasicInfo() {
                     />
                     <label htmlFor="radio-4">ที่อยู่ปัจจุบัน</label>
                   </div>
-                  <div className="space-x-2">
+                  <div className="space-x-2 pt-2 lg:pt-0">
                     <input
                       id="radio-5"
                       name="radio-for-work"
@@ -670,8 +676,8 @@ export default function BasicInfo() {
               {radioWorkValue === "radio-5" && (
                 <div>
                   <div className="space-y-4">
-                    <div className="flex space-x-4">
-                      <div className="w-1/2">
+                    <div className={responsiveClass}>
+                      <div className="lg:w-1/2">
                         <Input
                           type="text"
                           label="Address Number"
@@ -679,7 +685,7 @@ export default function BasicInfo() {
                           {...register("officeAddress.homeNumber")}
                         />
                       </div>
-                      <div className="w-1/2">
+                      <div className="lg:w-1/2">
                         <Input
                           type="text"
                           label="Floor"
@@ -688,8 +694,8 @@ export default function BasicInfo() {
                         />
                       </div>
                     </div>
-                    <div className="flex space-x-4">
-                      <div className="w-1/2">
+                    <div className={responsiveClass}>
+                      <div className="lg:w-1/2">
                         <Input
                           type="text"
                           label="Moo"
@@ -697,7 +703,7 @@ export default function BasicInfo() {
                           {...register("officeAddress.villageName")}
                         />
                       </div>
-                      <div className="w-1/2">
+                      <div className="lg:w-1/2">
                         <Input
                           type="text"
                           label="Soi"
@@ -706,8 +712,8 @@ export default function BasicInfo() {
                         />
                       </div>
                     </div>
-                    <div className="flex space-x-4">
-                      <div className="w-1/2">
+                    <div className={responsiveClass}>
+                      <div className="lg:w-1/2">
                         <Input
                           type="text"
                           label="Road"
@@ -715,7 +721,7 @@ export default function BasicInfo() {
                           {...register("officeAddress.streetName")}
                         />
                       </div>
-                      <div className="w-1/2">
+                      <div className="lg:w-1/2">
                         <Input
                           type="text"
                           label="Tambon"
@@ -733,8 +739,8 @@ export default function BasicInfo() {
                         </datalist>
                       </div>
                     </div>
-                    <div className="flex space-x-4">
-                      <div className="w-1/2">
+                    <div className={responsiveClass}>
+                      <div className="lg:w-1/2">
                         <Input
                           type="text"
                           label="Amphoe"
@@ -751,7 +757,7 @@ export default function BasicInfo() {
                           ))}
                         </datalist>
                       </div>
-                      <div className="w-1/2">
+                      <div className="lg:w-1/2">
                         <Input
                           type="text"
                           label="Province"
@@ -769,8 +775,8 @@ export default function BasicInfo() {
                         </datalist>
                       </div>
                     </div>
-                    <div className="flex space-x-4">
-                      <div className="w-1/2">
+                    <div className={responsiveClass}>
+                      <div className="lg:w-1/2">
                         <Input
                           type="text"
                           label="Postal Code"
@@ -784,7 +790,7 @@ export default function BasicInfo() {
                           ))}
                         </datalist>
                       </div>
-                      <div className="w-1/2">
+                      <div className="lg:w-1/2">
                         <Input
                           type="text"
                           label="Country"
@@ -805,7 +811,8 @@ export default function BasicInfo() {
             </div>
           </CardContent>
         </Card>
-        <Card className="bg-white">
+
+        <Card className="border-none shadow-none md:border-gray-300 md:shadow-md bg-white">
           <CardContent>
             <div className="p-4 space-y-4">
               <div className="flex gap-2 items-center text-[25px]">
@@ -861,9 +868,10 @@ export default function BasicInfo() {
             </div>
           </CardContent>
         </Card>
-        <Card className="bg-white">
+
+        <Card className="border-none shadow-none md:border-gray-300 md:shadow-md bg-white">
           <CardContent>
-            <div className="p-4 space-y-4">
+            <div className="md:p-4 space-y-4">
               <div>
                 <div className="flex gap-2 items-center text-[25px]">
                   บัญชีธนาคารของท่าน (เพื่อใช้ในการถอนเงิน)
@@ -874,10 +882,10 @@ export default function BasicInfo() {
                 </div>
               </div>
               <div className="space-y-4">
-                <div className="flex space-x-4">
+                <div className={responsiveClass}>
                   <select
                     {...register("firstBankAccount.bankName")}
-                    className="px-2.5 pb-2.5 pt-4 cursor-pointer text-gray-600 pl-2 hover:bg-slate-100
+                    className="border border-gray-200 px-2.5 pb-2.5 pt-4 cursor-pointer text-gray-600 pl-2 hover:bg-slate-100
                                             text-sm rounded-lg focus:ring-gray-700 focus:border-blue-700 block w-full h-full dark:bg-gray-700 dark:border-gray-600
                                             dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-700 dark:focus:border-gray-700"
                   >
@@ -907,12 +915,12 @@ export default function BasicInfo() {
                 </div>
               </div>
               <div>
-                <div className="flex items-center justify-between pt-4">
+                <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between pt-4">
                   <div className="flex gap-2 items-center text-[25px]">
                     เพิ่มบัญชีธนาคารที่ 2 (เพื่อใช้ในการถอนเงิน)
                   </div>
-                  <div className="flex space-x-6">
-                    <div className="space-x-2">
+                  <div className="flex flex-col lg:flex-row lg:space-x-6">
+                    <div className="space-x-2 pt-2 lg:pt-0">
                       <input
                         id="radio-6"
                         name="radio-for-bank"
@@ -922,7 +930,7 @@ export default function BasicInfo() {
                       />
                       <label htmlFor="radio-6">ใช้</label>
                     </div>
-                    <div className="space-x-2">
+                    <div className="space-x-2 pt-2 lg:pt-0">
                       <input
                         id="radio-7"
                         name="radio-for-bank"
@@ -945,7 +953,7 @@ export default function BasicInfo() {
                     <div className="flex space-x-4">
                       <select
                         {...register("secondBankAccountBody.bankName")}
-                        className="px-2.5 pb-2.5 pt-4 cursor-pointer  text-gray-600 pl-2 hover:bg-slate-100
+                        className="border border-gray-200 px-2.5 pb-2.5 pt-4 cursor-pointer  text-gray-600 pl-2 hover:bg-slate-100
                                             text-sm rounded-lg focus:ring-gray-700 focus:border-blue-700 block w-full h-full dark:bg-gray-700 dark:border-gray-600
                                             dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-700 dark:focus:border-gray-700"
                       >
@@ -979,7 +987,8 @@ export default function BasicInfo() {
             </div>
           </CardContent>
         </Card>
-        <div className="flex justify-end">
+
+        <div className="flex justify-end px-2 pb-10 md:p-0">
           <Button type="submit">Submit</Button>
         </div>
       </form>

@@ -13,8 +13,14 @@ type SubSuitTestProps = {
   onSuitTestDone: (done: boolean) => void;
 };
 
+type TQuestion = {
+  type: string;
+  question: string;
+  choices: string[];
+};
+
 export default function SubSuitTest({ onSuitTestDone }: SubSuitTestProps) {
-  const questions = [
+  const questions: TQuestion[] = [
     {
       question: "ท่านมีภาระค่าใช้จ่ายประจำดือนเป็นสัดส่วนเท่าใดของรายได้",
       choices: [
@@ -23,6 +29,7 @@ export default function SubSuitTest({ onSuitTestDone }: SubSuitTestProps) {
         "25% - 50% ของรายได้",
         "น้อยกว่า 25% ของรายได้",
       ],
+      type: "1",
     },
     {
       question: "ในปัจจุบัน ข้อใดต่อไปนี้ตรงกับสภาวะของท่านมากที่สุด",
@@ -32,6 +39,7 @@ export default function SubSuitTest({ onSuitTestDone }: SubSuitTestProps) {
         "ทรัพย์สินมากกว่าหนี้สิน",
         "เงินออมเพียงพอสำหรับวิยเกษียณอายุ",
       ],
+      type: "1",
     },
     {
       question: "ท่านมีประสบการณ์/ความรู้เกี่ยวกับการลงทุนในด้านใดมาบ้างแล้ว",
@@ -41,6 +49,7 @@ export default function SubSuitTest({ onSuitTestDone }: SubSuitTestProps) {
         "เพื่อสิทธิประโยชน์ทางภาษี",
         "เพื่อการเกษียณ",
       ],
+      type: "2",
     },
     {
       question: "ท่านคาดว่ายังไม่ต้องใช้เงินที่จะนำมาลงทุนอีกนานเท่าใด",
@@ -50,6 +59,7 @@ export default function SubSuitTest({ onSuitTestDone }: SubSuitTestProps) {
         "ทรัพย์สินมากกว่าหนี้สิน",
         "เงินออมเพียงพอสำหรับวิยเกษียณอายุ",
       ],
+      type: "1",
     },
     {
       question: "วัตถุประสงค์ในการลงทุน/เป้าหมายหลักในการลงทุนของท่าน คือ",
@@ -59,6 +69,7 @@ export default function SubSuitTest({ onSuitTestDone }: SubSuitTestProps) {
         "ได้รับผลตอบแทนที่สูงขึ้น ยอมเสี่ยงที่จะสูญเสียเงินต้นมากขึ้น",
         "ได้ผลตอบแทนสูงสุดในระยะยาว ยอมเสี่ยงที่จะสูญเงินต้น",
       ],
+      type: "1",
     },
     {
       question: "ความเสี่ยงจากการลงทุนข้อใดที่ท่านยอมรับได้",
@@ -68,6 +79,7 @@ export default function SubSuitTest({ onSuitTestDone }: SubSuitTestProps) {
         "โอกาสกำไรสูงสุด 20% แต่อาจขาดทุนถึง 15%",
         "โอกาสกำไรสูงสุด 50% แต่อาจขาดทุนถึง 100%",
       ],
+      type: "1",
     },
     {
       question:
@@ -78,6 +90,7 @@ export default function SubSuitTest({ onSuitTestDone }: SubSuitTestProps) {
         "เข้าใจและรับความผันผวนได้ในระดับหนึ่ง",
         "ไม่กังวลกับโอกาสขาดทุนสูง ยังหวังว่าอาจมีโอกาสปรับสูงขึ้น",
       ],
+      type: "1",
     },
     {
       question:
@@ -88,6 +101,7 @@ export default function SubSuitTest({ onSuitTestDone }: SubSuitTestProps) {
         "มากกว่า 10% - 20%",
         "มากกว่า 20% ขึ้นไป",
       ],
+      type: "1",
     },
     {
       question:
@@ -98,6 +112,7 @@ export default function SubSuitTest({ onSuitTestDone }: SubSuitTestProps) {
         "อดทนถือต่อไป และรอพลตอบแทนปริบตัวกลับมา",
         "มั่นใจ เพราะตั้งใจลงทุนระยะยาว และจะเพิ่มเงินลงทุน",
       ],
+      type: "1",
     },
   ];
 
@@ -240,9 +255,9 @@ export default function SubSuitTest({ onSuitTestDone }: SubSuitTestProps) {
     <div className="">
       <div className="flex flex-col space-y-8">
         {questions.map((question, questionIndex) =>
-          questionIndex + 1 === 3 ? (
+          question.type === "2" ? (
             <Card className="bg-white" key={questionIndex}>
-              <div className="flex flex-col space-y-4 p-8">
+              <div className="flex flex-col space-y-4 p-4 lg:p-8">
                 <p className="font-bold">
                   {questionIndex + 1}.{question.question}
                 </p>
@@ -278,18 +293,18 @@ export default function SubSuitTest({ onSuitTestDone }: SubSuitTestProps) {
           ) : (
             <Card className="bg-white" key={questionIndex}>
               {questionIndex === 0 && (
-                <div className="flex text-gray-400 text-l p-4">
+                <div className="flex text-gray-400 text-l p-4 lg:p-8">
                   <h2>
                     กรุณาเลือกข้อที่ตรงกับท่านมากที่สุดเพื่อท่านจะได้ทราบว่าท่านเหมาะที่จะลงทุนในทรัพย์สินประเภทใด
                   </h2>
                   <span className="text-red-500">*</span>
                 </div>
               )}
-              <div className="flex flex-col space-y-4 p-8">
+              <div className="space-y-4 p-4 lg:p-8">
                 <p className="font-bold">
                   {questionIndex + 1}.{question.question}
                 </p>
-                <div className="flex md:flex-row flex-col md:space-x-8">
+                <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-4">
                   {question.choices.map((choice, choiceIndex) => (
                     <div className="flex" key={choiceIndex}>
                       <input
@@ -307,7 +322,7 @@ export default function SubSuitTest({ onSuitTestDone }: SubSuitTestProps) {
                         htmlFor={`question-${questionIndex}-choice-${choiceIndex}`}
                         className=""
                       >
-                        {choice}
+                        {`${choiceIndex + 1}. ${choice}`}
                       </label>
                     </div>
                   ))}

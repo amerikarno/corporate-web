@@ -286,14 +286,15 @@ export default function KnowLedgeTest({ onTestSuccess }: KnowLedgeTestProps) {
           {answeredQuestionsCount}/{totalQuestions}
         </div>
       </div>
-      <div className="mx-16 mt-16">
+      <div className="">
         <div className="text-xl font-bold text-slate-800">
           แบบประเมินความเหมาะสมในการลงทุน
         </div>
       </div>
-      <Card>
-        <CardContent>
-          <div className="p-4 space-y-4 pr-8 pl-8 flex flex-col">
+
+      <Card className="border-none shadow-none">
+        <CardContent className="p-1 m-0">
+          <div className="space-y-4 flex flex-col">
             <div id={`page-${currentPage}`}>{renderQuestions()}</div>
             <div className="flex justify-between">
               <Button onClick={handlePrev} disabled={currentPage === 1}>

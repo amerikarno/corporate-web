@@ -54,47 +54,44 @@ export function CardWebcamInstructions() {
   };
 
   return (
-    <div className="p-10 flex justify-center">
-      <Card className="w-1/2 bg-white">
-        <CardContent>
-          <h1 className="py-2 font-bold">
-            ถ่ายรูปบัตรประชาชนเพื่อประกอบการยืนยันตัวตน
-          </h1>
-          <div className="">
-            <ol>
-              <li>1.จัดบัตรประชาชนให้อยู่ในกรอบ</li>
-              <li>2.อยู่ในพื้นที่ที่มีแสงสว่างเพียงพอ</li>
-              <li>3.ระวังแสงสะท้อนบนบัตรประชาชนขณะถ่ายบัตร</li>
-            </ol>
-            <div className="my-6">
-              <img src={getImages("idCardPic")} alt="" />
-            </div>
-            <div className="py-4">
-              <p className="font-bold">หมายเหตุ</p>
+    <div className="w-full h-screen">
+      <div className="w-full lg:py-4 xl:py-8">
+        <Card className="border-none shadow-none mx-auto w-full lg:w-4/5 xl:w-1/2 bg-white">
+          <CardContent>
+            <h1 className="py-2 font-bold">
+              ถ่ายรูปบัตรประชาชนเพื่อประกอบการยืนยันตัวตน
+            </h1>
+            <div className="">
               <ol>
-                <li>กรุณากด "ตกลง" เพื่อเปิดกล้อง</li>
-                <li>
-                  หากท่านไม่สามารถถ่ายรูปได้ กรุณาตรวจสอบการตั้งค่า
-                  <span className="text-blue-500 px-1 hover:cursor-pointer">
-                    <CameraSetting />
-                  </span>
-                </li>
+                <li>1.จัดบัตรประชาชนให้อยู่ในกรอบ</li>
+                <li>2.อยู่ในพื้นที่ที่มีแสงสว่างเพียงพอ</li>
+                <li>3.ระวังแสงสะท้อนบนบัตรประชาชนขณะถ่ายบัตร</li>
               </ol>
+              <div className="my-6">
+                <img src={getImages("idCardPic")} alt="" />
+              </div>
+              <div className="py-4">
+                <p className="font-bold">หมายเหตุ</p>
+                <ol>
+                  <li>กรุณากด "ตกลง" เพื่อเปิดกล้อง</li>
+                  <li>
+                    หากท่านไม่สามารถถ่ายรูปได้ กรุณาตรวจสอบการตั้งค่า
+                    <span className="text-blue-500 px-1 hover:cursor-pointer">
+                      <CameraSetting />
+                    </span>
+                  </li>
+                </ol>
+              </div>
+              <Button
+                type="button"
+                onClick={() => navigate("/authentication/signup/cardcapture")}
+              >
+                ตกลง
+              </Button>
             </div>
-            <Button
-              type="button"
-              onClick={() =>
-                // navigate("/create-job/added-individual-account/card-capture")
-                navigate(
-                  `${import.meta.env.BASE_URL}authentication/signup/cardcapture`
-                )
-              }
-            >
-              ตกลง
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 }

@@ -21,7 +21,11 @@ export function Collapsis(props: TCollapsisProps & ComponentProps<"div">) {
         >
           {label}
         </label>
-        {collapsed ? <ChevronUp /> : <ChevronDown />}
+        {collapsed ? (
+          <ChevronUp color="white" />
+        ) : (
+          <ChevronDown color="white" />
+        )}
       </div>
       {collapsed ? children : null}
     </>

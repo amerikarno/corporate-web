@@ -69,24 +69,20 @@ export default function SuitTestFatca() {
     //   alert("Please Do the Suit Test First.");
     //   window.scrollTo({ top: 0, behavior: "smooth" });
     // }
-    navigate(
-      `${import.meta.env.BASE_URL}authentication/signup/otpemailconfirm`
-    );
+    navigate("/authentication/signup/otpemailconfirm");
   };
 
   return (
-    <div className="flex justify-center p-10">
-      <div className="space-y-8 p-4 w-1/2">
-        <div className="">
-          <div className="text-2xl font-bold text-slate-800 ">
-            แบบประเมินความเหมาะสมในการลงทุน
-          </div>
+    <div className="flex justify-center py-4 lg:py-10">
+      <div className="space-y-8 p-4 w-full xl:w-4/5">
+        <div className="px-2 text-xl xl:text-2xl font-bold text-slate-800 ">
+          แบบประเมินความเหมาะสมในการลงทุน
         </div>
         <SubSuitTest onSuitTestDone={handleSuitTestSuccess} />
         <Card className="bg-white">
           <CardContent>
-            <div className="p-4 space-y-4 pr-8 pl-8 flex flex-col">
-              <span className="text-xl font-bold mb-4">กรอกข้อมูล FATCA</span>
+            <div className="space-y-4 xl:px-4 flex flex-col">
+              <span className="text-xl font-bold py-4">กรอกข้อมูล FATCA</span>
               <div className="space-y-4">
                 <span>ข้าพเจ้ามีข้อใดข้อหนึ่งดังนี้:</span>
                 <div className="flex flex-col pl-4">
@@ -180,45 +176,42 @@ export default function SuitTestFatca() {
             </div>
           </CardContent>
         </Card>
+
         <Card className="bg-white">
           <CardContent>
-            <div className="p-4 pl-8">
-              <div>
-                <span className="text-xl">
-                  ท่านต้องการทำแบบทดสอบความรู้ Knowledge Test
-                </span>
-                <div className="flex space-x-6 pt-4">
-                  <div className="space-x-2">
-                    <input
-                      id="knowLedgeTest-1"
-                      name="radio-for-knowLedgeTest"
-                      type="radio"
-                      checked={knowLedgeTest === "knowLedgeTest-1"}
-                      onChange={() => setKnowLedgeTest("knowLedgeTest-1")}
-                    />
-                    <label htmlFor="knowLedgeTest-1">ทำตอนนี้</label>
-                  </div>
-                  <div className="space-x-2">
-                    <input
-                      id="knowLedgeTest-2"
-                      name="radio-for-knowLedgeTest"
-                      type="radio"
-                      checked={knowLedgeTest === "knowLedgeTest-2"}
-                      onChange={() => setKnowLedgeTest("knowLedgeTest-2")}
-                    />
-                    <label htmlFor="knowLedgeTest-2">ทำภายหลัง</label>
-                  </div>
+            <div className="p-4 xl:pl-8">
+              <span className="text-xl">
+                ท่านต้องการทำแบบทดสอบความรู้ Knowledge Test
+              </span>
+              <div className="flex flex-col lg:flex-row lg:space-x-6 pt-4 space-y-4 lg:space-y-0">
+                <div className="space-x-2">
+                  <input
+                    id="knowLedgeTest-1"
+                    name="radio-for-knowLedgeTest"
+                    type="radio"
+                    checked={knowLedgeTest === "knowLedgeTest-1"}
+                    onChange={() => setKnowLedgeTest("knowLedgeTest-1")}
+                  />
+                  <label htmlFor="knowLedgeTest-1">ทำตอนนี้</label>
+                </div>
+                <div className="space-x-2">
+                  <input
+                    id="knowLedgeTest-2"
+                    name="radio-for-knowLedgeTest"
+                    type="radio"
+                    checked={knowLedgeTest === "knowLedgeTest-2"}
+                    onChange={() => setKnowLedgeTest("knowLedgeTest-2")}
+                  />
+                  <label htmlFor="knowLedgeTest-2">ทำภายหลัง</label>
                 </div>
               </div>
               {knowLedgeTest === "knowLedgeTest-1" && (
-                <div>
-                  <KnowLedgeTest onTestSuccess={handleKnowLedgeTestSuccess} />
-                </div>
+                <KnowLedgeTest onTestSuccess={handleKnowLedgeTestSuccess} />
               )}
             </div>
           </CardContent>
         </Card>
-        <div className="flex justify-end">
+        <div className="flex justify-end px-2">
           <Button onClick={handleSubmitSuitTestFatca}>Next Form</Button>
         </div>
         <div>
