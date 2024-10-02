@@ -91,7 +91,7 @@ export default function AddIndividualAccount() {
                 <div className="lg:w-1/2 h-[48px]">
                   <select
                     {...register("thTitle")}
-                    className="border border-gray-700 cursor-pointer hover:bg-slate-100 block px-2.5 w-full text-sm text-gray-600 bg-white py-3 rounded-md"
+                    className="border border-gray-700 cursor-pointer hover:bg-slate-100 block px-2.5 w-full h-full text-sm text-gray-600 bg-white py-3 rounded-md"
                   >
                     <option value="">คำนำหน้าชื่อ (ภาษาไทย)</option>
                     <option value="นาย">นาย</option>
@@ -140,10 +140,10 @@ export default function AddIndividualAccount() {
 
             <div className="space-y-2">
               <div className="flex flex-col space-y-2 lg:space-y-0 lg:flex-row lg:space-x-4">
-                <div className="lg:w-1/2">
+                <div className="lg:w-1/2 h-[48px]">
                   <select
                     {...register("engTitle")}
-                    className="border border-gray-700 cursor-pointer hover:bg-slate-100 block px-2.5 py-3 rounded-md w-full text-sm text-gray-600 bg-white"
+                    className="border border-gray-700 cursor-pointer hover:bg-slate-100 block px-2.5 py-3 rounded-md w-full h-full text-sm text-gray-600 bg-white"
                   >
                     <option value="">คำนำหน้าชื่อ (ภาษาอังกฤษ)</option>
                     <option value="Mr.">Mr.</option>
@@ -220,12 +220,12 @@ export default function AddIndividualAccount() {
             </div>
 
             <div className="flex flex-col space-y-2 lg:space-y-0 lg:flex-row lg:space-x-4">
-              <div className="lg:w-1/2">
+              <div className="lg:w-1/2 h-[48px] w-full">
                 <Input
                   type="date"
                   {...register("birthDate")}
-                  placeholder="วัน/เดือน/ปี เกิด"
-                  className="w-full border border-gray-700 cursor-pointer px-2.5 py-3 rounded-md text-gray-600 pl-2 hover:bg-slate-100 focus:border-blue-700"
+                  label="วัน/เดือน/ปี เกิด"
+                  className="w-full h-full border border-gray-700 cursor-pointer px-2.5 py-3 rounded-md text-gray-600 pl-2 bg-transparent hover:bg-slate-100 focus:border-blue-700"
                 />
                 {errors.birthDate && (
                   <span className="text-red-500">
@@ -234,10 +234,10 @@ export default function AddIndividualAccount() {
                 )}
               </div>
 
-              <div className="flex flex-col lg:w-1/2">
+              <div className="flex flex-col lg:w-1/2 w-full h-[48px]">
                 <select
                   {...register("mariageStatus")}
-                  className="border border-gray-700 cursor-pointer px-2.5 py-3 rounded-md text-gray-600 pl-2 hover:bg-slate-100 focus:border-blue-700"
+                  className="border h-full border-gray-700 cursor-pointer px-2.5 py-3 rounded-md text-gray-600 pl-2 bg-transparent hover:bg-slate-100 focus:border-blue-700"
                 >
                   <option value="">สถานะ</option>
                   <option value="โสด">Single</option>
