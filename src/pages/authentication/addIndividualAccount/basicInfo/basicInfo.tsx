@@ -988,7 +988,7 @@ export default function BasicInfo() {
           </CardContent>
         </Card>
 
-        <div className="flex justify-end">
+        <div className="flex justify-end px-2 pb-10 md:p-0">
           <Button type="submit">Submit</Button>
         </div>
       </form>
