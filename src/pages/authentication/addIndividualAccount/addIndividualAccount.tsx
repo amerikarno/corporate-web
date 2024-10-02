@@ -225,7 +225,7 @@ export default function AddIndividualAccount() {
                   type="date"
                   {...register("birthDate")}
                   placeholder="วัน/เดือน/ปี เกิด"
-                  className="w-full border border-gray-700 cursor-pointer px-2.5 py-3 rounded-md text-gray-600 pl-2 hover:bg-slate-100 focus:border-blue-700"
+                  className="w-full min-w-full border border-gray-700 cursor-pointer px-2.5 py-3 rounded-md text-gray-600 pl-2 hover:bg-slate-100 focus:border-blue-700"
                 />
                 {errors.birthDate && (
                   <span className="text-red-500">

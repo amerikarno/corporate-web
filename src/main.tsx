@@ -88,6 +88,12 @@ createRoot(document.getElementById("root")!).render(
             <Route
               path={`${
                 import.meta.env.BASE_URL
+              }authentication/signup/webcaminstructions`}
+              element={<CardWebcamInstructions />}
+            />
+            <Route
+              path={`${
+                import.meta.env.BASE_URL
               }authentication/signup/cardcapture`}
               element={<IDCardCapture />}
             />
@@ -98,7 +104,7 @@ createRoot(document.getElementById("root")!).render(
               element={<IdentityVerification />}
             />
             <Route
-              path={`${import.meta.env.BASE_URL}market`}
+              path={`${import.meta.env.BASE_URL}dashboard/personal`}
               element={<Personal />}
             />
             <Route

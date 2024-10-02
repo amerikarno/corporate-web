@@ -70,7 +70,7 @@ const Landing = ({ ThemeChanger }: datatype) => {
     <>
       <div className="w-full">
         <div id="header" className="border-b border-gray-300 shadow-sm">
-          <div className="max-w-screen-s1 s2:max-w-[980px] s3:max-w-[1280px] mx-auto s2:px-[10px]">
+          <div className="max-w-screen-s1 s2:max-w-[840px] s3:max-w-[1280px] mx-auto s3:px-2">
             <div className="w-full flex flex-row py-4 px-4">
               <div className="w-1/2 items-center s3:w-1/3">
                 <img src={getImages("logo")} alt="" className="h-12" />
@@ -82,59 +82,57 @@ const Landing = ({ ThemeChanger }: datatype) => {
               </div>
 
               {token ? (
-                <div className="w-1/2 lg:w-1/3 flex justify-end">
-                  <div className="flex flex-row space-x-2">
-                    <DropdownMenu>
-                      <DropdownMenuTrigger className="flex pr-4 space-x-2 outline-none">
-                        <Avatar className="w-16 h-16">
-                          <AvatarImage src={example} alt="" />
-                          <AvatarFallback>
-                            <div className="rounded-full w-full h-full bg-white"></div>
-                          </AvatarFallback>
-                        </Avatar>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent className="mr-12 bg-white space-y-2">
-                        <DropdownMenuItem
-                          className="cursor-pointer hover:bg-gray-300 hover:font-bold"
-                          onClick={() => {
-                            navigate("/");
-                          }}
-                        >
-                          Profile
-                        </DropdownMenuItem>
-                        <DropdownMenuItem
-                          className="cursor-pointer hover:bg-gray-300 hover:font-bold"
-                          onClick={() => {
-                            navigate("/market");
-                          }}
-                        >
-                          Market
-                        </DropdownMenuItem>
-                        <DropdownMenuItem
-                          className="cursor-pointer hover:bg-gray-300 hover:font-bold"
-                          onClick={() => {
-                            navigate("/order-trade");
-                          }}
-                        >
-                          Buy / Sell
-                        </DropdownMenuItem>
-                        <DropdownMenuItem
-                          className="cursor-pointer hover:bg-gray-300 hover:font-bold"
-                          onClick={() => {
-                            navigate("/");
-                          }}
-                        >
-                          Portfolio
-                        </DropdownMenuItem>
-                        <DropdownMenuItem
-                          className="cursor-pointer hover:bg-gray-300 hover:font-bold"
-                          onClick={() => handleLogout()}
-                        >
-                          Log out
-                        </DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                  </div>
+                <div className="w-1/2 s3:w-1/3 flex justify-end">
+                  <DropdownMenu>
+                    <DropdownMenuTrigger className="flex pr-4 space-x-2 outline-none">
+                      <Avatar className="w-16 h-16">
+                        <AvatarImage src={example} alt="" />
+                        <AvatarFallback>
+                          <div className="rounded-full w-full h-full bg-white"></div>
+                        </AvatarFallback>
+                      </Avatar>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent className="mr-12 bg-white space-y-2">
+                      <DropdownMenuItem
+                        className="cursor-pointer hover:bg-gray-300 hover:font-bold"
+                        onClick={() => {
+                          navigate("/");
+                        }}
+                      >
+                        Profile
+                      </DropdownMenuItem>
+                      <DropdownMenuItem
+                        className="cursor-pointer hover:bg-gray-300 hover:font-bold"
+                        onClick={() => {
+                          navigate("/dashboard/personal");
+                        }}
+                      >
+                        Market
+                      </DropdownMenuItem>
+                      <DropdownMenuItem
+                        className="cursor-pointer hover:bg-gray-300 hover:font-bold"
+                        onClick={() => {
+                          navigate("/order-trade");
+                        }}
+                      >
+                        Buy / Sell
+                      </DropdownMenuItem>
+                      <DropdownMenuItem
+                        className="cursor-pointer hover:bg-gray-300 hover:font-bold"
+                        onClick={() => {
+                          navigate("/");
+                        }}
+                      >
+                        Portfolio
+                      </DropdownMenuItem>
+                      <DropdownMenuItem
+                        className="cursor-pointer hover:bg-gray-300 hover:font-bold"
+                        onClick={() => handleLogout()}
+                      >
+                        Log out
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
                 </div>
               ) : (
                 <div className="w-1/2 s3:w-1/3 flex justify-end items-center space-x-4">

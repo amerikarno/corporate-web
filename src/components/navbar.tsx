@@ -120,7 +120,7 @@ const NavBar = ({ ThemeChanger, children, isFullWidth }: datatype) => {
                       <DropdownMenuItem
                         className="cursor-pointer hover:bg-gray-300 hover:font-bold"
                         onClick={() => {
-                          navigate("/market");
+                          navigate("/dashboard/personal");
                         }}
                       >
                         Market
