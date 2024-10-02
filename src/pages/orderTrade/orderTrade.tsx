@@ -284,7 +284,7 @@ export default function OrderTrade() {
         isFullWidth
         children={
           <div className="w-full flex justify-center">
-            <div className="w-2/3 md:px-4 flex flex-col justify-center space-y-4 py-10">
+            <div className="w-full sm:max-w-80p lg:max-w-60p md:px-4 flex flex-col justify-center space-y-4 py-10">
               <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
                 <div className="w-full flex justify-center">
                   <Card className="bg-white w-full p-4 md:space-y-4 md:p-10">
@@ -294,30 +294,8 @@ export default function OrderTrade() {
                         <IoReceiptOutline />
                       </span>
                     </span>
-                    <div className="w-full flex justify-center items-center">
+                    {/* <div className="w-full flex justify-center items-center">
                       <div className="w-2/3">
-                        {/* <Input
-                      {...register("corporateCode")}
-                      label="Corporate Code"
-                      data-testid="Corporate Code"
-                      id="corporateCode"
-                      disabled={isSubmitting}
-                      value={
-                        selectedCorporateCode !== null
-                          ? selectedCorporateCode
-                          : ""
-                      }
-                      onChange={handleCorporateCodeChange}
-                      type="number"
-                      list="corporateCodes"
-                      autoComplete="off"
-                      inputClassName=""
-                    />
-                    {errors.corporateCode && !selectedCorporateCode && (
-                      <p className="text-red-500 text-sm px-2">
-                        {errors.corporateCode.message}
-                      </p>
-                    )} */}
                         <datalist id="corporateCodes">
                           {mockedCorporateCodes.map((code, index) => (
                             <option key={index} value={code.corporateCode}>
@@ -326,9 +304,9 @@ export default function OrderTrade() {
                           ))}
                         </datalist>
                       </div>
-                    </div>
+                    </div> */}
                     <div className="flex items-center justify-center pt-4">
-                      <div className="w-1/2 ">
+                      <div className="w-full md:w-1/2 pb-4">
                         <div className="relative">
                           {/* <label className="absolute bg-white text-xs rounded-full border-none -top-4">Pairs</label> */}
                           <select
@@ -357,9 +335,9 @@ export default function OrderTrade() {
                         )}
                       </div>
                     </div>
-                    <div className="flex flex-row justify-center pb-4">
+                    <div className="flex flex-row w-full md:w-1/2 justify-center pb-4 mx-auto">
                       <div
-                        className={`flex justify-center select-none cursor-default w-1/4 text-white px-4 py-2 rounded-l transition-colors duration-300 ${
+                        className={`flex-1 select-none cursor-default w-1/4 text-white px-4 py-2 rounded-l transition-colors duration-300 ${
                           buySell === "buy" ? "bg-slate-800" : "bg-slate-500"
                         }`}
                         onClick={() => handleBuySell("buy")}
@@ -367,7 +345,7 @@ export default function OrderTrade() {
                         Buy
                       </div>
                       <div
-                        className={`flex justify-center select-none cursor-default w-1/4 text-white px-4 py-2 rounded-r transition-colors duration-300 ${
+                        className={`flex-1 select-none cursor-default w-1/4 text-white px-4 py-2 rounded-r transition-colors duration-300 ${
                           buySell === "sell" ? "bg-slate-800" : "bg-slate-500"
                         }`}
                         onClick={() => handleBuySell("sell")}

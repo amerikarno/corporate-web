@@ -24,6 +24,7 @@ import GoogleQr from "./pages/authentication/login/googleAuthen/qrGoogle.tsx";
 import QrVerification from "./pages/authentication/login/googleAuthen/qrVerification.tsx";
 import { OtpEmailConfirm } from "./pages/authentication/addIndividualAccount/otpEmailConfirm/otpEmailConfirm.tsx";
 import OrderTrade from "./pages/orderTrade/orderTrade.tsx";
+import BankOrder from "./pages/bankOrder/bankOrder.tsx";
 
 let helmetContext = {};
 
@@ -126,6 +127,10 @@ createRoot(document.getElementById("root")!).render(
             <Route
               path={`${import.meta.env.BASE_URL}/order-trade`}
               element={<OrderTrade />}
+            />
+            <Route
+              path={`${import.meta.env.BASE_URL}/deposite-withdraw`}
+              element={<BankOrder />}
             />
           </Routes>
         </Provider>

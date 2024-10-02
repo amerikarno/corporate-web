@@ -73,7 +73,12 @@ const Landing = ({ ThemeChanger }: datatype) => {
           <div className="max-w-screen-s1 s2:max-w-[840px] s3:max-w-[1280px] mx-auto s3:px-2">
             <div className="w-full flex flex-row py-4 px-4">
               <div className="w-1/2 items-center s3:w-1/3">
-                <img src={getImages("logo")} alt="" className="h-12" />
+                <img
+                  src={getImages("logo")}
+                  alt=""
+                  className="h-12 hover:cursor-pointer"
+                  onClick={() => navigate("/")}
+                />
               </div>
               <div className="hidden s3:flex s3:w-1/3 s3:items-center">
                 <p className="bg-gradient-to-r from-gold-light via-gold-mid to-gold-dark text-transparent bg-clip-text s2:text-3xl font-bold text-center">
@@ -107,7 +112,7 @@ const Landing = ({ ThemeChanger }: datatype) => {
                           navigate("/dashboard/personal");
                         }}
                       >
-                        Market
+                        Personal
                       </DropdownMenuItem>
                       <DropdownMenuItem
                         className="cursor-pointer hover:bg-gray-300 hover:font-bold"
@@ -115,7 +120,7 @@ const Landing = ({ ThemeChanger }: datatype) => {
                           navigate("/order-trade");
                         }}
                       >
-                        Buy / Sell
+                        Invest
                       </DropdownMenuItem>
                       <DropdownMenuItem
                         className="cursor-pointer hover:bg-gray-300 hover:font-bold"
@@ -124,6 +129,14 @@ const Landing = ({ ThemeChanger }: datatype) => {
                         }}
                       >
                         Portfolio
+                      </DropdownMenuItem>
+                      <DropdownMenuItem
+                        className="cursor-pointer hover:bg-gray-300 hover:font-bold"
+                        onClick={() => {
+                          navigate("/deposite-withdraw");
+                        }}
+                      >
+                        Deposite / Withdraw
                       </DropdownMenuItem>
                       <DropdownMenuItem
                         className="cursor-pointer hover:bg-gray-300 hover:font-bold"

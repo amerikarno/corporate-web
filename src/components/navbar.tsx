@@ -85,11 +85,18 @@ const NavBar = ({ ThemeChanger, children, isFullWidth }: datatype) => {
 
       <div id="header" className="border-b border-gray-300 shadow-sm">
         <div
-          className={`w-full ${isFullWidth ? "" : "lg:max-w-[1240px]"} mx-auto`}
+          className={`w-full ${
+            isFullWidth ? "px-2" : "lg:max-w-[1240px]"
+          } mx-auto`}
         >
-          <div className="w-full flex flex-row py-4 px-4">
+          <div className="w-full flex flex-row py-4">
             <div className="w-1/2 items-center lg:w-1/3">
-              <img src={getImages("logo")} alt="" className="h-12" />
+              <img
+                src={getImages("logo")}
+                alt=""
+                className="h-12 hover:cursor-pointer"
+                onClick={() => navigate("/")}
+              />
             </div>
             <div className="hidden lg:block lg:w-1/3 lg:items-center">
               <p className="bg-gradient-to-r from-gold-light via-gold-mid to-gold-dark text-transparent bg-clip-text s2:text-3xl font-bold text-center">
@@ -98,58 +105,64 @@ const NavBar = ({ ThemeChanger, children, isFullWidth }: datatype) => {
             </div>
             {token ? (
               <div className="w-1/2 lg:w-1/3 flex justify-end">
-                <div className="flex flex-row space-x-2">
-                  <DropdownMenu>
-                    <DropdownMenuTrigger className="flex pr-4 space-x-2 outline-none">
-                      <Avatar className="w-16 h-16">
-                        <AvatarImage src={example} alt="" />
-                        <AvatarFallback>
-                          <div className="rounded-full w-full h-full bg-white"></div>
-                        </AvatarFallback>
-                      </Avatar>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent className="mr-12 bg-white space-y-2">
-                      <DropdownMenuItem
-                        className="cursor-pointer hover:bg-gray-300 hover:font-bold"
-                        onClick={() => {
-                          navigate("/");
-                        }}
-                      >
-                        Profile
-                      </DropdownMenuItem>
-                      <DropdownMenuItem
-                        className="cursor-pointer hover:bg-gray-300 hover:font-bold"
-                        onClick={() => {
-                          navigate("/dashboard/personal");
-                        }}
-                      >
-                        Market
-                      </DropdownMenuItem>
-                      <DropdownMenuItem
-                        className="cursor-pointer hover:bg-gray-300 hover:font-bold"
-                        onClick={() => {
-                          navigate("/order-trade");
-                        }}
-                      >
-                        Buy / Sell
-                      </DropdownMenuItem>
-                      <DropdownMenuItem
-                        className="cursor-pointer hover:bg-gray-300 hover:font-bold"
-                        onClick={() => {
-                          navigate("/");
-                        }}
-                      >
-                        Portfolio
-                      </DropdownMenuItem>
-                      <DropdownMenuItem
-                        className="cursor-pointer hover:bg-gray-300 hover:font-bold"
-                        onClick={() => handleLogout()}
-                      >
-                        Log out
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </div>
+                <DropdownMenu>
+                  <DropdownMenuTrigger className="flex space-x-2 outline-none">
+                    <Avatar className="w-16 h-16">
+                      <AvatarImage src={example} alt="" />
+                      <AvatarFallback>
+                        <div className="rounded-full w-full h-full bg-white"></div>
+                      </AvatarFallback>
+                    </Avatar>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="mr-12 bg-white space-y-2">
+                    <DropdownMenuItem
+                      className="cursor-pointer hover:bg-gray-300 hover:font-bold"
+                      onClick={() => {
+                        navigate("/");
+                      }}
+                    >
+                      Profile
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                      className="cursor-pointer hover:bg-gray-300 hover:font-bold"
+                      onClick={() => {
+                        navigate("/dashboard/personal");
+                      }}
+                    >
+                      Personal
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                      className="cursor-pointer hover:bg-gray-300 hover:font-bold"
+                      onClick={() => {
+                        navigate("/order-trade");
+                      }}
+                    >
+                      Invest
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                      className="cursor-pointer hover:bg-gray-300 hover:font-bold"
+                      onClick={() => {
+                        navigate("/");
+                      }}
+                    >
+                      Portfolio
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                      className="cursor-pointer hover:bg-gray-300 hover:font-bold"
+                      onClick={() => {
+                        navigate("/deposite-withdraw");
+                      }}
+                    >
+                      Deposite / Withdraw
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                      className="cursor-pointer hover:bg-gray-300 hover:font-bold"
+                      onClick={() => handleLogout()}
+                    >
+                      Log out
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
               </div>
             ) : (
               <div className="w-1/2 s3:w-1/3 flex justify-end items-center space-x-4">
