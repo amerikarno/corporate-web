@@ -137,10 +137,10 @@ export function AssetDetails() {
                 <Card className="bg-white rounded-[30px]">
                   <CardContent>
                     <div className="box-body">
-                      <div className="border-b-2 border-gray-200 dark:border-white/10">
+                      <div className="border-b-2 border-gray-200">
                         <nav className="-mb-0.5 flex space-x-6 rtl:space-x-reverse">
                           <Link
-                            className={`py-4 px-1 inline-flex items-center gap-2 border-b-[3px] border-transparent text-sm whitespace-nowrap text-gray-500 dark:text-white/70 hover:text-primary ${
+                            className={`py-4 px-1 inline-flex items-center gap-2 border-b-[3px] border-transparent text-sm whitespace-nowrap text-gray-500 hover:text-primary ${
                               tab === 1
                                 ? "hs-tab-active:font-semibold hs-tab-active:border-primary hs-tab-active:text-primary active"
                                 : ""
@@ -154,7 +154,7 @@ export function AssetDetails() {
                             Details
                           </Link>
                           <Link
-                            className={`py-4 px-1 inline-flex items-center gap-2 border-b-[3px] border-transparent text-sm whitespace-nowrap text-gray-500 dark:text-white/70 hover:text-primary ${
+                            className={`py-4 px-1 inline-flex items-center gap-2 border-b-[3px] border-transparent text-sm whitespace-nowrap text-gray-500 hover:text-primary ${
                               tab === 2
                                 ? "hs-tab-active:font-semibold hs-tab-active:border-primary hs-tab-active:text-primary active"
                                 : ""

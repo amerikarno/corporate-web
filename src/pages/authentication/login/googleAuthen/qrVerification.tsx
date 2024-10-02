@@ -109,13 +109,13 @@ export default function QrVerification() {
   return (
     <div className="w-full flex justify-center">
       <div className="w-1/2">
-        <Card className="mt-10 py-10 bg-white rounded-md shadow-sm dark:bg-bgdark">
+        <Card className="mt-10 py-10 bg-white rounded-md shadow-sm">
           <div className="p-4 sm:p-7">
             <div className="text-center">
-              <h1 className="block text-2xl font-bold text-gray-800 dark:text-white pb-4">
+              <h1 className="block text-2xl font-bold text-gray-800">
                 Authenticator Verification
               </h1>
-              <p className="mt-3 text-sm text-gray-600 dark:text-white/70">
+              <p className="mt-3 text-sm text-gray-60">
                 Please enter the 6 digit code from your Google Authenticator
                 App.
               </p>
@@ -127,7 +127,7 @@ export default function QrVerification() {
                   <div className="grid grid-cols-6 gap-4 max-w-[20rem] mx-auto">
                     <Input
                       type="text"
-                      className="text-center py-2 px-3 block w-full border border-gray-400 rounded-md text-sm focus:border-primary focus:ring-primary dark:bg-bgdark dark:border-white/10 dark:text-white/70"
+                      className="text-center py-2 px-3 block w-full border border-gray-400 rounded-md text-sm focus:border-primary focus:ring-primary"
                       required
                       id="one"
                       name="one"
@@ -136,7 +136,7 @@ export default function QrVerification() {
                     />
                     <input
                       type="text"
-                      className="text-center py-2 px-3 block w-full border border-gray-400 rounded-md text-sm focus:border-primary focus:ring-primary dark:bg-bgdark dark:border-white/10 dark:text-white/70"
+                      className="text-center py-2 px-3 block w-full border border-gray-400 rounded-md text-sm focus:border-primary focus:ring-primary"
                       required
                       id="two"
                       name="two"
@@ -145,7 +145,7 @@ export default function QrVerification() {
                     />
                     <input
                       type="text"
-                      className="text-center py-2 px-3 block w-full border border-gray-400 rounded-md text-sm focus:border-primary focus:ring-primary dark:bg-bgdark dark:border-white/10 dark:text-white/70"
+                      className="text-center py-2 px-3 block w-full border border-gray-400 rounded-md text-sm focus:border-primary focus:ring-primary"
                       required
                       id="three"
                       name="three"
@@ -154,7 +154,7 @@ export default function QrVerification() {
                     />
                     <input
                       type="text"
-                      className="text-center py-2 px-3 block w-full border border-gray-400 rounded-md text-sm focus:border-primary focus:ring-primary dark:bg-bgdark dark:border-white/10 dark:text-white/70"
+                      className="text-center py-2 px-3 block w-full border border-gray-400 rounded-md text-sm focus:border-primary focus:ring-primary"
                       required
                       id="four"
                       name="four"
@@ -163,7 +163,7 @@ export default function QrVerification() {
                     />
                     <input
                       type="text"
-                      className="text-center py-2 px-3 block w-full border border-gray-400 rounded-md text-sm focus:border-primary focus:ring-primary dark:bg-bgdark dark:border-white/10 dark:text-white/70"
+                      className="text-center py-2 px-3 block w-full border border-gray-400 rounded-md text-sm focus:border-primary focus:ring-primary"
                       required
                       id="five"
                       name="five"
@@ -172,7 +172,7 @@ export default function QrVerification() {
                     />
                     <input
                       type="text"
-                      className="text-center py-2 px-3 block w-full border border-gray-400 rounded-md text-sm focus:border-primary focus:ring-primary dark:bg-bgdark dark:border-white/10 dark:text-white/70"
+                      className="text-center py-2 px-3 block w-full border border-gray-400 rounded-md text-sm focus:border-primary focus:ring-primary"
                       required
                       id="six"
                       name="six"
