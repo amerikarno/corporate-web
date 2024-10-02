@@ -88,7 +88,7 @@ export default function AddIndividualAccount() {
                 กรอกข้อมูลส่วนตัว
               </h1>
               <div className="flex flex-col space-y-2 lg:space-y-0 lg:flex-row lg:space-x-4">
-                <div className="lg:w-1/2">
+                <div className="lg:w-1/2 h-[48px]">
                   <select
                     {...register("thTitle")}
                     className="border border-gray-700 cursor-pointer hover:bg-slate-100 block px-2.5 w-full text-sm text-gray-600 bg-white py-3 rounded-md"
