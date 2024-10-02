@@ -161,7 +161,7 @@ const Landing = ({ ThemeChanger }: datatype) => {
           <IcoListItem data={dataAll} title="All" />
         </div>
         <footer id="footer" className="bg-dark-bg">
-          <div className="border-b border-white/10 dark:border-white/10 pb-8">
+          <div className="border-b border-white/10  pb-8">
             <div className="container mx-auto pt-10">
               <div className="grid grid-cols-12 gap-6">
                 <div className="col-span-12 md:col-span-4">
@@ -171,7 +171,7 @@ const Landing = ({ ThemeChanger }: datatype) => {
                       className="h-10 mb-2"
                       alt="img"
                     />
-                    <u className="text-lg text-white dark:text-gray-400">
+                    <u className="text-lg text-white ">
                       Elite Consulting
                     </u>
                     <p className="text-white text-xl font-bold pt-4">
@@ -181,35 +181,35 @@ const Landing = ({ ThemeChanger }: datatype) => {
                       <button
                         aria-label="button"
                         type="button"
-                        className="m-0 rounded-full p-2 ti-btn ti-btn-outline !border-0 bg-white/5 dark:bg-white/5 text-gray-400 dark:text-gray-400"
+                        className="m-0 rounded-full p-2 ti-btn ti-btn-outline !border-0 bg-white/5 "
                       >
                         <i className="ri ri-github-line text-lg leading-none"></i>
                       </button>
                       <button
                         aria-label="button"
                         type="button"
-                        className="m-0 rounded-full p-2 ti-btn ti-btn-outline !border-0 bg-white/5 dark:bg-white/5 text-gray-400 dark:text-gray-400"
+                        className="m-0 rounded-full p-2 ti-btn ti-btn-outline !border-0 bg-white/5 "
                       >
                         <i className="ri ri-instagram-line text-lg leading-none"></i>
                       </button>
                       <button
                         aria-label="button"
                         type="button"
-                        className="m-0 rounded-full p-2 ti-btn ti-btn-outline !border-0 bg-white/5 dark:bg-white/5 text-gray-400 dark:text-gray-400"
+                        className="m-0 rounded-full p-2 ti-btn ti-btn-outline !border-0 bg-white/5 "
                       >
                         <i className="ri ri-twitter-line text-lg leading-none"></i>
                       </button>
                       <button
                         aria-label="button"
                         type="button"
-                        className="m-0 rounded-full p-2 ti-btn ti-btn-outline !border-0 bg-white/5 dark:bg-white/5 text-gray-400 dark:text-gray-400"
+                        className="m-0 rounded-full p-2 ti-btn ti-btn-outline !border-0 bg-white/5 "
                       >
                         <i className="ri ri-linkedin-line text-lg leading-none"></i>
                       </button>
                       <button
                         aria-label="button"
                         type="button"
-                        className="m-0 rounded-full p-2 ti-btn ti-btn-outline !border-0 bg-white/5 dark:bg-white/5 text-gray-400 dark:text-gray-400"
+                        className="m-0 rounded-full p-2 ti-btn ti-btn-outline !border-0 bg-white/5 "
                       >
                         <i className="ri ri-google-line text-lg leading-none"></i>
                       </button>
@@ -219,7 +219,7 @@ const Landing = ({ ThemeChanger }: datatype) => {
                   <div className="col-span-12 md:col-span-4">
                     <div className="grid lg:grid-cols-2 gap-6">
                       <div className="space-y-3 px-4">
-                        <ul className="space-y-3 text-gray-400 dark:text-gray-400">
+                        <ul className="space-y-3 text-gray-400 ">
                           <li>
                             <Link to="#">เกี่ยวกับบริษัท</Link>
                           </li>
@@ -242,7 +242,7 @@ const Landing = ({ ThemeChanger }: datatype) => {
                       </div>
 
                       <div className="space-y-3 px-4">
-                        <ul className="space-y-3 text-gray-400 dark:text-gray-400">
+                        <ul className="space-y-3 text-gray-400 ">
                           <li>
                             <Link to="#">สมัครงาน</Link>
                           </li>
@@ -273,7 +273,7 @@ const Landing = ({ ThemeChanger }: datatype) => {
                         </h6>
                         <hr className="w-10 border-t-4 border-primary inline-block mx-auto" />
                       </div>
-                      <ul className="space-y-3 text-gray-400 dark:text-gray-400">
+                      <ul className="space-y-3 text-gray-400 ">
                         <li>
                           {" "}
                           <Link to="#" className="inline-flex">
@@ -304,11 +304,11 @@ const Landing = ({ ThemeChanger }: datatype) => {
                   <div className="col-span-12 md:col-span-4">
                     <Collapsis
                       label="แผนผังเวบไซต์"
-                      className="text-gray-400 dark:text-gray-400 px-4"
+                      className="text-gray-400  px-4"
                     >
                       <div className="grid lg:grid-cols-2 gap-4">
                         <div className="flex flex-col space-y-3 px-4">
-                          <ul className="text-gray-400 dark:text-gray-400 space-y-3">
+                          <ul className="text-gray-400  space-y-3">
                             <li>
                               <Link to="#">เกี่ยวกับบริษัท</Link>
                             </li>
@@ -337,7 +337,7 @@ const Landing = ({ ThemeChanger }: datatype) => {
                           </h6>
                           <hr className="w-10 border-t-4 border-primary inline-block mx-auto" />
                         </div> */}
-                          <ul className="space-y-3 text-gray-400 dark:text-gray-400">
+                          <ul className="space-y-3 text-gray-400 ">
                             <li>
                               <Link to="#">สมัครงาน</Link>
                             </li>
@@ -369,7 +369,7 @@ const Landing = ({ ThemeChanger }: datatype) => {
                         </h6>
                         <hr className="w-10 border-t-4 border-primary inline-block mx-auto" />
                       </div>
-                      <ul className="space-y-3 text-gray-400 dark:text-gray-400">
+                      <ul className="space-y-3 text-gray-400 ">
                         <li>
                           {" "}
                           <Link to="#" className="inline-flex">
@@ -414,11 +414,11 @@ const Landing = ({ ThemeChanger }: datatype) => {
                   <div className="col-span-12 lg:col-span-4">
                     <Collapsis
                       label="แผนผังเวบไซต์"
-                      className="text-gray-400 dark:text-gray-400 px-4"
+                      className="text-gray-400  px-4"
                     >
                       <div className="grid lg:grid-cols-2 gap-4">
                         <div className="flex flex-col space-y-3 px-4">
-                          <ul className="text-gray-400 dark:text-gray-400 space-y-3">
+                          <ul className="text-gray-400  space-y-3">
                             <li>
                               <Link to="#home">หน้าหลัก</Link>
                             </li>
@@ -452,7 +452,7 @@ const Landing = ({ ThemeChanger }: datatype) => {
                           </ul>
                         </div>
                         <div className="flex flex-col space-y-3 px-4">
-                          <ul className="text-gray-400 dark:text-gray-400 space-y-3">
+                          <ul className="text-gray-400  space-y-3">
                             <li>
                               <Link to="#our-mission">
                                 ปณิธานการดำเนินธุรกิจ

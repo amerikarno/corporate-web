@@ -480,8 +480,7 @@ export default function BasicInfo() {
                   <select
                     {...register("occupation.education")}
                     className="border border-gray-200 px-2.5 pb-2.5 pt-4 cursor-pointer text-gray-600 pl-2 hover:bg-slate-100
-                                text-sm rounded-lg focus:ring-gray-700 focus:border-blue-700 block w-full h-full dark:bg-gray-700 dark:border-gray-600
-                                dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-700 dark:focus:border-gray-700"
+                                text-sm rounded-lg focus:ring-gray-700 focus:border-blue-700 block w-full h-full"
                   >
                     <option value="">ระดับการศึกษาสูงสุด</option>
                     {educationTypes.map((status) => (
@@ -495,8 +494,7 @@ export default function BasicInfo() {
                   <select
                     {...register("occupation.sourceOfIncome")}
                     className="border border-gray-200 px-2.5 pb-2.5 pt-4 cursor-pointer text-gray-600 pl-2 hover:bg-slate-100
-                                text-sm rounded-lg focus:ring-gray-700 focus:border-blue-700 block w-full h-full dark:bg-gray-700 dark:border-gray-600
-                                dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-700 dark:focus:border-gray-700"
+                                text-sm rounded-lg focus:ring-gray-700 focus:border-blue-700 block w-full h-full"
                   >
                     <option value="">แหล่งที่มาของเงินลงทุน</option>
                     {sourceOfIncome.map((status) => (
@@ -512,8 +510,7 @@ export default function BasicInfo() {
                   <select
                     {...register("occupation.currentOccupation")}
                     className="border border-gray-200 px-2.5 pb-2.5 pt-4 cursor-pointer text-gray-600 pl-2 hover:bg-slate-100
-                                    text-sm rounded-lg focus:ring-gray-700 focus:border-blue-700 block w-full h-full dark:bg-gray-700 dark:border-gray-600
-                                    dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-700 dark:focus:border-gray-700"
+                                    text-sm rounded-lg focus:ring-gray-700 focus:border-blue-700 block w-full h-full"
                   >
                     <option value="">อาชีพปัจจุบัน</option>
                     {careerTypes.map((status) => (
@@ -546,8 +543,7 @@ export default function BasicInfo() {
                     <select
                       {...register("occupation.salaryRange")}
                       className="border border-gray-200 px-2.5 pb-2.5 pt-4 cursor-pointer text-gray-600 pl-2 hover:bg-slate-100
-                                        text-sm rounded-lg focus:ring-gray-700 focus:border-blue-700 block w-full h-full dark:bg-gray-700 dark:border-gray-600
-                                        dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-700 dark:focus:border-gray-700"
+                                        text-sm rounded-lg focus:ring-gray-700 focus:border-blue-700 block w-full h-full"
                     >
                       <option value="">รายได้ต่อเดือน</option>
                       {salaryRange.map((status) => (
@@ -565,8 +561,7 @@ export default function BasicInfo() {
                     <select
                       {...register("occupation.typeOfBusiness")}
                       className="border border-gray-200 px-2.5 pb-2.5 pt-4 cursor-pointer text-gray-600 pl-2 hover:bg-slate-100
-                                        text-sm rounded-lg focus:ring-gray-700 focus:border-blue-700 block w-full h-full dark:bg-gray-700 dark:border-gray-600
-                                        dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-700 dark:focus:border-gray-700"
+                                        text-sm rounded-lg focus:ring-gray-700 focus:border-blue-700 block w-full h-full "
                     >
                       <option value="">ประเภทธุระกิจ</option>
                       {businessTypes.map((status) => (
@@ -583,8 +578,7 @@ export default function BasicInfo() {
                     <select
                       {...register("occupation.salaryRange")}
                       className="border border-gray-200 px-2.5 pb-2.5 pt-4 cursor-pointer text-gray-600 pl-2 hover:bg-slate-100
-                                        text-sm rounded-lg focus:ring-gray-700 focus:border-blue-700 block w-full h-full dark:bg-gray-700 dark:border-gray-600
-                                        dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-700 dark:focus:border-gray-700"
+                                        text-sm rounded-lg focus:ring-gray-700 focus:border-blue-700 block w-full h-full"
                     >
                       <option value="">รายได้ต่อเดือน</option>
                       {salaryRange.map((status) => (
@@ -614,8 +608,7 @@ export default function BasicInfo() {
                     <select
                       {...register("occupation.salaryRange")}
                       className="border border-gray-200 px-2.5 pb-2.5 pt-4 cursor-pointer text-gray-600 pl-2 hover:bg-slate-100
-                                        text-sm rounded-lg focus:ring-gray-700 focus:border-blue-700 block w-full h-full dark:bg-gray-700 dark:border-gray-600
-                                        dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-700 dark:focus:border-gray-700"
+                                        text-sm rounded-lg focus:ring-gray-700 focus:border-blue-700 block w-full h-full"
                     >
                       <option value="">รายได้ต่อเดือน</option>
                       {salaryRange.map((status) => (
@@ -823,8 +816,7 @@ export default function BasicInfo() {
                   <input
                     type="checkbox"
                     id="objectiveCheckbox-1"
-                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500
-                                    dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
                     {...register("investment.shortTermInvestment")}
                   />
                   <label htmlFor="objectiveCheckbox-1">
@@ -835,8 +827,7 @@ export default function BasicInfo() {
                   <input
                     type="checkbox"
                     id="objectiveCheckbox-2"
-                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 
-                                    dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 "
                     {...register("investment.longTermInvestment")}
                   />
                   <label htmlFor="objectiveCheckbox-2">
@@ -847,8 +838,7 @@ export default function BasicInfo() {
                   <input
                     type="checkbox"
                     id="objectiveCheckbox-3"
-                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 
-                                    dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 "
                     {...register("investment.taxesInvestment")}
                   />
                   <label htmlFor="objectiveCheckbox-3">เพื่อเก็งกำไร</label>
@@ -857,8 +847,7 @@ export default function BasicInfo() {
                   <input
                     type="checkbox"
                     id="objectiveCheckbox-4"
-                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 
-                                    dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 "
                     {...register("investment.retireInvestment")}
                   />
                   <label htmlFor="objectiveCheckbox-4">เพื่อการออม</label>
@@ -886,8 +875,7 @@ export default function BasicInfo() {
                   <select
                     {...register("firstBankAccount.bankName")}
                     className="border border-gray-200 px-2.5 pb-2.5 pt-4 cursor-pointer text-gray-600 pl-2 hover:bg-slate-100
-                                            text-sm rounded-lg focus:ring-gray-700 focus:border-blue-700 block w-full h-full dark:bg-gray-700 dark:border-gray-600
-                                            dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-700 dark:focus:border-gray-700"
+                                            text-sm rounded-lg focus:ring-gray-700 focus:border-blue-700 block w-full h-full"
                   >
                     <option value="">กรุณาเลือกธนาคาร</option>
                     {bank.map((status) => (
@@ -954,8 +942,7 @@ export default function BasicInfo() {
                       <select
                         {...register("secondBankAccountBody.bankName")}
                         className="border border-gray-200 px-2.5 pb-2.5 pt-4 cursor-pointer  text-gray-600 pl-2 hover:bg-slate-100
-                                            text-sm rounded-lg focus:ring-gray-700 focus:border-blue-700 block w-full h-full dark:bg-gray-700 dark:border-gray-600
-                                            dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-700 dark:focus:border-gray-700"
+                                            text-sm rounded-lg focus:ring-gray-700 focus:border-blue-700 block w-full h-full"
                       >
                         <option value="">กรุณาเลือกธนาคาร</option>
                         {bank.map((status) => (

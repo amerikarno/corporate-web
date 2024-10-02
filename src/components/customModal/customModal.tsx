@@ -52,14 +52,14 @@ export function CustomModal({
               </button>
             </div>
             <div className="ti-modal-body">
-              <p className="mt-1 text-gray-800 dark:text-white/70">
+              <p className="mt-1 text-gray-800">
                 {description}
               </p>
             </div>
             <div className="ti-modal-footer">
               <button
                 type="button"
-                className="hs-dropdown-toggle ti-btn ti-border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:ring-offset-white focus:ring-primary dark:bg-bgdark dark:hover:bg-black/20 dark:border-white/10 dark:text-white/70 dark:hover:text-white dark:focus:ring-offset-white/10"
+                className="hs-dropdown-toggle ti-btn ti-border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:ring-offset-white focus:ring-primary"
                 data-hs-overlay="#hs-basic-modal"
               >
                 {" "}

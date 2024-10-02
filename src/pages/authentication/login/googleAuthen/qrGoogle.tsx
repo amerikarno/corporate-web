@@ -146,7 +146,7 @@ export default function GoogleQr() {
               <div className="grid grid-cols-6 gap-4 max-w-[20rem] mx-auto">
                 <input
                   type="text"
-                  className="text-center py-2 px-3 block w-full border border-gray-400 rounded-md text-sm focus:border-primary focus:ring-primary dark:bg-bgdark dark:border-white/10 dark:text-white/70"
+                  className="text-center py-2 px-3 block w-full border border-gray-400 rounded-md text-sm focus:border-primary focus:ring-primary"
                   required
                   id="one"
                   name="one"
@@ -155,7 +155,7 @@ export default function GoogleQr() {
                 />
                 <input
                   type="text"
-                  className="text-center py-2 px-3 block w-full border border-gray-400 rounded-md text-sm focus:border-primary focus:ring-primary dark:bg-bgdark dark:border-white/10 dark:text-white/70"
+                  className="text-center py-2 px-3 block w-full border border-gray-400 rounded-md text-sm focus:border-primary focus:ring-primary"
                   required
                   id="two"
                   name="two"
@@ -164,7 +164,7 @@ export default function GoogleQr() {
                 />
                 <input
                   type="text"
-                  className="text-center py-2 px-3 block w-full border border-gray-400 rounded-md text-sm focus:border-primary focus:ring-primary dark:bg-bgdark dark:border-white/10 dark:text-white/70"
+                  className="text-center py-2 px-3 block w-full border border-gray-400 rounded-md text-sm focus:border-primary focus:ring-primary"
                   required
                   id="three"
                   name="three"
@@ -173,7 +173,7 @@ export default function GoogleQr() {
                 />
                 <input
                   type="text"
-                  className="text-center py-2 px-3 block w-full border border-gray-400 rounded-md text-sm focus:border-primary focus:ring-primary dark:bg-bgdark dark:border-white/10 dark:text-white/70"
+                  className="text-center py-2 px-3 block w-full border border-gray-400 rounded-md text-sm focus:border-primary focus:ring-primary"
                   required
                   id="four"
                   name="four"
@@ -182,7 +182,7 @@ export default function GoogleQr() {
                 />
                 <input
                   type="text"
-                  className="text-center py-2 px-3 block w-full border border-gray-400 rounded-md text-sm focus:border-primary focus:ring-primary dark:bg-bgdark dark:border-white/10 dark:text-white/70"
+                  className="text-center py-2 px-3 block w-full border border-gray-400 rounded-md text-sm focus:border-primary focus:ring-primary"
                   required
                   id="five"
                   name="five"
@@ -191,7 +191,7 @@ export default function GoogleQr() {
                 />
                 <input
                   type="text"
-                  className="text-center py-2 px-3 block w-full border border-gray-400 rounded-md text-sm focus:border-primary focus:ring-primary dark:bg-bgdark dark:border-white/10 dark:text-white/70"
+                  className="text-center py-2 px-3 block w-full border border-gray-400 rounded-md text-sm focus:border-primary focus:ring-primary"
                   required
                   id="six"
                   name="six"

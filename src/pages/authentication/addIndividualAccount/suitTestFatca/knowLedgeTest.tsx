@@ -273,7 +273,7 @@ export default function KnowLedgeTest({ onTestSuccess }: KnowLedgeTestProps) {
   return (
     <div className="space-y-8 mt-8">
       <div className="flex items-center gap-4">
-        <div className="rounded-full h-3 w-full bg-neutral-200 dark:bg-neutral-600">
+        <div className="rounded-full h-3 w-full bg-neutral-200">
           <div
             className="rounded-full h-3 bg-primary transition-all"
             style={{

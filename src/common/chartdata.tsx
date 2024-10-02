@@ -863,9 +863,9 @@ export class SalesOverview extends Component<{}, spark3> {
           </div>
         </div>
         <div className="box-body p-0">
-          <div className="sm:flex flex-wrap p-4 border-b border-dashed border-gray-200 dark:border-white/10">
+          <div className="sm:flex flex-wrap p-4 border-b border-dashed border-gray-200">
             <div className="ltr:mr-3 rtl:ml-3">
-              <span className="avatar avatar-sm rounded-full p-2 bg-gray-100 dark:bg-black/20">
+              <span className="avatar avatar-sm rounded-full p-2 bg-gray-100">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
                   <path
                     fill="#f89f36"
@@ -876,29 +876,29 @@ export class SalesOverview extends Component<{}, spark3> {
             </div>
             <div className="sm:flex flex-wrap justify-evenly flex-auto">
               <div className="sm:m-0 m-2">
-                <span className="text-gray-500 dark:text-white/70">Symbol</span>
+                <span className="text-gray-500">Symbol</span>
                 <p className="font-semibold mb-0">BTC</p>
               </div>
               <div className="sm:m-0 m-2">
-                <span className="text-gray-500 dark:text-white/70">
+                <span className="text-gray-500">
                   Price Benchmark
                 </span>
                 <p className="font-semibold mb-0">128.00%</p>
               </div>
               <div className="sm:m-0 m-2">
-                <span className="text-gray-500 dark:text-white/70">
+                <span className="text-gray-500">
                   Price (USD)
                 </span>
                 <p className="text-success font-semibold mb-0">$4,253.49</p>
               </div>
               <div className="sm:m-0 m-2">
-                <span className="text-gray-500 dark:text-white/70">
+                <span className="text-gray-500">
                   Change (24H)
                 </span>
                 <p className="text-danger font-semibold mb-0">-0.24%</p>
               </div>
               <div className="sm:m-0 m-2">
-                <span className="text-gray-500 dark:text-white/70">
+                <span className="text-gray-500">
                   Market Cap
                 </span>
                 <p className="font-semibold mb-0">$179.12B</p>
@@ -1612,7 +1612,7 @@ export class AcceptanceRatio extends Component<{}, spark3> {
     return (
       <div id="chart">
         <ReactApexChart
-          className="p-4  border-b border-dashed border-gray-200 dark:border-white/10"
+          className="p-4  border-b border-dashed border-gray-200 "
           height={220}
           options={this.state.options}
           series={this.state.series}
@@ -1999,9 +1999,9 @@ export class NFTsalesOverview extends Component<{}, spark3> {
           </div>
         </div>
         <div className="box-body p-0">
-          <div className="flex flex-wrap p-4 border-b border-dashed border-gray-200 dark:border-white/10">
+          <div className="flex flex-wrap p-4 border-b border-dashed border-gray-200 ">
             <div className="ltr:mr-3 rtl:ml-3">
-              <span className="avatar avatar-sm rounded-full p-2 bg-gray-100 dark:bg-black/20">
+              <span className="avatar avatar-sm rounded-full p-2 bg-gray-100">
                 <img src={getImages("svg8")} alt="" />
               </span>
             </div>
@@ -3292,7 +3292,7 @@ export class Investments extends Component<{}, spark3> {
           <div className="sm:flex justify-between items-center text-sm text-center mb-4">
             <div className="sm:flex items-center mb-4 sm:mb-0 space-y-4 sm:space-y-0">
               <div className="ltr:mr-6 rtl:ml-6">
-                <span className="text-gray-500 dark:text-white/70">
+                <span className="text-gray-500">
                   Invested Value
                 </span>
                 <p className="mt-1 mb-0">
@@ -3303,7 +3303,7 @@ export class Investments extends Component<{}, spark3> {
                 </p>
               </div>
               <div className="ltr:mr-0 rtl:ml-0">
-                <span className="text-gray-500 dark:text-white/70">
+                <span className="text-gray-500">
                   Total Returns
                 </span>
                 <p className="mt-1 mb-0">
@@ -3316,13 +3316,13 @@ export class Investments extends Component<{}, spark3> {
             </div>
             <div className="sm:flex items-center space-y-4 sm:space-y-0">
               <div className="ltr:mr-6 rtl:ml-6">
-                <span className="text-gray-500 dark:text-white/70">
+                <span className="text-gray-500">
                   Today Change
                 </span>
                 <p className="mt-1 mb-0">$112.09</p>
               </div>
               <div className="ltr:mr-0 rtl:ml-0">
-                <span className="text-gray-500 dark:text-white/70">
+                <span className="text-gray-500">
                   Change In %
                 </span>
                 <p className="mt-1 mb-0">

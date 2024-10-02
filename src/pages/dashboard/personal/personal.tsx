@@ -26,13 +26,13 @@ const Personal = () => {
                           <h6 className="mb-2 text-base font-medium">
                             Total Balance
                           </h6>
-                          <h5 className="mb-1 text-3xl text-gray-800 dark:text-white font-semibold">
+                          <h5 className="mb-1 text-3xl text-gray-800 font-semibold">
                             $75,234
-                            <span className="text-xs text-gray-500 dark:text-white/70 font-normal ">
+                            <span className="text-xs text-gray-500  font-normal ">
                               / month
                             </span>
                           </h5>
-                          <span className="text-gray-500 dark:text-white/70">
+                          <span className="text-gray-500 ">
                             <i className="ti ti-trending-up text-success"></i>
                             +5% than last month
                           </span>
@@ -54,13 +54,13 @@ const Personal = () => {
                           <h6 className="mb-2 text-base font-medium">
                             Total Income
                           </h6>
-                          <h5 className="mb-1 text-3xl text-gray-800 dark:text-white font-semibold">
+                          <h5 className="mb-1 text-3xl text-gray-800 font-semibold">
                             $45,234
-                            <span className="text-xs text-gray-500 dark:text-white/70 font-normal ">
+                            <span className="text-xs text-gray-500  font-normal ">
                               / month
                             </span>
                           </h5>
-                          <span className="text-gray-500 dark:text-white/70">
+                          <span className="text-gray-500 ">
                             <i className="ti ti-trending-up text-success"></i>
                             +5% than last month
                           </span>
@@ -82,13 +82,13 @@ const Personal = () => {
                           <h6 className="mb-2 text-base font-medium">
                             Total Expenses
                           </h6>
-                          <h5 className="mb-1 text-3xl text-gray-800 dark:text-white font-semibold">
+                          <h5 className="mb-1 text-3xl text-gray-800 font-semibold">
                             $35,234
-                            <span className="text-xs text-gray-500 dark:text-white/70 font-normal ">
+                            <span className="text-xs text-gray-500  font-normal ">
                               / month
                             </span>
                           </h5>
-                          <span className="text-gray-500 dark:text-white/70">
+                          <span className="text-gray-500 ">
                             <i className="ti ti-trending-down text-danger"></i>
                             -10% than last month
                           </span>
@@ -161,7 +161,7 @@ const Personal = () => {
                           <button
                             type="button"
                             aria-label="button"
-                            className="hs-dropdown-toggle ti-dropdown-toggle rounded-sm p-2 bg-white !border border-gray-200 text-gray-500 hover:bg-gray-100  focus:ring-gray-200 dark:bg-black/20 dark:hover:bg-black/30 dark:border-white/10 dark:hover:border-white/20 dark:focus:ring-white/10 dark:focus:ring-offset-white/10"
+                            className="hs-dropdown-toggle ti-dropdown-toggle rounded-sm p-2 bg-white !border border-gray-200 text-gray-500 hover:bg-gray-100  focus:ring-gray-200 "
                           >
                             <i className="text-sm leading-none ti ti-dots-vertical"></i>{" "}
                           </button>
@@ -181,7 +181,7 @@ const Personal = () => {
                     </div>
                     <div className="box-body">
                       <ul className="flex flex-col">
-                        <li className="px-0 pt-0 ti-list-group border-0 text-gray-800 dark:text-white w-full">
+                        <li className="px-0 pt-0 ti-list-group border-0 text-gray-800 w-full">
                           <div className="">
                             <Link
                               to={`${
@@ -196,10 +196,10 @@ const Personal = () => {
                               />
                               <div className="flex">
                                 <div className="block my-auto">
-                                  <p className="block text-sm font-semibold text-gray-800 hover:text-gray-900 my-auto  dark:text-white dark:hover:text-gray-200">
+                                  <p className="block text-sm font-semibold text-gray-800 hover:text-gray-900 my-auto">
                                     Socrates Itumay
                                   </p>
-                                  <p className="text-xs text-gray-400 dark:text-white/80 truncate sm:max-w-max max-w-[100px] font-normal">
+                                  <p className="text-xs text-gray-400 truncate sm:max-w-max max-w-[100px] font-normal">
                                     +(72)-86976972
                                   </p>
                                 </div>
@@ -212,7 +212,7 @@ const Personal = () => {
                               to={`${
                                 import.meta.env.BASE_URL
                               }pagecomponent/contacts/`}
-                              className="text-gray-500 dark:text-white/70"
+                              className="text-gray-500 "
                             >
                               <i className="ri-heart-line text-base hover:text-danger"></i>
                             </Link>
@@ -221,13 +221,13 @@ const Personal = () => {
                               to={`${
                                 import.meta.env.BASE_URL
                               }pagecomponent/contacts/`}
-                              className="text-gray-500 dark:text-white/70 inline-flex"
+                              className="text-gray-500  inline-flex"
                             >
                               <i className="ri-arrow-right-s-line text-base"></i>
                             </Link>
                           </div>
                         </li>
-                        <li className="px-0 ti-list-group border-0 text-gray-800 dark:text-white w-full">
+                        <li className="px-0 ti-list-group border-0 text-gray-800 w-full">
                           <div className="">
                             <Link
                               to={`${
@@ -242,10 +242,10 @@ const Personal = () => {
                               />
                               <div className="flex">
                                 <div className="block my-auto">
-                                  <p className="block text-sm font-semibold text-gray-800 hover:text-gray-900 my-auto  dark:text-white dark:hover:text-gray-200">
+                                  <p className="block text-sm font-semibold text-gray-800 hover:text-gray-900 my-auto">
                                     Ryan Gercia
                                   </p>
-                                  <p className="text-xs text-gray-400 dark:text-white/80 truncate sm:max-w-max max-w-[100px] font-normal">
+                                  <p className="text-xs text-gray-400 truncate sm:max-w-max max-w-[100px] font-normal">
                                     +(12)-05147532
                                   </p>
                                 </div>
@@ -267,13 +267,13 @@ const Personal = () => {
                               to={`${
                                 import.meta.env.BASE_URL
                               }pagecomponent/contacts/`}
-                              className="text-gray-500 dark:text-white/70  inline-flex"
+                              className="text-gray-500   inline-flex"
                             >
                               <i className="ri-arrow-right-s-line text-base"></i>
                             </Link>
                           </div>
                         </li>
-                        <li className="px-0 ti-list-group border-0 text-gray-800 dark:text-white w-full">
+                        <li className="px-0 ti-list-group border-0 text-gray-800 w-full">
                           <div className="">
                             <Link
                               to={`${
@@ -288,10 +288,10 @@ const Personal = () => {
                               />
                               <div className="flex">
                                 <div className="block my-auto">
-                                  <p className="block text-sm font-semibold text-gray-800 hover:text-gray-900 my-auto  dark:text-white dark:hover:text-gray-200">
+                                  <p className="block text-sm font-semibold text-gray-800 hover:text-gray-900 my-auto">
                                     Prax Bhav
                                   </p>
-                                  <p className="text-xs text-gray-400 dark:text-white/80 truncate sm:max-w-max max-w-[100px] font-normal">
+                                  <p className="text-xs text-gray-400 truncate sm:max-w-max max-w-[100px] font-normal">
                                     +(12)-05147532
                                   </p>
                                 </div>
@@ -313,13 +313,13 @@ const Personal = () => {
                               to={`${
                                 import.meta.env.BASE_URL
                               }pagecomponent/contacts/`}
-                              className="text-gray-500 dark:text-white/70  inline-flex"
+                              className="text-gray-500   inline-flex"
                             >
                               <i className="ri-arrow-right-s-line text-base"></i>
                             </Link>
                           </div>
                         </li>
-                        <li className="px-0 ti-list-group border-0 text-gray-800 dark:text-white w-full">
+                        <li className="px-0 ti-list-group border-0 text-gray-800 w-full">
                           <div className="">
                             <Link
                               to={`${
@@ -334,10 +334,10 @@ const Personal = () => {
                               />
                               <div className="flex">
                                 <div className="block my-auto">
-                                  <p className="block text-sm font-semibold text-gray-800 hover:text-gray-900 my-auto  dark:text-white dark:hover:text-gray-200">
+                                  <p className="block text-sm font-semibold text-gray-800 hover:text-gray-900 my-auto">
                                     Jackie Chen
                                   </p>
-                                  <p className="text-xs text-gray-400 dark:text-white/80 truncate sm:max-w-max max-w-[100px] font-normal">
+                                  <p className="text-xs text-gray-400 truncate sm:max-w-max max-w-[100px] font-normal">
                                     +(12)-26556658
                                   </p>
                                 </div>
@@ -350,7 +350,7 @@ const Personal = () => {
                               to={`${
                                 import.meta.env.BASE_URL
                               }pagecomponent/contacts/`}
-                              className="text-gray-500 dark:text-white/70"
+                              className="text-gray-500 "
                             >
                               <i className="ri-heart-line text-base hover:text-danger"></i>
                             </Link>
@@ -359,13 +359,13 @@ const Personal = () => {
                               to={`${
                                 import.meta.env.BASE_URL
                               }pagecomponent/contacts/`}
-                              className="text-gray-500 dark:text-white/70 inline-flex"
+                              className="text-gray-500  inline-flex"
                             >
                               <i className="ri-arrow-right-s-line text-base"></i>
                             </Link>
                           </div>
                         </li>
-                        <li className="px-0 ti-list-group border-0 text-gray-800 dark:text-white w-full">
+                        <li className="px-0 ti-list-group border-0 text-gray-800 w-full">
                           <div className="">
                             <Link
                               to={`${
@@ -380,10 +380,10 @@ const Personal = () => {
                               />
                               <div className="flex">
                                 <div className="block my-auto">
-                                  <p className="block text-sm font-semibold text-gray-800 hover:text-gray-900 my-auto  dark:text-white dark:hover:text-gray-200">
+                                  <p className="block text-sm font-semibold text-gray-800 hover:text-gray-900 my-auto">
                                     Samantha Sam
                                   </p>
-                                  <p className="text-xs text-gray-400 dark:text-white/80 truncate sm:max-w-max max-w-[100px] font-normal">
+                                  <p className="text-xs text-gray-400 truncate sm:max-w-max max-w-[100px] font-normal">
                                     +(12)-26556658
                                   </p>
                                 </div>
@@ -396,7 +396,7 @@ const Personal = () => {
                               to={`${
                                 import.meta.env.BASE_URL
                               }pagecomponent/contacts/`}
-                              className="text-gray-500 dark:text-white/70"
+                              className="text-gray-500 "
                             >
                               <i className="ri-heart-line text-base hover:text-danger"></i>
                             </Link>
@@ -405,13 +405,13 @@ const Personal = () => {
                               to={`${
                                 import.meta.env.BASE_URL
                               }pagecomponent/contacts/`}
-                              className="text-gray-500 dark:text-white/70  inline-flex"
+                              className="text-gray-500   inline-flex"
                             >
                               <i className="ri-arrow-right-s-line text-base"></i>
                             </Link>
                           </div>
                         </li>
-                        <li className="px-0 ti-list-group border-0 text-gray-800 dark:text-white w-full">
+                        <li className="px-0 ti-list-group border-0 text-gray-800 w-full">
                           <div className="">
                             <Link
                               to={`${
@@ -426,10 +426,10 @@ const Personal = () => {
                               />
                               <div className="flex">
                                 <div className="block my-auto">
-                                  <p className="block text-sm font-semibold text-gray-800 hover:text-gray-900 my-auto  dark:text-white dark:hover:text-gray-200">
+                                  <p className="block text-sm font-semibold text-gray-800 hover:text-gray-900 my-auto">
                                     Robert Lewis
                                   </p>
-                                  <p className="text-xs text-gray-400 dark:text-white/80 truncate sm:max-w-max max-w-[100px] font-normal">
+                                  <p className="text-xs text-gray-400 truncate sm:max-w-max max-w-[100px] font-normal">
                                     +(12)-26556658
                                   </p>
                                 </div>
@@ -442,7 +442,7 @@ const Personal = () => {
                               to={`${
                                 import.meta.env.BASE_URL
                               }pagecomponent/contacts/`}
-                              className="text-gray-500 dark:text-white/70"
+                              className="text-gray-500 "
                             >
                               <i className="ri-heart-line text-base hover:text-danger"></i>
                             </Link>
@@ -451,13 +451,13 @@ const Personal = () => {
                               to={`${
                                 import.meta.env.BASE_URL
                               }pagecomponent/contacts`}
-                              className="text-gray-500 dark:text-white/70  inline-flex"
+                              className="text-gray-500   inline-flex"
                             >
                               <i className="ri-arrow-right-s-line text-base"></i>
                             </Link>
                           </div>
                         </li>
-                        <li className="px-0 pb-0 ti-list-group border-0 text-gray-800 dark:text-white w-full">
+                        <li className="px-0 pb-0 ti-list-group border-0 text-gray-800 w-full">
                           <div className="">
                             <Link
                               to={`${
@@ -472,10 +472,10 @@ const Personal = () => {
                               />
                               <div className="flex">
                                 <div className="block my-auto">
-                                  <p className="block text-sm font-semibold text-gray-800 hover:text-gray-900 my-auto  dark:text-white dark:hover:text-gray-200">
+                                  <p className="block text-sm font-semibold text-gray-800 hover:text-gray-900 my-auto">
                                     Ryan Gercia
                                   </p>
-                                  <p className="text-xs text-gray-400 dark:text-white/80 truncate sm:max-w-max max-w-[100px] font-normal">
+                                  <p className="text-xs text-gray-400 truncate sm:max-w-max max-w-[100px] font-normal">
                                     +(12)-05147532
                                   </p>
                                 </div>
@@ -497,7 +497,7 @@ const Personal = () => {
                               to={`${
                                 import.meta.env.BASE_URL
                               }pagecomponent/contacts/`}
-                              className="text-gray-500 dark:text-white/70  inline-flex"
+                              className="text-gray-500   inline-flex"
                             >
                               <i className="ri-arrow-right-s-line text-base"></i>
                             </Link>
@@ -550,7 +550,7 @@ const Personal = () => {
                     <div className="hs-dropdown ti-dropdown block ltr:ml-auto rtl:mr-auto my-auto">
                       <button
                         type="button"
-                        className="hs-dropdown-toggle ti-dropdown-toggle rounded-sm p-1 px-3 !border border-gray-200 text-gray-400 hover:text-gray-500 hover:bg-gray-200 hover:border-gray-200 focus:ring-gray-200  dark:hover:bg-black/30 dark:border-white/10 dark:hover:border-white/20 dark:focus:ring-white/10 dark:focus:ring-offset-white/10"
+                        className="hs-dropdown-toggle ti-dropdown-toggle rounded-sm p-1 px-3 !border border-gray-200 text-gray-400 hover:text-gray-500 hover:bg-gray-200 hover:border-gray-200 focus:ring-gray-200  "
                       >
                         Today <i className="ti ti-chevron-down"></i>
                       </button>
@@ -586,14 +586,14 @@ const Personal = () => {
                         </div>
                         <div className="flex-1">
                           <div className="flex items-center justify-between mb-1">
-                            <h5 className="mb-1 text-sm font-semibold text-gray-800 dark:text-white">
+                            <h5 className="mb-1 text-sm font-semibold text-gray-800">
                               Designing a landing page
                             </h5>
                             <div className="hs-dropdown ti-dropdown block ltr:ml-auto rtl:mr-auto my-auto">
                               <button
                                 type="button"
                                 aria-label="button"
-                                className="shadow-none hs-dropdown-toggle ti-dropdown-toggle rounded-sm p-0 bg-transparent border-0 text-gray-500 dark:bg-transparent"
+                                className="shadow-none hs-dropdown-toggle ti-dropdown-toggle rounded-sm p-0 bg-transparent border-0 text-gray-500"
                               >
                                 <i className="text-sm leading-none ti ti-dots-vertical"></i>{" "}
                               </button>
@@ -633,7 +633,7 @@ const Personal = () => {
                                 alt="Image Description"
                               />
                             </div>
-                            <span className="text-gray-500 dark:text-white/70 flex text-xs">
+                            <span className="text-gray-500  flex text-xs">
                               <i className="ri-time-line ltr:mr-1 rtl:ml-1 my-auto "></i>
                               10-04-23
                             </span>
@@ -654,14 +654,14 @@ const Personal = () => {
                         </div>
                         <div className="flex-1">
                           <div className="flex items-center justify-between mb-1">
-                            <h5 className="mb-1 text-sm font-semibold text-gray-800 dark:text-white">
+                            <h5 className="mb-1 text-sm font-semibold text-gray-800">
                               Fixing Responsive Issues
                             </h5>
                             <div className="hs-dropdown ti-dropdown block ltr:ml-auto rtl:mr-auto my-auto">
                               <button
                                 type="button"
                                 aria-label="button"
-                                className="shadow-none hs-dropdown-toggle ti-dropdown-toggle rounded-sm p-0 bg-transparent border-0 text-gray-500 dark:bg-transparent"
+                                className="shadow-none hs-dropdown-toggle ti-dropdown-toggle rounded-sm p-0 bg-transparent border-0 text-gray-500"
                               >
                                 <i className="text-sm leading-none ti ti-dots-vertical"></i>{" "}
                               </button>
@@ -695,13 +695,13 @@ const Personal = () => {
                                 src={getImages("jpg62")}
                                 alt="Image Description"
                               />
-                              <span className="inline-flex items-center justify-center avatar w-6 h-6  rounded-full bg-gray-100 border-2 border-gray-200 dark:bg-black/20 dark:border-white/10">
-                                <span className="font-medium text-gray-500 leading-none dark:text-white/70">
+                              <span className="inline-flex items-center justify-center avatar w-6 h-6  rounded-full bg-gray-100 border-2 border-gray-200 ">
+                                <span className="font-medium text-gray-500 leading-none ">
                                   9+
                                 </span>
                               </span>
                             </div>
-                            <span className="text-gray-500 dark:text-white/70 flex text-xs">
+                            <span className="text-gray-500  flex text-xs">
                               <i className="ri-time-line ltr:mr-1 rtl:ml-1 my-auto "></i>
                               10-04-23
                             </span>
@@ -722,14 +722,14 @@ const Personal = () => {
                         </div>
                         <div className="flex-1">
                           <div className="flex items-center justify-between mb-1">
-                            <h5 className="mb-1 text-sm font-semibold text-gray-800 dark:text-white">
+                            <h5 className="mb-1 text-sm font-semibold text-gray-800">
                               Fixing Bugs
                             </h5>
                             <div className="hs-dropdown ti-dropdown block ltr:ml-auto rtl:mr-auto my-auto">
                               <button
                                 type="button"
                                 aria-label="button"
-                                className="shadow-none hs-dropdown-toggle ti-dropdown-toggle rounded-sm p-0 bg-transparent border-0 text-gray-500 dark:bg-transparent"
+                                className="shadow-none hs-dropdown-toggle ti-dropdown-toggle rounded-sm p-0 bg-transparent border-0 text-gray-500"
                               >
                                 <i className="text-sm leading-none ti ti-dots-vertical"></i>{" "}
                               </button>
@@ -759,7 +759,7 @@ const Personal = () => {
                                 alt="Image Description"
                               />
                             </div>
-                            <span className="text-gray-500 dark:text-white/70 flex text-xs">
+                            <span className="text-gray-500  flex text-xs">
                               <i className="ri-time-line ltr:mr-1 rtl:ml-1 my-auto "></i>
                               10-04-23
                             </span>
@@ -780,14 +780,14 @@ const Personal = () => {
                         </div>
                         <div className="flex-1">
                           <div className="flex items-center justify-between mb-1">
-                            <h5 className="mb-1 text-sm font-semibold text-gray-800 dark:text-white">
+                            <h5 className="mb-1 text-sm font-semibold text-gray-800">
                               Fixing Javascript Issues
                             </h5>
                             <div className="hs-dropdown ti-dropdown block ltr:ml-auto rtl:mr-auto my-auto">
                               <button
                                 type="button"
                                 aria-label="button"
-                                className="shadow-none hs-dropdown-toggle ti-dropdown-toggle rounded-sm p-0 bg-transparent border-0 text-gray-500 dark:bg-transparent"
+                                className="shadow-none hs-dropdown-toggle ti-dropdown-toggle rounded-sm p-0 bg-transparent border-0 text-gray-500"
                               >
                                 <i className="text-sm leading-none ti ti-dots-vertical"></i>{" "}
                               </button>
@@ -822,7 +822,7 @@ const Personal = () => {
                                 alt="Image Description"
                               />
                             </div>
-                            <span className="text-gray-500 dark:text-white/70 flex text-xs">
+                            <span className="text-gray-500  flex text-xs">
                               <i className="ri-time-line ltr:mr-1 rtl:ml-1 my-auto "></i>
                               10-04-23
                             </span>
@@ -843,14 +843,14 @@ const Personal = () => {
                         </div>
                         <div className="flex-1">
                           <div className="flex items-center justify-between mb-1">
-                            <h5 className="mb-1 text-sm font-semibold text-gray-800 dark:text-white">
+                            <h5 className="mb-1 text-sm font-semibold text-gray-800">
                               Adding New Pages
                             </h5>
                             <div className="hs-dropdown ti-dropdown block ltr:ml-auto rtl:mr-auto my-auto">
                               <button
                                 type="button"
                                 aria-label="button"
-                                className="shadow-none hs-dropdown-toggle ti-dropdown-toggle rounded-sm p-0 bg-transparent border-0 text-gray-500 dark:bg-transparent"
+                                className="shadow-none hs-dropdown-toggle ti-dropdown-toggle rounded-sm p-0 bg-transparent border-0 text-gray-500"
                               >
                                 <i className="text-sm leading-none ti ti-dots-vertical"></i>{" "}
                               </button>
@@ -885,7 +885,7 @@ const Personal = () => {
                                 alt="Image Description"
                               />
                             </div>
-                            <span className="text-gray-500 dark:text-white/70 flex text-xs">
+                            <span className="text-gray-500  flex text-xs">
                               <i className="ri-time-line ltr:mr-1 rtl:ml-1 my-auto "></i>
                               10-04-23
                             </span>
@@ -907,7 +907,7 @@ const Personal = () => {
                     <h5 className="box-title my-auto">Recent Messages</h5>
                     <button
                       type="button"
-                      className="ti-btn m-0 rounded-sm p-1 px-3 !border border-gray-200 text-gray-400 hover:text-gray-500 hover:bg-gray-200 hover:border-gray-200 focus:ring-gray-200  dark:hover:bg-black/30 dark:border-white/10 dark:hover:border-white/20 dark:focus:ring-white/10 dark:focus:ring-offset-white/10"
+                      className="ti-btn m-0 rounded-sm p-1 px-3 !border border-gray-200 text-gray-400 hover:text-gray-500 hover:bg-gray-200 hover:border-gray-200 focus:ring-gray-200  "
                     >
                       View All
                     </button>
@@ -915,7 +915,7 @@ const Personal = () => {
                 </div>
                 <div className="box-body">
                   <ul className="">
-                    <li className="p-0 mb-5 ti-list-group border-0 text-gray-800 dark:text-white w-full">
+                    <li className="p-0 mb-5 ti-list-group border-0 text-gray-800 w-full">
                       <div className="flex items-start w-full">
                         <Link
                           to={`${
@@ -938,15 +938,15 @@ const Personal = () => {
                             className="absolute h-full w-full inset-0"
                           ></Link>
                           <div className="">
-                            <h5 className="text-sm text-gray-800 dark:text-white font-semibold">
+                            <h5 className="text-sm text-gray-800 font-semibold">
                               Elon Isk
                             </h5>
-                            <span className="text-xs text-gray-500 dark:text-white/70">
+                            <span className="text-xs text-gray-500 ">
                               Hello there! How are you doing? Call me when...
                             </span>
                           </div>
                           <div className="min-w-fit ltr:ml-2 rtl:mr-2 text-end">
-                            <p className="text-xs text-gray-500 dark:text-white/70 mb-1">
+                            <p className="text-xs text-gray-500  mb-1">
                               2 min
                             </p>
                             <span className="relative inline-flex rounded-full h-5 w-5 bg-primary text-white justify-center items-center">
@@ -956,7 +956,7 @@ const Personal = () => {
                         </div>
                       </div>
                     </li>
-                    <li className="p-0 mb-5 ti-list-group border-0 text-gray-800 dark:text-white w-full">
+                    <li className="p-0 mb-5 ti-list-group border-0 text-gray-800 w-full">
                       <div className="flex items-start w-full">
                         <Link
                           to={`${
@@ -979,22 +979,22 @@ const Personal = () => {
                             className="absolute h-full w-full inset-0"
                           ></Link>
                           <div className="">
-                            <h5 className="text-sm text-gray-800 dark:text-white font-semibold">
+                            <h5 className="text-sm text-gray-800 font-semibold">
                               Shakira Sen
                             </h5>
-                            <span className="text-xs text-gray-500 dark:text-white/70">
+                            <span className="text-xs text-gray-500 ">
                               I would like to discuss about that assets...
                             </span>
                           </div>
                           <div className="min-w-fit ltr:ml-2 rtl:mr-2 text-end">
-                            <p className="text-xs text-gray-500 dark:text-white/70 mb-1">
+                            <p className="text-xs text-gray-500  mb-1">
                               09:43
                             </p>
                           </div>
                         </div>
                       </div>
                     </li>
-                    <li className="p-0 mb-5 ti-list-group border-0 text-gray-800 dark:text-white w-full">
+                    <li className="p-0 mb-5 ti-list-group border-0 text-gray-800 w-full">
                       <div className="flex items-start w-full">
                         <Link
                           to={`${
@@ -1017,15 +1017,15 @@ const Personal = () => {
                             className="absolute h-full w-full inset-0"
                           ></Link>
                           <div className="">
-                            <h5 className="text-sm text-gray-800 dark:text-white font-semibold">
+                            <h5 className="text-sm text-gray-800 font-semibold">
                               Sebastian
                             </h5>
-                            <span className="text-xs text-gray-500 dark:text-white/70">
+                            <span className="text-xs text-gray-500 ">
                               Shall we go to the cafe at downtown...
                             </span>
                           </div>
                           <div className="min-w-fit ltr:ml-2 rtl:mr-2 text-end">
-                            <p className="text-xs text-gray-500 dark:text-white/70 mb-1">
+                            <p className="text-xs text-gray-500  mb-1">
                               yesterday
                             </p>
                             <span className="relative inline-flex rounded-full h-5 w-5 bg-primary text-white justify-center items-center">
@@ -1035,7 +1035,7 @@ const Personal = () => {
                         </div>
                       </div>
                     </li>
-                    <li className="p-0 mb-5 ti-list-group border-0 text-gray-800 dark:text-white w-full">
+                    <li className="p-0 mb-5 ti-list-group border-0 text-gray-800 w-full">
                       <div className="flex items-start w-full">
                         <Link
                           to={`${
@@ -1058,22 +1058,22 @@ const Personal = () => {
                             className="absolute h-full w-full inset-0"
                           ></Link>
                           <div className="">
-                            <h5 className="text-sm text-gray-800 dark:text-white font-semibold">
+                            <h5 className="text-sm text-gray-800 font-semibold">
                               Charlie Davieson
                             </h5>
-                            <span className="text-xs text-gray-500 dark:text-white/70">
+                            <span className="text-xs text-gray-500 ">
                               Lorem ipsum dolor sit amet, consectetur
                             </span>
                           </div>
                           <div className="min-w-fit ltr:ml-2 rtl:mr-2 text-end">
-                            <p className="text-xs text-gray-500 dark:text-white/70 mb-1">
+                            <p className="text-xs text-gray-500  mb-1">
                               yesterday
                             </p>
                           </div>
                         </div>
                       </div>
                     </li>
-                    <li className="p-0 mb-0 ti-list-group border-0 text-gray-800 dark:text-white w-full">
+                    <li className="p-0 mb-0 ti-list-group border-0 text-gray-800 w-full">
                       <div className="flex items-start w-full">
                         <Link
                           to={`${
@@ -1096,15 +1096,15 @@ const Personal = () => {
                             className="absolute h-full w-full inset-0"
                           ></Link>
                           <div className="">
-                            <h5 className="text-sm text-gray-800 dark:text-white font-semibold">
+                            <h5 className="text-sm text-gray-800 font-semibold">
                               Selena Deoyl
                             </h5>
-                            <span className="text-xs text-gray-500 dark:text-white/70">
+                            <span className="text-xs text-gray-500 ">
                               Phasellus vehicula at enim a pulvinar
                             </span>
                           </div>
                           <div className="min-w-fit ltr:ml-2 rtl:mr-2 text-end">
-                            <p className="text-xs text-gray-500 dark:text-white/70 mb-1">
+                            <p className="text-xs text-gray-500  mb-1">
                               yesterday
                             </p>
                           </div>
@@ -1124,7 +1124,7 @@ const Personal = () => {
                       <button
                         type="button"
                         aria-label="button"
-                        className="hs-dropdown-toggle ti-dropdown-toggle rounded-sm p-2 bg-white !border border-gray-200 text-gray-500 hover:bg-gray-100  focus:ring-gray-200 dark:bg-black/20 dark:hover:bg-black/30 dark:border-white/10 dark:hover:border-white/20 dark:focus:ring-white/10 dark:focus:ring-offset-white/10"
+                        className="hs-dropdown-toggle ti-dropdown-toggle rounded-sm p-2 bg-white !border border-gray-200 text-gray-500 hover:bg-gray-100  focus:ring-gray-200 "
                       >
                         <i className="text-sm leading-none ti ti-dots-vertical"></i>{" "}
                       </button>
@@ -1144,7 +1144,7 @@ const Personal = () => {
                 </div>
                 <div className="box-body">
                   <ul className="flex flex-col">
-                    <li className="flex flex-col gap-x-3.5 bg-white text-gray-800 dark:bg-bgdark dark:border-white/10 dark:text-white pb-1 rounded-sm mb-3">
+                    <li className="flex flex-col gap-x-3.5 bg-white text-gray-800  pb-1 rounded-sm mb-3">
                       <Link to="#">
                         <div className="flex items-center justify-between">
                           <div className="flex items-center space-x-3 rtl:space-x-reverse">
@@ -1155,18 +1155,18 @@ const Personal = () => {
                             </div>
                             <div className="ltr:ml-3 rtl:mr-3">
                               <h3 className="text-sm font-semibold">Bills</h3>
-                              <p className="text-xs text-gray-500 dark:text-white/70">
+                              <p className="text-xs text-gray-500 ">
                                 $250
                               </p>
                             </div>
                           </div>
                           <div className="space-x-2 ">
-                            <i className="ri ri-arrow-right-s-line text-gray-500 dark:text-white/70 text-lg"></i>
+                            <i className="ri ri-arrow-right-s-line text-gray-500  text-lg"></i>
                           </div>
                         </div>
                       </Link>
                     </li>
-                    <li className="flex flex-col gap-x-3.5 bg-white text-gray-800 dark:bg-bgdark dark:border-white/10 dark:text-white py-1 rounded-sm mb-3">
+                    <li className="flex flex-col gap-x-3.5 bg-white text-gray-800  py-1 rounded-sm mb-3">
                       <Link to="#">
                         <div className="flex items-center justify-between">
                           <div className="flex items-center space-x-3 rtl:space-x-reverse">
@@ -1179,18 +1179,18 @@ const Personal = () => {
                               <h3 className="text-sm font-semibold">
                                 Shopping
                               </h3>
-                              <p className="text-xs text-gray-500 dark:text-white/70">
+                              <p className="text-xs text-gray-500 ">
                                 $236
                               </p>
                             </div>
                           </div>
                           <div className="space-x-2 ">
-                            <i className="ri ri-arrow-right-s-line text-gray-500 dark:text-white/70 text-lg"></i>
+                            <i className="ri ri-arrow-right-s-line text-gray-500  text-lg"></i>
                           </div>
                         </div>
                       </Link>
                     </li>
-                    <li className="flex flex-col gap-x-3.5 bg-white text-gray-800 dark:bg-bgdark dark:border-white/10 dark:text-white py-1 rounded-sm mb-3">
+                    <li className="flex flex-col gap-x-3.5 bg-white text-gray-800  py-1 rounded-sm mb-3">
                       <Link to="#">
                         <div className="flex items-center justify-between">
                           <div className="flex items-center space-x-3 rtl:space-x-reverse">
@@ -1201,18 +1201,18 @@ const Personal = () => {
                             </div>
                             <div className="ltr:ml-3 rtl:mr-3">
                               <h3 className="text-sm font-semibold">Travel</h3>
-                              <p className="text-xs text-gray-500 dark:text-white/70">
+                              <p className="text-xs text-gray-500 ">
                                 $236
                               </p>
                             </div>
                           </div>
                           <div className="space-x-2 ">
-                            <i className="ri ri-arrow-right-s-line text-gray-500 dark:text-white/70 text-lg"></i>
+                            <i className="ri ri-arrow-right-s-line text-gray-500  text-lg"></i>
                           </div>
                         </div>
                       </Link>
                     </li>
-                    <li className="flex flex-col gap-x-3.5 bg-white text-gray-800 dark:bg-bgdark dark:border-white/10 dark:text-white py-1 rounded-sm mb-3">
+                    <li className="flex flex-col gap-x-3.5 bg-white text-gray-800  py-1 rounded-sm mb-3">
                       <Link to="#">
                         <div className="flex items-center justify-between">
                           <div className="flex items-center space-x-3 rtl:space-x-reverse">
@@ -1223,18 +1223,18 @@ const Personal = () => {
                             </div>
                             <div className="ltr:ml-3 rtl:mr-3">
                               <h3 className="text-sm font-semibold">Food</h3>
-                              <p className="text-xs text-gray-500 dark:text-white/70">
+                              <p className="text-xs text-gray-500 ">
                                 $2635
                               </p>
                             </div>
                           </div>
                           <div className="space-x-2 ">
-                            <i className="ri ri-arrow-right-s-line text-gray-500 dark:text-white/70 text-lg"></i>
+                            <i className="ri ri-arrow-right-s-line text-gray-500  text-lg"></i>
                           </div>
                         </div>
                       </Link>
                     </li>
-                    <li className="flex flex-col gap-x-3.5 bg-white text-gray-800 dark:bg-bgdark dark:border-white/10 dark:text-white py-1 rounded-sm mb-3">
+                    <li className="flex flex-col gap-x-3.5 bg-white text-gray-800  py-1 rounded-sm mb-3">
                       <Link to="#">
                         <div className="flex items-center justify-between">
                           <div className="flex items-center space-x-3 rtl:space-x-reverse">
@@ -1245,18 +1245,18 @@ const Personal = () => {
                             </div>
                             <div className="ltr:ml-3 rtl:mr-3">
                               <h3 className="text-sm font-semibold">Stocks</h3>
-                              <p className="text-xs text-gray-500 dark:text-white/70">
+                              <p className="text-xs text-gray-500 ">
                                 $2663
                               </p>
                             </div>
                           </div>
                           <div className="space-x-2">
-                            <i className="ri ri-arrow-right-s-line text-gray-500 dark:text-white/70 text-lg"></i>
+                            <i className="ri ri-arrow-right-s-line text-gray-500  text-lg"></i>
                           </div>
                         </div>
                       </Link>
                     </li>
-                    <li className="flex flex-col gap-x-3.5 bg-white text-gray-800 dark:bg-bgdark dark:border-white/10 dark:text-white pt-1 rounded-sm">
+                    <li className="flex flex-col gap-x-3.5 bg-white text-gray-800  pt-1 rounded-sm">
                       <Link to="#">
                         <div className="flex items-center justify-between">
                           <div className="flex items-center space-x-3 rtl:space-x-reverse">
@@ -1267,13 +1267,13 @@ const Personal = () => {
                             </div>
                             <div className="ltr:ml-3 rtl:mr-3">
                               <h3 className="text-sm font-semibold">Others</h3>
-                              <p className="text-xs text-gray-500 dark:text-white/70">
+                              <p className="text-xs text-gray-500 ">
                                 $3656
                               </p>
                             </div>
                           </div>
                           <div className="space-x-2">
-                            <i className="ri ri-arrow-right-s-line text-gray-500 dark:text-white/70 text-lg"></i>
+                            <i className="ri ri-arrow-right-s-line text-gray-500  text-lg"></i>
                           </div>
                         </div>
                       </Link>
@@ -1289,7 +1289,7 @@ const Personal = () => {
                   <div>
                     <button
                       type="button"
-                      className="ti-btn m-0 rounded-sm p-1 px-3 !border border-gray-200 text-gray-400 hover:text-gray-500 hover:bg-gray-200 hover:border-gray-200 focus:ring-gray-200  dark:hover:bg-black/30 dark:border-white/10 dark:hover:border-white/20 dark:focus:ring-white/10 dark:focus:ring-offset-white/10"
+                      className="ti-btn m-0 rounded-sm p-1 px-3 !border border-gray-200 text-gray-400 hover:text-gray-500 hover:bg-gray-200 hover:border-gray-200 focus:ring-gray-200  "
                     >
                       View All
                     </button>
@@ -1304,7 +1304,7 @@ const Personal = () => {
                             <span className="block text-sm font-semibold">
                               02
                             </span>
-                            <span className="block text-xs text-gray-500 dark:text-white/70">
+                            <span className="block text-xs text-gray-500 ">
                               Mon
                             </span>
                           </div>
@@ -1315,7 +1315,7 @@ const Personal = () => {
                                   You have an announcement - Ipsum Est Diam
                                   Eirmod
                                 </p>
-                                <p className="mb-0 text-xs leading-none text-gray-500 dark:text-white/70">
+                                <p className="mb-0 text-xs leading-none text-gray-500 ">
                                   10:00AM
                                   <span className="badge bg-primary/10 ltr:ml-2 rtl:mr-2 py-1 text-xs text-primary rounded-sm">
                                     Announcement
@@ -1352,7 +1352,7 @@ const Personal = () => {
                             <span className="block text-sm font-semibold">
                               15
                             </span>
-                            <span className="block text-xs text-gray-500 dark:text-white/70">
+                            <span className="block text-xs text-gray-500 ">
                               Sun
                             </span>
                           </div>
@@ -1362,7 +1362,7 @@ const Personal = () => {
                                 <p className="mb-1 truncate timeline-widget-content text-sm text-wrap !max-w-[15rem]">
                                   National holiday - Vero Jayanti
                                 </p>
-                                <p className="mb-0 text-xs leading-none text-gray-500 dark:text-white/70">
+                                <p className="mb-0 text-xs leading-none text-gray-500 ">
                                   <span className="badge bg-warning/10 ltr:ml-2 rtl:mr-2 py-1 text-xs text-warning rounded-sm">
                                     Holiday
                                   </span>
@@ -1398,7 +1398,7 @@ const Personal = () => {
                             <span className="block text-sm font-semibold">
                               23
                             </span>
-                            <span className="block text-xs text-gray-500 dark:text-white/70">
+                            <span className="block text-xs text-gray-500 ">
                               Mon
                             </span>
                           </div>
@@ -1408,7 +1408,7 @@ const Personal = () => {
                                 <p className="mb-1 truncate timeline-widget-content text-sm text-wrap !max-w-[15rem]">
                                   John pup birthday - Team Member
                                 </p>
-                                <p className="mb-4 text-xs leading-none text-gray-500 dark:text-white/70">
+                                <p className="mb-4 text-xs leading-none text-gray-500 ">
                                   09:00AM
                                   <span className="badge bg-success/10 ltr:ml-2 rtl:mr-2">
                                     Birthday
@@ -1418,7 +1418,7 @@ const Personal = () => {
                                   Amet sed no dolor kasd - Et Dolores Tempor
                                   Erat
                                 </p>
-                                <p className="mb-0 text-xs leading-none text-gray-500 dark:text-white/70">
+                                <p className="mb-0 text-xs leading-none text-gray-500 ">
                                   04:00PM
                                   <span className="badge bg-primary/10 ltr:ml-2 rtl:mr-2 py-1 text-xs text-primary rounded-sm">
                                     Announcement
@@ -1455,7 +1455,7 @@ const Personal = () => {
                             <span className="block text-sm font-semibold">
                               31
                             </span>
-                            <span className="block text-xs text-gray-500 dark:text-white/70">
+                            <span className="block text-xs text-gray-500 ">
                               Tue
                             </span>
                           </div>
@@ -1465,7 +1465,7 @@ const Personal = () => {
                                 <p className="mb-1 truncate timeline-widget-content text-sm text-wrap !max-w-[15rem]">
                                   National Holiday - Dolore Ipsum
                                 </p>
-                                <p className="mb-0 text-xs leading-none text-gray-500 dark:text-white/70">
+                                <p className="mb-0 text-xs leading-none text-gray-500 ">
                                   <span className="badge bg-warning/10 ltr:ml-2 rtl:mr-2 py-1 text-xs text-warning rounded-sm">
                                     Holiday
                                   </span>
@@ -1507,7 +1507,7 @@ const Personal = () => {
                   <div>
                     <button
                       type="button"
-                      className="ti-btn m-0 rounded-sm p-1 px-3 !border border-gray-200 text-gray-400 hover:text-gray-500 hover:bg-gray-200 hover:border-gray-200 focus:ring-gray-200  dark:hover:bg-black/30 dark:border-white/10 dark:hover:border-white/20 dark:focus:ring-white/10 dark:focus:ring-offset-white/10"
+                      className="ti-btn m-0 rounded-sm p-1 px-3 !border border-gray-200 text-gray-400 hover:text-gray-500 hover:bg-gray-200 hover:border-gray-200 focus:ring-gray-200  "
                     >
                       View All
                     </button>
@@ -1553,7 +1553,7 @@ const Personal = () => {
                     <Link
                       to="#"
                       aria-label="anchor"
-                      className="m-0 w-[2.375rem] h-[2.375rem] rounded-full ti-btn bg-gray-100 text-gray-500 hover:text-gray-600 hover:bg-gray-200 ring-offset-white focus:ring-gray-500 dark:bg-black/20 dark:hover:bg-black/30 dark:focus:ring-gray-600 dark:text-white/70 dark:focus:ring-offset-white/10"
+                      className="m-0 w-[2.375rem] h-[2.375rem] rounded-full ti-btn bg-gray-100 text-gray-500 hover:text-gray-600 hover:bg-gray-200 ring-offset-white focus:ring-gray-500 "
                     >
                       <i className="ri-arrow-right-s-line rtl:rotate-180"></i>
                     </Link>
@@ -1616,7 +1616,7 @@ const Personal = () => {
                     <div className="hs-dropdown ti-dropdown block ltr:ml-auto rtl:mr-auto my-auto">
                       <button
                         type="button"
-                        className="hs-dropdown-toggle ti-dropdown-toggle rounded-sm p-1 px-3 !border border-gray-200 text-gray-400 hover:text-gray-500 hover:bg-gray-200 hover:border-gray-200 focus:ring-gray-200  dark:hover:bg-black/30 dark:border-white/10 dark:hover:border-white/20 dark:focus:ring-white/10 dark:focus:ring-offset-white/10"
+                        className="hs-dropdown-toggle ti-dropdown-toggle rounded-sm p-1 px-3 !border border-gray-200 text-gray-400 hover:text-gray-500 hover:bg-gray-200 hover:border-gray-200 focus:ring-gray-200  "
                       >
                         View All <i className="ti ti-chevron-down"></i>
                       </button>
@@ -1637,33 +1637,33 @@ const Personal = () => {
                 <div className="box-body">
                   <div className="table-bordered rounded-sm ti-custom-table-head overflow-auto">
                     <table className="ti-custom-table ti-custom-table-head whitespace-nowrap">
-                      <thead className="bg-gray-50 dark:bg-black/20">
+                      <thead className="bg-gray-50 ">
                         <tr className="">
                           <th
                             scope="col"
-                            className="dark:text-white/80 !text-center"
+                            className="!text-center"
                           >
                             S.no
                           </th>
-                          <th scope="col" className="dark:text-white/80">
+                          <th scope="col" className="">
                             Recipient
                           </th>
-                          <th scope="col" className="dark:text-white/80">
+                          <th scope="col" className="">
                             Transaction Id
                           </th>
-                          <th scope="col" className="dark:text-white/80">
+                          <th scope="col" className="">
                             Date
                           </th>
-                          <th scope="col" className="dark:text-white/80">
+                          <th scope="col" className="">
                             Amount
                           </th>
-                          <th scope="col" className="dark:text-white/80">
+                          <th scope="col" className="">
                             Type
                           </th>
-                          <th scope="col" className="dark:text-white/80">
+                          <th scope="col" className="">
                             Status
                           </th>
-                          <th scope="col" className="dark:text-white/80">
+                          <th scope="col" className="">
                             Action
                           </th>
                         </tr>
@@ -1679,10 +1679,10 @@ const Personal = () => {
                                 alt="Image Description"
                               />
                               <div className="block my-auto">
-                                <p className="block text-sm font-semibold my-auto text-gray-800 dark:text-white">
+                                <p className="block text-sm font-semibold my-auto text-gray-800">
                                   Socrates Itumay
                                 </p>
-                                <span className="block text-xs text-gray-400 dark:text-white/80 !font-normal my-auto min-w-[180px]">
+                                <span className="block text-xs text-gray-400 !font-normal my-auto min-w-[180px]">
                                   socratesitumay@gmail.com
                                 </span>
                               </div>
@@ -1705,7 +1705,7 @@ const Personal = () => {
                               >
                                 <i className="ti ti-eye"></i>
                                 <span
-                                  className="hs-tooltip-content ti-main-tooltip-content py-1 px-2 bg-gray-900 text-xs font-medium text-white shadow-sm dark:bg-slate-700 hidden style1"
+                                  className="hs-tooltip-content ti-main-tooltip-content py-1 px-2 bg-gray-900 text-xs font-medium text-white shadow-sm  hidden style1"
                                   role="tooltip"
                                   data-popper-placement="top"
                                 >
@@ -1720,7 +1720,7 @@ const Personal = () => {
                               >
                                 <i className="ti ti-trash"></i>
                                 <span
-                                  className="hs-tooltip-content ti-main-tooltip-content py-1 px-2 bg-gray-900 text-xs font-medium text-white shadow-sm dark:bg-slate-700"
+                                  className="hs-tooltip-content ti-main-tooltip-content py-1 px-2 bg-gray-900 text-xs font-medium text-white shadow-sm "
                                   role="tooltip"
                                 >
                                   Delete
@@ -1739,10 +1739,10 @@ const Personal = () => {
                                 alt="Image Description"
                               />
                               <div className="block my-auto">
-                                <p className="block text-sm font-semibold my-auto text-gray-800 dark:text-white">
+                                <p className="block text-sm font-semibold my-auto text-gray-800">
                                   Luke Cooper
                                 </p>
-                                <span className="block text-xs text-gray-400 dark:text-white/80 !font-normal my-auto min-w-[180px]">
+                                <span className="block text-xs text-gray-400 !font-normal my-auto min-w-[180px]">
                                   LukeCooper@gmail.com
                                 </span>
                               </div>
@@ -1765,7 +1765,7 @@ const Personal = () => {
                               >
                                 <i className="ti ti-eye"></i>
                                 <span
-                                  className="hs-tooltip-content ti-main-tooltip-content py-1 px-2 bg-gray-900 text-xs font-medium text-white shadow-sm dark:bg-slate-700 hidden style1"
+                                  className="hs-tooltip-content ti-main-tooltip-content py-1 px-2 bg-gray-900 text-xs font-medium text-white shadow-sm  hidden style1"
                                   role="tooltip"
                                   data-popper-placement="top"
                                 >
@@ -1780,7 +1780,7 @@ const Personal = () => {
                               >
                                 <i className="ti ti-trash"></i>
                                 <span
-                                  className="hs-tooltip-content ti-main-tooltip-content py-1 px-2 bg-gray-900 text-xs font-medium text-white shadow-sm dark:bg-slate-700"
+                                  className="hs-tooltip-content ti-main-tooltip-content py-1 px-2 bg-gray-900 text-xs font-medium text-white shadow-sm "
                                   role="tooltip"
                                 >
                                   Delete
@@ -1799,10 +1799,10 @@ const Personal = () => {
                                 alt="Image Description"
                               />
                               <div className="block my-auto">
-                                <p className="block text-sm font-semibold my-auto text-gray-800 dark:text-white">
+                                <p className="block text-sm font-semibold my-auto text-gray-800">
                                   Rony Brad
                                 </p>
-                                <span className="block text-xs text-gray-400 dark:text-white/80 !font-normal my-auto min-w-[180px]">
+                                <span className="block text-xs text-gray-400 !font-normal my-auto min-w-[180px]">
                                   RonyBrad@gmail.com
                                 </span>
                               </div>
@@ -1825,7 +1825,7 @@ const Personal = () => {
                               >
                                 <i className="ti ti-eye"></i>
                                 <span
-                                  className="hs-tooltip-content ti-main-tooltip-content py-1 px-2 bg-gray-900 text-xs font-medium text-white shadow-sm dark:bg-slate-700 hidden style1"
+                                  className="hs-tooltip-content ti-main-tooltip-content py-1 px-2 bg-gray-900 text-xs font-medium text-white shadow-sm  hidden style1"
                                   role="tooltip"
                                   data-popper-placement="top"
                                 >
@@ -1840,7 +1840,7 @@ const Personal = () => {
                               >
                                 <i className="ti ti-trash"></i>
                                 <span
-                                  className="hs-tooltip-content ti-main-tooltip-content py-1 px-2 bg-gray-900 text-xs font-medium text-white shadow-sm dark:bg-slate-700"
+                                  className="hs-tooltip-content ti-main-tooltip-content py-1 px-2 bg-gray-900 text-xs font-medium text-white shadow-sm "
                                   role="tooltip"
                                 >
                                   Delete
@@ -1859,10 +1859,10 @@ const Personal = () => {
                                 alt="Image Description"
                               />
                               <div className="block my-auto">
-                                <p className="block text-sm font-semibold my-auto text-gray-800 dark:text-white">
+                                <p className="block text-sm font-semibold my-auto text-gray-800">
                                   Sophia Khud
                                 </p>
-                                <span className="block text-xs text-gray-400 dark:text-white/80 !font-normal my-auto min-w-[180px]">
+                                <span className="block text-xs text-gray-400 !font-normal my-auto min-w-[180px]">
                                   RonyBrad@gmail.com
                                 </span>
                               </div>
@@ -1885,7 +1885,7 @@ const Personal = () => {
                               >
                                 <i className="ti ti-eye"></i>
                                 <span
-                                  className="hs-tooltip-content ti-main-tooltip-content py-1 px-2 bg-gray-900 text-xs font-medium text-white shadow-sm dark:bg-slate-700 hidden style1"
+                                  className="hs-tooltip-content ti-main-tooltip-content py-1 px-2 bg-gray-900 text-xs font-medium text-white shadow-sm  hidden style1"
                                   role="tooltip"
                                   data-popper-placement="top"
                                 >
@@ -1900,7 +1900,7 @@ const Personal = () => {
                               >
                                 <i className="ti ti-trash"></i>
                                 <span
-                                  className="hs-tooltip-content ti-main-tooltip-content py-1 px-2 bg-gray-900 text-xs font-medium text-white shadow-sm dark:bg-slate-700"
+                                  className="hs-tooltip-content ti-main-tooltip-content py-1 px-2 bg-gray-900 text-xs font-medium text-white shadow-sm "
                                   role="tooltip"
                                 >
                                   Delete
@@ -1919,10 +1919,10 @@ const Personal = () => {
                                 alt="Image Description"
                               />
                               <div className="block my-auto">
-                                <p className="block text-sm font-semibold my-auto text-gray-800 dark:text-white">
+                                <p className="block text-sm font-semibold my-auto text-gray-800">
                                   Cooper Hard
                                 </p>
-                                <span className="block text-xs text-gray-400 dark:text-white/80 !font-normal my-auto min-w-[180px]">
+                                <span className="block text-xs text-gray-400 !font-normal my-auto min-w-[180px]">
                                   CooperHard@gmail.com
                                 </span>
                               </div>
@@ -1945,7 +1945,7 @@ const Personal = () => {
                               >
                                 <i className="ti ti-eye"></i>
                                 <span
-                                  className="hs-tooltip-content ti-main-tooltip-content py-1 px-2 bg-gray-900 text-xs font-medium text-white shadow-sm dark:bg-slate-700 hidden style1"
+                                  className="hs-tooltip-content ti-main-tooltip-content py-1 px-2 bg-gray-900 text-xs font-medium text-white shadow-sm  hidden style1"
                                   role="tooltip"
                                   data-popper-placement="top"
                                 >
@@ -1960,7 +1960,7 @@ const Personal = () => {
                               >
                                 <i className="ti ti-trash"></i>
                                 <span
-                                  className="hs-tooltip-content ti-main-tooltip-content py-1 px-2 bg-gray-900 text-xs font-medium text-white shadow-sm dark:bg-slate-700"
+                                  className="hs-tooltip-content ti-main-tooltip-content py-1 px-2 bg-gray-900 text-xs font-medium text-white shadow-sm "
                                   role="tooltip"
                                 >
                                   Delete
