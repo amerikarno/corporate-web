@@ -89,7 +89,7 @@ const Landing = ({ ThemeChanger }: datatype) => {
               {token ? (
                 <div className="w-1/2 s3:w-1/3 flex justify-end">
                   <DropdownMenu>
-                    <DropdownMenuTrigger className="flex pr-4 space-x-2 outline-none">
+                    <DropdownMenuTrigger className="flex space-x-2 outline-none">
                       <Avatar className="w-16 h-16">
                         <AvatarImage src={example} alt="" />
                         <AvatarFallback>
@@ -99,7 +99,7 @@ const Landing = ({ ThemeChanger }: datatype) => {
                     </DropdownMenuTrigger>
                     <DropdownMenuContent className="mr-12 bg-white space-y-2">
                       <DropdownMenuItem
-                        className="cursor-pointer hover:bg-gray-300 hover:font-bold"
+                        className="cursor-pointer hover:bg-gray-300 hover:font-bold w-[200px]"
                         onClick={() => {
                           navigate("/");
                         }}
@@ -107,7 +107,7 @@ const Landing = ({ ThemeChanger }: datatype) => {
                         Profile
                       </DropdownMenuItem>
                       <DropdownMenuItem
-                        className="cursor-pointer hover:bg-gray-300 hover:font-bold"
+                        className="cursor-pointer hover:bg-gray-300 hover:font-bold w-[200px]"
                         onClick={() => {
                           navigate("/dashboard/personal");
                         }}
@@ -115,7 +115,7 @@ const Landing = ({ ThemeChanger }: datatype) => {
                         Personal
                       </DropdownMenuItem>
                       <DropdownMenuItem
-                        className="cursor-pointer hover:bg-gray-300 hover:font-bold"
+                        className="cursor-pointer hover:bg-gray-300 hover:font-bold w-[200px]"
                         onClick={() => {
                           navigate("/order-trade");
                         }}
@@ -123,7 +123,7 @@ const Landing = ({ ThemeChanger }: datatype) => {
                         Invest
                       </DropdownMenuItem>
                       <DropdownMenuItem
-                        className="cursor-pointer hover:bg-gray-300 hover:font-bold"
+                        className="cursor-pointer hover:bg-gray-300 hover:font-bold w-[200px]"
                         onClick={() => {
                           navigate("/");
                         }}
@@ -131,7 +131,7 @@ const Landing = ({ ThemeChanger }: datatype) => {
                         Portfolio
                       </DropdownMenuItem>
                       <DropdownMenuItem
-                        className="cursor-pointer hover:bg-gray-300 hover:font-bold"
+                        className="cursor-pointer hover:bg-gray-300 hover:font-bold w-[200px]"
                         onClick={() => {
                           navigate("/deposite-withdraw");
                         }}
@@ -139,7 +139,7 @@ const Landing = ({ ThemeChanger }: datatype) => {
                         Deposite / Withdraw
                       </DropdownMenuItem>
                       <DropdownMenuItem
-                        className="cursor-pointer hover:bg-gray-300 hover:font-bold"
+                        className="cursor-pointer hover:bg-gray-300 hover:font-bold w-[200px]"
                         onClick={() => handleLogout()}
                       >
                         Log out
