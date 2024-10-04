@@ -89,7 +89,7 @@ export default function BasicInfo() {
   };
 
   const individualData: IndividualData = useSelector(
-    (state: any) => state.individualDatas
+    (state: any) => state.individualData
   );
 
   useEffect(() => {

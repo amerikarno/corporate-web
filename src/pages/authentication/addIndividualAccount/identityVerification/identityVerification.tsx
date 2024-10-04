@@ -16,11 +16,177 @@ import {
   AlertDialogAction,
   AlertDialogCancel,
 } from "@/components/ui/alert-dialog";
+import { getCookies } from "@/lib/cookies";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "@/api/axios";
+import {
+  clearIndividualData,
+  initIndividualData,
+  setTestCorporateData,
+} from "@/redux/Action";
+import { useEffect, useState } from "react";
+import Alert from "@/components/alert/Alert";
 
 export default function IdentityVerification() {
   const navigate = useNavigate();
+  const token = getCookies();
+  const dispatch = useDispatch();
 
-  const ConfirmBtn = () => {
+  const fetchIndividualData = async (AccountID: string) => {
+    try {
+      console.log(AccountID);
+      const res = await axios.post(
+        "/api/v1/individual/list",
+        { AccountID },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      dispatch(initIndividualData(res.data[0]));
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const individualData = useSelector((state: any) => state.individualData);
+
+  useEffect(() => {
+    const cidValue = localStorage.getItem("cid");
+    if (cidValue) {
+      fetchIndividualData(cidValue || "");
+    } else {
+      console.log("cid not found");
+    }
+  }, [token, dispatch]);
+
+  const [alertVisible, setAlertVisible] = useState(false);
+  const handleClose = () => {
+    if (alertType === "success") {
+      setAlertVisible(false);
+      navigate("/authentication/login");
+      dispatch(clearIndividualData());
+      localStorage.clear();
+    }
+    setAlertVisible(false);
+  };
+
+  const [alertType, setAlertType] = useState("");
+  // const [alertMessage,setAlertMessage] = useState("");
+
+  const handleNdid = async () => {
+    let body = {
+      ndid: true,
+      cid: localStorage.getItem("cid"),
+    };
+    dispatch(setTestCorporateData(body));
+    console.log("ndid choosed : ", body);
+    try {
+      if (individualData?.thaid || individualData?.ndid) {
+        const res = await axios.post(
+          "/api/v1/individual/update/ndidthaid",
+          body,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        if (res.status === 200) {
+          console.log("update ndid success :", res);
+          setAlertVisible(true);
+          setAlertType("success");
+          //  setAlertMessage("Thanks for your submission")
+        } else {
+          console.log("update ndid not success :", res);
+          setAlertVisible(true);
+          setAlertType("error");
+          // setAlertMessage("please try again")
+        }
+      } else {
+        const res = await axios.post("/api/v1/individual/ndidthaid", body, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        if (res.status === 200) {
+          console.log("save ndid success :", res);
+          setAlertVisible(true);
+          setAlertType("success");
+          //  setAlertMessage("Thanks for your submission")
+        } else {
+          console.log("save ndid not success :", res);
+          setAlertVisible(true);
+          setAlertType("error");
+          // setAlertMessage("please try again")
+        }
+      }
+    } catch (error) {
+      console.log("save ndid not success :", error);
+      setAlertVisible(true);
+      setAlertType("error");
+      // setAlertMessage("please try again")
+    }
+  };
+  const handlethaiid = async () => {
+    let body = {
+      thaid: true,
+      cid: localStorage.getItem("cid"),
+    };
+    dispatch(setTestCorporateData(body));
+    console.log("thaid choosed : ", body);
+    try {
+      if (individualData?.thaid || individualData?.ndid) {
+        const res = await axios.post(
+          "/api/v1/individual/update/ndidthaid",
+          body,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        if (res.status === 200) {
+          console.log("update thaid success :", res);
+          setAlertVisible(true);
+          setAlertType("success");
+          //  setAlertMessage("Thanks for your submission")
+        } else {
+          console.log("update thaid not success :", res);
+          setAlertVisible(true);
+          setAlertType("error");
+          // setAlertMessage("please try again")
+        }
+      } else {
+        const res = await axios.post("/api/v1/individual/ndidthaid", body, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        if (res.status === 200) {
+          console.log("save thaid success :", res);
+          setAlertVisible(true);
+          setAlertType("success");
+          //  setAlertMessage("Thanks for your submission")
+        } else {
+          console.log("save thaid not success :", res);
+          setAlertVisible(true);
+          setAlertType("error");
+          // setAlertMessage("please try again")
+        }
+      }
+    } catch (error) {
+      console.log("save ndid not success :", error);
+      setAlertVisible(true);
+      setAlertType("error");
+      // setAlertMessage("please try again")
+    }
+  };
+
+  const ConfirmNdidBtn = () => {
     return (
       <AlertDialog>
         <AlertDialogTrigger className="bg-primary p-2 rounded-md text-white hover:bg-primary/90 w-28">
@@ -38,7 +204,36 @@ export default function IdentityVerification() {
           </AlertDialogHeader>
           <AlertDialogFooter className="flex items-center justify-center">
             <AlertDialogCancel className="w-32">ปิด</AlertDialogCancel>
-            <AlertDialogAction className="w-32">ยืนยัน</AlertDialogAction>
+            <AlertDialogAction className="w-32" onClick={handleNdid}>
+              ยืนยัน
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+    );
+  };
+
+  const ConfirmThaidBtn = () => {
+    return (
+      <AlertDialog>
+        <AlertDialogTrigger className="bg-primary p-2 rounded-md text-white hover:bg-primary/90 w-28">
+          ตกลง
+        </AlertDialogTrigger>
+        <AlertDialogContent className="bg-white">
+          <AlertDialogHeader>
+            <AlertDialogTitle>คุณแน่ใจใช่ไหม?</AlertDialogTitle>
+            <AlertDialogDescription>
+              <span>
+                หมายเหตุ ถ้าทำรายการไม่สำเร็จต้องรอ 1 ชม.
+                จึงจะเปลี่ยนวิธียืนยันตัวตนแบบอื่นได้
+              </span>
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter className="flex items-center justify-center">
+            <AlertDialogCancel className="w-32">ปิด</AlertDialogCancel>
+            <AlertDialogAction className="w-32" onClick={handlethaiid}>
+              ยืนยัน
+            </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
@@ -48,6 +243,13 @@ export default function IdentityVerification() {
   return (
     <div className="w-full">
       <div className="flex flex-col items-center p-8 pt-16 space-y-8 md:mx-16">
+        {alertVisible && (
+          <Alert
+            type={alertType}
+            onClose={handleClose}
+            data-testid="alertResponse"
+          />
+        )}
         <div className="flex flex-col items-center text-slate-800">
           <span className="font-bold text-2xl">
             ท่านสามารถเลือก "ยืนยันตัวตน" ดังนี้
@@ -77,15 +279,8 @@ export default function IdentityVerification() {
               ถ้าทำรายการไม่สำเร็จต้องรอ 1 ชม.
               จึงจะเปลี่ยนวิธียืนยันตัวตนแบบอื่นได้
             </span>
-            {/* <CustomModal
-            title="คุณแน่ใจมั้ย?"
-            description="หมายเหตุ ถ้าทำรายการไม่สำเร็จต้องรอ 1 ชม. จึงจะเปลี่ยนวิธียืนยันตัวตนแบบอื่นได้"
-            textClose="ยกเลิก"
-            textSave="ยืนยัน"
-            onSave={() => {}}
-          /> */}
             <div className="flex justify-start py-4">
-              <ConfirmBtn />
+              <ConfirmNdidBtn />
             </div>
           </div>
         </Card>
@@ -106,15 +301,8 @@ export default function IdentityVerification() {
               ถ้าทำรายการไม่สำเร็จต้องรอ 1 ชม.
               จึงจะเปลี่ยนวิธียืนยันตัวตนแบบอื่นได้
             </span>
-            {/* <CustomModal
-            title="คุณแน่ใจมั้ย?"
-            description="หมายเหตุ ถ้าทำรายการไม่สำเร็จต้องรอ 1 ชม. จึงจะเปลี่ยนวิธียืนยันตัวตนแบบอื่นได้"
-            textClose="ยกเลิก"
-            textSave="ยืนยัน"
-            onSave={() => {}}
-          /> */}
             <div className="flex justify-start py-4">
-              <ConfirmBtn />
+              <ConfirmThaidBtn />
             </div>
           </div>
         </Card>

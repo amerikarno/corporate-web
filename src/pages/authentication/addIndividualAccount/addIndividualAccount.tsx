@@ -34,7 +34,7 @@ export default function AddIndividualAccount() {
     try {
       consoleLog(AccountID);
       const res = await axios.post(
-        "authentication/signup/basicinfo",
+        "/api/v1/individual/list",
         { AccountID },
         {
           headers: {
@@ -50,7 +50,7 @@ export default function AddIndividualAccount() {
     }
   };
 
-  const individualData = useSelector((state: any) => state.individualDatas);
+  const individualData = useSelector((state: any) => state.individualData);
 
   useEffect(() => {
     const cidValue = localStorage.getItem("cid");

@@ -34,7 +34,7 @@ export default function SuitTestFatca() {
       console.log(error);
     }
   };
-  const individualData = useSelector((state: any) => state.individualDatas);
+  const individualData = useSelector((state: any) => state.individualData);
   useEffect(() => {
     const cidValue = localStorage.getItem("cid");
     if (cidValue) {

@@ -193,7 +193,7 @@ export default function KnowLedgeTest({ onTestSuccess }: KnowLedgeTestProps) {
       consoleLog(error);
     }
   };
-  const individualData = useSelector((state: any) => state.individualDatas);
+  const individualData = useSelector((state: any) => state.individualData);
 
   useEffect(() => {
     const cidValue = localStorage.getItem("cid");

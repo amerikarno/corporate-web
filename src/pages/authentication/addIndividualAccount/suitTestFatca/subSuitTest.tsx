@@ -144,7 +144,7 @@ export default function SubSuitTest({
       console.log(error);
     }
   };
-  const individualData = useSelector((state: any) => state.individualDatas);
+  const individualData = useSelector((state: any) => state.individualData);
 
   const fetchSuitTestResult =
     individualData?.SuiteTestResult.suiteTestResult.suitTestResult.answer;

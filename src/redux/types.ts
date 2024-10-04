@@ -133,7 +133,7 @@ export interface InitialState {
   bgImg: string;
   iconText: string;
   body: Body;
-  individualDatas: IndividualData;
+  individualData: IndividualData;
   livenessOcr: LivenessOcr;
   user: User;
   unitTest: any;

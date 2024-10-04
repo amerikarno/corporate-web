@@ -27,7 +27,7 @@ let initialState: InitialState = {
     class: "",
   },
 
-  individualDatas: {
+  individualData: {
     CreatedAt: "",
     DeletedAt: "",
     id: "",
@@ -153,10 +153,10 @@ export default function reducer(state = initialState, action: any) {
     case "initIndividualData":
       return {
         ...state,
-        individualDatas: { ...state.individualDatas, ...payload },
+        individualDatas: { ...state.individualData, ...payload },
       };
     case "clearAddIndividual":
-      return { ...state, addIndividual: initialState.individualDatas };
+      return { ...state, addIndividual: initialState.individualData };
     /////////////////////////////////////////////////////////
 
     ////////////////////livenessOcr//////////////////////
