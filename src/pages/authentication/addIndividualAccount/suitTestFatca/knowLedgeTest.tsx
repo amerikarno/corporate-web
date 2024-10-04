@@ -1,3 +1,4 @@
+import { consoleLog } from "@/lib/utils";
 import { Button } from "../../../../components/ui/Button";
 import { Card, CardContent } from "../../../../components/ui/Card";
 import { useState } from "react";
@@ -213,7 +214,7 @@ export default function KnowLedgeTest({ onTestSuccess }: KnowLedgeTestProps) {
     } else {
       setAllTestSuccess(true);
       onTestSuccess(true);
-      console.log("All Answer Corrected!");
+      consoleLog("All Answer Corrected!");
     }
   };
 

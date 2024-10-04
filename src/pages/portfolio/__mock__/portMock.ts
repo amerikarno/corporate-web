@@ -48,7 +48,7 @@ export const portMock: TPortfolio = {
         investmentStructure: "/",
         distributionFrequency: "Quarterly",
       },
-      icoStatus: "funding",
+      icoStatus: "invest",
       investment: {
         id: "1",
         createAt: "2023-03-01T00:00:00Z", //invest date
@@ -105,7 +105,7 @@ export const portMock: TPortfolio = {
         investmentStructure: "/",
         distributionFrequency: "Annually",
       },
-      icoStatus: "live",
+      icoStatus: "complete",
       investment: {
         id: "2",
         createAt: "2022-04-01T00:00:00Z", //invest date

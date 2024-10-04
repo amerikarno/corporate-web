@@ -5,8 +5,7 @@ import SubSuitTest from "./subSuitTest";
 import KnowLedgeTest from "./knowLedgeTest";
 import { TiTick } from "react-icons/ti";
 import "./suitTestFatca.css";
-// import { isAllowedPage } from "@/lib/utils";
-// import UnAuthorize from "@/pages/unAuthorizePage/unAuthorize";
+import { consoleLog } from "@/lib/utils";
 import { useNavigate } from "react-router-dom";
 
 export default function SuitTestFatca() {
@@ -31,23 +30,23 @@ export default function SuitTestFatca() {
   const [knowLedgeTestSuccess, setKnowLedgeTestSuccess] = useState(false);
   const [suitTestSuccess, setSuitTestSuccess] = useState(false);
   const navigate = useNavigate();
-  console.log(knowLedgeTestSuccess, suitTestSuccess);
+  consoleLog(knowLedgeTestSuccess, suitTestSuccess);
 
   const handleKnowLedgeTestSuccess = (success: boolean) => {
     setKnowLedgeTestSuccess(success);
-    console.log("Test Success:", success);
+    consoleLog("Test Success:", success);
   };
   const handleSuitTestSuccess = (success: boolean) => {
     setSuitTestSuccess(success);
-    console.log("Suit Test submit button pressed!");
+    consoleLog("Suit Test submit button pressed!");
   };
   //fatcaradio === "fatcaradio-2" แปลว่าไม่ใช่อเมริกา
 
   const handleSubmitSuitTestFatca = () => {
-    // console.log(isButtonDisabled);
-    // console.log(suitTestSuccess);
-    // console.log(fatcaradio === "fatcaradio-2");
-    // console.log(fatcaInfo !== "");
+    // consoleLog(isButtonDisabled);
+    // consoleLog(suitTestSuccess);
+    // consoleLog(fatcaradio === "fatcaradio-2");
+    // consoleLog(fatcaInfo !== "");
     // if (
     //   suitTestSuccess &&
     //   (fatcaradio === "fatcaradio-2" || fatcaInfo !== "")
@@ -61,7 +60,7 @@ export default function SuitTestFatca() {
     //     knowLedgeTestResult: knowLedgeTestSuccess ? 15 : 0,
     //     pageID: 400,
     //   };
-    //   console.log(body);
+    //   consoleLog(body);
     //   navigate(
     //     `${import.meta.env.BASE_URL}authentication/signup/identityverification`
     //   );
@@ -155,7 +154,7 @@ export default function SuitTestFatca() {
                           // disabled={isButtonDisabled}
                           onClick={() => {
                             setIsButtonDisabled(true);
-                            console.log("fatcaInfo : ", fatcaInfo);
+                            consoleLog("fatcaInfo : ", fatcaInfo);
                           }}
                         >
                           {isButtonDisabled ? (

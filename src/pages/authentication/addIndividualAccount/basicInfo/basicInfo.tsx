@@ -18,6 +18,7 @@ import {
 import { basicInfoSchema, TBasicInfo } from "./constant/schemas";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { consoleLog } from "@/lib/utils";
 
 export default function BasicInfo() {
   // if (!isAllowedPage(2002)) {
@@ -127,21 +128,21 @@ export default function BasicInfo() {
       banks: [prebody.firstBankAccount, prebody.secondBankAccountBody],
       pageID: 300,
     };
-    console.log(body);
+    consoleLog(body);
     navigate(`${import.meta.env.BASE_URL}authentication/signup/suittestfatca`);
   };
 
   const handleAddressRadioChange = (value: string) => {
-    console.log(value);
+    consoleLog(value);
     setRadioAddressValue(value);
   };
   const handleWorkRadioChange = (value: string) => {
-    console.log(value);
+    consoleLog(value);
     setRadioWorkValue(value);
   };
 
   const handleBankRadioChange = (value: string) => {
-    console.log(value);
+    consoleLog(value);
     setAddBankValue(value);
   };
 

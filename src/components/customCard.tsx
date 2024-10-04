@@ -2,6 +2,7 @@ import { TDataProps } from "@/pages/landing/type";
 import { Button } from "./ui/Button";
 import { getCookies } from "@/lib/cookies";
 import { useNavigate } from "react-router-dom";
+import { consoleLog } from "@/lib/utils";
 
 type TCustomCardProps = {
   data: TDataProps;
@@ -29,7 +30,7 @@ export function CustomCard({ data, index }: TCustomCardProps) {
             <Button
               className={`${token ? "" : "hidden"}`}
               onClick={() => {
-                console.log("invest");
+                consoleLog("invest");
               }}
             >
               Invest

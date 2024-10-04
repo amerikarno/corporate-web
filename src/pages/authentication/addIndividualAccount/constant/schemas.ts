@@ -10,7 +10,7 @@ export const individualAccountSchema = z.object({
   email: z.string(),
   mobile: z.string(),
   birthDate: z.string(),
-  mariageStatus: z.string(),
+  marriageStatus: z.string(),
   citizenId: z.string(),
   laserCode: z.string(),
   agreement: z.boolean(),

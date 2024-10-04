@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { setFaceImage } from "@/redux/Action";
 import { sleep } from "@/lib/utils";
 import { useWindowSize } from "@/lib/useWindowSize";
+import { consoleLog } from "@/lib/utils";
 
 export default function Liveness() {
   type TActionMessage = {
@@ -67,14 +68,14 @@ export default function Liveness() {
     }
 
     loadModels();
-    console.log(image);
+    consoleLog(image);
   }, []);
 
   useEffect(() => {
     if (stream) {
       const track = stream.getVideoTracks()[0];
       track.onended = () => {
-        console.log("Video track ended");
+        consoleLog("Video track ended");
         setStream(null);
       };
     }
@@ -112,7 +113,7 @@ export default function Liveness() {
   };
 
   const faceDetect = async () => {
-    // console.log(trackIsCenter, trackIsLeft, trackIsRight, trackIsMouthOpen);
+    // consoleLog(trackIsCenter, trackIsLeft, trackIsRight, trackIsMouthOpen);
     if (
       trackIsCenter &&
       trackIsLeft &&
@@ -136,12 +137,12 @@ export default function Liveness() {
         const leftEAR = calculateEAR(leftEye);
         const rightEAR = calculateEAR(rightEye);
         if (rightEAR > 0.4 && trackIsCenter) {
-          console.log("Turned left");
+          consoleLog("Turned left");
           setIsTurnLeft(true);
           trackIsLeft = true;
         }
         if (leftEAR > 0.4 && trackIsCenter) {
-          console.log("Turned right");
+          consoleLog("Turned right");
           setIsTurnRight(true);
           trackIsRight = true;
         }
@@ -156,7 +157,7 @@ export default function Liveness() {
           mouth[19],
         ]);
         if (mouthDist > 25 && trackIsCenter) {
-          console.log("Mouth opened");
+          consoleLog("Mouth opened");
           setIsMouthOpen(true);
           trackIsMouthOpen = true;
         }
@@ -382,10 +383,10 @@ export default function Liveness() {
 
   const takePhoto = () => {
     if (isCenter && isMouthOpen && isTurnLeft && isTurnRight) {
-      console.log("take a photo");
+      consoleLog("take a photo");
       capture();
     } else {
-      console.log("actions incomplete");
+      consoleLog("actions incomplete");
     }
     navigate("/authentication/signup/webcaminstructions");
   };

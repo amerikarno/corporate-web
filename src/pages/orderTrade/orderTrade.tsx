@@ -10,6 +10,7 @@ import DataTable, { TableColumn } from "react-data-table-component";
 import { MdCurrencyExchange } from "react-icons/md";
 import { IoReceiptOutline } from "react-icons/io5";
 import NavBar from "@/components/navbar";
+import { consoleLog } from "@/lib/utils";
 
 export default function OrderTrade() {
   // const [buySell, setBuySell] = useState<string>("buy");
@@ -61,10 +62,10 @@ export default function OrderTrade() {
     //     }));
     //     setFetchedCorporateCodes(corporateCodes);
     //   } else {
-    //     console.log("Failed to fetch corporate codes");
+    //     consoleLog("Failed to fetch corporate codes");
     //   }
     // } catch (error) {
-    //   console.log("Error fetching corporate codes:", error);
+    //   consoleLog("Error fetching corporate codes:", error);
     // }
   };
 
@@ -77,7 +78,7 @@ export default function OrderTrade() {
     //     },
     //   });
     //   if (res.status === 200) {
-    //     // console.log(res.data);
+    //     // consoleLog(res.data);
     //     // const orderTrades = res.data || [];
     //     // const uniqueOrderTrades = orderTrades.filter(
     //     //   (order: any, index: any, self: any) =>
@@ -91,12 +92,12 @@ export default function OrderTrade() {
     //     //     fiatAmount: (Number(order.fiatAmount) / 100000).toString(),
     //     //   })
     //     // );
-    //     // console.log("OrderTrade data fetched successfully.", uniqueOrderTrades);
+    //     // consoleLog("OrderTrade data fetched successfully.", uniqueOrderTrades);
     //   } else {
-    //     console.log("Failed to fetch orderTrade");
+    //     consoleLog("Failed to fetch orderTrade");
     //   }
     // } catch (error) {
-    //   console.log("Fetching order list of this role error!", error);
+    //   consoleLog("Fetching order list of this role error!", error);
     // }
   };
 
@@ -185,7 +186,7 @@ export default function OrderTrade() {
   //     setBuySell("buy");
   //   }
 
-  //   console.log("use effect", orderListDatatoInputField);
+  //   consoleLog("use effect", orderListDatatoInputField);
   // }, [choosedEditData]);
 
   // const handleBuySell = (value: string) => {
@@ -237,8 +238,8 @@ export default function OrderTrade() {
       fiatAmount: handleFloatValue(Number(data.fiatAmount)),
       cryptoPrice: handleFloatValue(Number(data.cryptoPrice)),
     };
-    console.log(choosedEditData);
-    console.log(body);
+    consoleLog(choosedEditData);
+    consoleLog(body);
 
     // try {
     //   const token = getCookies();
@@ -252,10 +253,10 @@ export default function OrderTrade() {
     //       reset();
     //       clearChoosedEditData();
     //       setSelectedCorporateCode(null);
-    //       console.log("edit successful");
+    //       consoleLog("edit successful");
     //       fetchOrderList();
     //     } else {
-    //       console.log("edit failed");
+    //       consoleLog("edit failed");
     //     }
     //   } else {
     //     const res = await axios.post("/api/v1/transaction/order/create", body, {
@@ -267,14 +268,14 @@ export default function OrderTrade() {
     //       reset();
     //       clearChoosedEditData();
     //       setSelectedCorporateCode(null);
-    //       console.log("save successful");
+    //       consoleLog("save successful");
     //       fetchOrderList();
     //     } else {
-    //       console.log("save failed");
+    //       consoleLog("save failed");
     //     }
     //   }
     // } catch (error) {
-    //   console.log(error);
+    //   consoleLog(error);
     // }
   };
 

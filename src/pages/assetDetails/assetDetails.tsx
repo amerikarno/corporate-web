@@ -10,11 +10,12 @@ import { RowInfo } from "@/components/rowLableInfo";
 import { ArrowLeft } from "lucide-react";
 import { ContentDetails } from "@/components/contentDetails";
 import { FaqAccordion } from "@/components/Faq";
+import { consoleLog } from "@/lib/utils";
 
 export function AssetDetails() {
   const navigate = useNavigate();
   const assetId = useParams().id;
-  console.log(assetId);
+  consoleLog(assetId);
   const [assetData, setAssetData] = useState<TAssetData | undefined>(undefined);
   const [tab, setTab] = useState(1);
   const [faq, setFaq] = useState(0);

@@ -27,3 +27,7 @@ export function formatNumberToCommasFraction(
     maximumFractionDigits: 2,
   });
 }
+
+export function consoleLog(...args: any[]) {
+  console.log(...args);
+}

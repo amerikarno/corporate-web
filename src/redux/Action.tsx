@@ -1,3 +1,4 @@
+import { TIndividualData } from "@/pages/authentication/addIndividualAccount/types";
 import { Dispatch } from "redux";
 
 export const ThemeChanger = (value: string) => async (dispatch: Dispatch) => {
@@ -66,5 +67,33 @@ export const setAuthenEmail = (email: string) => {
   return {
     type: "setAuthenEmail",
     payload: email,
+  };
+};
+
+export const setTestCorporateData = (data: any) => {
+  return {
+    type: "setTestCorporateData",
+    payload: data,
+  };
+};
+
+export const clearTestCorporateData = () => {
+  return {
+    type: "clearTestCorporateData",
+    payload: null,
+  };
+};
+
+export const initIndividualData = (data: TIndividualData) => {
+  return {
+    type: "initIndividualData",
+    payload: data,
+  };
+};
+
+export const clearIndividualData = () => {
+  return {
+    type: "clearIndividualData",
+    payload: null,
   };
 };

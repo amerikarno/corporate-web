@@ -1,5 +1,3 @@
-import { getCookies } from "@/lib/cookies";
-
 let initialState = {
   lang: "en",
   dir: "ltr",
@@ -29,7 +27,9 @@ let initialState = {
   },
 
   addIndividual: {
-    cid: "",
+    CreatedAt: "",
+    DeletedAt: "",
+    id: "",
     thTitle: "",
     thName: "",
     thSurname: "",
@@ -39,17 +39,68 @@ let initialState = {
     email: "",
     mobile: "",
     birthDate: "",
-    mariageStatus: "",
+    marriageStatus: "",
     citizenId: "",
     laserCode: "",
+    education: "",
+    sourceOfIncome: "",
+    currentOccupation: "",
+    officeName: "",
+    typeOfBusiness: "",
+    positionName: "",
+    salaryRange: "",
+    shortTermInvestment: "",
+    taxesInvestment: "",
+    longTermInvestment: "",
+    retireInvestment: "",
+    pageId: "",
+    update: "",
+    SuiteTestResult: {
+      createBy: "",
+      id: "",
+      suiteTestResult: "",
+      isFatca: "",
+      fatcaInfo: "",
+      isKnowLedgeDone: "",
+      knowLedgeTestResult: 0,
+    },
+    address: [
+      {
+        CreatedAt: "",
+        DeletedAt: "",
+        id: "",
+        homeNumber: "",
+        villageNumber: "",
+        villageName: "",
+        subStreetName: "",
+        streetName: "",
+        subDistrictName: "",
+        districtName: "",
+        provinceName: "",
+        zipCode: "",
+        countryName: "",
+        types: 0,
+      },
+    ],
+    bank: [
+      {
+        CreatedAt: "",
+        DeletedAt: "",
+        id: "",
+        bankName: "",
+        bankBranchName: "",
+        bankAccountNumber: "",
+        types: 0,
+      },
+    ],
+    ndid: "",
+    thaid: "",
   },
 
   livenessOcr: {
     faceImage: null,
     idCardImage: null,
   },
-
-  token: getCookies(),
 
   user: {
     id: "",
@@ -64,6 +115,8 @@ let initialState = {
     iat: 0,
     name: "",
   },
+
+  unitTest: null,
 };
 
 export default function reducer(state = initialState, action: any) {
@@ -74,24 +127,25 @@ export default function reducer(state = initialState, action: any) {
       state = payload;
       return state;
 
+    //////////////////// unit test //////////////////////
+    case "setTestCorporateData":
+      return {
+        ...state,
+        unitTest: payload,
+      };
+    case "clearTestCorporateData":
+      return {
+        ...state,
+        unitTest: null,
+      };
+    /////////////////////////////////////////////////////////
+
     ////////////////////AddIndividual//////////////////////
-    case "setCid":
+    case "initIndividualData":
       return {
         ...state,
-        addIndividual: { ...state.addIndividual, cid: payload },
+        addIndividual: { ...state.addIndividual, ...payload },
       };
-    case "setIndividualEmail":
-      return {
-        ...state,
-        addIndividual: { ...state.addIndividual, email: payload },
-      };
-
-    case "setIndividualMobile":
-      return {
-        ...state,
-        addIndividual: { ...state.addIndividual, mobile: payload },
-      };
-
     case "clearAddIndividual":
       return { ...state, addIndividual: initialState.addIndividual };
     /////////////////////////////////////////////////////////

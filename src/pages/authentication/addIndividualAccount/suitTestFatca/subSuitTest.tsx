@@ -1,6 +1,7 @@
 import { Button } from "../../../../components/ui/Button";
 import { Card } from "../../../../components/ui/Card";
 import { useState } from "react";
+import { consoleLog } from "@/lib/utils";
 
 interface Answer {
   questionIndex: number;
@@ -143,12 +144,12 @@ export default function SubSuitTest({ onSuitTestDone }: SubSuitTestProps) {
     const currentAnswers = answers[questionIndex].answer as number[];
     const newAnswers = [...currentAnswers];
     newAnswers[choiceIndex] = newAnswers[choiceIndex] === 1 ? 0 : 1;
-    console.log(newAnswers);
+    consoleLog(newAnswers);
 
     const checkboxAnswers = newAnswers.map((val, index) =>
       val === 1 ? index + 1 : 0
     );
-    console.log(checkboxAnswers);
+    consoleLog(checkboxAnswers);
     const highestIndex = newAnswers.reduce(
       (maxIndex, val, index) => (val === 1 ? index : maxIndex),
       -1
@@ -225,11 +226,11 @@ export default function SubSuitTest({ onSuitTestDone }: SubSuitTestProps) {
     const age = ageScore(Number(localStorage.getItem("age")));
     scoreCalculator = scoreCalculator + age;
     setTotalScore(scoreCalculator);
-    // console.log(scoreCalculator)
-    // console.log(answers)
-    // console.log(allAnswered)
-    // console.log(totalScore)
-    // console.log(suitTestDone)
+    // consoleLog(scoreCalculator)
+    // consoleLog(answers)
+    // consoleLog(allAnswered)
+    // consoleLog(totalScore)
+    // consoleLog(suitTestDone)
     if (allAnswered) {
       const suitTestResult = answers.map((item: any) => ({
         id: item.questionIndex,
@@ -244,7 +245,7 @@ export default function SubSuitTest({ onSuitTestDone }: SubSuitTestProps) {
         totalScore: scoreCalculator,
         suitTestResult: { answer: { ...suitTestResult } },
       };
-      console.log(body);
+      consoleLog(body);
     } else {
       alert("Do suit test first.");
       window.scrollTo({ top: 0, behavior: "smooth" });

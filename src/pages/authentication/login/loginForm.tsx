@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { normalStyleInput } from "@/assets/css/normalStyleInput";
 import axios from "@/api/axios";
 import { AxiosError } from "axios";
+import { consoleLog } from "@/lib/utils";
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -32,10 +33,10 @@ const LoginForm = () => {
     if (data.email && data.password) {
       const dataStr = `${data.email},${data.password}`;
       const base64 = btoa(dataStr);
-      console.log(base64);
+      consoleLog(base64);
 
       const decodeStr = atob(base64);
-      console.log(decodeStr);
+      consoleLog(decodeStr);
 
       try {
         const res = await axios.post(
@@ -49,7 +50,7 @@ const LoginForm = () => {
         );
 
         if (res.status === 200) {
-          console.log(res.data);
+          consoleLog(res.data);
           localStorage.setItem("basic", base64);
           if (res.data.secret !== "") {
             localStorage.setItem("secret", res.data.secret);
@@ -65,13 +66,13 @@ const LoginForm = () => {
           }
         } else {
           setError("root", { message: res.data.message });
-          console.log("error", { message: res.data });
+          consoleLog("error", { message: res.data });
         }
       } catch (error) {
         if (error instanceof AxiosError) {
           setError("root", { message: error.response?.data.message });
         }
-        console.log(error);
+        consoleLog(error);
       }
     }
   };
