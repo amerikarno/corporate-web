@@ -71,16 +71,9 @@ export default function BasicInfo() {
   const fetchIndividualData = async (AccountID: string) => {
     try {
       consoleLog(AccountID);
-      const res = await axios.post(
-        "/api/v1/individual/list",
-        { accountId: AccountID },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const res = await axios.post("/api/v1/individual/list", {
+        accountId: AccountID,
+      });
       dispatch(initIndividualData(res.data[0]));
       consoleLog(res);
     } catch (error) {
@@ -258,13 +251,14 @@ export default function BasicInfo() {
     consoleLog(body);
     dispatch(setTestCorporateData(body));
     try {
-      const token = getCookies();
       const registeredAddressFind: TBasicinfoAddress | null =
         individualData?.address?.find((addr) => addr.types === 1) || null;
       if (registeredAddressFind?.homeNumber) {
-        const res = await axios.post("/api/v1/individual/update/post", body, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const res = await axios.post(
+          "/api/v1/individual/update/post",
+          body,
+          {}
+        );
         if (res.status === 200) {
           consoleLog("update basic info success", res);
           navigate("/authentication/signup/suittestfatca");
@@ -273,9 +267,7 @@ export default function BasicInfo() {
           consoleLog("update basic info unsuccess x", res);
         }
       } else {
-        const res = await axios.post("/api/v1/individual/postcreate", body, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const res = await axios.post("/api/v1/individual/postcreate", body, {});
         if (res.status === 200) {
           consoleLog("submit basic info success", res);
           navigate("/authentication/signup/suittestfatca");

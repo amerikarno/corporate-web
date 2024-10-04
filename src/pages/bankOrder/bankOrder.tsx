@@ -6,7 +6,6 @@ import { bankOrderSchema } from "./constant/schemas";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
-import { getCookies } from "@/lib/cookies";
 import axios from "@/api/axios";
 import DataTable, { TableColumn } from "react-data-table-component";
 // import { useDispatch, useSelector } from "react-redux";
@@ -81,10 +80,6 @@ export default function BankOrder() {
       // const res = await axios.post(
       //   "/api/v1/corporate/query/all",
       //   {},
-      //   {
-      //     headers: {
-      //       Authorization: `Bearer ${token}`,
-      //     },
       //   }
       // );
       // if (res.status === 200) {
@@ -104,9 +99,6 @@ export default function BankOrder() {
     try {
       // const token = getCookies();
       // const res = await axios.get("/api/v1/transaction/bank/get/individual", {
-      //   headers: {
-      //     Authorization: `Bearer ${token}`,
-      //   },
       // });
       // if (res.status === 200) {
       //   consoleLog(res.data);
@@ -216,13 +208,8 @@ export default function BankOrder() {
     consoleLog(choosedEditData);
     consoleLog(body);
     try {
-      const token = getCookies();
       if (body.id && body.id !== "") {
-        const res = await axios.post("/api/v1/transaction/bank/edit", body, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const res = await axios.post("/api/v1/transaction/bank/edit", body, {});
         if (res.status === 200) {
           reset();
           setBankRemove(false);
@@ -234,11 +221,11 @@ export default function BankOrder() {
           consoleLog("edit failed");
         }
       } else {
-        const res = await axios.post("/api/v1/transaction/bank/create", body, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const res = await axios.post(
+          "/api/v1/transaction/bank/create",
+          body,
+          {}
+        );
         if (res.status === 200) {
           reset();
           setBankRemove(false);

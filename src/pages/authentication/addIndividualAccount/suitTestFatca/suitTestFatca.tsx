@@ -18,16 +18,9 @@ export default function SuitTestFatca() {
   const fetchIndividualData = async (AccountID: string) => {
     try {
       console.log(AccountID);
-      const res = await axios.post(
-        "/api/v1/individual/list",
-        { accountId: AccountID },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const res = await axios.post("/api/v1/individual/list", {
+        accountId: AccountID,
+      });
       dispatch(initIndividualData(res.data[0]));
       console.log(res);
     } catch (error) {
@@ -126,13 +119,7 @@ export default function SuitTestFatca() {
         try {
           const res = await axios.post(
             "/api/v1/suitetest/result/individual/edit",
-            body,
-            {
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`,
-              },
-            }
+            body
           );
           console.log(res);
           if (res.status === 200) {
@@ -149,13 +136,7 @@ export default function SuitTestFatca() {
         try {
           const res = await axios.post(
             "/api/v1/suitetest/result/individual/save",
-            body,
-            {
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`,
-              },
-            }
+            body
           );
           console.log(res);
           if (res.status === 200) {

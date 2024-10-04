@@ -34,16 +34,9 @@ export default function AddIndividualAccount() {
   const fetchIndividualData = async (AccountID: string) => {
     try {
       consoleLog({ accountId: AccountID });
-      const res = await axios.post(
-        "/api/v1/individual/list",
-        { accountId: AccountID },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const res = await axios.post("/api/v1/individual/list", {
+        accountId: AccountID,
+      });
       dispatch(initIndividualData(res.data[0]));
       consoleLog(res);
     } catch (error) {
@@ -156,15 +149,10 @@ export default function AddIndividualAccount() {
       })
     );
     try {
-      const token = getCookies();
       consoleLog("body to send ", body);
       if (individualData?.id) {
         consoleLog("api : /api/v1/individual/update/pre");
-        const res = await axios.post("/api/v1/individual/update/pre", body, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const res = await axios.post("/api/v1/individual/update/pre", body, {});
         consoleLog(res);
         if (res.status === 200) {
           const age = calculateAge(body.birthDate);
@@ -178,11 +166,7 @@ export default function AddIndividualAccount() {
         }
       } else {
         consoleLog("api : /api/v1/individual/precreate ", body);
-        const res = await axios.post("/api/v1/individual/precreate", body, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const res = await axios.post("/api/v1/individual/precreate", body, {});
         consoleLog(res);
         if (res.status === 200) {
           const age = calculateAge(body.birthDate);

@@ -35,16 +35,9 @@ export default function IdentityVerification() {
   const fetchIndividualData = async (AccountID: string) => {
     try {
       console.log(AccountID);
-      const res = await axios.post(
-        "/api/v1/individual/list",
-        { accountId: AccountID },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const res = await axios.post("/api/v1/individual/list", {
+        accountId: AccountID,
+      });
       dispatch(initIndividualData(res.data[0]));
       console.log(res);
     } catch (error) {
@@ -88,12 +81,7 @@ export default function IdentityVerification() {
       if (individualData?.thaid || individualData?.ndid) {
         const res = await axios.post(
           "/api/v1/individual/update/ndidthaid",
-          body,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
+          body
         );
         if (res.status === 200) {
           console.log("update ndid success :", res);
@@ -107,11 +95,7 @@ export default function IdentityVerification() {
           // setAlertMessage("please try again")
         }
       } else {
-        const res = await axios.post("/api/v1/individual/ndidthaid", body, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const res = await axios.post("/api/v1/individual/ndidthaid", body, {});
         if (res.status === 200) {
           console.log("save ndid success :", res);
           setAlertVisible(true);
@@ -142,12 +126,7 @@ export default function IdentityVerification() {
       if (individualData?.thaid || individualData?.ndid) {
         const res = await axios.post(
           "/api/v1/individual/update/ndidthaid",
-          body,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
+          body
         );
         if (res.status === 200) {
           console.log("update thaid success :", res);
@@ -161,11 +140,7 @@ export default function IdentityVerification() {
           // setAlertMessage("please try again")
         }
       } else {
-        const res = await axios.post("/api/v1/individual/ndidthaid", body, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const res = await axios.post("/api/v1/individual/ndidthaid", body, {});
         if (res.status === 200) {
           console.log("save thaid success :", res);
           setAlertVisible(true);

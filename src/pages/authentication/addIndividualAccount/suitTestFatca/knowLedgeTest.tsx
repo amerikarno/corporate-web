@@ -177,16 +177,9 @@ export default function KnowLedgeTest({ onTestSuccess }: KnowLedgeTestProps) {
   const fetchIndividualData = async (AccountID: string) => {
     try {
       consoleLog(AccountID);
-      const res = await axios.post(
-        "/api/v1/individual/list",
-        { accountId: AccountID },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const res = await axios.post("/api/v1/individual/list", {
+        accountId: AccountID,
+      });
       dispatch(initIndividualData(res.data[0]));
       consoleLog(res);
     } catch (error) {
