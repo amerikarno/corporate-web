@@ -11,16 +11,10 @@ import {
 } from "./__mock__/mockCustomCardData";
 import getImages from "@/common/imagesData";
 import { getCookies, removeCookies } from "@/lib/cookies";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/Button";
 import example from "@assets/drawIcon/example.png";
-import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuItem,
-} from "@/components/ui/dropdown-menu";
 import { IcoListItem } from "@/components/icoListItem";
+import { MenuForDropdown } from "@/components/menuForDropdown";
 
 interface datatype {
   ThemeChanger: any;
@@ -88,64 +82,7 @@ const Landing = ({ ThemeChanger }: datatype) => {
 
               {token ? (
                 <div className="w-1/2 s3:w-1/3 flex justify-end">
-                  <DropdownMenu>
-                    <DropdownMenuTrigger className="flex space-x-2 outline-none">
-                      <Avatar className="w-16 h-16">
-                        <AvatarImage src={example} alt="" />
-                        <AvatarFallback>
-                          <div className="rounded-full w-full h-full bg-white"></div>
-                        </AvatarFallback>
-                      </Avatar>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent className="mr-12 bg-white space-y-2">
-                      <DropdownMenuItem
-                        className="cursor-pointer hover:bg-gray-300 hover:font-bold w-[200px]"
-                        onClick={() => {
-                          navigate("/");
-                        }}
-                      >
-                        Profile
-                      </DropdownMenuItem>
-                      <DropdownMenuItem
-                        className="cursor-pointer hover:bg-gray-300 hover:font-bold w-[200px]"
-                        onClick={() => {
-                          navigate("/dashboard/personal");
-                        }}
-                      >
-                        Personal
-                      </DropdownMenuItem>
-                      <DropdownMenuItem
-                        className="cursor-pointer hover:bg-gray-300 hover:font-bold w-[200px]"
-                        onClick={() => {
-                          navigate("/order-trade");
-                        }}
-                      >
-                        Invest
-                      </DropdownMenuItem>
-                      <DropdownMenuItem
-                        className="cursor-pointer hover:bg-gray-300 hover:font-bold w-[200px]"
-                        onClick={() => {
-                          navigate("/");
-                        }}
-                      >
-                        Portfolio
-                      </DropdownMenuItem>
-                      <DropdownMenuItem
-                        className="cursor-pointer hover:bg-gray-300 hover:font-bold w-[200px]"
-                        onClick={() => {
-                          navigate("/deposite-withdraw");
-                        }}
-                      >
-                        Deposite / Withdraw
-                      </DropdownMenuItem>
-                      <DropdownMenuItem
-                        className="cursor-pointer hover:bg-gray-300 hover:font-bold w-[200px]"
-                        onClick={() => handleLogout()}
-                      >
-                        Log out
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
+                  <MenuForDropdown avatar={example} logout={handleLogout} />
                 </div>
               ) : (
                 <div className="w-1/2 s3:w-1/3 flex justify-end items-center space-x-4">

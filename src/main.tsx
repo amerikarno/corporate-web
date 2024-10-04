@@ -14,7 +14,6 @@ import Liveness from "./pages/authentication/addIndividualAccount/livenessOcr/li
 import { CardWebcamInstructions } from "./pages/authentication/addIndividualAccount/livenessOcr/cardScan/webCamInstructions.tsx";
 import IDCardCapture from "./pages/authentication/addIndividualAccount/livenessOcr/cardScan/idCardCapture.tsx";
 import IdentityVerification from "./pages/authentication/addIndividualAccount/identityVerification/identityVerification.tsx";
-import Personal from "./pages/dashboard/personal/personal.tsx";
 import ScrollToTop from "./components/ScrollToTop/ScrolltoTop.tsx";
 import Login from "./pages/authentication/login/login.tsx";
 import { AssetDetails } from "./pages/assetDetails/assetDetails.tsx";
@@ -25,6 +24,7 @@ import QrVerification from "./pages/authentication/login/googleAuthen/qrVerifica
 import { OtpEmailConfirm } from "./pages/authentication/addIndividualAccount/otpEmailConfirm/otpEmailConfirm.tsx";
 import OrderTrade from "./pages/orderTrade/orderTrade.tsx";
 import BankOrder from "./pages/bankOrder/bankOrder.tsx";
+import Portfolio from "./pages/portfolio/portfolio.tsx";
 
 let helmetContext = {};
 
@@ -104,10 +104,10 @@ createRoot(document.getElementById("root")!).render(
               }authentication/signup/identityverification`}
               element={<IdentityVerification />}
             />
-            <Route
+            {/* <Route
               path={`${import.meta.env.BASE_URL}dashboard/personal`}
               element={<Personal />}
-            />
+            /> */}
             <Route
               path={`${import.meta.env.BASE_URL}asset/:id`}
               element={<AssetDetails />}
@@ -131,6 +131,11 @@ createRoot(document.getElementById("root")!).render(
             <Route
               path={`${import.meta.env.BASE_URL}/deposite-withdraw`}
               element={<BankOrder />}
+            />
+            <Route
+              path={`${import.meta.env.BASE_URL}/portfolio`}
+              element={<Portfolio />}
+              // element={<Personal />}
             />
           </Routes>
         </Provider>
