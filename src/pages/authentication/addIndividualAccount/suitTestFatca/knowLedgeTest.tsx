@@ -1,8 +1,12 @@
 import { consoleLog } from "@/lib/utils";
 import { Button } from "../../../../components/ui/Button";
 import { Card, CardContent } from "../../../../components/ui/Card";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TiTick } from "react-icons/ti";
+import { useDispatch, useSelector } from "react-redux";
+import { getCookies } from "@/lib/cookies";
+import axios from "@/api/axios";
+import { initIndividualData } from "@/redux/Action";
 
 const questionsData = {
   id: "1",
@@ -167,6 +171,44 @@ export default function KnowLedgeTest({ onTestSuccess }: KnowLedgeTestProps) {
   const totalQuestions = questionsData.items.length;
   const answeredQuestionsCount = Object.keys(answers).length;
   const [allTestSuccess, setAllTestSuccess] = useState(false);
+  const dispatch = useDispatch();
+  const token = getCookies();
+
+  const fetchIndividualData = async (AccountID: string) => {
+    try {
+      consoleLog(AccountID);
+      const res = await axios.post(
+        "/api/v1/individual/list",
+        { AccountID },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      dispatch(initIndividualData(res.data[0]));
+      consoleLog(res);
+    } catch (error) {
+      consoleLog(error);
+    }
+  };
+  const individualData = useSelector((state: any) => state.individualDatas);
+
+  useEffect(() => {
+    const cidValue = localStorage.getItem("cid");
+    fetchIndividualData(cidValue || "");
+  }, [token, dispatch]);
+
+  useEffect(() => {
+    if (individualData?.SuiteTestResult.isKnowLedgeDone) {
+      const initialAnswers: { [key: number]: number } = {};
+      questionsData.items.forEach((question) => {
+        initialAnswers[question.id] = question.ans;
+      });
+      setAnswers(initialAnswers);
+    }
+  }, [individualData]);
 
   const handleNext = () => {
     setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
@@ -219,10 +261,20 @@ export default function KnowLedgeTest({ onTestSuccess }: KnowLedgeTestProps) {
   };
 
   const handleAnswerChange = (questionId: number, answer: number) => {
-    setAnswers((prevAnswers) => ({
-      ...prevAnswers,
-      [questionId]: answer,
-    }));
+    setAnswers((prevAnswers) => {
+      const updatedAnswers = { ...prevAnswers, [questionId]: answer };
+
+      const question = questionsData.items.find((q) => q.id === questionId);
+      if (question && updatedAnswers[questionId] === question.ans) {
+        setIncorrectAnswers((prevIncorrectAnswers) => {
+          const { [questionId]: _, ...remainingIncorrectAnswers } =
+            prevIncorrectAnswers;
+          return remainingIncorrectAnswers;
+        });
+      }
+
+      return updatedAnswers;
+    });
     setHighlightedQuestion(null);
   };
 

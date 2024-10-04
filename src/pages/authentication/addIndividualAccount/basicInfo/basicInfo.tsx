@@ -19,13 +19,21 @@ import { basicInfoSchema, TBasicInfo } from "./constant/schemas";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { consoleLog } from "@/lib/utils";
+import { getCookies } from "@/lib/cookies";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "@/api/axios";
+import { initIndividualData, setTestCorporateData } from "@/redux/Action";
+import { TBasicinfoAddress, TBasicInfoBank } from "../types";
+import { IndividualData } from "@/redux/types";
 
 export default function BasicInfo() {
-  // if (!isAllowedPage(2002)) {
-  //   return <UnAuthorize />;
-  // }
+  const responsiveClass =
+    "flex flex-col space-y-2 lg:space-y-0 lg:flex-row lg:space-x-4";
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const token = getCookies();
+
   const [radioAddressValue, setRadioAddressValue] = useState("radio-2");
   const [radioWorkValue, setRadioWorkValue] = useState("radio-5");
   const [addBankValue, setAddBankValue] = useState("radio-6");
@@ -54,10 +62,129 @@ export default function BasicInfo() {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
   } = useForm<TBasicInfo>({
     resolver: zodResolver(basicInfoSchema),
   });
+
+  const fetchIndividualData = async (AccountID: string) => {
+    try {
+      consoleLog(AccountID);
+      const res = await axios.post(
+        "/api/v1/individual/list",
+        { AccountID },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      dispatch(initIndividualData(res.data[0]));
+      consoleLog(res);
+    } catch (error) {
+      consoleLog(error);
+    }
+  };
+
+  const individualData: IndividualData = useSelector(
+    (state: any) => state.individualDatas
+  );
+
+  useEffect(() => {
+    const cidValue = localStorage.getItem("cid");
+    if (cidValue) {
+      fetchIndividualData(cidValue || "");
+    } else {
+      consoleLog("cid not found");
+    }
+  }, [token, dispatch]);
+
+  useEffect(() => {
+    if (individualData) {
+      consoleLog(individualData);
+
+      const registeredAddressFind: TBasicinfoAddress | null =
+        individualData?.address?.find((addr) => addr.types === 1) || null;
+      const currentAddressFind: TBasicinfoAddress | null =
+        individualData?.address?.find((addr) => addr.types === 2) || null;
+      const officeAddressFind: TBasicinfoAddress | null =
+        individualData?.address?.find((addr) => addr.types === 3) || null;
+
+      const firstBank: TBasicInfoBank | null =
+        individualData?.bank?.find((addr) => addr.types === 1) || null;
+      const secondBank: TBasicInfoBank | null =
+        individualData?.bank?.find((addr) => addr.types === 2) || null;
+
+      let fillData: TBasicInfo = {
+        registeredAddress: {
+          homeNumber: registeredAddressFind?.homeNumber || "",
+          villageNumber: registeredAddressFind?.villageNumber || "",
+          villageName: registeredAddressFind?.villageName || "",
+          subStreetName: registeredAddressFind?.subStreetName || "",
+          streetName: registeredAddressFind?.streetName || "",
+          subDistrictName: registeredAddressFind?.subDistrictName || "",
+          districtName: registeredAddressFind?.districtName || "",
+          provinceName: registeredAddressFind?.provinceName || "",
+          zipCode: registeredAddressFind?.zipCode || "",
+          countryName: registeredAddressFind?.countryName || "",
+        },
+        currentAddress: {
+          homeNumber: currentAddressFind?.homeNumber || "",
+          villageNumber: currentAddressFind?.villageNumber || "",
+          villageName: currentAddressFind?.villageName || "",
+          subStreetName: currentAddressFind?.subStreetName || "",
+          streetName: currentAddressFind?.streetName || "",
+          subDistrictName: currentAddressFind?.subDistrictName || "",
+          districtName: currentAddressFind?.districtName || "",
+          provinceName: currentAddressFind?.provinceName || "",
+          zipCode: currentAddressFind?.zipCode || "",
+          countryName: currentAddressFind?.countryName || "",
+        },
+        officeAddress: {
+          homeNumber: officeAddressFind?.homeNumber || "",
+          villageNumber: officeAddressFind?.villageNumber || "",
+          villageName: officeAddressFind?.villageName || "",
+          subStreetName: officeAddressFind?.subStreetName || "",
+          streetName: officeAddressFind?.streetName || "",
+          subDistrictName: officeAddressFind?.subDistrictName || "",
+          districtName: officeAddressFind?.districtName || "",
+          provinceName: officeAddressFind?.provinceName || "",
+          zipCode: officeAddressFind?.zipCode || "",
+          countryName: officeAddressFind?.countryName || "",
+        },
+        occupation: {
+          education: individualData?.education || "",
+          sourceOfIncome: individualData?.sourceOfIncome || "",
+          currentOccupation: individualData?.currentOccupation || "",
+          officeName: individualData?.officeName || "",
+          typeOfBusiness: individualData?.typeOfBusiness || "",
+          positionName: individualData?.positionName || "",
+          salaryRange: individualData?.salaryRange || "",
+        },
+        firstBankAccount: {
+          bankName: firstBank?.bankName || "",
+          bankBranchName: firstBank?.bankBranchName || "",
+          bankAccountNumber: firstBank?.bankAccountNumber || "",
+        },
+        secondBankAccountBody: {
+          bankName: secondBank?.bankName || "",
+          bankBranchName: secondBank?.bankBranchName || "",
+          bankAccountNumber: secondBank?.bankAccountNumber || "",
+        },
+        investment: {
+          shortTermInvestment: individualData?.shortTermInvestment || false,
+          longTermInvestment: individualData?.longTermInvestment || false,
+          taxesInvestment: individualData?.taxesInvestment || false,
+          retireInvestment: individualData?.retireInvestment || false,
+        },
+      };
+      consoleLog(firstBank);
+      consoleLog(fillData);
+      reset(fillData);
+    }
+  }, [individualData, reset]);
 
   const currentOccupation = watch("occupation.currentOccupation");
   const [showBusinessType, setShowBusinessType] = useState(true);
@@ -79,11 +206,11 @@ export default function BasicInfo() {
     }
   }, [currentOccupation]);
 
-  useEffect(() => {
-    setAddBankValue("radio-7");
-  }, []);
+  // useEffect(()=>{
+  //   setAddBankValue("radio-6")
+  // },[])
 
-  const onSubmit = (data: TBasicInfo) => {
+  const onSubmit = async (data: TBasicInfo) => {
     let prebody = {
       ...data,
       registeredAddress: {
@@ -107,12 +234,12 @@ export default function BasicInfo() {
       },
       firstBankAccount: {
         ...data.firstBankAccount,
-        type: 1,
+        types: 1,
         is_default: true,
       },
       secondBankAccountBody: {
         ...data.secondBankAccountBody,
-        type: 2,
+        types: 2,
         is_default: false,
       },
     };
@@ -129,7 +256,37 @@ export default function BasicInfo() {
       pageID: 300,
     };
     consoleLog(body);
-    navigate(`${import.meta.env.BASE_URL}authentication/signup/suittestfatca`);
+    dispatch(setTestCorporateData(body));
+    try {
+      const token = getCookies();
+      const registeredAddressFind: TBasicinfoAddress | null =
+        individualData?.address?.find((addr) => addr.types === 1) || null;
+      if (registeredAddressFind?.homeNumber) {
+        const res = await axios.post("/api/v1/individual/update/post", body, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        if (res.status === 200) {
+          consoleLog("update basic info success", res);
+          navigate("/authentication/signup/suittestfatca");
+          window.scrollTo(0, 0);
+        } else {
+          consoleLog("update basic info unsuccess x", res);
+        }
+      } else {
+        const res = await axios.post("/api/v1/individual/postcreate", body, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        if (res.status === 200) {
+          consoleLog("submit basic info success", res);
+          navigate("/authentication/signup/suittestfatca");
+          window.scrollTo(0, 0);
+        } else {
+          consoleLog("submit basic info unsuccess x", res);
+        }
+      }
+    } catch (error) {
+      consoleLog(error);
+    }
   };
 
   const handleAddressRadioChange = (value: string) => {
@@ -145,9 +302,6 @@ export default function BasicInfo() {
     consoleLog(value);
     setAddBankValue(value);
   };
-
-  const responsiveClass =
-    "flex flex-col space-y-2 lg:space-y-0 lg:flex-row lg:space-x-4";
 
   return (
     <div className="md:p-4 flex justify-center">

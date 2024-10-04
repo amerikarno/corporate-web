@@ -1,74 +1,177 @@
-import { Button } from "../../../../components/ui/Button";
-import { Card, CardContent } from "../../../../components/ui/Card";
-import { useState } from "react";
+import { Button } from "@/components/ui/Button";
+import { Card, CardContent } from "@/components/ui/Card";
+import { useEffect, useState } from "react";
 import SubSuitTest from "./subSuitTest";
 import KnowLedgeTest from "./knowLedgeTest";
 import { TiTick } from "react-icons/ti";
 import "./suitTestFatca.css";
 import { consoleLog } from "@/lib/utils";
 import { useNavigate } from "react-router-dom";
+import axios from "@/api/axios";
+import { initIndividualData, setTestCorporateData } from "@/redux/Action";
+import { useDispatch, useSelector } from "react-redux";
+import { getCookies } from "@/lib/cookies";
 
 export default function SuitTestFatca() {
-  // if (!isAllowedPage(2002)) {
-  //   return <UnAuthorize />;
-  // }
+  const token = getCookies();
+  const dispatch = useDispatch();
+  const fetchIndividualData = async (AccountID: string) => {
+    try {
+      console.log(AccountID);
+      const res = await axios.post(
+        "/api/v1/individual/list",
+        { AccountID },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      dispatch(initIndividualData(res.data[0]));
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const individualData = useSelector((state: any) => state.individualDatas);
+  useEffect(() => {
+    const cidValue = localStorage.getItem("cid");
+    if (cidValue) {
+      fetchIndividualData(cidValue || "");
+    } else {
+      console.log("cid not found");
+    }
+  }, [token, dispatch]);
 
   const [fatcaradio, setFatcaRadio] = useState("fatcaradio-2");
   const [knowLedgeTest, setKnowLedgeTest] = useState("knowLedgeTest-2");
-  const [fatcaInfo, setFatcaInfo] = useState<string | boolean[]>("");
+  const [fatcaInfo, setFatcaInfo] = useState<string | number[]>("");
   const [checkboxStates, setCheckboxStates] = useState<boolean[]>(
     new Array(8).fill(false)
   );
 
+  useEffect(() => {
+    if (individualData?.SuiteTestResult.isFatca) {
+      setFatcaInfo(individualData.SuiteTestResult.fatcaInfo);
+      if (Array.isArray(fatcaInfo)) {
+        const initialCheckboxStates = fatcaInfo.map((state) => state === 1);
+        setCheckboxStates(initialCheckboxStates);
+      }
+      setFatcaRadio("fatcaradio-1");
+    } else {
+    }
+
+    if (individualData?.SuiteTestResult.isKnowLedgeDone) {
+      setKnowLedgeTest("knowLedgeTest-1");
+      setKnowLedgeTestSuccess(true);
+    }
+  }, [individualData]);
+
   const handleCheckboxChange = (index: number) => {
     const updatedCheckboxStates = [...checkboxStates];
     updatedCheckboxStates[index] = !updatedCheckboxStates[index];
+
+    //change from true to 1 and false to 0
+    const numericCheckboxStates = updatedCheckboxStates.map((state) =>
+      state ? 1 : 0
+    );
+    console.log(numericCheckboxStates);
     setCheckboxStates(updatedCheckboxStates);
-    setFatcaInfo(updatedCheckboxStates);
+    setFatcaInfo(numericCheckboxStates);
   };
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(false);
   const [knowLedgeTestSuccess, setKnowLedgeTestSuccess] = useState(false);
   const [suitTestSuccess, setSuitTestSuccess] = useState(false);
+  const [suitTestResult, setSuitTestResult] = useState();
   const navigate = useNavigate();
-  consoleLog(knowLedgeTestSuccess, suitTestSuccess);
 
   const handleKnowLedgeTestSuccess = (success: boolean) => {
     setKnowLedgeTestSuccess(success);
-    consoleLog("Test Success:", success);
+    console.log("Test Success:", success);
   };
   const handleSuitTestSuccess = (success: boolean) => {
     setSuitTestSuccess(success);
-    consoleLog("Suit Test submit button pressed!");
+    console.log("Suit Test submit button pressed!");
+  };
+
+  const handleSuitTestResult = (exam_result: any) => {
+    console.log(exam_result);
+    setSuitTestResult(exam_result);
   };
   //fatcaradio === "fatcaradio-2" แปลว่าไม่ใช่อเมริกา
-
-  const handleSubmitSuitTestFatca = () => {
-    // consoleLog(isButtonDisabled);
-    // consoleLog(suitTestSuccess);
-    // consoleLog(fatcaradio === "fatcaradio-2");
-    // consoleLog(fatcaInfo !== "");
-    // if (
-    //   suitTestSuccess &&
-    //   (fatcaradio === "fatcaradio-2" || fatcaInfo !== "")
-    // ) {
-    //   let body = {
-    //     id: localStorage.getItem("cid"),
-    //     suiteTestResult: [1, 1, 1, 1, 1, 1, 1, 1, 1].join("|"),
-    //     isFatca: fatcaradio === "fatcaradio-1",
-    //     fatcaInfo: fatcaInfo,
-    //     isKnowLedgeDone: knowLedgeTestSuccess,
-    //     knowLedgeTestResult: knowLedgeTestSuccess ? 15 : 0,
-    //     pageID: 400,
-    //   };
-    //   consoleLog(body);
-    //   navigate(
-    //     `${import.meta.env.BASE_URL}authentication/signup/identityverification`
-    //   );
-    // } else {
-    //   alert("Please Do the Suit Test First.");
-    //   window.scrollTo({ top: 0, behavior: "smooth" });
-    // }
-    navigate("/authentication/signup/otpemailconfirm");
+  const handleSubmitSuitTestFatca = async () => {
+    console.log(isButtonDisabled);
+    console.log(suitTestSuccess);
+    console.log(fatcaradio === "fatcaradio-2");
+    console.log(fatcaInfo !== "");
+    if (
+      suitTestSuccess &&
+      (fatcaradio === "fatcaradio-2" ||
+        JSON.stringify(fatcaInfo) !== JSON.stringify([0, 0, 0, 0, 0, 0, 0, 0]))
+    ) {
+      let body = {
+        id: localStorage.getItem("cid"),
+        suiteTestResult: suitTestResult,
+        isFatca: fatcaradio === "fatcaradio-1",
+        fatcaInfo: fatcaInfo === "" ? [] : fatcaInfo,
+        isKnowLedgeDone: knowLedgeTestSuccess,
+        knowLedgeTestResult: knowLedgeTestSuccess ? 15 : 0,
+        pageID: 400,
+      };
+      console.log(body);
+      dispatch(setTestCorporateData(body));
+      if (individualData?.SuiteTestResult.suiteTestResult.totalScore) {
+        console.log("suite test updating...");
+        try {
+          const res = await axios.post(
+            "/api/v1/suitetest/result/individual/edit",
+            body,
+            {
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          console.log(res);
+          if (res.status === 200) {
+            console.log("suit test edit success", res.data);
+            navigate("/authentication/signup/otpemailconfirm");
+          } else {
+            console.log("suit test edit not success");
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      } else {
+        console.log("suite test saving...");
+        try {
+          const res = await axios.post(
+            "/api/v1/suitetest/result/individual/save",
+            body,
+            {
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          console.log(res);
+          if (res.status === 200) {
+            console.log("suit test save success", res.data);
+            navigate("/authentication/signup/otpemailconfirm");
+          } else {
+            console.log("suit test save not success");
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    } else {
+      alert(`Please complete the suite test,
+if you are an American citizen, please complete the FATCA form first.`);
+    }
   };
 
   return (
@@ -77,7 +180,10 @@ export default function SuitTestFatca() {
         <div className="px-2 text-xl xl:text-2xl font-bold text-slate-800 ">
           แบบประเมินความเหมาะสมในการลงทุน
         </div>
-        <SubSuitTest onSuitTestDone={handleSuitTestSuccess} />
+        <SubSuitTest
+          onSuitTestDone={handleSuitTestSuccess}
+          suitTestResult={handleSuitTestResult}
+        />
         <Card className="bg-white">
           <CardContent>
             <div className="space-y-4 xl:px-4 flex flex-col">

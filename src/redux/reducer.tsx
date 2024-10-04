@@ -1,4 +1,5 @@
-let initialState = {
+import { InitialState } from "./types";
+let initialState: InitialState = {
   lang: "en",
   dir: "ltr",
   dataNavLayout: "vertical",
@@ -26,7 +27,7 @@ let initialState = {
     class: "",
   },
 
-  addIndividual: {
+  individualDatas: {
     CreatedAt: "",
     DeletedAt: "",
     id: "",
@@ -49,16 +50,24 @@ let initialState = {
     typeOfBusiness: "",
     positionName: "",
     salaryRange: "",
-    shortTermInvestment: "",
-    taxesInvestment: "",
-    longTermInvestment: "",
-    retireInvestment: "",
+    shortTermInvestment: false,
+    taxesInvestment: false,
+    longTermInvestment: false,
+    retireInvestment: false,
     pageId: "",
     update: "",
     SuiteTestResult: {
       createBy: "",
       id: "",
-      suiteTestResult: "",
+      suiteTestResult: {
+        cid: "",
+        investorTypeRisk: "",
+        level: 0,
+        totalScore: 0,
+        suitTestResult: {
+          answer: {},
+        },
+      },
       isFatca: "",
       fatcaInfo: "",
       isKnowLedgeDone: "",
@@ -144,10 +153,10 @@ export default function reducer(state = initialState, action: any) {
     case "initIndividualData":
       return {
         ...state,
-        addIndividual: { ...state.addIndividual, ...payload },
+        individualDatas: { ...state.individualDatas, ...payload },
       };
     case "clearAddIndividual":
-      return { ...state, addIndividual: initialState.addIndividual };
+      return { ...state, addIndividual: initialState.individualDatas };
     /////////////////////////////////////////////////////////
 
     ////////////////////livenessOcr//////////////////////

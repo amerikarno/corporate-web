@@ -50,9 +50,7 @@ export default function AddIndividualAccount() {
     }
   };
 
-  const individualData = useSelector(
-    (state: any) => state.individualData.individualDatas
-  );
+  const individualData = useSelector((state: any) => state.individualDatas);
 
   useEffect(() => {
     const cidValue = localStorage.getItem("cid");

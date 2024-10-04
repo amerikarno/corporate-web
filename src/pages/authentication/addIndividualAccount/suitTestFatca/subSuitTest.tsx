@@ -1,7 +1,10 @@
+import { useDispatch, useSelector } from "react-redux";
 import { Button } from "../../../../components/ui/Button";
 import { Card } from "../../../../components/ui/Card";
-import { useState } from "react";
-import { consoleLog } from "@/lib/utils";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { initIndividualData } from "@/redux/Action";
+import { getCookies } from "@/lib/cookies";
 
 interface Answer {
   questionIndex: number;
@@ -11,6 +14,7 @@ interface Answer {
 }
 
 type SubSuitTestProps = {
+  suitTestResult: (result: any) => void;
   onSuitTestDone: (done: boolean) => void;
 };
 
@@ -20,7 +24,10 @@ type TQuestion = {
   choices: string[];
 };
 
-export default function SubSuitTest({ onSuitTestDone }: SubSuitTestProps) {
+export default function SubSuitTest({
+  onSuitTestDone,
+  suitTestResult,
+}: SubSuitTestProps) {
   const questions: TQuestion[] = [
     {
       question: "ท่านมีภาระค่าใช้จ่ายประจำดือนเป็นสัดส่วนเท่าใดของรายได้",
@@ -116,14 +123,132 @@ export default function SubSuitTest({ onSuitTestDone }: SubSuitTestProps) {
       type: "1",
     },
   ];
+  const token = getCookies();
+  const dispatch = useDispatch();
+  const fetchIndividualData = async (AccountID: string) => {
+    try {
+      console.log(AccountID);
+      const res = await axios.post(
+        "/api/v1/individual/list",
+        { AccountID },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      dispatch(initIndividualData(res.data[0]));
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const individualData = useSelector((state: any) => state.individualDatas);
 
-  const [answers, setAnswers] = useState<Answer[]>(
-    questions.map((_, index) => ({
-      questionIndex: index,
-      answer: index === 2 ? [0, 0, 0, 0] : "",
-      score: 0,
-    }))
+  const fetchSuitTestResult =
+    individualData?.SuiteTestResult.suiteTestResult.suitTestResult.answer;
+  const fetchedData = Object.keys(fetchSuitTestResult || []).map(
+    (key) => fetchSuitTestResult?.[key].ans
   );
+  console.log(fetchedData);
+
+  const initialAnswers = questions.map((_, index) => {
+    if (fetchedData) {
+      const answerFromData = fetchedData[index];
+      let answerValue: string | number[] = "";
+      let score = 0;
+
+      if (Array.isArray(answerFromData) && index === 2) {
+        answerValue = answerFromData;
+        const selectedChoices = answerFromData
+          .map((val, idx) => (val === 1 ? idx + 1 : 0))
+          .filter((val) => val !== 0);
+        score = Math.max(...selectedChoices);
+      } else if (Array.isArray(answerFromData)) {
+        const selectedChoiceIndex = answerFromData.findIndex(
+          (choice) => choice === 1
+        );
+        if (selectedChoiceIndex !== -1) {
+          score = selectedChoiceIndex + 1;
+          answerValue = questions[index].choices[selectedChoiceIndex];
+        }
+      }
+
+      return {
+        questionIndex: index,
+        answer: answerValue,
+        score,
+      };
+    } else {
+      return {
+        questionIndex: index,
+        answer: index === 2 ? [0, 0, 0, 0] : "",
+        score: 0,
+      };
+    }
+  });
+  const [answers, setAnswers] = useState<Answer[]>(initialAnswers);
+
+  useEffect(() => {
+    const cidValue = localStorage.getItem("cid");
+    if (cidValue) {
+      fetchIndividualData(cidValue || "");
+    } else {
+      console.log("cid not found");
+    }
+  }, [token, dispatch]);
+
+  useEffect(() => {
+    if (individualData) {
+      const fetchSuitTestResult =
+        individualData?.SuiteTestResult.suiteTestResult.suitTestResult.answer;
+      const fetchedData = Object.keys(fetchSuitTestResult || []).map(
+        (key) => fetchSuitTestResult?.[key].ans
+      );
+      console.log(fetchedData);
+
+      const initialAnswers = questions.map((_, index) => {
+        if (fetchedData) {
+          const answerFromData = fetchedData[index];
+          let answerValue: string | number[] = "";
+          let score = 0;
+
+          if (Array.isArray(answerFromData) && index === 2) {
+            answerValue = answerFromData;
+            const selectedChoices = answerFromData
+              .map((val, idx) => (val === 1 ? idx + 1 : 0))
+              .filter((val) => val !== 0);
+            score = Math.max(...selectedChoices);
+          } else if (Array.isArray(answerFromData)) {
+            const selectedChoiceIndex = answerFromData.findIndex(
+              (choice) => choice === 1
+            );
+            if (selectedChoiceIndex !== -1) {
+              score = selectedChoiceIndex + 1;
+              answerValue = questions[index].choices[selectedChoiceIndex];
+            }
+          }
+
+          return {
+            questionIndex: index,
+            answer: answerValue,
+            score,
+          };
+        } else {
+          return {
+            questionIndex: index,
+            answer: index === 2 ? [0, 0, 0, 0] : "",
+            score: 0,
+          };
+        }
+      });
+
+      setAnswers(initialAnswers);
+      handleSubmit();
+    }
+  }, [individualData]);
+
   const [totalScore, setTotalScore] = useState(0);
   const [investorType, setInvestorType] = useState("");
   const [suitTestDone, setSuitTestDone] = useState(false);
@@ -144,12 +269,12 @@ export default function SubSuitTest({ onSuitTestDone }: SubSuitTestProps) {
     const currentAnswers = answers[questionIndex].answer as number[];
     const newAnswers = [...currentAnswers];
     newAnswers[choiceIndex] = newAnswers[choiceIndex] === 1 ? 0 : 1;
-    consoleLog(newAnswers);
+    console.log(newAnswers);
 
     const checkboxAnswers = newAnswers.map((val, index) =>
       val === 1 ? index + 1 : 0
     );
-    consoleLog(checkboxAnswers);
+    console.log(checkboxAnswers);
     const highestIndex = newAnswers.reduce(
       (maxIndex, val, index) => (val === 1 ? index : maxIndex),
       -1
@@ -195,7 +320,16 @@ export default function SubSuitTest({ onSuitTestDone }: SubSuitTestProps) {
     }
   };
 
+  const mapTosuitTestResult = (score: number) => {
+    const index = score - 1;
+    let resList = [0, 0, 0, 0];
+    resList[index] = 1;
+
+    return resList;
+  };
+
   const handleSubmit = () => {
+    console.log(answers);
     let scoreCalculator = answers[2].score;
     const allAnswered = answers.every((ans, index) => {
       if (index === 2) {
@@ -226,29 +360,30 @@ export default function SubSuitTest({ onSuitTestDone }: SubSuitTestProps) {
     const age = ageScore(Number(localStorage.getItem("age")));
     scoreCalculator = scoreCalculator + age;
     setTotalScore(scoreCalculator);
-    // consoleLog(scoreCalculator)
-    // consoleLog(answers)
-    // consoleLog(allAnswered)
-    // consoleLog(totalScore)
-    // consoleLog(suitTestDone)
+    // console.log(scoreCalculator)
+    // console.log(answers)
+    // console.log(allAnswered)
+    // console.log(totalScore)
+    // console.log(suitTestDone)
     if (allAnswered) {
-      const suitTestResult = answers.map((item: any) => ({
-        id: item.questionIndex,
-        ans: item.questionIndex === 2 ? item.listOfBooleanScore : item.score,
-        type: item.questionIndex === 2 ? 2 : 1,
-        quiz: 1,
+      const suitTestCalculate = answers.map((item: any) => ({
+        // id: item.questionIndex,
+        ans:
+          item.questionIndex === 2
+            ? item.answer
+            : mapTosuitTestResult(item.score),
+        // type: item.questionIndex === 2 ? 2 : 1,
+        // quiz: 1,
       }));
       let body = {
         cid: localStorage.getItem("cid"),
         investorTypeRisk: investorTypeTemp,
         level: giveGrade(scoreCalculator),
         totalScore: scoreCalculator,
-        suitTestResult: { answer: { ...suitTestResult } },
+        suitTestResult: { answer: { ...suitTestCalculate } },
       };
-      consoleLog(body);
-    } else {
-      alert("Do suit test first.");
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      suitTestResult(body);
+      console.log(body);
     }
   };
 

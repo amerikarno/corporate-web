@@ -142,15 +142,10 @@ export function OtpEmailConfirm() {
                   />
                 </div>
                 <div className="md:px-4 space-x-4 flex flex-row md:w-1/3 md:pr-4">
-                  <Button
-                    onClick={() => setDisableMobile(false)}
-                    disabled={!disableMobile}
-                  >
+                  <Button onClick={() => setDisableMobile(false)} disabled={!disableMobile}>
                     แก้ไข
                   </Button>
-                  <Button onClick={() => handleConfirm("mobile")}>
-                    ยืนยัน
-                  </Button>
+                  <Button onClick={() => handleConfirm("mobile")}>ยืนยัน</Button>
                 </div>
               </div>
             </div>
@@ -175,10 +170,7 @@ export function OtpEmailConfirm() {
                   />
                 </div>
                 <div className="md:px-4 md:pr-4 space-x-4 flex flex-row md:w-1/3">
-                  <Button
-                    onClick={() => setDisableEmail(false)}
-                    disabled={!disableEmail}
-                  >
+                  <Button onClick={() => setDisableEmail(false)} disabled={!disableEmail}>
                     แก้ไข
                   </Button>
                   <Button onClick={() => handleConfirm("email")}>ยืนยัน</Button>
@@ -188,26 +180,15 @@ export function OtpEmailConfirm() {
           </CardContent>
         </Card>
         <div className="w-full lg:w-4/5 xl:w-1/2 flex justify-end mx-auto px-2 md:px-0">
-          <Button
-            onClick={() =>
-              navigate(
-                `${import.meta.env.BASE_URL}authentication/signup/livenessocr`
-              )
-            }
-          >
-            Next
-          </Button>
+          <Button onClick={() => navigate("/authentication/signup/livenessocr")}>Next</Button>
         </div>
 
         <AlertDialog open={isDialogOpen}>
           <AlertDialogContent className="bg-white">
             <AlertDialogTitle>
-              กรุณายืนยันรหัส OTP 6 หลัก ระบบได้ทำการส่งรหัส OTP ไปยังหมายเลข{" "}
-              {hideOtpNumber(userData.mobile)} แล้ว
+              กรุณายืนยันรหัส OTP 6 หลัก ระบบได้ทำการส่งรหัส OTP ไปยังหมายเลข {hideOtpNumber(userData.mobile)} แล้ว
             </AlertDialogTitle>{" "}
-            <AlertDialogTitle className="bg-white">
-              ref code : {refCode.current}
-            </AlertDialogTitle>
+            <AlertDialogTitle className="bg-white">ref code : {refCode.current}</AlertDialogTitle>
             <AlertDialogDescription className="bg-white">
               <div>
                 <div className="pb-10 space-y-4">
@@ -216,9 +197,7 @@ export function OtpEmailConfirm() {
                   </p>
                   <Input name="otp" onChange={handleInput} />
                 </div>
-                <div>
-                  กรุณาตรวจสอบรหัส OTP บนโทรศัพย์มือถือของท่านภายใน 5 นาที
-                </div>
+                <div>กรุณาตรวจสอบรหัส OTP บนโทรศัพย์มือถือของท่านภายใน 5 นาที</div>
                 <div>
                   หากท่านไม่ได้รับรหัส OTP{" "}
                   {isCountDone ? (
