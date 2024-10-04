@@ -37,7 +37,7 @@ export default function IdentityVerification() {
       console.log(AccountID);
       const res = await axios.post(
         "/api/v1/individual/list",
-        { AccountID },
+        { accountId: AccountID },
         {
           headers: {
             "Content-Type": "application/json",

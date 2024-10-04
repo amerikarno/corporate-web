@@ -22,6 +22,7 @@ export default function AddIndividualAccount() {
     handleSubmit,
     reset,
     setValue,
+    trigger,
     formState: { errors },
   } = useForm<TIndividualAccount>({
     resolver: zodResolver(individualAccountSchema),
@@ -32,10 +33,10 @@ export default function AddIndividualAccount() {
 
   const fetchIndividualData = async (AccountID: string) => {
     try {
-      consoleLog(AccountID);
+      consoleLog({ accountId: AccountID });
       const res = await axios.post(
         "/api/v1/individual/list",
-        { AccountID },
+        { accountId: AccountID },
         {
           headers: {
             "Content-Type": "application/json",
@@ -86,7 +87,7 @@ export default function AddIndividualAccount() {
   const [thTitle, setThTitle] = useState("");
   const [engTitle, setEngTitle] = useState("");
 
-  const handleTitleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleTitleChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
     const choosedTitle = e.target.value;
     consoleLog(choosedTitle);
     if (choosedTitle === "นาย") {
@@ -121,6 +122,8 @@ export default function AddIndividualAccount() {
       setValue("thTitle", "นางสาว");
       setValue("engTitle", "Miss.");
     }
+    await trigger("thTitle");
+    await trigger("engTitle");
   };
 
   const navigate = useNavigate();
@@ -206,10 +209,11 @@ export default function AddIndividualAccount() {
                 กรอกข้อมูลส่วนตัว
               </h1>
               <div className="flex flex-col space-y-2 lg:space-y-0 lg:flex-row lg:space-x-4">
-                <div className="lg:w-1/2 h-[48px]">
+                <div className="lg:w-1/2">
                   <select
-                    {...register("thTitle")}
-                    onChange={handleTitleChange}
+                    {...register("thTitle", {
+                      onChange: handleTitleChange,
+                    })}
                     value={thTitle}
                     className={normalStyleInput}
                   >
@@ -219,7 +223,7 @@ export default function AddIndividualAccount() {
                     <option value="นางสาว">นางสาว</option>
                   </select>
                   {errors.thTitle && (
-                    <span className="text-red-500">
+                    <span className="text-red-500 text-sm">
                       {errors.thTitle.message}
                     </span>
                   )}
@@ -236,7 +240,7 @@ export default function AddIndividualAccount() {
                     className={normalStyleInput}
                   />
                   {errors.thName && (
-                    <span className="text-red-500">
+                    <span className="text-red-500 text-sm">
                       {errors.thName.message}
                     </span>
                   )}
@@ -250,7 +254,7 @@ export default function AddIndividualAccount() {
                     className={normalStyleInput}
                   />
                   {errors.thSurname && (
-                    <span className="text-red-500">
+                    <span className="text-red-500 text-sm">
                       {errors.thSurname.message}
                     </span>
                   )}
@@ -260,12 +264,12 @@ export default function AddIndividualAccount() {
 
             <div className="space-y-4">
               <div className="flex flex-col space-y-2 lg:space-y-0 lg:flex-row lg:space-x-4">
-                <div className="lg:w-1/2 h-[48px]">
+                <div className="lg:w-1/2">
                   <select
-                    {...register("engTitle")}
-                    onChange={handleTitleChange}
+                    {...register("engTitle", {
+                      onChange: handleTitleChange,
+                    })}
                     value={engTitle}
-                    // className="border border-gray-700 cursor-pointer hover:bg-slate-100 block px-2.5 py-3 rounded-md w-full h-full text-sm text-gray-600 bg-white"
                     className={normalStyleInput}
                   >
                     <option value="">คำนำหน้าชื่อ (ภาษาอังกฤษ)</option>
@@ -274,7 +278,7 @@ export default function AddIndividualAccount() {
                     <option value="Mrs.">Miss.</option>
                   </select>
                   {errors.engTitle && (
-                    <span className="text-red-500">
+                    <span className="text-red-500 text-sm">
                       {errors.engTitle.message}
                     </span>
                   )}
@@ -291,7 +295,7 @@ export default function AddIndividualAccount() {
                     className={normalStyleInput}
                   />
                   {errors.engName && (
-                    <span className="text-red-500">
+                    <span className="text-red-500 text-sm">
                       {errors.engName.message}
                     </span>
                   )}
@@ -306,7 +310,7 @@ export default function AddIndividualAccount() {
                     className={normalStyleInput}
                   />
                   {errors.engSurname && (
-                    <span className="text-red-500">
+                    <span className="text-red-500 text-sm">
                       {errors.engSurname.message}
                     </span>
                   )}
@@ -324,7 +328,9 @@ export default function AddIndividualAccount() {
                   className={normalStyleInput}
                 />
                 {errors.email && (
-                  <span className="text-red-500">{errors.email.message}</span>
+                  <span className="text-red-500 text-sm">
+                    {errors.email.message}
+                  </span>
                 )}
               </div>
 
@@ -337,31 +343,31 @@ export default function AddIndividualAccount() {
                   className={normalStyleInput}
                 />
                 {errors.mobile && (
-                  <span className="text-red-500">{errors.mobile.message}</span>
+                  <span className="text-red-500 text-sm">
+                    {errors.mobile.message}
+                  </span>
                 )}
               </div>
             </div>
 
             <div className="flex flex-col space-y-2 lg:space-y-0 lg:flex-row lg:space-x-4">
-              <div className="lg:w-1/2 h-[48px] w-full">
+              <div className="lg:w-1/2 w-full">
                 <Input
                   type="date"
                   {...register("birthDate")}
                   label="วัน/เดือน/ปี เกิด"
-                  // className="w-full h-full border border-gray-700 cursor-pointer px-2.5 py-3 rounded-md text-gray-600 pl-2 bg-transparent hover:bg-slate-100 focus:border-blue-700"
                   className={normalStyleInput}
                 />
                 {errors.birthDate && (
-                  <span className="text-red-500">
+                  <span className="text-red-500 text-sm">
                     {errors.birthDate.message}
                   </span>
                 )}
               </div>
 
-              <div className="flex flex-col lg:w-1/2 w-full h-[48px]">
+              <div className="flex flex-col lg:w-1/2 w-full">
                 <select
                   {...register("marriageStatus")}
-                  // className="border h-full border-gray-700 cursor-pointer px-2.5 py-3 rounded-md text-gray-600 pl-2 bg-transparent hover:bg-slate-100 focus:border-blue-700"
                   className={normalStyleInput}
                 >
                   <option value="">สถานะ</option>
@@ -370,7 +376,7 @@ export default function AddIndividualAccount() {
                   <option value="อย่า">Divorce</option>
                 </select>
                 {errors.marriageStatus && (
-                  <span className="text-red-500">
+                  <span className="text-red-500 text-sm">
                     {errors.marriageStatus.message}
                   </span>
                 )}
@@ -387,7 +393,7 @@ export default function AddIndividualAccount() {
                   className={normalStyleInput}
                 />
                 {errors.citizenId && (
-                  <span className="text-red-500">
+                  <span className="text-red-500 text-sm">
                     {errors.citizenId.message}
                   </span>
                 )}
@@ -402,7 +408,7 @@ export default function AddIndividualAccount() {
                   className={normalStyleInput}
                 />
                 {errors.laserCode && (
-                  <span className="text-red-500">
+                  <span className="text-red-500 text-sm">
                     {errors.laserCode.message}
                   </span>
                 )}
@@ -420,8 +426,13 @@ export default function AddIndividualAccount() {
                   ข้อพเจ้าได้อ่านและตกลงตามข้อกำหนดและเงื่อนไขและรับทราบนโยบายความเป็นส่วนตัว
                 </label>
               </div>
+              {errors.agreement && (
+                <span className="text-red-500 text-sm">
+                  {errors.agreement.message}
+                </span>
+              )}
               <div>
-                <span className="text-red-500 cursor-pointer">
+                <span className="text-blue-500 text-sm cursor-pointer">
                   อ่านรายละเอียดเพิ่มเติม
                 </span>
               </div>

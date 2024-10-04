@@ -20,7 +20,7 @@ export default function SuitTestFatca() {
       console.log(AccountID);
       const res = await axios.post(
         "/api/v1/individual/list",
-        { AccountID },
+        { accountId: AccountID },
         {
           headers: {
             "Content-Type": "application/json",

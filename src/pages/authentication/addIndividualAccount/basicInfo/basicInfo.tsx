@@ -73,7 +73,7 @@ export default function BasicInfo() {
       consoleLog(AccountID);
       const res = await axios.post(
         "/api/v1/individual/list",
-        { AccountID },
+        { accountId: AccountID },
         {
           headers: {
             "Content-Type": "application/json",
