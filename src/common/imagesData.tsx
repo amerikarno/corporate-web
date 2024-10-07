@@ -1,4 +1,5 @@
-import logo from "@assets/logo_ecg-03.png";
+import logo from "@assets/fda.png";
+// import logo from "@assets/logo_ecg-03.png";
 import example from "@assets/drawIcon/example.png";
 import idOverLay from "@assets/ID_Card_overlay.svg";
 import verticalIdOvleray from "@assets/vertical_id_overlay.svg";

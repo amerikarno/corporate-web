@@ -90,7 +90,7 @@ const NavBarLanding = ({ ThemeChanger }: datatype) => {
               </div>
               <div className="hidden xl:flex xl:w-1/3 items-center">
                 <u className="xl:text-3xl font-bold text-black">
-                  Elite Consulting
+                  Finansia Digital Asset
                 </u>
               </div>
 

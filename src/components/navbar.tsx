@@ -14,9 +14,10 @@ interface datatype {
   ThemeChanger: any;
   children: React.ReactNode;
   isFullWidth?: boolean;
+  pad?: string;
 }
 
-const NavBar = ({ ThemeChanger, children, isFullWidth }: datatype) => {
+const NavBar = ({ ThemeChanger, children, isFullWidth, pad }: datatype) => {
   const token = getCookies();
   const navigate = useNavigate();
 
@@ -94,7 +95,7 @@ const NavBar = ({ ThemeChanger, children, isFullWidth }: datatype) => {
             </div>
             <div className="hidden lg:block lg:w-1/3 lg:items-center">
               <p className="bg-gradient-to-r from-gold-light via-gold-mid to-gold-dark text-transparent bg-clip-text s2:text-3xl font-bold text-center">
-                Elite Consulting
+                Finansia Digital Asset
               </p>
             </div>
             {token ? (

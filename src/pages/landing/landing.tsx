@@ -76,7 +76,7 @@ const Landing = ({ ThemeChanger }: datatype) => {
               </div>
               <div className="hidden s3:flex s3:w-1/3 s3:items-center">
                 <p className="bg-gradient-to-r from-gold-light via-gold-mid to-gold-dark text-transparent bg-clip-text s2:text-3xl font-bold text-center">
-                  Elite Consulting
+                  Finansia Digital Asset
                 </p>
               </div>
 
@@ -119,7 +119,9 @@ const Landing = ({ ThemeChanger }: datatype) => {
                       className="h-10 mb-2"
                       alt="img"
                     />
-                    <u className="text-lg text-white ">Elite Consulting</u>
+                    <u className="text-lg text-white ">
+                      Finansia Digital Asset
+                    </u>
                     <p className="text-white text-xl font-bold pt-4">
                       Community
                     </p>
@@ -339,7 +341,7 @@ const Landing = ({ ThemeChanger }: datatype) => {
                 }}
                 className="text-primary hover:cursor-pointer"
               >
-                Elite Consulting
+                Finansia Digital Asset
               </span>
             </p>
           </div>

@@ -89,6 +89,12 @@ createRoot(document.getElementById("root")!).render(
             <Route
               path={`${
                 import.meta.env.BASE_URL
+              }authentication/signup/webcaminstructions`}
+              element={<CardWebcamInstructions />}
+            />
+            <Route
+              path={`${
+                import.meta.env.BASE_URL
               }authentication/signup/cardcapture`}
               element={<IDCardCapture />}
             />
@@ -97,6 +103,10 @@ createRoot(document.getElementById("root")!).render(
                 import.meta.env.BASE_URL
               }authentication/signup/identityverification`}
               element={<IdentityVerification />}
+            />
+            <Route
+              path={`${import.meta.env.BASE_URL}/portfolio`}
+              element={<Portfolio />}
             />
             <Route
               path={`${import.meta.env.BASE_URL}asset/:id`}
@@ -121,11 +131,6 @@ createRoot(document.getElementById("root")!).render(
             <Route
               path={`${import.meta.env.BASE_URL}/deposite-withdraw`}
               element={<BankOrder />}
-            />
-            <Route
-              path={`${import.meta.env.BASE_URL}/portfolio`}
-              element={<Portfolio />}
-              // element={<Personal />}
             />
           </Routes>
         </Provider>

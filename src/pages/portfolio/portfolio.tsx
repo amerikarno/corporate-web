@@ -129,8 +129,9 @@ export default function Portfolio() {
 
   return (
     <NavBar
+      isFullWidth
       children={
-        <div className="p-10 space-y-20">
+        <div className="p-2 space-y-20">
           <Card className="p-4">
             <CardContent className="grid grid-cols-3 gap-y-10 gap-x-4">
               <div className="col-span-2">

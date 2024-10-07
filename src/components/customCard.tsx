@@ -22,7 +22,7 @@ export function CustomCard({ data, index }: TCustomCardProps) {
           <div className="flex flex-row items-center space-x-4">
             <img src={data.logo} alt="" className="h-[17px] md:h-[34px]" />
             <h1 className={`font-bold text-xl text-gray-800`}>
-              Elite Consulting
+              Finansia Digital Asset
             </h1>
           </div>
           <div className="flex flex-row justify-between">
