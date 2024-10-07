@@ -3,7 +3,7 @@ import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
 // import { TOrderTrade } from "./constant/type";
 import { orderTradeSchema, TOrderTrade } from "./constant/schemas";
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useEffect, useState } from "react";
 import DataTable, { TableColumn } from "react-data-table-component";
@@ -34,6 +34,50 @@ export default function OrderTrade() {
     resolver: zodResolver(orderTradeSchema),
     mode: "onChange",
   });
+
+  const [investTransactions, setInvestTransactions] = useState<TOrderTrade[]>(
+    []
+  );
+
+  const columnsOrderTrade: TableColumn<TOrderTrade>[] = [
+    {
+      name: "Corporate Code",
+      selector: (row: TOrderTrade) => row.customerCode || "",
+    },
+    {
+      name: "Buy/Sell",
+      selector: (row: TOrderTrade) => row.icoCode || "",
+    },
+    {
+      name: "pair",
+      selector: (row: TOrderTrade) => row.currency || "",
+    },
+    {
+      name: "Crypto Amount",
+      selector: (row: TOrderTrade) => row.amount || "",
+    },
+    {
+      name: "Crypto Price",
+      selector: (row: TOrderTrade) => row.value || "",
+    },
+    {
+      name: "Status",
+      selector: (row: TOrderTrade) => getStatus(row.status) || "",
+    },
+    {
+      cell: (row: TOrderTrade) => (
+        <Button
+          onClick={() => {
+            handleEditData(row);
+          }}
+          disabled={row.status === 1 || row.status === 2}
+        >
+          Edit
+        </Button>
+      ),
+      ignoreRowClick: true,
+    },
+  ];
 
   const [selectedCurrency, setSelectedCurrency] = useState<TCurrency>({
     name: "THB",
@@ -99,7 +143,27 @@ export default function OrderTrade() {
     }
   };
 
-  const fetchOrderList = async () => {};
+  const fetchOrderList = async () => {
+    try {
+      const res = await axios.post(
+        "/api/v1/customer/product/transaction",
+        {},
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${getCookies()}`,
+          },
+        }
+      );
+      if (res.status === 200) {
+        setInvestTransactions(res.data);
+      } else {
+        consoleLog(res.data);
+      }
+    } catch (error) {
+      consoleLog(error);
+    }
+  };
 
   const getStatus = (status?: number) => {
     if (status === -1) {
@@ -115,52 +179,11 @@ export default function OrderTrade() {
     }
   };
 
-  const dataMocked: TOrderTrade[] = [];
-
-  const columnsOrderTrade: TableColumn<TOrderTrade>[] = [
-    {
-      name: "Corporate Code",
-      selector: (row: TOrderTrade) => row.customerCode || "",
-    },
-    {
-      name: "Buy/Sell",
-      selector: (row: TOrderTrade) => row.icoCode || "",
-    },
-    {
-      name: "pair",
-      selector: (row: TOrderTrade) => row.currency || "",
-    },
-    {
-      name: "Crypto Amount",
-      selector: (row: TOrderTrade) => row.amount || "",
-    },
-    {
-      name: "Crypto Price",
-      selector: (row: TOrderTrade) => row.value || "",
-    },
-    {
-      name: "Status",
-      selector: (row: TOrderTrade) => getStatus(row.status) || "",
-    },
-    {
-      cell: (row: TOrderTrade) => (
-        <Button
-          onClick={() => {
-            handleEditData(row);
-          }}
-          disabled={row.status === 1 || row.status === 2}
-        >
-          Edit
-        </Button>
-      ),
-      ignoreRowClick: true,
-    },
-  ];
-
   useEffect(() => {
     if (!assetData) {
       const user = getUser();
       setUser(user ? user : undefined);
+      consoleLog("user", user);
       fetchCorporateCodes();
       fetchOrderList();
     }
@@ -197,10 +220,9 @@ export default function OrderTrade() {
   };
 
   const onsubmit = async (data: TOrderTrade) => {
-    reset();
     let body: TOrderTrade = {
       ...data,
-      customerCode: user?.id,
+      customerCode: user?.customerCode,
       icoCode: assetData?.info?.id,
     };
     consoleLog("data", body);
@@ -211,12 +233,13 @@ export default function OrderTrade() {
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: "Bearer " + getCookies(),
+            Authorization: `Bearer ${getCookies()}`,
           },
         }
       );
       if (res.status === 200) {
         consoleLog(res.data);
+        reset();
       } else {
         consoleLog(res.data);
       }
@@ -327,7 +350,7 @@ export default function OrderTrade() {
                 <DataTable
                   title="Rejected Orders / Trades Lists"
                   columns={columnsOrderTrade}
-                  data={dataMocked}
+                  data={investTransactions}
                   clearSelectedRows
                 />
               </Card>
