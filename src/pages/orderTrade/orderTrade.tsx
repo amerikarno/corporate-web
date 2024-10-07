@@ -13,7 +13,6 @@ import NavBar from "@/components/navbar";
 import { consoleLog, sleep } from "@/lib/utils";
 import { TAssetData } from "../assetDetails/types";
 import { mockAssetData } from "../assetDetails/__mock__/mockAsset";
-import { ZodError } from "zod";
 
 type TCurrency = {
   name: string;
@@ -27,7 +26,7 @@ export default function OrderTrade() {
   });
   // const [tokenAmount, setTokenAmount] = useState<string>("");
   // const [currencyAmount, setCurrencyAmount] = useState<string>("");
-  const [assetData, setAssetData] = useState<TAssetData>();
+  const [assetData, setAssetData] = useState<TAssetData | undefined>();
   const [lot, setLot] = useState<number>(0);
   const [unitPrice, setUnitPrice] = useState<number>(1);
   const [tradeData, setTradeData] = useState<TOrderTrade>({
@@ -47,7 +46,9 @@ export default function OrderTrade() {
     { name: "JPY", factor: 0.23 },
   ];
 
-  const handleEditData = (data: TOrderTrade) => {};
+  const handleEditData = (data: TOrderTrade) => {
+    consoleLog(data);
+  };
 
   const handleTokenAmount = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -232,8 +233,10 @@ export default function OrderTrade() {
   });
 
   useEffect(() => {
-    fetchOrderList();
-    fetchCorporateCodes();
+    if (!assetData) {
+      fetchCorporateCodes();
+      fetchOrderList();
+    }
   }, [reset]);
 
   // const handleCorporateCodeChange = (

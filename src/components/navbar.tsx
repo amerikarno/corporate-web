@@ -14,10 +14,9 @@ interface datatype {
   ThemeChanger: any;
   children: React.ReactNode;
   isFullWidth?: boolean;
-  pad?: string;
 }
 
-const NavBar = ({ ThemeChanger, children, isFullWidth, pad }: datatype) => {
+const NavBar = ({ ThemeChanger, children, isFullWidth }: datatype) => {
   const token = getCookies();
   const navigate = useNavigate();
 
