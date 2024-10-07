@@ -1,72 +1,105 @@
 import { Card } from "@/components/ui/Card";
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
-import { TOrderTrade } from "./constant/type";
-import { orderTradeSchema } from "./constant/schemas";
+// import { TOrderTrade } from "./constant/type";
+import { orderTradeSchema, TOrderTrade } from "./constant/schemas";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import DataTable, { TableColumn } from "react-data-table-component";
 import { MdCurrencyExchange } from "react-icons/md";
 import { IoReceiptOutline } from "react-icons/io5";
 import NavBar from "@/components/navbar";
-import { consoleLog } from "@/lib/utils";
+import { consoleLog, sleep } from "@/lib/utils";
+import { TAssetData } from "../assetDetails/types";
+import { mockAssetData } from "../assetDetails/__mock__/mockAsset";
+import { ZodError } from "zod";
+
+type TCurrency = {
+  name: string;
+  factor: number;
+};
 
 export default function OrderTrade() {
-  // const [buySell, setBuySell] = useState<string>("buy");
-  // const [selectedCorporateCode, setSelectedCorporateCode] = useState<
-  //   number | null
-  // >(null);
-  const [selectedTradingPair, setSelectedTradingPair] =
-    useState<string>("THB/USDT");
-  // const [mockedCorporateCodes, _] = useState<{ corporateCode: number }[]>([]);
-  // setFetchedCorporateCodes([]);
-  const [choosedEditData, setChoosedEditData] = useState<TOrderTrade>();
-  // const clearChoosedEditData = () => {
-  //   setChoosedEditData(undefined);
-  // };
-  // const [sellCurrency, setSellCurrency] = useState<string>("");
-  const tradingPair = [{ name: "THB/USDT" }, { name: "THB/USDC" }];
-  // const buyCurrency = [{ name: "THB" }, { name: "USD" }];
+  const [selectedCurrency, setSelectedCurrency] = useState<TCurrency>({
+    name: "THB",
+    factor: 1,
+  });
+  // const [tokenAmount, setTokenAmount] = useState<string>("");
+  // const [currencyAmount, setCurrencyAmount] = useState<string>("");
+  const [assetData, setAssetData] = useState<TAssetData>();
+  const [lot, setLot] = useState<number>(0);
+  const [unitPrice, setUnitPrice] = useState<number>(1);
+  const [tradeData, setTradeData] = useState<TOrderTrade>({
+    customerCode: "",
+    icoCode: "",
+    amount: "",
+    currency: "",
+    value: "",
+  });
+  // const [choosedEditData, setChoosedEditData] = useState<TOrderTrade>();
+  const payCurrency = [
+    // factor is from xx curency = 1 thb. eg 35 usd= 1 thb
+    { name: "", factor: 1 },
+    { name: "THB", factor: 1 },
+    { name: "USD", factor: 35 },
+    { name: "EUR", factor: 30 },
+    { name: "JPY", factor: 0.23 },
+  ];
 
-  const handleFloatValue = (value: number | null): number => {
-    if (!value) return 0;
+  const handleEditData = (data: TOrderTrade) => {};
 
-    let newValue = value.toString();
+  const handleTokenAmount = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    const inputValue = value.replace(/[^0-9.,]/g, "");
+    // setTokenAmount(inputValue);
+    const formattedValue = inputValue.replace(/,(?=\.)/g, "").replace(/,/g, "");
+    const numValue = parseFloat(formattedValue);
+    const numCurrencyAmount = (numValue * unitPrice) / selectedCurrency.factor;
+    const formattedCurrencyAmount = numCurrencyAmount.toLocaleString("en-US", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+    // setCurrencyAmount(formattedCurrencyAmount);
+    setTradeData({
+      ...tradeData,
+      value: formattedCurrencyAmount,
+      amount: inputValue,
+    });
+  };
 
-    if (!newValue.includes(".")) {
-      newValue += ".00000";
-    } else {
-      const [integerPart, decimalPart] = newValue.split(".");
-      newValue = integerPart + "." + (decimalPart + "00000").slice(0, 5);
-    }
-
-    return Math.round(parseFloat(newValue) * 100000);
+  const handleCurrencyAmount = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    const inputValue = value.replace(/[^0-9.,]/g, "");
+    // setCurrencyAmount(inputValue);
+    const formattedValue = inputValue.replace(/,(?=\.)/g, "").replace(/,/g, "");
+    const numValue = parseFloat(formattedValue);
+    const numTokenAmount = (numValue * selectedCurrency.factor) / unitPrice;
+    const formattedTokenAmount = numTokenAmount.toLocaleString("en-US", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+    // setTokenAmount(formattedTokenAmount);
+    setTradeData({
+      ...tradeData,
+      value: inputValue,
+      amount: formattedTokenAmount,
+    });
   };
 
   const fetchCorporateCodes = async () => {
-    // try {
-    //   const token = getCookies();
-    //   const res = await axios.post(
-    //     "/api/v1/corporate/query/all",
-    //     {},
-    //     {
-    //       headers: {
-    //         Authorization: `Bearer ${token}`,
-    //       },
-    //     }
-    //   );
-    //   if (res.status === 200) {
-    //     const corporateCodes = res.data.map((item: any) => ({
-    //       corporateCode: item.CorporateCode,
-    //     }));
-    //     setFetchedCorporateCodes(corporateCodes);
-    //   } else {
-    //     consoleLog("Failed to fetch corporate codes");
-    //   }
-    // } catch (error) {
-    //   consoleLog("Error fetching corporate codes:", error);
-    // }
+    await sleep(1000);
+    setAssetData(mockAssetData);
+    const lot = mockAssetData.info!.minimumInvestmentQuantity.split(" ")[0];
+    const numLot = parseFloat(lot);
+    if (!isNaN(numLot)) {
+      setLot(numLot);
+    }
+    const unitPrice = mockAssetData.info!.issueUnitPrice.split(" ")[0];
+    const numUnitPrice = parseFloat(unitPrice);
+    if (!isNaN(numUnitPrice)) {
+      setUnitPrice(numUnitPrice);
+    }
   };
 
   const fetchOrderList = async () => {
@@ -120,43 +153,35 @@ export default function OrderTrade() {
   const columnsOrderTrade: TableColumn<TOrderTrade>[] = [
     {
       name: "Corporate Code",
-      selector: (row: TOrderTrade) => row.corporateCode || "",
+      selector: (row: TOrderTrade) => row.customerCode || "",
     },
     {
       name: "Buy/Sell",
-      selector: (row: TOrderTrade) => row.operations || "",
+      selector: (row: TOrderTrade) => row.icoCode || "",
     },
     {
       name: "pair",
-      selector: (row: TOrderTrade) => row.pair || "",
-    },
-    {
-      name: "Crypto Amount",
-      selector: (row: TOrderTrade) => row.cryptoAmount || "",
-    },
-    {
-      name: "Crypto Price",
-      selector: (row: TOrderTrade) => row.cryptoPrice || "",
-    },
-    {
-      name: "Fiat Amount",
-      selector: (row: TOrderTrade) => row.fiatAmount || "",
-    },
-    {
-      name: "Currency",
       selector: (row: TOrderTrade) => row.currency || "",
     },
     {
+      name: "Crypto Amount",
+      selector: (row: TOrderTrade) => row.amount || "",
+    },
+    {
+      name: "Crypto Price",
+      selector: (row: TOrderTrade) => row.value || "",
+    },
+    {
       name: "Status",
-      selector: (row: TOrderTrade) => getStatus(row.transactionStatus) || "",
+      selector: (row: TOrderTrade) => getStatus(row.status) || "",
     },
     {
       cell: (row: TOrderTrade) => (
         <Button
           onClick={() => {
-            setChoosedEditData(row);
+            handleEditData(row);
           }}
-          disabled={row.transactionStatus === 1 || row.transactionStatus === 2}
+          disabled={row.status === 1 || row.status === 2}
         >
           Edit
         </Button>
@@ -200,8 +225,6 @@ export default function OrderTrade() {
   const {
     register,
     handleSubmit,
-    setValue,
-    watch,
     formState: { errors, isSubmitting },
     reset,
   } = useForm<TOrderTrade>({
@@ -219,64 +242,59 @@ export default function OrderTrade() {
   //   setSelectedCorporateCode(Number(event.target.value) || null);
   // };
 
-  const handleTradingPairChange = (
+  const handleCurrencyChange = (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
-    setSelectedTradingPair(event.target.value);
-    // const cur = event.target.value.split("/");
-    // setSellCurrency(cur[1]);
+    const currency = payCurrency.find(
+      (item) => item.name === event.target.value
+    );
+    if (currency) {
+      setSelectedCurrency(currency);
+
+      const numCurrencyAmount =
+        (parseFloat(tradeData.amount) * unitPrice) / currency.factor;
+
+      // setCurrencyAmount(
+      //   numCurrencyAmount.toLocaleString("en-us", {
+      //     maximumFractionDigits: 2,
+      //     minimumFractionDigits: 2,
+      //   })
+      // );
+      setTradeData({
+        ...tradeData,
+        value: numCurrencyAmount.toLocaleString("en-us", {
+          maximumFractionDigits: 2,
+          minimumFractionDigits: 2,
+        }),
+      });
+      // setTokenAmount(
+      //   numTokenAmount.toLocaleString("en-us", {
+      //     maximumFractionDigits: 2,
+      //     minimumFractionDigits: 2,
+      //   })
+      // );
+    } else {
+      setSelectedCurrency({
+        name: "",
+        factor: 1,
+      });
+    }
   };
 
   const onSubmit = async (data: TOrderTrade) => {
-    // const currency = buySell === "sell" ? sellCurrency : data.currency;
-    let body: TOrderTrade = {
-      ...data,
-      // operations: buySell,
-      // currency: currency,
-      id: choosedEditData?.id,
-      cryptoAmount: handleFloatValue(Number(data.cryptoAmount)),
-      fiatAmount: handleFloatValue(Number(data.fiatAmount)),
-      cryptoPrice: handleFloatValue(Number(data.cryptoPrice)),
-    };
-    consoleLog(choosedEditData);
-    consoleLog(body);
-
-    // try {
-    //   const token = getCookies();
-    //   if (body.id) {
-    //     const res = await axios.post("/api/v1/transaction/order/edit", body, {
-    //       headers: {
-    //         Authorization: `Bearer ${token}`,
-    //       },
-    //     });
-    //     if (res.status === 200) {
-    //       reset();
-    //       clearChoosedEditData();
-    //       setSelectedCorporateCode(null);
-    //       consoleLog("edit successful");
-    //       fetchOrderList();
-    //     } else {
-    //       consoleLog("edit failed");
-    //     }
-    //   } else {
-    //     const res = await axios.post("/api/v1/transaction/order/create", body, {
-    //       headers: {
-    //         Authorization: `Bearer ${token}`,
-    //       },
-    //     });
-    //     if (res.status === 200) {
-    //       reset();
-    //       clearChoosedEditData();
-    //       setSelectedCorporateCode(null);
-    //       consoleLog("save successful");
-    //       fetchOrderList();
-    //     } else {
-    //       consoleLog("save failed");
-    //     }
-    //   }
-    // } catch (error) {
-    //   consoleLog(error);
-    // }
+    consoleLog(data);
+    if (parseFloat(data.amount) < lot) {
+      const error = {
+        issues: [
+          {
+            code: "custom",
+            message: `Amount must be greater than or equal to the minimum size of ${lot}.`,
+            path: ["amount"],
+          },
+        ],
+      };
+      error.issues.push(...error.issues);
+    }
   };
 
   return (
@@ -294,156 +312,77 @@ export default function OrderTrade() {
                         <IoReceiptOutline />
                       </span>
                     </span>
-                    {/* <div className="w-full flex justify-center items-center">
-                      <div className="w-2/3">
-                        <datalist id="corporateCodes">
-                          {mockedCorporateCodes.map((code, index) => (
-                            <option key={index} value={code.corporateCode}>
-                              {code.corporateCode}
-                            </option>
-                          ))}
-                        </datalist>
-                      </div>
-                    </div> */}
                     <div className="flex items-center justify-center pt-4">
-                      <div className="w-full md:w-1/2 pb-4">
-                        <div className="relative">
-                          {/* <label className="absolute bg-white text-xs rounded-full border-none -top-4">Pairs</label> */}
-                          <select
-                            id="pair"
-                            {...register("pair")}
-                            value={selectedTradingPair}
-                            onChange={handleTradingPairChange}
-                            disabled={isSubmitting}
-                            className="h-11 cursor-pointer bg-slate-700 focus:ring-gray-200 hover:bg-slate-900 border border-slate-800 text-white text-base rounded-md block w-full py-2.5 px-4 focus:outline-none appearance-none"
-                          >
-                            <option value="THB/USTD" disabled>
-                              THB/USDT
-                            </option>
-                            {tradingPair.map((pair, index) => (
-                              <option key={index} value={pair.name}>
-                                {pair.name}
-                              </option>
-                            ))}
-                          </select>
-                          <MdCurrencyExchange className="absolute text-xl right-4 top-1/2 transform -translate-y-1/2 pointer-events-none text-white" />
-                        </div>
-                        {errors.pair && (
-                          <p className="text-red-500 text-sm px-2">
-                            {errors.pair.message}
-                          </p>
-                        )}
-                      </div>
-                    </div>
-                    {/* <div className="flex flex-row w-full md:w-1/2 justify-center pb-4 mx-auto">
-                      <div
-                        className={`flex-1 select-none cursor-default w-1/4 text-white px-4 py-2 rounded-l transition-colors duration-300 ${
-                          buySell === "buy" ? "bg-slate-800" : "bg-slate-500"
-                        }`}
-                        onClick={() => handleBuySell("buy")}
-                      >
-                        Buy
-                      </div>
-                      <div
-                        className={`flex-1 select-none cursor-default w-1/4 text-white px-4 py-2 rounded-r transition-colors duration-300 ${
-                          buySell === "sell" ? "bg-slate-800" : "bg-slate-500"
-                        }`}
-                        onClick={() => handleBuySell("sell")}
-                      >
-                        Sell
-                      </div>
-                    </div> */}
-                    <div className="flex gap-4 items-center ">
-                      <div className="w-full grid grid-cols-1 gap-4 md:grid-cols-2">
+                      <div className="w-full md:w-1/2 space-y-6">
                         <div>
-                          <Input
-                            {...register("cryptoAmount")}
-                            label="Crypto Amount"
-                            data-testid="Crypto Amount"
-                            id="cryptoAmount"
-                            disabled={isSubmitting}
-                            step="0.00001"
-                            type="number"
-                          />
-                          {errors.cryptoAmount && (
-                            <p className="text-red-500 text-sm px-2">
-                              {errors.cryptoAmount.message}
-                            </p>
-                          )}
-                        </div>
-
-                        <div>
-                          <Input
-                            {...register("fiatAmount")}
-                            label="Fiat Amount"
-                            data-testid="Fiat Amount"
-                            id="fiatAmount"
-                            disabled={isSubmitting}
-                            step="0.00001"
-                            type="number"
-                          />
-                          {errors.fiatAmount && (
-                            <p className="text-red-500 text-sm px-2">
-                              {errors.fiatAmount.message}
-                            </p>
-                          )}
-                        </div>
-
-                        <div>
-                          <Input
-                            {...register("cryptoPrice")}
-                            label="Crypto Price"
-                            data-testid="Crypto Price"
-                            id="cryptoPrice"
-                            disabled={isSubmitting}
-                            step="0.00001"
-                            type="number"
-                          />
-                          {errors.cryptoPrice && (
-                            <p className="text-red-500 text-sm px-2">
-                              {errors.cryptoPrice.message}
-                            </p>
-                          )}
-                        </div>
-
-                        <div>
-                          <select
-                            {...register("currency")}
-                            value={watch("currency")}
-                            onChange={(e) => {
-                              setValue("currency", e.target.value);
-                            }}
-                            data-testid="currency-combobox"
-                            className="px-2.5 pb-2.5 pt-4 cursor-pointer border border-gray-700 text-gray-600 pl-2 hover:bg-slate-100
-                text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full h-full "
-                          >
-                            <option value="">Currency</option>
-                            <option value="THB">THB</option>
-                            <option value="USD">USD</option>
-                            {/* <option value="THB">THB</option>
-                    <option value="USD">USD</option> */}
-                            {/* {buySell === "buy" ? (
-                            buyCurrency.map((currency, index) => (
-                              <option key={index} value={currency.name}>
-                                {currency.name}
-                              </option>
-                            ))
-                          ) : (
-                            <option value={sellCurrency}>{sellCurrency}</option>
-                          )} */}
-                          </select>
+                          <div className="relative">
+                            <select
+                              id="currency"
+                              {...register("currency")}
+                              value={selectedCurrency.name}
+                              onChange={handleCurrencyChange}
+                              disabled={isSubmitting}
+                              className="h-11 cursor-pointer bg-slate-700 focus:ring-gray-200 hover:bg-slate-900 border border-slate-800 text-white text-base rounded-md block w-full py-2.5 px-4 focus:outline-none appearance-none"
+                            >
+                              {payCurrency.map((pair, index) => (
+                                <option key={index} value={pair.name}>
+                                  {pair.name}
+                                </option>
+                              ))}
+                            </select>
+                            <MdCurrencyExchange className="absolute text-xl right-4 top-1/2 transform -translate-y-1/2 pointer-events-none text-white" />
+                          </div>
                           {errors.currency && (
                             <p className="text-red-500 text-sm px-2">
                               {errors.currency.message}
                             </p>
                           )}
                         </div>
+                        <div>
+                          <Input
+                            {...(register("amount"),
+                            { onChange: handleTokenAmount })}
+                            label={`Token`}
+                            data-testid="tokenAmount"
+                            id="tokenAmount"
+                            disabled={isSubmitting}
+                            value={tradeData.amount}
+                            inputClassName="text-right"
+                          />
+                          {errors.amount && (
+                            <p className="text-red-500 text-sm px-2">
+                              {errors.amount.message}
+                            </p>
+                          )}
+                        </div>
+
+                        <div>
+                          <Input
+                            {...(register("value"),
+                            { onChange: handleCurrencyAmount })}
+                            label={`Amount (${selectedCurrency.name})`}
+                            data-testid="fiatValue"
+                            id="fiatValue"
+                            disabled={isSubmitting}
+                            value={tradeData.value}
+                            inputClassName="text-right"
+                          />
+                          {errors.value && (
+                            <p className="text-red-500 text-sm px-2">
+                              {errors.value.message}
+                            </p>
+                          )}
+                        </div>
+                        <div className="w-full flex justify-center py-6">
+                          <Button
+                            type="submit"
+                            disabled={isSubmitting}
+                            className="w-full bg-slate-700 hover:bg-slate-900"
+                          >
+                            {isSubmitting ? "Submitting..." : "Submit"}
+                          </Button>
+                        </div>
                       </div>
-                    </div>
-                    <div className="flex justify-end py-6">
-                      <Button type="submit" disabled={isSubmitting}>
-                        {isSubmitting ? "Submitting..." : "Submit"}
-                      </Button>
                     </div>
                   </Card>
                 </div>
@@ -453,10 +392,6 @@ export default function OrderTrade() {
                   title="Rejected Orders / Trades Lists"
                   columns={columnsOrderTrade}
                   data={dataMocked}
-                  // data={orderTradeData.map((orderTrade, index) => ({
-                  //   ...orderTrade,
-                  //   key: index,
-                  // }))}
                   clearSelectedRows
                 />
               </Card>

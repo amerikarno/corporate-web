@@ -1,13 +1,16 @@
 export type TUser = {
-  id?: string;
-  email?: string;
-  groups?: number[];
-  permissions?: number[];
-  roles?: number[];
+  id: string;
+  email: string;
+  name?: string;
+  lastName?: string;
+  image?: string;
+  groups?: null;
+  permissions?: null;
+  roles?: null;
   userId?: string;
   loginStatus?: string;
-  Error?: string | null;
-  exp?: number;
-  iat?: number;
-  name?: string;
+  expiresDate: string;
+  Error: string | null;
+  exp: number;
+  iat: number;
 };
