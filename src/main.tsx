@@ -35,6 +35,7 @@ createRoot(document.getElementById("root")!).render(
         <ScrollToTop />
         <Provider store={store}>
           <Routes>
+            <Route path="*" element={<Landing />} />
             <Route index element={<Landing />} />
             <Route
               path={`${import.meta.env.BASE_URL}authentication/login`}
