@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 import { ThemeChanger } from "@/redux/Action";
@@ -14,13 +14,18 @@ interface datatype {
   ThemeChanger: any;
   children: React.ReactNode;
   isFullWidth?: boolean;
+  padding?: string;
 }
 
-const NavBar = ({ ThemeChanger, children, isFullWidth }: datatype) => {
+const NavBar = ({ ThemeChanger, children, isFullWidth, padding }: datatype) => {
   const token = getCookies();
   const navigate = useNavigate();
+  const [pad, setPad] = useState<string>("");
 
   useEffect(() => {
+    if (padding) {
+      setPad(padding);
+    }
     function handleResize() {
       if (window.innerWidth <= 992) {
         const theme = store.getState();
@@ -80,7 +85,7 @@ const NavBar = ({ ThemeChanger, children, isFullWidth }: datatype) => {
       <div id="header" className="border-b border-gray-300 shadow-sm">
         <div
           className={`w-full ${
-            isFullWidth ? "px-2" : "lg:max-w-[1240px]"
+            isFullWidth ? "px-2" : `px-2 md:${pad} lg:max-w-[1240px]`
           } mx-auto`}
         >
           <div className="w-full flex flex-row py-4">

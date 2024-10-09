@@ -1,3 +1,5 @@
+import { IcoType } from "@/pages/landing/types";
+
 export interface Address {
   CreatedAt: string;
   DeletedAt: string;
@@ -136,5 +138,6 @@ export interface InitialState {
   individualData: IndividualData;
   livenessOcr: LivenessOcr;
   user: User;
+  icoAll: IcoType;
   unitTest: any;
 }

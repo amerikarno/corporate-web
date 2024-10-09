@@ -1,8 +1,8 @@
 import { cn } from "@/lib/utils";
 
 type TrowInfoProps = {
-  title: string;
-  value: string;
+  title?: string;
+  value?: string;
   className?: string;
 };
 export function RowInfo({ title, value, className }: TrowInfoProps) {

@@ -15,6 +15,7 @@ import png7 from "@/assets/images/png7.png";
 import png8 from "@/assets/images/png8.png";
 import phoneIcon from "@/assets/images/otpPhone.svg";
 import mailIcon from "@/assets/images/otpMail.svg";
+import man from "@/assets/man.svg";
 
 export const randomImage = (): string => {
   const ran = Math.floor(Math.random() * 10);
@@ -39,6 +40,7 @@ const getImages = (img: string) => {
     png7,
     png8,
     whiteBg,
+    man,
   };
   return i[img];
 };

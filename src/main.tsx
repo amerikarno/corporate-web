@@ -110,7 +110,7 @@ createRoot(document.getElementById("root")!).render(
               element={<Portfolio />}
             />
             <Route
-              path={`${import.meta.env.BASE_URL}asset/:id`}
+              path={`${import.meta.env.BASE_URL}asset/:type/:id`}
               element={<AssetDetails />}
             />
             <Route

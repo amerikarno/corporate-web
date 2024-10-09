@@ -1,8 +1,8 @@
 import { cn } from "@/lib/utils";
 
 type TConstenDetails = {
-  header: string;
-  content: string;
+  header?: string;
+  content?: string;
   headClass?: string;
   contentClass?: string;
 };

@@ -125,6 +125,8 @@ let initialState: InitialState = {
     name: "",
   },
 
+  icoAll: {},
+
   unitTest: null,
 };
 
@@ -189,6 +191,15 @@ export default function reducer(state = initialState, action: any) {
         user: { ...state.user, email: payload },
       };
     /////////////////////////////////////////////////////
+
+    //////////////////////// ico /////////////////////////////
+    case "setAllIcoStore":
+      return {
+        ...state,
+        icoAll: payload,
+      };
+    /////////////////////////////////////////////////////
+
     default:
       return state;
   }

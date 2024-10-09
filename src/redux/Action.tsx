@@ -1,4 +1,5 @@
 import { TIndividualData } from "@/pages/authentication/addIndividualAccount/types";
+import { IcoType } from "@/pages/landing/types";
 import { Dispatch } from "redux";
 
 export const ThemeChanger = (value: string) => async (dispatch: Dispatch) => {
@@ -95,5 +96,12 @@ export const clearIndividualData = () => {
   return {
     type: "clearIndividualData",
     payload: null,
+  };
+};
+
+export const setAllIcoStore = (data: IcoType) => {
+  return {
+    type: "setAllIcoStore",
+    payload: data,
   };
 };

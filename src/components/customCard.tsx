@@ -1,19 +1,23 @@
-import { TDataProps } from "@/pages/landing/type";
 import { Button } from "./ui/Button";
 import { getCookies } from "@/lib/cookies";
 import { useNavigate } from "react-router-dom";
-import { consoleLog } from "@/lib/utils";
+import { Asset } from "@/pages/landing/types";
 
 type TCustomCardProps = {
-  data: TDataProps;
+  data: Asset | null | undefined;
   index: number;
+  type: string;
 };
 
-export function CustomCard({ data, index }: TCustomCardProps) {
+export function CustomCard({ data, index, type }: TCustomCardProps) {
   const normalText = "text-gray-400";
   const darkText = "text-gray-800";
   const token = getCookies();
   const navigate = useNavigate();
+
+  if (!data || data === null) {
+    return;
+  }
 
   return (
     <div className="w-[380px] h-[520px] border border-gray-200 rounded-[30px] bg-white shadow-md flex justify-center">
@@ -30,7 +34,8 @@ export function CustomCard({ data, index }: TCustomCardProps) {
             <Button
               className={`${token ? "" : "hidden"}`}
               onClick={() => {
-                consoleLog("invest");
+                localStorage.setItem("asset", `${type}-${index}`);
+                navigate("/order-trade");
               }}
             >
               Invest
@@ -40,9 +45,10 @@ export function CustomCard({ data, index }: TCustomCardProps) {
         </div>
 
         <div
-          onClick={() =>
-            navigate(`${import.meta.env.BASE_URL}asset/${index + 1}`)
-          }
+          onClick={() => {
+            localStorage.setItem("asset", `${type}-${index}`);
+            navigate(`/asset/${type}/${index}`);
+          }}
           className="hover:cursor-pointer"
         >
           <div className="w-full p-2 md:p-4">
@@ -61,8 +67,8 @@ export function CustomCard({ data, index }: TCustomCardProps) {
 
           <div className="w-full p-4 space-y-4">
             <div className="flex justify-between">
-              <p className={normalText}>Product Catagory</p>
-              <p className={darkText}>{data.catagory}</p>
+              <p className={normalText}>Product Category</p>
+              <p className={darkText}>{data.category}</p>
             </div>
             <div className="flex justify-between">
               <p className={normalText}>Expect Return</p>

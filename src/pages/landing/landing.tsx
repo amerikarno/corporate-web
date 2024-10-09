@@ -1,21 +1,17 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 import { ThemeChanger } from "@/redux/Action";
 import store from "@/redux/store";
 import { Collapsis } from "@/components/collapse/collapse";
-import {
-  dataAll,
-  dataForHot,
-  dataForRecomended,
-} from "./__mock__/mockCustomCardData";
 import getImages from "@/common/imagesData";
 import { getCookies, removeCookies } from "@/lib/cookies";
 import { Button } from "@/components/ui/Button";
 import example from "@assets/drawIcon/example.png";
 import { IcoListItem } from "@/components/icoListItem";
 import { MenuForDropdown } from "@/components/menuForDropdown";
-import { getApiInfo } from "@/lib/utils";
+import { IcoType } from "./types";
+import { getAllIcoData } from "@/lib/utils";
 
 interface datatype {
   ThemeChanger: any;
@@ -24,26 +20,42 @@ interface datatype {
 const Landing = ({ ThemeChanger }: datatype) => {
   const navigate = useNavigate();
   const token = getCookies();
+  const [icoData, setIcoData] = useState<IcoType | undefined>(undefined);
+
+  function handleResize() {
+    if (window.innerWidth <= 992) {
+      const theme = store.getState();
+      ThemeChanger({
+        ...theme,
+        toggled: "close",
+        dataNavLayout: "horizontal",
+      });
+    } else {
+      const theme = store.getState();
+      ThemeChanger({
+        ...theme,
+        toggled: "open",
+        dataNavLayout: "horizontal",
+      });
+    }
+  }
+
+  const fetchIcoData = async () => {
+    const data = await getAllIcoData();
+    if (data) {
+      setIcoData(data);
+      store.dispatch({
+        type: "setAllIcoStore",
+        payload: data,
+      });
+    }
+  };
 
   useEffect(() => {
-    getApiInfo("/api/v1/customer/product/ipo");
-    function handleResize() {
-      if (window.innerWidth <= 992) {
-        const theme = store.getState();
-        ThemeChanger({
-          ...theme,
-          toggled: "close",
-          dataNavLayout: "horizontal",
-        });
-      } else {
-        const theme = store.getState();
-        ThemeChanger({
-          ...theme,
-          toggled: "open",
-          dataNavLayout: "horizontal",
-        });
-      }
+    if (!icoData) {
+      fetchIcoData();
     }
+    localStorage.removeItem("asset");
 
     handleResize();
 
@@ -51,16 +63,15 @@ const Landing = ({ ThemeChanger }: datatype) => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // function handleClick() {
-  //   const theme = store.getState();
-  //   ThemeChanger({ ...theme, toggled: "close", dataNavLayout: "horizontal" });
-  // }
-
   const handleLogout = () => {
     localStorage.clear();
     removeCookies();
     navigate("/");
   };
+
+  if (!icoData) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>
@@ -106,9 +117,9 @@ const Landing = ({ ThemeChanger }: datatype) => {
           </div>
         </div>
         <div id="content" className="w-full space-y-6">
-          <IcoListItem data={dataForHot} title="Hot" />
-          <IcoListItem data={dataForRecomended} title="Recomended" />
-          <IcoListItem data={dataAll} title="All" />
+          <IcoListItem data={icoData.active} title="Active" />
+          <IcoListItem data={icoData.upcoming} title="Upcoming" />
+          <IcoListItem data={icoData.ended} title="Ended" />
         </div>
         <footer id="footer" className="bg-dark-bg">
           <div className="border-b border-white/10  pb-8">

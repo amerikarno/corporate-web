@@ -43,7 +43,8 @@ export function MenuForDropdown({ avatar, logout }: TMenuForDropdown) {
         <DropdownMenuItem
           className="cursor-pointer hover:bg-gray-300 hover:font-bold w-[200px]"
           onClick={() => {
-            navigate("/order-trade");
+            navigate("/");
+            // navigate("/order-trade");
           }}
         >
           Invest

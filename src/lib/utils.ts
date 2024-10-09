@@ -4,6 +4,7 @@ import { getCookies } from "./cookies";
 import { jwtDecode } from "jwt-decode";
 import { TUser } from "@/pages/authentication/login/types";
 import axios from "@/api/axios";
+import { mockAssetData } from "@/pages/assetDetails/__mock__/mockAsset";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -35,7 +36,14 @@ export function formatNumberToCommasFraction(
 export function consoleLog(...args: any[]) {
   const error = new Error();
   const stack = error.stack?.split("\n")[2].trim();
-  console.log(`[${stack}]`, ...args);
+  // const stack1 = error.stack?.split("\n")[1].trim();
+  // const stack0 = error.stack?.split("\n")[0].trim();
+  // console.log(error);
+  // console.log(stack0);
+  // console.log(stack1);
+  // console.log(stack);
+  console.log(stack, ...args);
+  // return [...args];
 }
 
 export const getUser = () => {
@@ -47,16 +55,36 @@ export const getUser = () => {
   return null;
 };
 
-export const getApiInfo = async (url: string) => {
-  const res = await axios.post(
-    url,
-    {},
-    {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${getCookies()}`,
-      },
+export const getAllIcoData = async () => {
+  try {
+    const res = await axios.post(
+      "api/v1/customer/product/ipo",
+      {},
+      { headers: { Authorization: `Bearer ${getCookies()}` } }
+    );
+    if (res.status === 200) {
+      return res.data;
     }
-  );
-  consoleLog(res);
+  } catch (error) {
+    console.log(error);
+    return mockAssetData;
+  }
+};
+
+export const getApiInfo = async (url: string) => {
+  try {
+    const res = await axios.post(
+      url,
+      {},
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${getCookies()}`,
+        },
+      }
+    );
+    consoleLog(res);
+  } catch (error) {
+    consoleLog(error);
+  }
 };

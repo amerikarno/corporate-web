@@ -1,10 +1,12 @@
+import getImages from "@/common/imagesData";
+
 type TPeopleCardProps = {
-  firstName: string;
+  firstName?: string;
   middleName?: string;
-  lastName: string;
-  position: string;
-  history: string;
-  picture: string;
+  lastName?: string;
+  position?: string;
+  history?: string;
+  picture?: string;
 };
 export function PeopleCard({
   firstName,
@@ -16,7 +18,11 @@ export function PeopleCard({
 }: TPeopleCardProps) {
   return (
     <div className="w-full flex flex-row md:gap-4 py-2 space-x-2">
-      <img src={picture} alt="" className="w-12 h-12 rounded-full" />
+      <img
+        src={picture ? picture : getImages("man")}
+        alt=""
+        className="w-12 h-12 rounded-full"
+      />
       <div className="flex flex-col flex-grow">
         <p className="text-black font-bold">
           {firstName} {middleName} {lastName}

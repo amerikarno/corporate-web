@@ -1,8 +1,8 @@
 type TFaq = {
   questionIndex: number;
   onSet: (index: number) => void;
-  question: string;
-  asnwer: string;
+  question?: string;
+  asnwer?: string;
   selectedFaq: number;
 };
 export function FaqAccordion({

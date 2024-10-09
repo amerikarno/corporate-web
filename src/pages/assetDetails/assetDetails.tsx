@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { mockAssetData } from "./__mock__/mockAsset";
-import { TAssetData } from "./types";
 import NavBar from "@/components/navbar";
 import { Card, CardContent, CardHeader } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
@@ -10,18 +9,40 @@ import { RowInfo } from "@/components/rowLableInfo";
 import { ArrowLeft } from "lucide-react";
 import { ContentDetails } from "@/components/contentDetails";
 import { FaqAccordion } from "@/components/Faq";
-import { consoleLog } from "@/lib/utils";
+import { TAssetData } from "../landing/types";
 
 export function AssetDetails() {
   const navigate = useNavigate();
   const assetId = useParams().id;
-  consoleLog(assetId);
+  const assetType = useParams().type;
   const [assetData, setAssetData] = useState<TAssetData | undefined>(undefined);
   const [tab, setTab] = useState(1);
   const [faq, setFaq] = useState(0);
 
   const fetchAssetData = async () => {
-    setAssetData(mockAssetData);
+    const index = parseInt(assetId || "0");
+    const store = localStorage.getItem("asset")?.split("-");
+    if (store) {
+      let data: TAssetData[] = [];
+      switch (store[0]) {
+        case "Active":
+          data = mockAssetData.active ? mockAssetData.active : [];
+          break;
+
+        case "Upcoming":
+          data = mockAssetData.upcoming ? mockAssetData.upcoming : [];
+          break;
+
+        case "Ended":
+          data = mockAssetData.ended ? mockAssetData.ended : [];
+          break;
+
+        default:
+          break;
+      }
+
+      setAssetData(data[index]);
+    }
   };
 
   useEffect(() => {
@@ -62,48 +83,58 @@ export function AssetDetails() {
                         <div className="flex-grow">
                           <div className="w-full flex flex-row">
                             <img
-                              src={assetData.asset.logo}
+                              src={assetData?.asset?.logo}
                               alt=""
                               className="w-16 h-16"
                             />
                             <div className="w-full flex-col px-4 space-y-2">
                               <h1 className={`text-xl font-bold ${darkText}`}>
-                                {assetData.asset.name}
+                                {assetData?.asset?.name}
                               </h1>
                               <div
                                 className={`hidden sm:block sm:line-clamp-2 ${normalText}`}
                               >
-                                {assetData.asset.description}
+                                {assetData?.asset?.description}
                               </div>
                             </div>
                           </div>
                         </div>
                         <div className="w1/4">
-                          <Button>Invest</Button>
+                          <Button
+                            onClick={() => {
+                              localStorage.setItem(
+                                "asset",
+                                `${assetType}-${assetId}`
+                              );
+                              navigate("/order-trade");
+                            }}
+                          >
+                            Invest
+                          </Button>
                         </div>
                       </div>
                     </div>
                   </CardHeader>
                   <CardContent>
-                    <div className="w-full p-6 grid grid-cols-1 md:grid-cols-3 gap-10">
+                    <div className="w-full p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
                       <div className="space-y-4">
                         <h1 className={normalText}>Total Issuance</h1>
                         <p className={darkText}>
-                          {assetData.info.totalIssuance}
+                          {assetData?.info?.totalIssuance}
                         </p>
                       </div>
 
                       <div className="space-y-4">
                         <h1 className={normalText}>Total Amount Raised</h1>
                         <p className={darkText}>
-                          {assetData.info.totalAmountRaised}
+                          {assetData?.info?.totalAmountRaised}
                         </p>
                       </div>
 
                       <div className="space-y-4">
                         <h1 className={normalText}>Contract Information</h1>
                         <p className={`break-words ${darkText}`}>
-                          {assetData.info.contractInfomation}
+                          {assetData?.info?.contractInfomation}
                         </p>
                       </div>
 
@@ -112,7 +143,7 @@ export function AssetDetails() {
                           Minimum Investment Amount
                         </h1>
                         <p className={darkText}>
-                          {assetData.info.minimumInvestmentAmount}
+                          {assetData?.info?.minimumInvestmentAmount}
                         </p>
                       </div>
 
@@ -121,14 +152,14 @@ export function AssetDetails() {
                           Minimum Investment Quantity
                         </h1>
                         <p className={darkText}>
-                          {assetData.info.minimumInvestmentQuantity}
+                          {assetData?.info?.minimumInvestmentQuantity}
                         </p>
                       </div>
 
                       <div className="space-y-4">
                         <h1 className={normalText}>Issue Unit Price</h1>
                         <p className={darkText}>
-                          {assetData.info.issueUnitPrice}
+                          {assetData?.info?.issueUnitPrice}
                         </p>
                       </div>
                     </div>
@@ -179,7 +210,7 @@ export function AssetDetails() {
                             aria-labelledby="underline-item-1"
                           >
                             <div className="hs-accordion-group">
-                              {assetData.details.map((item, index) => (
+                              {assetData?.details?.map((item, index) => (
                                 <div className="py-6" key={index}>
                                   <ContentDetails
                                     key={index}
@@ -201,7 +232,7 @@ export function AssetDetails() {
                               className="hs-accordion-group"
                               data-hs-accordion-always-open
                             >
-                              {assetData.faq.map((item, index) => (
+                              {assetData?.faq?.map((item, index) => (
                                 <div className="py-2" key={index}>
                                   <FaqAccordion
                                     key={index}
@@ -221,6 +252,7 @@ export function AssetDetails() {
                   </CardContent>
                 </Card>
               </div>
+
               <div className="min-w-[400px] lg:w-1/3 xl:w-1/3 lg:pt-14 px-2">
                 <Card className="bg-white rounded-[30px] px-4 space-y-20">
                   <div className="space-y-4 pt-10">
@@ -229,79 +261,81 @@ export function AssetDetails() {
                     </h1>
                     <RowInfo
                       title="Network"
-                      value={assetData.keyInformation.network}
+                      value={assetData?.keyInformation?.network}
                     />
                     <RowInfo
                       title="Precision"
-                      value={assetData.keyInformation.precision}
+                      value={assetData?.keyInformation?.precision}
                     />
                     <RowInfo
                       title="Capital Structure"
-                      value={assetData.keyInformation.capitalStructure}
+                      value={assetData?.keyInformation?.capitalStructure}
                     />
                     <RowInfo
                       title="Classification"
-                      value={assetData.keyInformation.classification}
+                      value={assetData?.keyInformation?.classiFication}
                     />
                     <RowInfo
                       title="Product Type"
-                      value={assetData.keyInformation.productType}
+                      value={assetData?.keyInformation?.productType}
                     />
                     <RowInfo
                       title="Creation Time"
-                      value={assetData.keyInformation.creationTime}
+                      value={assetData?.keyInformation?.creationTime}
                     />
                     <RowInfo
                       title="Release Time"
-                      value={assetData.keyInformation.releaseTime}
+                      value={assetData?.keyInformation?.releaseTime}
                     />
                     <RowInfo
                       title="Completion Time"
-                      value={assetData.keyInformation.compleationTime}
+                      value={assetData?.keyInformation?.compleationTime}
                     />
                   </div>
+
                   <div className="space-y-4">
                     <h1 className={`w-full text-left text-lg ${darkText}`}>
                       Issuance Terms
                     </h1>
                     <RowInfo
                       title="Investment Preriod"
-                      value={assetData.issuanceTerms.investmentPeriod}
+                      value={assetData?.issuanceTerms?.investmentPeriod}
                     />
                     <RowInfo
                       title="Dividend Yeild"
-                      value={assetData.issuanceTerms.dividendYield}
+                      value={assetData?.issuanceTerms?.dividendYield}
                     />
                     <RowInfo
                       title="Gross Margin"
-                      value={assetData.issuanceTerms.grossmargin}
+                      value={assetData?.issuanceTerms?.grossMargin}
                     />
                     <RowInfo
                       title="Equity Multiple"
-                      value={assetData.issuanceTerms.equityMultiple}
+                      value={assetData?.issuanceTerms?.equityMultiple}
                     />
                     <RowInfo
                       title="Profit"
-                      value={assetData.issuanceTerms.profit}
+                      value={assetData?.issuanceTerms?.profit}
                     />
                     <RowInfo
                       title="Leverage"
-                      value={assetData.issuanceTerms.leverage}
+                      value={assetData?.issuanceTerms?.leverage}
                     />
                     <RowInfo
                       title="Investment Structure"
-                      value={assetData.issuanceTerms.investmentStructure}
+                      value={assetData?.issuanceTerms?.investmentStructure}
                     />
                     <RowInfo
                       title="DIstribution Frequency"
-                      value={assetData.issuanceTerms.distributionFrequency}
+                      value={assetData?.issuanceTerms?.distributionFrequency}
                     />
                   </div>
+
                   <div className="space-y-4 pb-5">
                     <h1 className={`w-full text-left text-lg ${darkText}`}>
                       Company Members
                     </h1>
-                    {assetData.companyMembers.map((member, index) => (
+                    {assetData?.companyMembers?.map((member, index) => (
                       <PeopleCard
                         key={index}
                         firstName={member.firstName}
