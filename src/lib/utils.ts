@@ -67,7 +67,7 @@ export const getAllIcoData = async () => {
     }
   } catch (error) {
     console.log(error);
-    return mockAssetData;
+    // return mockAssetData;
   }
 };
 

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { mockAssetData } from "./__mock__/mockAsset";
 import NavBar from "@/components/navbar";
 import { Card, CardContent, CardHeader } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
@@ -10,6 +9,8 @@ import { ArrowLeft } from "lucide-react";
 import { ContentDetails } from "@/components/contentDetails";
 import { FaqAccordion } from "@/components/Faq";
 import { TAssetData } from "../landing/types";
+import { useSelector } from "react-redux";
+import { getAllIcoData } from "@/lib/utils";
 
 export function AssetDetails() {
   const navigate = useNavigate();
@@ -18,23 +19,29 @@ export function AssetDetails() {
   const [assetData, setAssetData] = useState<TAssetData | undefined>(undefined);
   const [tab, setTab] = useState(1);
   const [faq, setFaq] = useState(0);
+  const icoAll = useSelector((state: any) => state.icoAll);
 
   const fetchAssetData = async () => {
-    const index = parseInt(assetId || "0");
     const store = localStorage.getItem("asset")?.split("-");
-    if (store) {
+    let allIcoData;
+    Object.keys(icoAll).length === 0
+      ? (allIcoData = await getAllIcoData())
+      : (allIcoData = icoAll);
+
+    if (store && allIcoData) {
+      const index = parseInt(store[1] || "0");
       let data: TAssetData[] = [];
       switch (store[0]) {
         case "Active":
-          data = mockAssetData.active ? mockAssetData.active : [];
+          data = allIcoData.active ? allIcoData.active : [];
           break;
 
-        case "Upcoming":
-          data = mockAssetData.upcoming ? mockAssetData.upcoming : [];
+        case (store[0] = "Upcoming"):
+          data = allIcoData.upcoming ? allIcoData.upcoming : [];
           break;
 
-        case "Ended":
-          data = mockAssetData.ended ? mockAssetData.ended : [];
+        case (store[0] = "Ended"):
+          data = allIcoData.ended ? allIcoData.ended : [];
           break;
 
         default:
