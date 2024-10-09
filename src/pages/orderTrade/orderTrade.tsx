@@ -69,16 +69,19 @@ export default function OrderTrade() {
     },
     {
       cell: (row: Transaction) => (
-        <Button
-          onClick={() => {
-            handleCancleTransaction(row);
-          }}
-          disabled={
-            row?.investment?.status === "1" || row?.investment?.status === "2"
-          }
-        >
-          cancle
-        </Button>
+        <div className="flex w-full h-full justify-center items-center">
+          <Button
+            className="bg-slate-700 hover:bg-red-400 hover:border-none hover:text-white w-full h-full"
+            onClick={() => {
+              handleCancleTransaction(row);
+            }}
+            disabled={
+              row?.investment?.status === "1" || row?.investment?.status === "2"
+            }
+          >
+            cancle
+          </Button>
+        </div>
       ),
       ignoreRowClick: true,
     },
@@ -291,6 +294,7 @@ export default function OrderTrade() {
       if (res.status === 200) {
         consolelog(res.data);
         reset();
+        await fetchOrderList();
       } else {
         consolelog(res.data);
       }
@@ -470,7 +474,7 @@ export default function OrderTrade() {
               <DataTable
                 title="Orders / Reserves Lists"
                 columns={columnsOrderTrade}
-                data={investTransactions}
+                data={investTransactions || []}
                 clearSelectedRows
               />
             </Card>
