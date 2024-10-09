@@ -3,6 +3,7 @@ import { twMerge } from "tailwind-merge";
 import { getCookies } from "./cookies";
 import { jwtDecode } from "jwt-decode";
 import { TUser } from "@/pages/authentication/login/types";
+import axios from "@/api/axios";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -32,7 +33,9 @@ export function formatNumberToCommasFraction(
 }
 
 export function consoleLog(...args: any[]) {
-  console.log(...args);
+  const error = new Error();
+  const stack = error.stack?.split("\n")[2].trim();
+  console.log(`[${stack}]`, ...args);
 }
 
 export const getUser = () => {
@@ -42,4 +45,18 @@ export const getUser = () => {
     return user;
   }
   return null;
+};
+
+export const getApiInfo = async (url: string) => {
+  const res = await axios.post(
+    url,
+    {},
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${getCookies()}`,
+      },
+    }
+  );
+  consoleLog(res);
 };

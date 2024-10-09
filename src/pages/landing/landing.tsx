@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/Button";
 import example from "@assets/drawIcon/example.png";
 import { IcoListItem } from "@/components/icoListItem";
 import { MenuForDropdown } from "@/components/menuForDropdown";
+import { getApiInfo } from "@/lib/utils";
 
 interface datatype {
   ThemeChanger: any;
@@ -25,6 +26,7 @@ const Landing = ({ ThemeChanger }: datatype) => {
   const token = getCookies();
 
   useEffect(() => {
+    getApiInfo("/api/v1/customer/product/ipo");
     function handleResize() {
       if (window.innerWidth <= 992) {
         const theme = store.getState();
