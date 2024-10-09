@@ -7,7 +7,7 @@ import axios from "axios";
 const BASE_URL = "https://sit-corporate-admin.finansiada.com";
 // const BASE_URL = "http://cwa-alb-607898773.eu-north-1.elb.amazonaws.com";
 
-// consoleLog("base url:", BASE_URL);
+// consolelog("base url:", BASE_URL);
 
 export default axios.create({
   baseURL: BASE_URL,

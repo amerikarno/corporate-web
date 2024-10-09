@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCookies } from "@/lib/cookies";
 import axios from "@/api/axios";
 import { initIndividualData, setTestCorporateData } from "@/redux/Action";
-import { consoleLog } from "@/lib/utils";
+import { consolelog } from "@/lib/utils";
 
 export default function AddIndividualAccount() {
   const {
@@ -33,14 +33,14 @@ export default function AddIndividualAccount() {
 
   const fetchIndividualData = async (AccountID: string) => {
     try {
-      consoleLog({ accountId: AccountID });
+      consolelog({ accountId: AccountID });
       const res = await axios.post("/api/v1/individual/list", {
         accountId: AccountID,
       });
       dispatch(initIndividualData(res.data[0]));
-      consoleLog(res);
+      consolelog(res);
     } catch (error) {
-      consoleLog(error);
+      console.log(error);
     }
   };
 
@@ -55,7 +55,7 @@ export default function AddIndividualAccount() {
 
   useEffect(() => {
     if (individualData) {
-      consoleLog(individualData);
+      consolelog(individualData);
       const dateFormatted = individualData?.birthDate?.split("T")[0];
       const fillData: TIndividualAccount = {
         email: individualData.email || "",
@@ -72,7 +72,7 @@ export default function AddIndividualAccount() {
         laserCode: individualData.laserCode || "",
         agreement: true,
       };
-      consoleLog(fillData);
+      consolelog(fillData);
       reset(fillData);
     }
   }, [individualData, reset]);
@@ -82,7 +82,7 @@ export default function AddIndividualAccount() {
 
   const handleTitleChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
     const choosedTitle = e.target.value;
-    consoleLog(choosedTitle);
+    consolelog(choosedTitle);
     if (choosedTitle === "นาย") {
       setThTitle("นาย");
       setEngTitle("Mr.");
@@ -94,7 +94,7 @@ export default function AddIndividualAccount() {
       setValue("thTitle", "นาง");
       setValue("engTitle", "Mrs.");
     } else if (choosedTitle === "นางสาว") {
-      consoleLog("go to this");
+      consolelog("go to this");
       setThTitle("นางสาว");
       setEngTitle("Miss.");
       setValue("thTitle", "นางสาว");
@@ -135,7 +135,7 @@ export default function AddIndividualAccount() {
   };
 
   const onSubmit = async (data: TIndividualAccount) => {
-    consoleLog(data);
+    consolelog(data);
     let body = {
       ...data,
       birthDate: new Date(data.birthDate),
@@ -149,37 +149,37 @@ export default function AddIndividualAccount() {
       })
     );
     try {
-      consoleLog("body to send ", body);
+      consolelog("body to send ", body);
       if (individualData?.id) {
-        consoleLog("api : /api/v1/individual/update/pre");
+        consolelog("api : /api/v1/individual/update/pre");
         const res = await axios.post("/api/v1/individual/update/pre", body, {});
-        consoleLog(res);
+        consolelog(res);
         if (res.status === 200) {
           const age = calculateAge(body.birthDate);
           localStorage.setItem("cid", res.data.id);
           localStorage.setItem("age", age.toString());
-          consoleLog(age);
-          consoleLog("update success", res, data);
+          consolelog(age);
+          consolelog("update success", res, data);
 
           navigate("/authentication/signup/basicinfo");
           window.scrollTo(0, 0);
         }
       } else {
-        consoleLog("api : /api/v1/individual/precreate ", body);
+        consolelog("api : /api/v1/individual/precreate ", body);
         const res = await axios.post("/api/v1/individual/precreate", body, {});
-        consoleLog(res);
+        consolelog(res);
         if (res.status === 200) {
           const age = calculateAge(body.birthDate);
           localStorage.setItem("cid", res.data.id);
           localStorage.setItem("age", age.toString());
-          consoleLog("create success", res, data);
+          consolelog("create success", res, data);
 
           navigate("/authentication/signup/basicinfo");
           window.scrollTo(0, 0);
         }
       }
     } catch (error) {
-      consoleLog(error);
+      console.log(error);
     }
   };
 

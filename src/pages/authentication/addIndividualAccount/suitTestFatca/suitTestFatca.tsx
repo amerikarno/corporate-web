@@ -5,7 +5,7 @@ import SubSuitTest from "./subSuitTest";
 import KnowLedgeTest from "./knowLedgeTest";
 import { TiTick } from "react-icons/ti";
 import "./suitTestFatca.css";
-import { consoleLog } from "@/lib/utils";
+import { consolelog } from "@/lib/utils";
 import { useNavigate } from "react-router-dom";
 import axios from "@/api/axios";
 import { initIndividualData, setTestCorporateData } from "@/redux/Action";
@@ -241,7 +241,7 @@ if you are an American citizen, please complete the FATCA form first.`);
                           // disabled={isButtonDisabled}
                           onClick={() => {
                             setIsButtonDisabled(true);
-                            consoleLog("fatcaInfo : ", fatcaInfo);
+                            consolelog("fatcaInfo : ", fatcaInfo);
                           }}
                         >
                           {isButtonDisabled ? (

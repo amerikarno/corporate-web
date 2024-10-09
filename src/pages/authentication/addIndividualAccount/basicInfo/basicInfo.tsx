@@ -18,7 +18,7 @@ import {
 import { basicInfoSchema, TBasicInfo } from "./constant/schemas";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { consoleLog } from "@/lib/utils";
+import { consolelog } from "@/lib/utils";
 import { getCookies } from "@/lib/cookies";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "@/api/axios";
@@ -70,14 +70,14 @@ export default function BasicInfo() {
 
   const fetchIndividualData = async (AccountID: string) => {
     try {
-      consoleLog(AccountID);
+      consolelog(AccountID);
       const res = await axios.post("/api/v1/individual/list", {
         accountId: AccountID,
       });
       dispatch(initIndividualData(res.data[0]));
-      consoleLog(res);
+      consolelog(res);
     } catch (error) {
-      consoleLog(error);
+      console.log(error);
     }
   };
 
@@ -90,13 +90,13 @@ export default function BasicInfo() {
     if (cidValue) {
       fetchIndividualData(cidValue || "");
     } else {
-      consoleLog("cid not found");
+      consolelog("cid not found");
     }
   }, [token, dispatch]);
 
   useEffect(() => {
     if (individualData) {
-      consoleLog(individualData);
+      consolelog(individualData);
 
       const registeredAddressFind: TBasicinfoAddress | null =
         individualData?.address?.find((addr) => addr.types === 1) || null;
@@ -173,8 +173,8 @@ export default function BasicInfo() {
           retireInvestment: individualData?.retireInvestment || false,
         },
       };
-      consoleLog(firstBank);
-      consoleLog(fillData);
+      consolelog(firstBank);
+      consolelog(fillData);
       reset(fillData);
     }
   }, [individualData, reset]);
@@ -248,7 +248,7 @@ export default function BasicInfo() {
       banks: [prebody.firstBankAccount, prebody.secondBankAccountBody],
       pageID: 300,
     };
-    consoleLog(body);
+    consolelog(body);
     dispatch(setTestCorporateData(body));
     try {
       const registeredAddressFind: TBasicinfoAddress | null =
@@ -260,38 +260,38 @@ export default function BasicInfo() {
           {}
         );
         if (res.status === 200) {
-          consoleLog("update basic info success", res);
+          consolelog("update basic info success", res);
           navigate("/authentication/signup/suittestfatca");
           window.scrollTo(0, 0);
         } else {
-          consoleLog("update basic info unsuccess x", res);
+          consolelog("update basic info unsuccess x", res);
         }
       } else {
         const res = await axios.post("/api/v1/individual/postcreate", body, {});
         if (res.status === 200) {
-          consoleLog("submit basic info success", res);
+          consolelog("submit basic info success", res);
           navigate("/authentication/signup/suittestfatca");
           window.scrollTo(0, 0);
         } else {
-          consoleLog("submit basic info unsuccess x", res);
+          consolelog("submit basic info unsuccess x", res);
         }
       }
     } catch (error) {
-      consoleLog(error);
+      console.log(error);
     }
   };
 
   const handleAddressRadioChange = (value: string) => {
-    consoleLog(value);
+    consolelog(value);
     setRadioAddressValue(value);
   };
   const handleWorkRadioChange = (value: string) => {
-    consoleLog(value);
+    consolelog(value);
     setRadioWorkValue(value);
   };
 
   const handleBankRadioChange = (value: string) => {
-    consoleLog(value);
+    consolelog(value);
     setAddBankValue(value);
   };
 

@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import getImages from "@/common/imagesData";
 import { useWindowSize } from "@/lib/useWindowSize";
 import { sleep } from "@/lib/utils";
-import { consoleLog } from "@/lib/utils";
+import { consolelog } from "@/lib/utils";
 
 type TScreen = {
   width: number;
@@ -47,10 +47,10 @@ export default function IDCardCapture() {
   };
 
   // const handleSubmit = async () => {
-  //   // consoleLog(imageSrc);
-  //   // consoleLog("face image", livenessOcr.faceImage);
-  //   // consoleLog("id image", livenessOcr.idCardImage);
-  //   // consoleLog("sent image to server");
+  //   // consolelog(imageSrc);
+  //   // consolelog("face image", livenessOcr.faceImage);
+  //   // consolelog("id image", livenessOcr.idCardImage);
+  //   // consolelog("sent image to server");
   //   navigate("/authentication/signup/identityverification");
   // };
 
@@ -73,7 +73,7 @@ export default function IDCardCapture() {
       });
       setScreenLayout({ width: 326, height: 514 });
     }
-    consoleLog(width, height);
+    consolelog(width, height);
   }, [width, height]);
 
   return (

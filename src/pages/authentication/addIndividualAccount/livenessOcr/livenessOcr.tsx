@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { setFaceImage } from "@/redux/Action";
 import { sleep } from "@/lib/utils";
 import { useWindowSize } from "@/lib/useWindowSize";
-import { consoleLog } from "@/lib/utils";
+import { consolelog } from "@/lib/utils";
 
 export default function Liveness() {
   type TActionMessage = {
@@ -68,14 +68,14 @@ export default function Liveness() {
     }
 
     loadModels();
-    consoleLog(image);
+    consolelog(image);
   }, []);
 
   useEffect(() => {
     if (stream) {
       const track = stream.getVideoTracks()[0];
       track.onended = () => {
-        consoleLog("Video track ended");
+        consolelog("Video track ended");
         setStream(null);
       };
     }
@@ -113,7 +113,7 @@ export default function Liveness() {
   };
 
   const faceDetect = async () => {
-    // consoleLog(trackIsCenter, trackIsLeft, trackIsRight, trackIsMouthOpen);
+    // consolelog(trackIsCenter, trackIsLeft, trackIsRight, trackIsMouthOpen);
     if (
       trackIsCenter &&
       trackIsLeft &&
@@ -137,12 +137,12 @@ export default function Liveness() {
         const leftEAR = calculateEAR(leftEye);
         const rightEAR = calculateEAR(rightEye);
         if (rightEAR > 0.4 && trackIsCenter) {
-          consoleLog("Turned left");
+          consolelog("Turned left");
           setIsTurnLeft(true);
           trackIsLeft = true;
         }
         if (leftEAR > 0.4 && trackIsCenter) {
-          consoleLog("Turned right");
+          consolelog("Turned right");
           setIsTurnRight(true);
           trackIsRight = true;
         }
@@ -157,7 +157,7 @@ export default function Liveness() {
           mouth[19],
         ]);
         if (mouthDist > 25 && trackIsCenter) {
-          consoleLog("Mouth opened");
+          consolelog("Mouth opened");
           setIsMouthOpen(true);
           trackIsMouthOpen = true;
         }
@@ -383,10 +383,10 @@ export default function Liveness() {
 
   const takePhoto = () => {
     if (isCenter && isMouthOpen && isTurnLeft && isTurnRight) {
-      consoleLog("take a photo");
+      consolelog("take a photo");
       capture();
     } else {
-      consoleLog("actions incomplete");
+      consolelog("actions incomplete");
     }
     navigate("/authentication/signup/webcaminstructions");
   };

@@ -10,7 +10,7 @@ import DataTable, { TableColumn } from "react-data-table-component";
 import { MdCurrencyExchange } from "react-icons/md";
 import { IoReceiptOutline } from "react-icons/io5";
 import NavBar from "@/components/navbar";
-import { consoleLog, getAllIcoData, getUser } from "@/lib/utils";
+import { consolelog, getAllIcoData, getUser } from "@/lib/utils";
 import axios from "@/api/axios";
 import { getCookies } from "@/lib/cookies";
 import { TUser } from "../authentication/login/types";
@@ -210,10 +210,10 @@ export default function OrderTrade() {
       if (res.status === 200) {
         setInvestTransactions(res.data);
       } else {
-        consoleLog(res.data);
+        console.log(res.data);
       }
     } catch (error) {
-      consoleLog(error);
+      console.log(error);
     }
   };
 
@@ -235,7 +235,7 @@ export default function OrderTrade() {
     if (!assetData) {
       const user = getUser();
       setUser(user ? user : undefined);
-      consoleLog("user", user);
+      consolelog("user", user);
       fetchAssetData();
       fetchOrderList();
     }
@@ -277,7 +277,7 @@ export default function OrderTrade() {
       customerCode: user?.customerCode,
       icoCode: assetData?.icoCode,
     };
-    consoleLog("data", body);
+    consolelog("data", body);
     try {
       const res = await axios.post(
         "/api/v1/customer/product/investment",
@@ -290,13 +290,13 @@ export default function OrderTrade() {
         }
       );
       if (res.status === 200) {
-        consoleLog(res.data);
+        consolelog(res.data);
         reset();
       } else {
-        consoleLog(res.data);
+        consolelog(res.data);
       }
     } catch (error) {
-      consoleLog(error);
+      console.log(error);
     }
   };
 

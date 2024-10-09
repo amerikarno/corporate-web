@@ -3,7 +3,7 @@ import axios from "axios";
 import api from "@/api/axios";
 import { useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/Button";
-import { consoleLog } from "@/lib/utils";
+import { consolelog } from "@/lib/utils";
 
 const AzureForm: React.FC = () => {
   const [accessToken, setAccessToken] = useState<string | null>(null);
@@ -15,7 +15,7 @@ const AzureForm: React.FC = () => {
     const token = query.get("access_token");
 
     if (token) {
-      consoleLog("Token:", token);
+      consolelog("Token:", token);
       setAccessToken(token);
     }
   }, [location.search]);
@@ -28,16 +28,16 @@ const AzureForm: React.FC = () => {
         },
         withCredentials: true,
       });
-      consoleLog(res);
+      consolelog(res);
     } catch (error) {
-      consoleLog(error);
+      console.log(error);
     }
     window.location.href = "http://localhost:1323/api/v1/authen/login/azure";
   };
 
   useEffect(() => {
     if (accessToken) {
-      consoleLog("Access Token:", accessToken);
+      consolelog("Access Token:", accessToken);
       axios
         .get("https://graph.microsoft.com/v1.0/me", {
           headers: {
@@ -45,7 +45,7 @@ const AzureForm: React.FC = () => {
           },
         })
         .then((response) => {
-          consoleLog("User Data:", response.data);
+          consolelog("User Data:", response.data);
           setUserData(response.data);
         })
         .catch((error) => {

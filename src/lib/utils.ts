@@ -33,7 +33,7 @@ export function formatNumberToCommasFraction(
   });
 }
 
-export function consoleLog(...args: any[]) {
+export function consolelog(...args: any[]) {
   const error = new Error();
   const stack = error.stack?.split("\n")[2].trim();
   // const stack1 = error.stack?.split("\n")[1].trim();
@@ -83,8 +83,8 @@ export const getApiInfo = async (url: string) => {
         },
       }
     );
-    consoleLog(res);
+    consolelog(res);
   } catch (error) {
-    consoleLog(error);
+    console.log(error);
   }
 };

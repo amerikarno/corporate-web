@@ -1,4 +1,4 @@
-import { consoleLog } from "@/lib/utils";
+import { consolelog } from "@/lib/utils";
 import { Button } from "../../../../components/ui/Button";
 import { Card, CardContent } from "../../../../components/ui/Card";
 import { useEffect, useState } from "react";
@@ -176,14 +176,14 @@ export default function KnowLedgeTest({ onTestSuccess }: KnowLedgeTestProps) {
 
   const fetchIndividualData = async (AccountID: string) => {
     try {
-      consoleLog(AccountID);
+      consolelog(AccountID);
       const res = await axios.post("/api/v1/individual/list", {
         accountId: AccountID,
       });
       dispatch(initIndividualData(res.data[0]));
-      consoleLog(res);
+      consolelog(res);
     } catch (error) {
-      consoleLog(error);
+      console.log(error);
     }
   };
   const individualData = useSelector((state: any) => state.individualData);
@@ -249,7 +249,7 @@ export default function KnowLedgeTest({ onTestSuccess }: KnowLedgeTestProps) {
     } else {
       setAllTestSuccess(true);
       onTestSuccess(true);
-      consoleLog("All Answer Corrected!");
+      consolelog("All Answer Corrected!");
     }
   };
 

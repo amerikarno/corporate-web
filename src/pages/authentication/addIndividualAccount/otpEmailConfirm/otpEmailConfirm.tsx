@@ -16,7 +16,7 @@ import { setIndividualEmail, setIndividualMobile } from "@/redux/Action";
 import { useNavigate } from "react-router-dom";
 import getImages from "@/common/imagesData";
 import { normalStyleInput } from "@/assets/css/normalStyleInput";
-import { consoleLog } from "@/lib/utils";
+import { consolelog } from "@/lib/utils";
 
 export function OtpEmailConfirm() {
   const initialTime = 300;
@@ -78,7 +78,7 @@ export function OtpEmailConfirm() {
       default:
         break;
     }
-    consoleLog("click", type);
+    consolelog("click", type);
   };
 
   const hideOtpNumber = (number?: string) => {
