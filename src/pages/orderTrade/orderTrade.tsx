@@ -70,7 +70,6 @@ export default function OrderTrade() {
     {
       cell: (row: Transaction) => (
         <Button
-          variant={"outline"}
           onClick={() => {
             handleCancleTransaction(row);
           }}
@@ -104,7 +103,7 @@ export default function OrderTrade() {
   const handleCancleTransaction = async (data: Transaction) => {
     try {
       const res = await axios.post(
-        "/api/v1/customer/product/ipo/transaction/delete",
+        "/api/v1/customer/product/transaction/delete",
         {
           id: data.investment?.id,
         },
