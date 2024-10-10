@@ -161,6 +161,7 @@ export default function OrderTrade() {
       }
     } catch (error) {
       console.log(error);
+      // TODO: remove mock
       setBankInfo(bankMock);
     }
   };
@@ -226,7 +227,7 @@ export default function OrderTrade() {
       if (res.status === 200) {
         consolelog(res.data);
         reset();
-        // await fetchOrderList();
+        await fetchUserBankInfo();
       } else {
         consolelog(res.data);
       }
