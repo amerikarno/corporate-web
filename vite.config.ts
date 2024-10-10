@@ -11,5 +11,8 @@ export default defineConfig({
       "@components": path.resolve(__dirname, "./src/components"),
     },
   },
+  build: {
+    chunkSizeWarningLimit: 3000,
+  },
   plugins: [react()],
 });

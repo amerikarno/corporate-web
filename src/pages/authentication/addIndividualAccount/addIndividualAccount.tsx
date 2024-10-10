@@ -199,7 +199,7 @@ export default function AddIndividualAccount() {
                       onChange: handleTitleChange,
                     })}
                     value={thTitle}
-                    className={normalStyleInput}
+                    className={`${normalStyleInput}`}
                   >
                     <option value="">คำนำหน้าชื่อ (ภาษาไทย)</option>
                     <option value="นาย">นาย</option>
@@ -221,7 +221,7 @@ export default function AddIndividualAccount() {
                     {...register("thName")}
                     id="thName"
                     label="ชื่อ (ภาษาไทย)"
-                    className={normalStyleInput}
+                    // className={normalStyleInput}
                   />
                   {errors.thName && (
                     <span className="text-red-500 text-sm">
@@ -235,7 +235,7 @@ export default function AddIndividualAccount() {
                     {...register("thSurname")}
                     id="thSurname"
                     label="ชื่อสกุล (ภาษาไทย)"
-                    className={normalStyleInput}
+                    // className={normalStyleInput}
                   />
                   {errors.thSurname && (
                     <span className="text-red-500 text-sm">
@@ -254,7 +254,7 @@ export default function AddIndividualAccount() {
                       onChange: handleTitleChange,
                     })}
                     value={engTitle}
-                    className={normalStyleInput}
+                    className={`${normalStyleInput}`}
                   >
                     <option value="">คำนำหน้าชื่อ (ภาษาอังกฤษ)</option>
                     <option value="Mr.">Mr.</option>
@@ -276,7 +276,7 @@ export default function AddIndividualAccount() {
                     {...register("engName")}
                     id="engName"
                     label="ชื่อ (ภาษาอังกฤษ)"
-                    className={normalStyleInput}
+                    // className={normalStyleInput}
                   />
                   {errors.engName && (
                     <span className="text-red-500 text-sm">
@@ -291,7 +291,7 @@ export default function AddIndividualAccount() {
                     {...register("engSurname")}
                     id="engSurname"
                     label="ชื่อสกุล (ภาษาอังกฤษ)"
-                    className={normalStyleInput}
+                    // className={normalStyleInput}
                   />
                   {errors.engSurname && (
                     <span className="text-red-500 text-sm">
@@ -309,7 +309,7 @@ export default function AddIndividualAccount() {
                   {...register("email")}
                   id="email"
                   label="อีเมล"
-                  className={normalStyleInput}
+                  // className={normalStyleInput}
                 />
                 {errors.email && (
                   <span className="text-red-500 text-sm">
@@ -324,7 +324,7 @@ export default function AddIndividualAccount() {
                   {...register("mobile")}
                   id="mobile"
                   label="หมายเลขโทรศัพท์มือถือ"
-                  className={normalStyleInput}
+                  // className={normalStyleInput}
                 />
                 {errors.mobile && (
                   <span className="text-red-500 text-sm">
@@ -340,7 +340,7 @@ export default function AddIndividualAccount() {
                   type="date"
                   {...register("birthDate")}
                   label="วัน/เดือน/ปี เกิด"
-                  className={normalStyleInput}
+                  // className={normalStyleInput}
                 />
                 {errors.birthDate && (
                   <span className="text-red-500 text-sm">
@@ -352,7 +352,7 @@ export default function AddIndividualAccount() {
               <div className="flex flex-col lg:w-1/2 w-full">
                 <select
                   {...register("marriageStatus")}
-                  className={normalStyleInput}
+                  className={`${normalStyleInput}`}
                 >
                   <option value="">สถานะ</option>
                   <option value="โสด">Single</option>
@@ -374,7 +374,7 @@ export default function AddIndividualAccount() {
                   {...register("citizenId")}
                   id="citizenId"
                   label="หมายเลขบัตรประชาชน"
-                  className={normalStyleInput}
+                  // className={normalStyleInput}
                 />
                 {errors.citizenId && (
                   <span className="text-red-500 text-sm">
@@ -389,7 +389,7 @@ export default function AddIndividualAccount() {
                   {...register("laserCode")}
                   id="lasorCode"
                   label="เลขหลังบัตรประชาชน (Laser Code)"
-                  className={normalStyleInput}
+                  // className={normalStyleInput}
                 />
                 {errors.laserCode && (
                   <span className="text-red-500 text-sm">
