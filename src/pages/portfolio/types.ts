@@ -85,3 +85,14 @@ export type TUserProfile = {
   firstName: string;
   lastName: string;
 };
+
+export type TBankInfo = {
+  id: string;
+  userId: string;
+  firstName: string;
+  lastName: string;
+  currency: string;
+  balance: string;
+  used: string;
+  available: string;
+};

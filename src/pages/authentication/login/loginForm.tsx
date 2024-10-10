@@ -33,11 +33,6 @@ const LoginForm = () => {
     if (data.email && data.password) {
       const dataStr = `${data.email},${data.password}`;
       const base64 = btoa(dataStr);
-      consolelog(base64);
-
-      const decodeStr = atob(base64);
-      consolelog(decodeStr);
-
       try {
         const res = await axios.post(
           "/api/v1/authen/customers/login",

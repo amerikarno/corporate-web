@@ -2,126 +2,141 @@ import { Card, CardContent } from "@/components/ui/Card";
 import NavBar from "@/components/navbar";
 import DataTable, { TableColumn } from "react-data-table-component";
 import { useEffect, useState } from "react";
-import { TPortfolio } from "./types";
-import { portMock, userMock } from "./__mock__/portMock";
-import { formatNumberToCommasFraction, sleep } from "@/lib/utils";
-
-type TDataTable = {
-  id: number;
-  assetName: string;
-  amount: string;
-  unit: string;
-  dueDate: string;
-  icoStatus: string;
-};
-
-type BorderCollapse = "collapse" | "separate";
-type TextAlign = "center" | "left" | "right";
+import { TBankInfo } from "./types";
+import { bankMock, transactionMock } from "./__mock__/portMock";
+import { formatNumberToCommasFraction } from "@/lib/utils";
+import { Button } from "@/components/ui/Button";
+import { Transaction } from "../orderTrade/constant/type";
+import axios from "@/api/axios";
+import { getCookies } from "@/lib/cookies";
 
 export default function Portfolio() {
-  const [portfolioData, setPortfolioData] = useState<TPortfolio | undefined>(
-    undefined
-  );
+  const [bankInfo, setBankInfo] = useState<TBankInfo | undefined>(undefined);
   const [isLoading, setIsLoading] = useState(true);
-  const [data, setData] = useState<TDataTable[]>([]);
-  //   const [selectedRow, setSelectedRow] = useState<number>(0);
-
+  const [investTransactions, setInvestTransactions] = useState<Transaction[]>(
+    []
+  );
   const textTitle = "text-base text-gray-500 font-semibold";
   const textContent = "text-xl font-semibold";
 
-  const columns: TableColumn<TDataTable>[] = [
-    {
-      name: "",
-      selector: (row) => row.id,
-      width: "50px",
-    },
-    {
-      name: <div>Asset</div>,
-      cell: (row) => <div className="text-center w-full">{row.assetName}</div>,
-    },
-    {
-      name: <div>Amount (THB)</div>,
-      cell: (row) => (
-        <div className="text-right w-full">
-          {formatNumberToCommasFraction(row.amount)}
-        </div>
-      ),
-    },
-    {
-      name: <div>Unit</div>,
-      cell: (row) => (
-        <div className="text-right w-full">
-          {formatNumberToCommasFraction(row.unit)}
-        </div>
-      ),
-    },
-    {
-      name: <div>Due Date</div>,
-      cell: (row) => (
-        <div className="text-center w-full">{row.dueDate.split("T")[0]}</div>
-      ),
-    },
-    {
-      name: <div>Period</div>,
-      cell: (row) => <div className="text-center w-full">{row.icoStatus}</div>,
-    },
-  ];
+  const getUserBankInfo = async () => {
+    try {
+      const res = await axios.post(
+        "",
+        {},
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${getCookies()}`,
+          },
+        }
+      );
+      if (res.status === 200) {
+        setBankInfo(res.data);
+      }
+    } catch (error) {
+      console.log(error);
+      setBankInfo(bankMock);
+    }
 
-  const customStyles = {
-    table: {
-      style: {
-        borderCollapse: "collapse" as BorderCollapse,
-      },
-    },
-    headCells: {
-      style: {
-        borderRight: "1px solid rgba(0,0,0,.12)",
-        backgroundColor: "#f5f5f5",
-        textAlign: "center" as TextAlign,
-        justifyContent: "center",
-      },
-    },
-    cells: {
-      style: {
-        borderRight: "1px solid rgba(0,0,0,.12)",
-        bordertop: "1px solid rgba(0,0,0,.12)",
-      },
-    },
-  };
-
-  const setDataTable = (portfolioData: TPortfolio) => {
-    let data: TDataTable[] = [];
-    let id = 0;
-    portfolioData.investmentInfo.forEach((port) => {
-      data.push({
-        id: ++id,
-        assetName: port.asset.name,
-        amount: port.investment.amount,
-        unit: port.investment.unit,
-        dueDate: port.keyInformation.compleationTime,
-        icoStatus: port.icoStatus,
-      });
-    });
-    setData(data);
-  };
-
-  //   const setAssetOverView = (index: number) => {
-  //     setSelectedRow(index);
-  //   };
-
-  const getUserPortfolio = async () => {
-    await sleep(1000);
-    setPortfolioData(portMock);
     setIsLoading(false);
   };
 
   useEffect(() => {
-    if (!portfolioData) {
-      getUserPortfolio();
-    } else {
-      setDataTable(portfolioData);
+    fetchTransactionList();
+    getUserBankInfo();
+  }, []);
+
+  const fetchTransactionList = async () => {
+    try {
+      const res = await axios.post(
+        "/api/v1/customer/product/transaction",
+        {},
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${getCookies()}`,
+          },
+        }
+      );
+      if (res.status === 200) {
+        setInvestTransactions(res.data);
+      } else {
+        console.log(res.data);
+      }
+    } catch (error) {
+      console.log(error);
     }
-  }, [portfolioData]);
+  };
+
+  const handleCancleTransaction = async (data: Transaction) => {
+    try {
+      const res = await axios.post(
+        "/api/v1/customer/product/transaction/delete",
+        {
+          id: data.investment?.id,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${getCookies()}`,
+          },
+        }
+      );
+      if (res.status === 200) {
+        await fetchTransactionList();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const columnsOrderTrade: TableColumn<Transaction>[] = [
+    // {
+    //   name: "",
+    //   cell: (_, rowIndex) => <span>{rowIndex + 1}</span>,
+    //   width: "75px",
+    // },
+    {
+      name: "Customer Code",
+      selector: (row: Transaction) =>
+        row?.investment?.customerCode?.toString() || "",
+    },
+    {
+      name: "ICO",
+      selector: (row: Transaction) => row?.asset?.name?.toString() || "",
+    },
+    {
+      name: "Amount",
+      selector: (row: Transaction) => row?.investment?.amount?.toString() || "",
+    },
+    {
+      name: "value",
+      selector: (row: Transaction) => row?.investment?.value?.toString() || "",
+    },
+    {
+      name: "Status",
+      selector: (row: Transaction) => row?.investment?.status || "",
+    },
+    {
+      cell: (row: Transaction) => (
+        <div className="flex w-full h-full justify-center items-center py-2 px-4">
+          <Button
+            className="bg-slate-700 hover:bg-red-400 hover:border-none hover:text-white w-full h-full"
+            onClick={() => {
+              handleCancleTransaction(row);
+            }}
+            disabled={
+              row?.investment?.status === "1" || row?.investment?.status === "2"
+            }
+          >
+            cancle
+          </Button>
+        </div>
+      ),
+      ignoreRowClick: true,
+    },
+  ];
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -136,50 +151,51 @@ export default function Portfolio() {
             <CardContent className="grid grid-cols-3 gap-y-10 gap-x-4">
               <div className="col-span-2">
                 <h1 className={textTitle}>Account ID</h1>
-                <h1 className={textContent}>{userMock.accountId}</h1>
+                <h1 className={textContent}>{bankInfo?.id}</h1>
               </div>
               <div className="col-span-1">
                 <h1 className={textTitle}>Name</h1>
                 <h1
                   className={textContent}
-                >{`${userMock.firstName} ${userMock.lastName}`}</h1>
+                >{`${bankInfo?.firstName} ${bankInfo?.lastName}`}</h1>
               </div>
               <div className="">
                 <h1 className={textTitle}>Total Balance (THB)</h1>
                 <h1 className={textContent}>
-                  {formatNumberToCommasFraction(
-                    portfolioData!.accountBalance.balance
-                  )}
+                  {formatNumberToCommasFraction(bankInfo?.balance)}
                 </h1>
               </div>
               <div className="">
                 <h1 className={textTitle}>Used (THB)</h1>
                 <h1 className={textContent}>
-                  {formatNumberToCommasFraction(
-                    portfolioData!.accountBalance.used
-                  )}
+                  {formatNumberToCommasFraction(bankInfo?.used)}
                 </h1>
               </div>
               <div className="">
                 <h1 className={textTitle}>Available (THB)</h1>
                 <h1 className={textContent}>
-                  {formatNumberToCommasFraction(
-                    portfolioData!.accountBalance.available
-                  )}
+                  {formatNumberToCommasFraction(bankInfo?.available)}
                 </h1>
               </div>
             </CardContent>
           </Card>
-          <DataTable
-            className="border-t border-b border-l border-gray-200"
-            columns={columns}
-            data={data}
-            responsive
-            customStyles={customStyles}
-            // onRowClicked={(row) => {
-            //   setAssetOverView(row.id - 1);
-            // }}
-          />
+
+          <Card className="p-4 w-full bg-white">
+            <DataTable
+              title="Reserved Transaction"
+              columns={columnsOrderTrade}
+              data={investTransactions || []}
+              clearSelectedRows
+              pagination
+              paginationPerPage={5}
+              paginationRowsPerPageOptions={[5, 10, 15]}
+              paginationComponentOptions={{
+                rowsPerPageText: "Rows per page:",
+                rangeSeparatorText: "from",
+                noRowsPerPage: false,
+              }}
+            />
+          </Card>
         </div>
       }
     />

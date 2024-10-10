@@ -31,15 +31,17 @@ export function CustomCard({ data, index, type }: TCustomCardProps) {
           </div>
           <div className="flex flex-row justify-between">
             <h2 className={`break-words ${normalText}`}>{data.issueBy}</h2>
+            {/* {type === "Active" && ( */}
             <Button
               className={`${token ? "" : "hidden"}`}
               onClick={() => {
                 localStorage.setItem("asset", `${type}-${index}`);
-                navigate("/order-trade");
+                navigate("/invest");
               }}
             >
               Invest
             </Button>
+            {/* )} */}
           </div>
           <div className="border-b border-gray-200"></div>
         </div>

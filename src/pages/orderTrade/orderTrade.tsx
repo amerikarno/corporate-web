@@ -1,4 +1,4 @@
-import { Card } from "@/components/ui/Card";
+import { Card, CardContent, CardHeader } from "@/components/ui/Card";
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
 // import { TOrderTrade } from "./constant/type";
@@ -10,13 +10,20 @@ import DataTable, { TableColumn } from "react-data-table-component";
 import { MdCurrencyExchange } from "react-icons/md";
 import { IoReceiptOutline } from "react-icons/io5";
 import NavBar from "@/components/navbar";
-import { consolelog, getAllIcoData, getUser } from "@/lib/utils";
+import {
+  consolelog,
+  formatNumberToCommasFraction,
+  getAllIcoData,
+  getUser,
+} from "@/lib/utils";
 import axios from "@/api/axios";
 import { getCookies } from "@/lib/cookies";
 import { TUser } from "../authentication/login/types";
 import { TAssetData } from "../landing/types";
 import { useSelector } from "react-redux";
 import { Transaction } from "./constant/type";
+import getImages from "@/common/imagesData";
+import { useNavigate } from "react-router-dom";
 
 type TCurrency = {
   name: string;
@@ -38,54 +45,55 @@ export default function OrderTrade() {
 
   const normalText = "text-gray-400";
   const darkText = "text-gray-800";
+  const navigate = useNavigate();
 
-  const [investTransactions, setInvestTransactions] = useState<Transaction[]>(
-    []
-  );
+  // const [investTransactions, setInvestTransactions] = useState<Transaction[]>(
+  //   []
+  // );
   const icoAll = useSelector((state: any) => state.icoAll);
 
-  const columnsOrderTrade: TableColumn<Transaction>[] = [
-    {
-      name: "Customer Code",
-      selector: (row: Transaction) =>
-        row?.investment?.customerCode?.toString() || "",
-    },
-    {
-      name: "Ico Code",
-      selector: (row: Transaction) =>
-        row?.investment?.icoCode?.toString() || "",
-    },
-    {
-      name: "Amount",
-      selector: (row: Transaction) => row?.investment?.amount?.toString() || "",
-    },
-    {
-      name: "value",
-      selector: (row: Transaction) => row?.investment?.value?.toString() || "",
-    },
-    {
-      name: "Status",
-      selector: (row: Transaction) => getStatus(row?.investment?.status) || "",
-    },
-    {
-      cell: (row: Transaction) => (
-        <div className="flex w-full h-full justify-center items-center">
-          <Button
-            className="bg-slate-700 hover:bg-red-400 hover:border-none hover:text-white w-full h-full"
-            onClick={() => {
-              handleCancleTransaction(row);
-            }}
-            disabled={
-              row?.investment?.status === "1" || row?.investment?.status === "2"
-            }
-          >
-            cancle
-          </Button>
-        </div>
-      ),
-      ignoreRowClick: true,
-    },
-  ];
+  // const columnsOrderTrade: TableColumn<Transaction>[] = [
+  //   {
+  //     name: "Customer Code",
+  //     selector: (row: Transaction) =>
+  //       row?.investment?.customerCode?.toString() || "",
+  //   },
+  //   {
+  //     name: "Ico Code",
+  //     selector: (row: Transaction) =>
+  //       row?.investment?.icoCode?.toString() || "",
+  //   },
+  //   {
+  //     name: "Amount",
+  //     selector: (row: Transaction) => row?.investment?.amount?.toString() || "",
+  //   },
+  //   {
+  //     name: "value",
+  //     selector: (row: Transaction) => row?.investment?.value?.toString() || "",
+  //   },
+  //   {
+  //     name: "Status",
+  //     selector: (row: Transaction) => getStatus(row?.investment?.status) || "",
+  //   },
+  //   {
+  //     cell: (row: Transaction) => (
+  //       <div className="flex w-full h-full justify-center items-center">
+  //         <Button
+  //           className="bg-slate-700 hover:bg-red-400 hover:border-none hover:text-white w-full h-full"
+  //           onClick={() => {
+  //             handleCancleTransaction(row);
+  //           }}
+  //           disabled={
+  //             row?.investment?.status === "1" || row?.investment?.status === "2"
+  //           }
+  //         >
+  //           cancle
+  //         </Button>
+  //       </div>
+  //     ),
+  //     ignoreRowClick: true,
+  //   },
+  // ];
 
   const [selectedCurrency, setSelectedCurrency] = useState<TCurrency>({
     name: "THB",
@@ -103,27 +111,27 @@ export default function OrderTrade() {
     { name: "JPY", factor: 0.23 },
   ];
 
-  const handleCancleTransaction = async (data: Transaction) => {
-    try {
-      const res = await axios.post(
-        "/api/v1/customer/product/transaction/delete",
-        {
-          id: data.investment?.id,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${getCookies()}`,
-          },
-        }
-      );
-      if (res.status === 200) {
-        await fetchOrderList();
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const handleCancleTransaction = async (data: Transaction) => {
+  //   try {
+  //     const res = await axios.post(
+  //       "/api/v1/customer/product/transaction/delete",
+  //       {
+  //         id: data.investment?.id,
+  //       },
+  //       {
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           Authorization: `Bearer ${getCookies()}`,
+  //         },
+  //       }
+  //     );
+  //     if (res.status === 200) {
+  //       await fetchOrderList();
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   const handleTokenAmount = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -157,6 +165,13 @@ export default function OrderTrade() {
     setValue("amount", formattedTokenAmount);
     await trigger("amount");
     await trigger("value");
+  };
+
+  const handleMoreDetail = () => {
+    const store = localStorage.getItem("asset")?.split("-");
+    if (store) {
+      navigate(`/asset/${store[0]}/${store[1]}`);
+    }
   };
 
   const fetchAssetData = async () => {
@@ -197,41 +212,27 @@ export default function OrderTrade() {
     }
   };
 
-  const fetchOrderList = async () => {
-    try {
-      const res = await axios.post(
-        "/api/v1/customer/product/transaction",
-        {},
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${getCookies()}`,
-          },
-        }
-      );
-      if (res.status === 200) {
-        setInvestTransactions(res.data);
-      } else {
-        console.log(res.data);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const getStatus = (status?: string) => {
-    if (status === "-1") {
-      return "Reject";
-    } else if (status === "0") {
-      return "Pending";
-    } else if (status === "1") {
-      return "Checked";
-    } else if (status === "2") {
-      return "Approved";
-    } else {
-      return "";
-    }
-  };
+  // const fetchOrderList = async () => {
+  //   try {
+  //     const res = await axios.post(
+  //       "/api/v1/customer/product/transaction",
+  //       {},
+  //       {
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           Authorization: `Bearer ${getCookies()}`,
+  //         },
+  //       }
+  //     );
+  //     if (res.status === 200) {
+  //       setInvestTransactions(res.data);
+  //     } else {
+  //       console.log(res.data);
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   useEffect(() => {
     if (!assetData) {
@@ -239,7 +240,7 @@ export default function OrderTrade() {
       setUser(user ? user : undefined);
       consolelog("user", user);
       fetchAssetData();
-      fetchOrderList();
+      // fetchOrderList();
     }
   }, [reset]);
 
@@ -294,7 +295,7 @@ export default function OrderTrade() {
       if (res.status === 200) {
         consolelog(res.data);
         reset();
-        await fetchOrderList();
+        // await fetchOrderList();
       } else {
         consolelog(res.data);
       }
@@ -302,10 +303,6 @@ export default function OrderTrade() {
       console.log(error);
     }
   };
-
-  if (!assetData) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <NavBar
@@ -318,7 +315,7 @@ export default function OrderTrade() {
                 <div className="w-full px-2 space-y-2 p-2 md:space-y-4">
                   <div className="flex flex-row items-center space-x-4">
                     <img
-                      src={assetData?.asset?.logo}
+                      src={getImages("logo")}
                       alt=""
                       className="h-[17px] md:h-[34px]"
                     />
@@ -373,19 +370,70 @@ export default function OrderTrade() {
                       {assetData?.asset?.minimum}
                     </p>
                   </div>
+                  <div className="flex justify-between">
+                    <p className={normalText}> </p>
+                    <u
+                      className="text-blue-500 hover:cursor-pointer hover:font-semibold"
+                      onClick={() => handleMoreDetail()}
+                    >
+                      More Details
+                    </u>
+                  </div>
                 </div>
               </div>
             </Card>
 
+            <Card>
+              <CardHeader>
+                <div className="flex flex-row justify-between">
+                  <div className={normalText}>Account Balance</div>
+                  <div className={darkText}>{user?.id}</div>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <div className="flex flex-col justify-center space-y-4">
+                  <div className="flex flex-row w-full justify-between">
+                    <p className={normalText}>Total credit</p>
+                    <p className={darkText}>
+                      {formatNumberToCommasFraction("10000000")}
+                    </p>
+                  </div>
+                  <div className="flex flex-row w-full justify-between">
+                    <p className={normalText}>Avaliable</p>
+                    <p className={darkText}>
+                      {formatNumberToCommasFraction("100000")}
+                    </p>
+                  </div>
+                  <div className="flex flex-row w-full justify-between">
+                    <p className={normalText}> </p>
+                    <u
+                      className={`text-blue-500 hover:cursor-pointer hover:font-semibold`}
+                      onClick={() => navigate("/portfolio")}
+                    >
+                      Portfolio
+                    </u>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
             <form className="space-y-4" onSubmit={handleSubmit(onsubmit)}>
               <div className="w-full flex justify-center">
-                <Card className="bg-white w-full md:space-y-4 md:p-10">
-                  <span className="flex justify-start items-center font-bold md:text-xl py-2 gap-2">
-                    Orders / Invest
-                    <span>
-                      <IoReceiptOutline />
+                <Card className="bg-white w-full md:space-y-4 p-6">
+                  <div className="flex flex-row justify-between">
+                    <span className="flex justify-start items-center font-bold md:text-xl py-2 gap-2">
+                      Orders / Invest
+                      <span>
+                        <IoReceiptOutline />
+                      </span>
                     </span>
-                  </span>
+                    <u
+                      className="text-blue-500 hover:cursor-pointer hover:font-semibold"
+                      onClick={() => navigate("/")}
+                    >
+                      Change Assets
+                    </u>
+                  </div>
                   <div className="flex items-center justify-center pt-4">
                     <div className="w-full md:w-1/2 space-y-6">
                       <div>
@@ -470,14 +518,14 @@ export default function OrderTrade() {
               </div>
             </form>
 
-            <Card className="p-4 w-full bg-white">
+            {/* <Card className="p-4 w-full bg-white">
               <DataTable
                 title="Orders / Reserves Lists"
                 columns={columnsOrderTrade}
                 data={investTransactions || []}
                 clearSelectedRows
               />
-            </Card>
+            </Card> */}
           </div>
         </div>
       }

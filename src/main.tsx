@@ -126,7 +126,7 @@ createRoot(document.getElementById("root")!).render(
               element={<QrVerification />}
             />
             <Route
-              path={`${import.meta.env.BASE_URL}/order-trade`}
+              path={`${import.meta.env.BASE_URL}/invest`}
               element={<OrderTrade />}
             />
             <Route

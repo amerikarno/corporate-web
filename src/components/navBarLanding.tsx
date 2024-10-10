@@ -125,7 +125,7 @@ const NavBarLanding = ({ ThemeChanger }: datatype) => {
                       <DropdownMenuItem
                         className="cursor-pointer hover:bg-gray-300 hover:font-bold"
                         onClick={() => {
-                          navigate("/order-trade");
+                          navigate("/invest");
                         }}
                       >
                         Buy / Sell

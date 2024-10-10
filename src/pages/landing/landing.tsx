@@ -11,7 +11,7 @@ import example from "@assets/drawIcon/example.png";
 import { IcoListItem } from "@/components/icoListItem";
 import { MenuForDropdown } from "@/components/menuForDropdown";
 import { IcoType } from "./types";
-import { getAllIcoData } from "@/lib/utils";
+import { getAllIcoData, testApiInfo } from "@/lib/utils";
 
 interface datatype {
   ThemeChanger: any;
@@ -52,6 +52,7 @@ const Landing = ({ ThemeChanger }: datatype) => {
   };
 
   useEffect(() => {
+    testApiInfo("/api/v1/customer/product/ipo");
     if (!icoData) {
       fetchIcoData();
     }
@@ -69,13 +70,9 @@ const Landing = ({ ThemeChanger }: datatype) => {
     navigate("/");
   };
 
-  if (!icoData) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <>
-      <div className="w-full">
+      <div className="w-full h-full">
         <div id="header" className="border-b border-gray-300 shadow-sm">
           <div className="max-w-screen-s1 s2:max-w-[840px] s3:max-w-[1280px] mx-auto s3:px-2">
             <div className="w-full flex flex-row py-4 px-4">
@@ -116,11 +113,23 @@ const Landing = ({ ThemeChanger }: datatype) => {
             </div>
           </div>
         </div>
-        <div id="content" className="w-full space-y-6">
-          <IcoListItem data={icoData.active} title="Active" />
-          <IcoListItem data={icoData.upcoming} title="Upcoming" />
-          <IcoListItem data={icoData.ended} title="Ended" />
-        </div>
+        {icoData ? (
+          <div id="content" className="w-full space-y-6">
+            {icoData.active && (
+              <IcoListItem data={icoData.active} title="Active" />
+            )}
+            {icoData.upcoming && (
+              <IcoListItem data={icoData.upcoming} title="Upcoming" />
+            )}
+            {icoData.ended && (
+              <IcoListItem data={icoData.ended} title="Ended" />
+            )}
+          </div>
+        ) : (
+          <div className="w-full h-[400px] flex items-center justify-center">
+            No data found.
+          </div>
+        )}
         <footer id="footer" className="bg-dark-bg">
           <div className="border-b border-white/10  pb-8">
             <div className="container mx-auto pt-10">

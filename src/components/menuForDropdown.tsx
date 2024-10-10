@@ -44,7 +44,7 @@ export function MenuForDropdown({ avatar, logout }: TMenuForDropdown) {
           className="cursor-pointer hover:bg-gray-300 hover:font-bold w-[200px]"
           onClick={() => {
             navigate("/");
-            // navigate("/order-trade");
+            // navigate("/invest");
           }}
         >
           Invest

@@ -4,6 +4,7 @@ import { getCookies } from "./cookies";
 import { jwtDecode } from "jwt-decode";
 import { TUser } from "@/pages/authentication/login/types";
 import axios from "@/api/axios";
+import { mockAssetData } from "@/pages/assetDetails/__mock__/mockAsset";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -66,11 +67,11 @@ export const getAllIcoData = async () => {
     }
   } catch (error) {
     console.log(error);
-    // return mockAssetData;
+    return mockAssetData;
   }
 };
 
-export const getApiInfo = async (url: string) => {
+export const testApiInfo = async (url: string) => {
   try {
     const res = await axios.post(
       url,

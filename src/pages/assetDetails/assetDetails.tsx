@@ -113,7 +113,7 @@ export function AssetDetails() {
                                 "asset",
                                 `${assetType}-${assetId}`
                               );
-                              navigate("/order-trade");
+                              navigate("/invest");
                             }}
                           >
                             Invest
