@@ -11,7 +11,7 @@ import example from "@assets/drawIcon/example.png";
 import { IcoListItem } from "@/components/icoListItem";
 import { MenuForDropdown } from "@/components/menuForDropdown";
 import { IcoType } from "./types";
-import { getAllIcoData, testApiInfo } from "@/lib/utils";
+import { getAllIcoData } from "@/lib/utils";
 
 interface datatype {
   ThemeChanger: any;
@@ -52,7 +52,6 @@ const Landing = ({ ThemeChanger }: datatype) => {
   };
 
   useEffect(() => {
-    testApiInfo("/api/v1/customer/product/ipo");
     if (!icoData) {
       fetchIcoData();
     }

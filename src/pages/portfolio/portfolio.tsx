@@ -3,7 +3,7 @@ import NavBar from "@/components/navbar";
 import DataTable, { TableColumn } from "react-data-table-component";
 import { useEffect, useState } from "react";
 import { TBankInfo } from "./types";
-import { bankMock, transactionMock } from "./__mock__/portMock";
+import { bankMock } from "./__mock__/portMock";
 import { formatNumberToCommasFraction } from "@/lib/utils";
 import { Button } from "@/components/ui/Button";
 import { Transaction } from "../orderTrade/constant/type";
