@@ -36,6 +36,7 @@ export default function Portfolio() {
       }
     } catch (error) {
       console.log(error);
+      // TODO: remove mock
       setBankInfo(bankMock);
     }
 

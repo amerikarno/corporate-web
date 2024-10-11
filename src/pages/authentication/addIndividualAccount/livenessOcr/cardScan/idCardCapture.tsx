@@ -13,6 +13,9 @@ type TScreen = {
   width: number;
   height: number;
 };
+
+type VideoConstraints = MediaTrackConstraints;
+
 export default function IDCardCapture() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -24,11 +27,7 @@ export default function IDCardCapture() {
     height: 514,
   });
   const { width, height } = useWindowSize();
-  const [videoConstraints, setVideoConstraints] = useState({
-    width: screenLayout.width,
-    height: screenLayout.height,
-    facingMode: "user",
-  });
+  const [videoConstraints, setVideoConstraints] = useState<VideoConstraints>();
 
   useEffect(() => {
     if (livenessOcr.idCardImage && livenessOcr.idCardImage !== null) {
@@ -54,23 +53,49 @@ export default function IDCardCapture() {
   //   navigate("/authentication/signup/identityverification");
   // };
 
+  const getDeviceType = (): string => {
+    const userAgent = navigator.userAgent;
+
+    if (/Mobi|Android/i.test(userAgent)) {
+      return "Mobile";
+    } else if (/Tablet|iPad/i.test(userAgent)) {
+      return "Tablet";
+    } else {
+      return "Desktop";
+    }
+  };
+
   useEffect(() => {
+    const deviceType = getDeviceType();
+    consolelog(deviceType);
     if (width >= 600) {
-      setVideoConstraints({
-        width: 514,
-        height: 326,
-        facingMode: "user",
-      });
+      deviceType === "Mobile" || deviceType === "Tablet"
+        ? setVideoConstraints({
+            width: 514,
+            height: 326,
+            facingMode: { exact: "environment" },
+          })
+        : setVideoConstraints({
+            width: 514,
+            height: 326,
+            facingMode: "user",
+          });
       setScreenLayout({
         width: 514,
         height: 326,
       });
     } else {
-      setVideoConstraints({
-        width: 326,
-        height: 514,
-        facingMode: "user",
-      });
+      deviceType === "Mobile" || deviceType === "Tablet"
+        ? setVideoConstraints({
+            width: 514,
+            height: 326,
+            facingMode: { exact: "environment" },
+          })
+        : setVideoConstraints({
+            width: 514,
+            height: 326,
+            facingMode: "user",
+          });
       setScreenLayout({ width: 326, height: 514 });
     }
     consolelog(width, height);

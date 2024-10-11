@@ -144,6 +144,7 @@ export default function OrderTrade() {
       }
     }
   };
+
   const fetchUserBankInfo = async () => {
     try {
       const res = await axios.post(
