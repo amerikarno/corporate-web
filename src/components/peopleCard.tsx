@@ -22,6 +22,7 @@ export function PeopleCard({
         src={picture ? picture : getImages("man")}
         alt=""
         className="w-12 h-12 rounded-full"
+        onError={(e) => (e.currentTarget.src = getImages("whiteBg"))}
       />
       <div className="flex flex-col flex-grow">
         <p className="text-black font-bold">

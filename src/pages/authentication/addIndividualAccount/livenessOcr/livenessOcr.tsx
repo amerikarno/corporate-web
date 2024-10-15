@@ -1,7 +1,7 @@
 import { useRef, useEffect, useState, useCallback } from "react";
 import Webcam from "react-webcam";
 import * as faceapi from "face-api.js";
-import { consolelog } from "@/lib/utils";
+import { consolelog, forceResetNameFavIcon } from "@/lib/utils";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setFaceImage } from "@/redux/Action";
@@ -16,6 +16,7 @@ type TActionMessage = {
 };
 
 export default function Liveness() {
+  forceResetNameFavIcon();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const webcamRef = useRef<Webcam>(null);
@@ -36,7 +37,6 @@ export default function Liveness() {
   const [isTurnRight, setIsTurnRight] = useState<boolean>(false);
   const [isMouthOpen, setIsMouthOpen] = useState<boolean>(false);
 
-  // Load face-api.js models
   const loadModels = async () => {
     // consolelog("Loading face-api.js models...");
     const MODEL_URL = "/models";
@@ -85,7 +85,6 @@ export default function Liveness() {
     }
   };
 
-  // Detect faces and draw on canvas
   const detectFaces = useCallback(async () => {
     if (webcamRef.current && webcamRef.current.video && isModelLoaded) {
       const video = webcamRef.current.video as HTMLVideoElement;
@@ -115,6 +114,7 @@ export default function Liveness() {
             const centerX = dims.width / 2;
             const centerY = dims.height / 2;
             const radius = 100; // Static radius for the circle
+            consolelog(dims);
 
             // Calculate circle's bounding box
             const circleWidth = radius * 2;
@@ -258,8 +258,8 @@ export default function Liveness() {
     loadModels();
     // consolelog(window.innerWidth, window.innerHeight);
     setVideoConstraints({
-      width: 360,
-      height: 720,
+      width: window.innerWidth,
+      height: window.innerHeight,
       facingMode: "user",
     });
   }, []);

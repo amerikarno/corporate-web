@@ -35,14 +35,7 @@ export function formatNumberToCommasFraction(
 export function consolelog(...args: any[]) {
   const error = new Error();
   const stack = error.stack?.split("\n")[2].trim();
-  // const stack1 = error.stack?.split("\n")[1].trim();
-  // const stack0 = error.stack?.split("\n")[0].trim();
-  // console.log(error);
-  // console.log(stack0);
-  // console.log(stack1);
-  // console.log(stack);
   console.log(stack, ...args);
-  // return [...args];
 }
 
 export const getUser = () => {
@@ -85,5 +78,22 @@ export const testApiInfo = async (url: string) => {
     consolelog(res);
   } catch (error) {
     console.log(error);
+  }
+};
+
+export const forceResetNameFavIcon = () => {
+  const url = "./src/assets/fda.png";
+  document.title = "Finansia ICO";
+
+  const link: HTMLLinkElement | null =
+    document.querySelector("link[rel~='icon']");
+
+  if (!link) {
+    const newLink = document.createElement("link");
+    newLink.rel = "icon";
+    newLink.href = url;
+    document.head.appendChild(newLink);
+  } else {
+    link.href = url;
   }
 };

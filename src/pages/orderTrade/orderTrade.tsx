@@ -11,6 +11,7 @@ import { IoReceiptOutline } from "react-icons/io5";
 import NavBar from "@/components/navbar";
 import {
   consolelog,
+  forceResetNameFavIcon,
   formatNumberToCommasFraction,
   getAllIcoData,
   getUser,
@@ -31,6 +32,7 @@ type TCurrency = {
 };
 
 export default function OrderTrade() {
+  forceResetNameFavIcon();
   const {
     register,
     handleSubmit,
@@ -253,7 +255,7 @@ export default function OrderTrade() {
                       className="h-[17px] md:h-[34px]"
                     />
                     <h1 className={`font-bold text-xl text-gray-800`}>
-                      Finansia Digital Asset
+                      Finansia ICO
                     </h1>
                   </div>
                   <div className="flex flex-row justify-between">

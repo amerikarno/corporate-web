@@ -9,8 +9,10 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { TUser } from "../types";
 import { Input } from "@/components/ui/Input";
+import { forceResetNameFavIcon } from "@/lib/utils";
 
 export default function QrVerification() {
+  forceResetNameFavIcon();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [otp, setOtp] = useState<string[]>(["", "", "", "", "", ""]);

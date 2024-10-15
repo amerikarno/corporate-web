@@ -12,8 +12,10 @@ import {
   AlertDialogTrigger,
 } from "../../../../../components/ui/alert-dialog";
 import getImages from "@/common/imagesData";
+import { forceResetNameFavIcon } from "@/lib/utils";
 
 export function CardWebcamInstructions() {
+  forceResetNameFavIcon();
   const navigate = useNavigate();
 
   const CameraSetting = () => {

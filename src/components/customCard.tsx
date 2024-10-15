@@ -2,6 +2,7 @@ import { Button } from "./ui/Button";
 import { getCookies } from "@/lib/cookies";
 import { useNavigate } from "react-router-dom";
 import { Asset } from "@/pages/landing/types";
+import getImages from "@/common/imagesData";
 
 type TCustomCardProps = {
   data: Asset | null | undefined;
@@ -24,24 +25,26 @@ export function CustomCard({ data, index, type }: TCustomCardProps) {
       <div className="w-[360px] h-[500px] flex flex-col justify-evenly">
         <div className="w-full px-2 space-y-2 p-2 md:space-y-4">
           <div className="flex flex-row items-center space-x-4">
-            <img src={data.logo} alt="" className="h-[17px] md:h-[34px]" />
-            <h1 className={`font-bold text-xl text-gray-800`}>
-              Finansia Digital Asset
-            </h1>
+            <img
+              src={getImages("logo")}
+              alt=""
+              className="h-[17px] md:h-[34px]"
+            />
+            <h1 className={`font-bold text-xl text-gray-800`}>Finansia ICO</h1>
           </div>
           <div className="flex flex-row justify-between">
             <h2 className={`break-words ${normalText}`}>{data.issueBy}</h2>
-            {/* {type === "Active" && ( */}
-            <Button
-              className={`${token ? "" : "hidden"}`}
-              onClick={() => {
-                localStorage.setItem("asset", `${type}-${index}`);
-                navigate("/invest");
-              }}
-            >
-              Invest
-            </Button>
-            {/* )} */}
+            {type === "Active" && (
+              <Button
+                className={`${token ? "" : "hidden"}`}
+                onClick={() => {
+                  localStorage.setItem("asset", `${type}-${index}`);
+                  navigate("/invest");
+                }}
+              >
+                Invest
+              </Button>
+            )}
           </div>
           <div className="border-b border-gray-200"></div>
         </div>

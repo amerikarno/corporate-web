@@ -25,13 +25,20 @@ import { OtpEmailConfirm } from "./pages/authentication/addIndividualAccount/otp
 import OrderTrade from "./pages/orderTrade/orderTrade.tsx";
 import BankOrder from "./pages/bankOrder/bankOrder.tsx";
 import Portfolio from "./pages/portfolio/portfolio.tsx";
+import ResetAppTitle from "./components/resetAppTitle.tsx";
 
 let helmetContext = {};
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <HelmetProvider context={helmetContext}>
+      {/* <Helmet>
+        <title>new title</title>
+        <meta name="description" content="This is my page description" />
+        <link rel="icon" type="image/png" href="./src/assets/e.png" />
+      </Helmet> */}
       <BrowserRouter>
+        <ResetAppTitle />
         <ScrollToTop />
         <Provider store={store}>
           <Routes>

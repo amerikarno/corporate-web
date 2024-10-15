@@ -10,9 +10,12 @@ import { ContentDetails } from "@/components/contentDetails";
 import { FaqAccordion } from "@/components/Faq";
 import { TAssetData } from "../landing/types";
 import { useSelector } from "react-redux";
-import { getAllIcoData } from "@/lib/utils";
+import { consolelog, forceResetNameFavIcon, getAllIcoData } from "@/lib/utils";
+import { getCookies } from "@/lib/cookies";
+import getImages from "@/common/imagesData";
 
 export function AssetDetails() {
+  forceResetNameFavIcon();
   const navigate = useNavigate();
   const assetId = useParams().id;
   const assetType = useParams().type;
@@ -20,6 +23,7 @@ export function AssetDetails() {
   const [tab, setTab] = useState(1);
   const [faq, setFaq] = useState(0);
   const icoAll = useSelector((state: any) => state.icoAll);
+  const token = getCookies();
 
   const fetchAssetData = async () => {
     const store = localStorage.getItem("asset")?.split("-");
@@ -65,6 +69,8 @@ export function AssetDetails() {
   const normalText = "text-gray-400";
   const darkText = "text-gray-900 font-bold";
 
+  consolelog(assetData?.asset?.logo);
+
   return (
     <>
       <div className="ml-1">
@@ -93,6 +99,9 @@ export function AssetDetails() {
                               src={assetData?.asset?.logo}
                               alt=""
                               className="w-16 h-16"
+                              onError={(e) =>
+                                (e.currentTarget.src = getImages("whiteBg"))
+                              }
                             />
                             <div className="w-full flex-col px-4 space-y-2">
                               <h1 className={`text-xl font-bold ${darkText}`}>
@@ -107,17 +116,19 @@ export function AssetDetails() {
                           </div>
                         </div>
                         <div className="w1/4">
-                          <Button
-                            onClick={() => {
-                              localStorage.setItem(
-                                "asset",
-                                `${assetType}-${assetId}`
-                              );
-                              navigate("/invest");
-                            }}
-                          >
-                            Invest
-                          </Button>
+                          {token && assetType === "Active" && (
+                            <Button
+                              onClick={() => {
+                                localStorage.setItem(
+                                  "asset",
+                                  `${assetType}-${assetId}`
+                                );
+                                navigate("/invest");
+                              }}
+                            >
+                              Invest
+                            </Button>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -239,18 +250,20 @@ export function AssetDetails() {
                               className="hs-accordion-group"
                               data-hs-accordion-always-open
                             >
-                              {assetData?.faq?.map((item, index) => (
-                                <div className="py-2" key={index}>
-                                  <FaqAccordion
-                                    key={index}
-                                    question={item.question}
-                                    asnwer={item.answer}
-                                    onSet={(i) => setFaq(i)}
-                                    questionIndex={index}
-                                    selectedFaq={faq}
-                                  />
-                                </div>
-                              ))}
+                              {assetData?.faq
+                                ?.filter((item) => item.question !== "")
+                                .map((item, index) => (
+                                  <div className="py-2" key={index}>
+                                    <FaqAccordion
+                                      key={index}
+                                      question={item.question}
+                                      asnwer={item.answer}
+                                      onSet={(i) => setFaq(i)}
+                                      questionIndex={index}
+                                      selectedFaq={faq}
+                                    />
+                                  </div>
+                                ))}
                             </div>
                           </div>
                         )}

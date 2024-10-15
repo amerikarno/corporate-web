@@ -4,13 +4,17 @@ import DataTable, { TableColumn } from "react-data-table-component";
 import { useEffect, useState } from "react";
 import { TBankInfo } from "./types";
 import { bankMock } from "./__mock__/portMock";
-import { formatNumberToCommasFraction } from "@/lib/utils";
+import {
+  forceResetNameFavIcon,
+  formatNumberToCommasFraction,
+} from "@/lib/utils";
 import { Button } from "@/components/ui/Button";
 import { Transaction } from "../orderTrade/constant/type";
 import axios from "@/api/axios";
 import { getCookies } from "@/lib/cookies";
 
 export default function Portfolio() {
+  forceResetNameFavIcon();
   const [bankInfo, setBankInfo] = useState<TBankInfo | undefined>(undefined);
   const [isLoading, setIsLoading] = useState(true);
   const [investTransactions, setInvestTransactions] = useState<Transaction[]>(
@@ -42,11 +46,6 @@ export default function Portfolio() {
 
     setIsLoading(false);
   };
-
-  useEffect(() => {
-    fetchTransactionList();
-    getUserBankInfo();
-  }, []);
 
   const fetchTransactionList = async () => {
     try {
@@ -138,6 +137,11 @@ export default function Portfolio() {
       ignoreRowClick: true,
     },
   ];
+
+  useEffect(() => {
+    fetchTransactionList();
+    getUserBankInfo();
+  }, []);
 
   if (isLoading) {
     return <div>Loading...</div>;

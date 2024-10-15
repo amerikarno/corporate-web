@@ -11,13 +11,14 @@ import example from "@assets/drawIcon/example.png";
 import { IcoListItem } from "@/components/icoListItem";
 import { MenuForDropdown } from "@/components/menuForDropdown";
 import { IcoType } from "./types";
-import { getAllIcoData } from "@/lib/utils";
+import { forceResetNameFavIcon, getAllIcoData } from "@/lib/utils";
 
 interface datatype {
   ThemeChanger: any;
 }
 
 const Landing = ({ ThemeChanger }: datatype) => {
+  forceResetNameFavIcon();
   const navigate = useNavigate();
   const token = getCookies();
   const [icoData, setIcoData] = useState<IcoType | undefined>(undefined);
@@ -85,7 +86,7 @@ const Landing = ({ ThemeChanger }: datatype) => {
               </div>
               <div className="hidden s3:flex s3:w-1/3 s3:items-center">
                 <p className="bg-gradient-to-r from-gold-light via-gold-mid to-gold-dark text-transparent bg-clip-text s2:text-3xl font-bold text-center">
-                  Finansia Digital Asset
+                  Finansia ICO
                 </p>
               </div>
 
@@ -140,9 +141,7 @@ const Landing = ({ ThemeChanger }: datatype) => {
                       className="h-10 mb-2"
                       alt="img"
                     />
-                    <u className="text-lg text-white ">
-                      Finansia Digital Asset
-                    </u>
+                    <u className="text-lg text-white ">Finansia ICO</u>
                     <p className="text-white text-xl font-bold pt-4">
                       Community
                     </p>
@@ -254,7 +253,7 @@ const Landing = ({ ThemeChanger }: datatype) => {
                         {" "}
                         <Link to="#" className="inline-flex">
                           <i className="text-white ri-mail-line ltr:mr-2 rtl:ml-2 pr-1"></i>
-                          info@admin.com
+                          info@finansia-ico.com
                         </Link>
                       </li>
                       <li>
@@ -362,7 +361,7 @@ const Landing = ({ ThemeChanger }: datatype) => {
                 }}
                 className="text-primary hover:cursor-pointer"
               >
-                Finansia Digital Asset
+                Finansia ICO
               </span>
             </p>
           </div>

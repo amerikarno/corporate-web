@@ -89,9 +89,7 @@ const NavBarLanding = ({ ThemeChanger }: datatype) => {
                 <img src={getImages("logo")} alt="" className="h-12 md:h-16" />
               </div>
               <div className="hidden xl:flex xl:w-1/3 items-center">
-                <u className="xl:text-3xl font-bold text-black">
-                  Finansia Digital Asset
-                </u>
+                <u className="xl:text-3xl font-bold text-black">Finansia ICO</u>
               </div>
 
               {token ? (
