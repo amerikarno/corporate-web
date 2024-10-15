@@ -50,7 +50,7 @@ export const getUser = () => {
 export const getAllIcoData = async () => {
   try {
     const res = await axios.post(
-      "api/v1/customer/product/ipo",
+      "/api/v1/customer/product/ipo",
       {},
       { headers: { Authorization: `Bearer ${getCookies()}` } }
     );
