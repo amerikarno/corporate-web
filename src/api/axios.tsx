@@ -3,14 +3,21 @@ import axios from "axios";
 // import log from "@/log/log";
 
 const BASE_URL = window.origin;
-// const BASE_URL = "http://localhost:1323";
-// const BASE_URL = "https://sit-corporate-admin.finansiada.com";
-// const BASE_URL = "http://cwa-alb-607898773.eu-north-1.elb.amazonaws.com";
+const BASE_URL2 = "https://admin.eliteconsulting.io";
 
 // consolelog("base url:", BASE_URL);
 
+const checkBase = () => {
+  let baseTmp = BASE_URL;
+  if (window.origin.includes("eliteconsulting")) {
+    baseTmp = BASE_URL2;
+  }
+  return baseTmp;
+};
+
 export default axios.create({
-  baseURL: BASE_URL,
+  // baseURL: BASE_URL,
+  baseURL: checkBase(),
   withCredentials: true,
 });
 
