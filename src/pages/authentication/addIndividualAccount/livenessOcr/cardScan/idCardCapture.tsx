@@ -6,7 +6,7 @@ import { setIdCardImage } from "@/redux/Action";
 import { useNavigate } from "react-router-dom";
 import getImages from "@/common/imagesData";
 import { useWindowSize } from "@/lib/useWindowSize";
-import { resetTitleFavIcon, sleep } from "@/lib/utils";
+import { sleep } from "@/lib/utils";
 import { consolelog } from "@/lib/utils";
 
 type TScreen = {
@@ -17,7 +17,7 @@ type TScreen = {
 type VideoConstraints = MediaTrackConstraints;
 
 export default function IDCardCapture() {
-  resetTitleFavIcon();
+  //resetTitleFavIcon;
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const webcamRef = useRef<Webcam>(null);

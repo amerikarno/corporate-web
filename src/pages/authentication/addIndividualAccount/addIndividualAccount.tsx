@@ -14,10 +14,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCookies } from "@/lib/cookies";
 import axios from "@/api/axios";
 import { initIndividualData, setTestCorporateData } from "@/redux/Action";
-import { consolelog, resetTitleFavIcon } from "@/lib/utils";
+import { consolelog } from "@/lib/utils";
 
 export default function AddIndividualAccount() {
-  resetTitleFavIcon();
+  //resetTitleFavIcon;
   const {
     register,
     handleSubmit,

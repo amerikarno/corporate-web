@@ -14,10 +14,10 @@ import { bank } from "@/lib/constantVariables";
 import { BsBank2 } from "react-icons/bs";
 import { BiMoneyWithdraw } from "react-icons/bi";
 import Navbar from "@/components/navbar";
-import { consolelog, resetTitleFavIcon } from "@/lib/utils";
+import { consolelog } from "@/lib/utils";
 
 export default function BankOrder() {
-  resetTitleFavIcon();
+  //resetTitleFavIcon;
   // const dispatch = useDispatch();
   const [buySell, setBuySell] = useState<string>("depostie");
   //   const [selectedCorporateCode, setSelectedCorporateCode] =

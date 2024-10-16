@@ -17,7 +17,7 @@ type TActionMessage = {
 };
 
 export default function Liveness() {
-  resetTitleFavIcon();
+  //resetTitleFavIcon;
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const webcamRef = useRef<Webcam>(null);

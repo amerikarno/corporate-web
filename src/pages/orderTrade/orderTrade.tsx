@@ -11,7 +11,6 @@ import { IoReceiptOutline } from "react-icons/io5";
 import NavBar from "@/components/navbar";
 import {
   consolelog,
-  resetTitleFavIcon,
   formatNumberToCommasFraction,
   getAllIcoData,
   getAppName,
@@ -33,7 +32,7 @@ type TCurrency = {
 };
 
 export default function OrderTrade() {
-  resetTitleFavIcon();
+  //resetTitleFavIcon;
   const {
     register,
     handleSubmit,

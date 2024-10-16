@@ -1,4 +1,5 @@
-import logo from "@assets/fda.png";
+import logo from "@assets/drawIcon/example.png";
+// import logo from "@assets/drawIcon/ico.svg";
 // import logo from "@assets/logo_ecg-03.png";
 import example from "@assets/drawIcon/example.png";
 import idOverLay from "@assets/ID_Card_overlay.svg";
@@ -16,6 +17,7 @@ import png8 from "@/assets/images/png8.png";
 import phoneIcon from "@/assets/images/otpPhone.svg";
 import mailIcon from "@/assets/images/otpMail.svg";
 import man from "@/assets/man.svg";
+import emptyImg from "@/assets/drawIcon/empty.svg";
 
 export const randomImage = (): string => {
   const ran = Math.floor(Math.random() * 10);
@@ -24,6 +26,7 @@ export const randomImage = (): string => {
 
 const getImages = (img: string) => {
   const i: any = {
+    emptyImg,
     phoneIcon,
     mailIcon,
     logo,

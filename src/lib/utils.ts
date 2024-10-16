@@ -83,41 +83,19 @@ export const testApiInfo = async (url: string) => {
   }
 };
 
-export const resetTitleFavIcon = () => {
-  const url = window.origin.includes("eliteconsulting") ? "e.png" : "fda.png";
+// export const resetTitleFavIcon = () => {
+//   const url = "";
+//   document.title = "ICO Campaign Portal";
 
-  document.title = getAppName();
+//   const link: HTMLLinkElement | null =
+//     document.querySelector("link[rel~='icon']");
 
-  const link: HTMLLinkElement | null =
-    document.querySelector("link[rel~='icon']");
-
-  if (!link) {
-    const newLink = document.createElement("link");
-    newLink.rel = "icon";
-    newLink.href = url;
-    document.head.appendChild(newLink);
-  } else {
-    link.href = url;
-  }
-  // consolelog("reset Title and Favorite icon");
-};
-
-export const getAppName = () => {
-  return window.origin.includes("eliteconsulting")
-    ? "Elite Consulting"
-    : "Finansia ICO";
-};
-
-export const base64ToFile = (base64: string, filename: string): File => {
-  const arr = base64.split(",");
-  const mime = arr[0].match(/:(.*?);/)![1];
-  const bstr = atob(arr[1]);
-  let n = bstr.length;
-  const u8arr = new Uint8Array(n);
-
-  while (n--) {
-    u8arr[n] = bstr.charCodeAt(n);
-  }
-
-  return new File([u8arr], filename, { type: mime });
-};
+//   if (!link) {
+//     const newLink = document.createElement("link");
+//     newLink.rel = "icon";
+//     newLink.href = url;
+//     document.head.appendChild(newLink);
+//   } else {
+//     link.href = url;
+//   }
+// };
