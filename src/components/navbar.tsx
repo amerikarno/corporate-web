@@ -9,7 +9,6 @@ import { getCookies, removeCookies } from "@/lib/cookies";
 import example from "@assets/drawIcon/example.png";
 import { Button } from "@/components/ui/Button";
 import { MenuForDropdown } from "./menuForDropdown";
-import { getAppName } from "@/lib/utils";
 
 interface datatype {
   ThemeChanger: any;
@@ -100,7 +99,7 @@ const NavBar = ({ ThemeChanger, children, isFullWidth, padding }: datatype) => {
             </div>
             <div className="hidden lg:block lg:w-1/3 lg:items-center justify-center">
               <p className="bg-gradient-to-r from-gold-light via-gold-mid to-gold-dark text-transparent bg-clip-text s2:text-3xl font-bold text-center">
-                {getAppName()}
+                ICO Campaign Portal
               </p>
             </div>
             {token ? (
@@ -108,7 +107,7 @@ const NavBar = ({ ThemeChanger, children, isFullWidth, padding }: datatype) => {
                 <MenuForDropdown avatar={example} logout={handleLogout} />
               </div>
             ) : (
-              <div className="w-1/2 s3:w-1/3 flex justify-end items-center space-x-4">
+              <div className="w-1/2 lg:w-1/3 flex justify-end items-center space-x-4">
                 <Button
                   className="bg-[rgba(90,102,241,1)] min-w-24 max-w-24"
                   onClick={() => navigate("/authentication/signup/type/")}

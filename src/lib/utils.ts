@@ -83,6 +83,28 @@ export const testApiInfo = async (url: string) => {
   }
 };
 
+export const getAppName = () => {
+  let appName = "ICO";
+  if (window.origin.includes("eliteconsulting")) {
+    appName = "Elite Consulting";
+  }
+  return appName;
+};
+
+export const base64ToFile = (base64: string, filename: string): File => {
+  const arr = base64.split(",");
+  const mime = arr[0].match(/:(.*?);/)![1];
+  const bstr = atob(arr[1]);
+  let n = bstr.length;
+  const u8arr = new Uint8Array(n);
+
+  while (n--) {
+    u8arr[n] = bstr.charCodeAt(n);
+  }
+
+  return new File([u8arr], filename, { type: mime });
+};
+
 // export const resetTitleFavIcon = () => {
 //   const url = "";
 //   document.title = "ICO Campaign Portal";
