@@ -127,7 +127,7 @@ const Landing = ({ ThemeChanger }: datatype) => {
           </div>
         ) : (
           <div className="w-full h-[400px] flex items-center justify-center">
-            No data found.
+            Loading ...
           </div>
         )}
         <footer id="footer" className="bg-dark-bg">
@@ -277,55 +277,53 @@ const Landing = ({ ThemeChanger }: datatype) => {
                       <div className="flex flex-col space-y-3 px-4">
                         <ul className="text-gray-400 dark:text-gray-400 space-y-3">
                           <li>
-                            <Link to="#home">หน้าหลัก</Link>
+                            <Link to="#">หน้าหลัก</Link>
                           </li>
                           <li>
-                            <Link to="#invest">ลงทุน</Link>
+                            <Link to="#">ลงทุน</Link>
                           </li>
                           <li>
-                            <Link to="#services">ธุรกิจและบริการ</Link>
+                            <Link to="#">ธุรกิจและบริการ</Link>
                           </li>
                           <li>
                             <Link to="#">เปิดบัญชี/ฝาก-ถอน</Link>
                           </li>
                           <li>
-                            <Link to="#features">บริการอิเล็กทรอนิกส์</Link>
+                            <Link to="#">บริการอิเล็กทรอนิกส์</Link>
                           </li>
                           <li>
-                            <Link to="#about">โปรโมชั่น</Link>
+                            <Link to="#">โปรโมชั่น</Link>
                           </li>
                           <li>
                             <Link to="#">ดาวน์โหลด</Link>
                           </li>
                           <li>
-                            <Link to="#contact">ติดต่อเรา</Link>
+                            <Link to="#">ติดต่อเรา</Link>
                           </li>
                           <li>
-                            <Link to="#faq">คำถามพบบ่อย</Link>
+                            <Link to="#">คำถามพบบ่อย</Link>
                           </li>
                           <li>
-                            <Link to="#blogs">คอมมูนิตี้</Link>
+                            <Link to="#">คอมมูนิตี้</Link>
                           </li>
                         </ul>
                       </div>
                       <div className="flex flex-col space-y-3 px-4">
                         <ul className="text-gray-400 dark:text-gray-400 space-y-3">
                           <li>
-                            <Link to="#our-mission">ปณิธานการดำเนินธุรกิจ</Link>
+                            <Link to="#">ปณิธานการดำเนินธุรกิจ</Link>
                           </li>
                           <li>
                             <Link to="#">โครงสร้างองค์กร</Link>
                           </li>
                           <li>
-                            <Link to="#team">คณะกรรมการบริษัท</Link>
+                            <Link to="#">คณะกรรมการบริษัท</Link>
                           </li>
                           <li>
-                            <Link to="#statistics">งบการเงิน</Link>
+                            <Link to="#">งบการเงิน</Link>
                           </li>
                           <li>
-                            <Link to="#testimonials">
-                              ประกาศและประชาสัมพันธ์
-                            </Link>
+                            <Link to="#">ประกาศและประชาสัมพันธ์</Link>
                           </li>
                           <li>
                             <Link to="#">สมัครงาน</Link>
