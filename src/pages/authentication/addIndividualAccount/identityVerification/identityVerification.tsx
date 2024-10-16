@@ -26,10 +26,9 @@ import {
 } from "@/redux/Action";
 import { useEffect, useState } from "react";
 import Alert from "@/components/alert/Alert";
-import { forceResetNameFavIcon } from "@/lib/utils";
 
 export default function IdentityVerification() {
-  forceResetNameFavIcon();
+  //resetTitleFavIcon;
   const navigate = useNavigate();
   const token = getCookies();
   const dispatch = useDispatch();

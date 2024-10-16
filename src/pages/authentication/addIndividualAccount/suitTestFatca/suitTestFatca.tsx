@@ -5,7 +5,7 @@ import SubSuitTest from "./subSuitTest";
 import KnowLedgeTest from "./knowLedgeTest";
 import { TiTick } from "react-icons/ti";
 import "./suitTestFatca.css";
-import { consolelog, forceResetNameFavIcon } from "@/lib/utils";
+import { consolelog } from "@/lib/utils";
 import { useNavigate } from "react-router-dom";
 import axios from "@/api/axios";
 import { initIndividualData, setTestCorporateData } from "@/redux/Action";
@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCookies } from "@/lib/cookies";
 
 export default function SuitTestFatca() {
-  forceResetNameFavIcon();
+  //resetTitleFavIcon;
   const token = getCookies();
   const dispatch = useDispatch();
   const fetchIndividualData = async (AccountID: string) => {

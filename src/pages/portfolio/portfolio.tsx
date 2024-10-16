@@ -4,17 +4,14 @@ import DataTable, { TableColumn } from "react-data-table-component";
 import { useEffect, useState } from "react";
 import { TBankInfo } from "./types";
 import { bankMock } from "./__mock__/portMock";
-import {
-  forceResetNameFavIcon,
-  formatNumberToCommasFraction,
-} from "@/lib/utils";
+import { formatNumberToCommasFraction } from "@/lib/utils";
 import { Button } from "@/components/ui/Button";
 import { Transaction } from "../orderTrade/constant/type";
 import axios from "@/api/axios";
 import { getCookies } from "@/lib/cookies";
 
 export default function Portfolio() {
-  forceResetNameFavIcon();
+  //resetTitleFavIcon;
   const [bankInfo, setBankInfo] = useState<TBankInfo | undefined>(undefined);
   const [isLoading, setIsLoading] = useState(true);
   const [investTransactions, setInvestTransactions] = useState<Transaction[]>(

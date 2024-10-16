@@ -10,12 +10,12 @@ import { ContentDetails } from "@/components/contentDetails";
 import { FaqAccordion } from "@/components/Faq";
 import { TAssetData } from "../landing/types";
 import { useSelector } from "react-redux";
-import { consolelog, forceResetNameFavIcon, getAllIcoData } from "@/lib/utils";
+import { consolelog, getAllIcoData } from "@/lib/utils";
 import { getCookies } from "@/lib/cookies";
 import getImages from "@/common/imagesData";
 
 export function AssetDetails() {
-  forceResetNameFavIcon();
+  //resetTitleFavIcon;
   const navigate = useNavigate();
   const assetId = useParams().id;
   const assetType = useParams().type;
@@ -100,7 +100,7 @@ export function AssetDetails() {
                               alt=""
                               className="w-16 h-16"
                               onError={(e) =>
-                                (e.currentTarget.src = getImages("whiteBg"))
+                                (e.currentTarget.src = getImages("example"))
                               }
                             />
                             <div className="w-full flex-col px-4 space-y-2">

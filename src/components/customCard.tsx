@@ -30,7 +30,7 @@ export function CustomCard({ data, index, type }: TCustomCardProps) {
               alt=""
               className="h-[17px] md:h-[34px]"
             />
-            <h1 className={`font-bold text-xl text-gray-800`}>Finansia ICO</h1>
+            <h1 className={`font-bold text-xl text-gray-800`}>ICO</h1>
           </div>
           <div className="flex flex-row justify-between">
             <h2 className={`break-words ${normalText}`}>{data.issueBy}</h2>

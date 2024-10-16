@@ -32,19 +32,10 @@ export function MenuForDropdown({ avatar, logout }: TMenuForDropdown) {
         >
           Profile
         </DropdownMenuItem>
-        {/* <DropdownMenuItem
-          className="cursor-pointer hover:bg-gray-300 hover:font-bold w-[200px]"
-          onClick={() => {
-            navigate("/dashboard/personal");
-          }}
-        >
-          Personal
-        </DropdownMenuItem> */}
         <DropdownMenuItem
           className="cursor-pointer hover:bg-gray-300 hover:font-bold w-[200px]"
           onClick={() => {
             navigate("/");
-            // navigate("/invest");
           }}
         >
           Invest
@@ -57,14 +48,14 @@ export function MenuForDropdown({ avatar, logout }: TMenuForDropdown) {
         >
           Portfolio
         </DropdownMenuItem>
-        <DropdownMenuItem
+        {/* <DropdownMenuItem
           className="cursor-pointer hover:bg-gray-300 hover:font-bold w-[200px]"
           onClick={() => {
             navigate("/deposite-withdraw");
           }}
         >
           Deposite / Withdraw
-        </DropdownMenuItem>
+        </DropdownMenuItem> */}
         <DropdownMenuItem
           className="cursor-pointer hover:bg-gray-300 hover:font-bold w-[200px]"
           onClick={() => logout()}

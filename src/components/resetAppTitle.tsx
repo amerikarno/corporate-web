@@ -19,7 +19,7 @@ export default function ResetAppTitle() {
   const location = useLocation();
 
   useEffect(() => {
-    document.title = "Finansia ICO";
+    document.title = "ICO";
     updateFavicon("/fda.png");
   }, [location]);
 

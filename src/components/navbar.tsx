@@ -97,9 +97,9 @@ const NavBar = ({ ThemeChanger, children, isFullWidth, padding }: datatype) => {
                 onClick={() => navigate("/")}
               />
             </div>
-            <div className="hidden lg:block lg:w-1/3 lg:items-center">
+            <div className="hidden lg:block lg:w-1/3 lg:items-center justify-center">
               <p className="bg-gradient-to-r from-gold-light via-gold-mid to-gold-dark text-transparent bg-clip-text s2:text-3xl font-bold text-center">
-                Finansia ICO
+                ICO Campaign Portal
               </p>
             </div>
             {token ? (

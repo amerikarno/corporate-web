@@ -81,9 +81,9 @@ export const testApiInfo = async (url: string) => {
   }
 };
 
-export const forceResetNameFavIcon = () => {
-  const url = "/fda.png";
-  document.title = "Finansia ICO";
+export const resetTitleFavIcon = () => {
+  const url = "";
+  document.title = "ICO";
 
   const link: HTMLLinkElement | null =
     document.querySelector("link[rel~='icon']");

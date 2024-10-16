@@ -11,14 +11,14 @@ import example from "@assets/drawIcon/example.png";
 import { IcoListItem } from "@/components/icoListItem";
 import { MenuForDropdown } from "@/components/menuForDropdown";
 import { IcoType } from "./types";
-import { forceResetNameFavIcon, getAllIcoData } from "@/lib/utils";
+import { getAllIcoData } from "@/lib/utils";
 
 interface datatype {
   ThemeChanger: any;
 }
 
 const Landing = ({ ThemeChanger }: datatype) => {
-  forceResetNameFavIcon();
+  //resetTitleFavIcon;
   const navigate = useNavigate();
   const token = getCookies();
   const [icoData, setIcoData] = useState<IcoType | undefined>(undefined);
@@ -78,15 +78,16 @@ const Landing = ({ ThemeChanger }: datatype) => {
             <div className="w-full flex flex-row py-4 px-4">
               <div className="w-1/2 items-center s3:w-1/3">
                 <img
-                  src={getImages("logo")}
+                  src={getImages("whiteBg")}
                   alt=""
                   className="h-12 hover:cursor-pointer"
                   onClick={() => navigate("/")}
                 />
               </div>
-              <div className="hidden s3:flex s3:w-1/3 s3:items-center">
+
+              <div className="hidden s3:flex s3:w-1/3 s3:items-center justify-center">
                 <p className="bg-gradient-to-r from-gold-light via-gold-mid to-gold-dark text-transparent bg-clip-text s2:text-3xl font-bold text-center">
-                  Finansia ICO
+                  ICO Campaign Portal
                 </p>
               </div>
 
@@ -136,12 +137,12 @@ const Landing = ({ ThemeChanger }: datatype) => {
               <div className="grid grid-cols-12 gap-6">
                 <div className="col-span-12 md:col-span-4">
                   <div className="space-y-4 px-4">
-                    <img
+                    {/* <img
                       src={getImages("logo")}
                       className="h-10 mb-2"
                       alt="img"
-                    />
-                    <u className="text-lg text-white ">Finansia ICO</u>
+                    /> */}
+                    <u className="text-lg text-white ">ICO</u>
                     <p className="text-white text-xl font-bold pt-4">
                       Community
                     </p>
@@ -253,7 +254,7 @@ const Landing = ({ ThemeChanger }: datatype) => {
                         {" "}
                         <Link to="#" className="inline-flex">
                           <i className="text-white ri-mail-line ltr:mr-2 rtl:ml-2 pr-1"></i>
-                          info@finansia-ico.com
+                          info@ico.com
                         </Link>
                       </li>
                       <li>
@@ -359,7 +360,7 @@ const Landing = ({ ThemeChanger }: datatype) => {
                 }}
                 className="text-primary hover:cursor-pointer"
               >
-                Finansia ICO
+                ICO
               </span>
             </p>
           </div>

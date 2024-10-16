@@ -9,10 +9,10 @@ import { setCookies } from "@/lib/cookies";
 import { TUser } from "../types";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
-import { consolelog, forceResetNameFavIcon } from "@/lib/utils";
+import { consolelog } from "@/lib/utils";
 
 export default function GoogleQr() {
-  forceResetNameFavIcon();
+  //resetTitleFavIcon;
   const [secret, setSecret] = useState("");
   const [message, setMessage] = useState("");
   const [secretError, setSecretError] = useState("");
