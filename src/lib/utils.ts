@@ -81,19 +81,19 @@ export const testApiInfo = async (url: string) => {
   }
 };
 
-export const resetTitleFavIcon = () => {
-  const url = "";
-  document.title = "ICO";
+// export const resetTitleFavIcon = () => {
+//   const url = "";
+//   document.title = "ICO Campaign Portal";
 
-  const link: HTMLLinkElement | null =
-    document.querySelector("link[rel~='icon']");
+//   const link: HTMLLinkElement | null =
+//     document.querySelector("link[rel~='icon']");
 
-  if (!link) {
-    const newLink = document.createElement("link");
-    newLink.rel = "icon";
-    newLink.href = url;
-    document.head.appendChild(newLink);
-  } else {
-    link.href = url;
-  }
-};
+//   if (!link) {
+//     const newLink = document.createElement("link");
+//     newLink.rel = "icon";
+//     newLink.href = url;
+//     document.head.appendChild(newLink);
+//   } else {
+//     link.href = url;
+//   }
+// };
