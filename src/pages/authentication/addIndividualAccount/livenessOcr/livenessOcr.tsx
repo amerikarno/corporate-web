@@ -1,11 +1,12 @@
 import { useRef, useEffect, useState, useCallback } from "react";
 import Webcam from "react-webcam";
 import * as faceapi from "face-api.js";
-import { consolelog, resetTitleFavIcon } from "@/lib/utils";
+import { base64ToFile, consolelog, resetTitleFavIcon } from "@/lib/utils";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setFaceImage } from "@/redux/Action";
 import { Camera } from "lucide-react";
+import axios from "@/api/axios";
 
 type VideoConstraints = MediaTrackConstraints;
 type TActionMessage = {
@@ -114,7 +115,7 @@ export default function Liveness() {
             const centerX = dims.width / 2;
             const centerY = dims.height / 2;
             const radius = 100; // Static radius for the circle
-            consolelog(dims);
+            // consolelog(dims);
 
             // Calculate circle's bounding box
             const circleWidth = radius * 2;
@@ -242,25 +243,52 @@ export default function Liveness() {
     return mouthDistance;
   };
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (isCenter && isMouthOpen && isTurnLeft && isTurnRight) {
       const srcImg = webcamRef.current?.getScreenshot();
       if (srcImg && srcImg !== null) {
-        dispatch(setFaceImage(srcImg));
+        const cid = localStorage.getItem("cid");
+        const file = base64ToFile(srcImg, `faceImage-${cid}.png`);
+        const body = {
+          registerId: cid,
+          file: file,
+          docType: "faceCompare",
+        };
+
+        await axios
+          .post("api/v1/document/openaccount/upload", body, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          })
+          .then((res) => {
+            consolelog(res);
+            dispatch(setFaceImage(srcImg));
+            // navigate("/authentication/signup/webcaminstructions");
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+
         consolelog(srcImg);
-        // navigate("/authentication/signup/webcaminstructions");
       }
     }
+    //TODO: remove link
     navigate("/authentication/signup/webcaminstructions");
   };
 
   useEffect(() => {
     loadModels();
+    //aspect = w/h
     // consolelog(window.innerWidth, window.innerHeight);
+    // setVideoConstraints({
+    //   width: 375,
+    //   height: 667,
+    //   facingMode: "user",
+    // });
     setVideoConstraints({
-      width: window.innerWidth,
-      height: window.innerHeight,
-      facingMode: "user",
+      height: 667,
+      width: 375,
     });
   }, []);
 
@@ -292,8 +320,8 @@ export default function Liveness() {
   }, [webcamRef]);
 
   return (
-    <>
-      <div className="relative w-screen h-screen">
+    <div className="w-full h-full flex justify-center items-start">
+      <div className="relative w-[375px] h-[667px]">
         {!webcamInitialized && <p>Loading webcam...</p>}
         <Webcam
           className="w-full h-full absolute top-0 left-0"
@@ -317,6 +345,6 @@ export default function Liveness() {
           />
         </div>
       </div>
-    </>
+    </div>
   );
 }

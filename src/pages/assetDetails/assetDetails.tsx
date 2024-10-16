@@ -10,7 +10,7 @@ import { ContentDetails } from "@/components/contentDetails";
 import { FaqAccordion } from "@/components/Faq";
 import { TAssetData } from "../landing/types";
 import { useSelector } from "react-redux";
-import { consolelog, resetTitleFavIcon, getAllIcoData } from "@/lib/utils";
+import { resetTitleFavIcon, getAllIcoData } from "@/lib/utils";
 import { getCookies } from "@/lib/cookies";
 import getImages from "@/common/imagesData";
 
@@ -68,8 +68,6 @@ export function AssetDetails() {
 
   const normalText = "text-gray-400";
   const darkText = "text-gray-900 font-bold";
-
-  consolelog(assetData?.asset?.logo);
 
   return (
     <>
