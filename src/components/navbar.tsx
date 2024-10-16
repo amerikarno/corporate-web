@@ -91,7 +91,7 @@ const NavBar = ({ ThemeChanger, children, isFullWidth, padding }: datatype) => {
           <div className="w-full flex flex-row py-4">
             <div className="w-1/2 items-center lg:w-1/3">
               <img
-                src={getImages("logo")}
+                src={getImages("whiteBg")}
                 alt=""
                 className="h-12 hover:cursor-pointer"
                 onClick={() => navigate("/")}
