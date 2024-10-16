@@ -3,7 +3,7 @@ import ndid from "@assets/identityVerification/ndid.png";
 import { Card } from "@/components/ui/Card";
 import { FaPhoneAlt } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/Button";
 import {
   AlertDialog,
@@ -26,13 +26,17 @@ import {
 } from "@/redux/Action";
 import { useEffect, useState } from "react";
 import Alert from "@/components/alert/Alert";
-import { forceResetNameFavIcon } from "@/lib/utils";
+import { consolelog, resetTitleFavIcon } from "@/lib/utils";
 
 export default function IdentityVerification() {
-  forceResetNameFavIcon();
+  resetTitleFavIcon();
   const navigate = useNavigate();
   const token = getCookies();
   const dispatch = useDispatch();
+  const location = useLocation();
+  const customerCode = new URLSearchParams(location.search).get("customerCode");
+
+  consolelog(customerCode);
 
   const fetchIndividualData = async (AccountID: string) => {
     try {
@@ -50,7 +54,7 @@ export default function IdentityVerification() {
   const individualData = useSelector((state: any) => state.individualData);
 
   useEffect(() => {
-    const cidValue = localStorage.getItem("cid");
+    const cidValue = customerCode ? customerCode : localStorage.getItem("cid");
     if (cidValue) {
       fetchIndividualData(cidValue || "");
     } else {

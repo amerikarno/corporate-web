@@ -1,14 +1,12 @@
 import { TBankInfo } from "../types";
 
 export const bankMock: TBankInfo = {
-  id: "xx-xxx-xxx-xxx",
-  userId: "ee082cb5-00ae-4c54-a184-4738f562bc92",
-  firstName: "moo",
-  lastName: "deng",
+  customerCode: "90000001",
+  bankAccount: "bankaccountid1",
+  totoalCredits: "95580600",
+  avaliable: "95580600",
+  use: "420",
   currency: "THB",
-  balance: "10000000",
-  used: "9500000",
-  available: "500000",
 };
 
 export const transactionMock = [

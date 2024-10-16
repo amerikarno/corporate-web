@@ -15,6 +15,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import example from "@assets/drawIcon/example.png";
 import { Button } from "@/components/ui/Button";
+import { getAppName } from "@/lib/utils";
 
 interface datatype {
   ThemeChanger: any;
@@ -89,7 +90,9 @@ const NavBarLanding = ({ ThemeChanger }: datatype) => {
                 <img src={getImages("logo")} alt="" className="h-12 md:h-16" />
               </div>
               <div className="hidden xl:flex xl:w-1/3 items-center">
-                <u className="xl:text-3xl font-bold text-black">Finansia ICO</u>
+                <u className="xl:text-3xl font-bold text-black">
+                  {getAppName()}
+                </u>
               </div>
 
               {token ? (

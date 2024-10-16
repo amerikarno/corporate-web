@@ -4,17 +4,14 @@ import DataTable, { TableColumn } from "react-data-table-component";
 import { useEffect, useState } from "react";
 import { TBankInfo } from "./types";
 import { bankMock } from "./__mock__/portMock";
-import {
-  forceResetNameFavIcon,
-  formatNumberToCommasFraction,
-} from "@/lib/utils";
+import { resetTitleFavIcon, formatNumberToCommasFraction } from "@/lib/utils";
 import { Button } from "@/components/ui/Button";
 import { Transaction } from "../orderTrade/constant/type";
 import axios from "@/api/axios";
 import { getCookies } from "@/lib/cookies";
 
 export default function Portfolio() {
-  forceResetNameFavIcon();
+  resetTitleFavIcon();
   const [bankInfo, setBankInfo] = useState<TBankInfo | undefined>(undefined);
   const [isLoading, setIsLoading] = useState(true);
   const [investTransactions, setInvestTransactions] = useState<Transaction[]>(
@@ -154,32 +151,36 @@ export default function Portfolio() {
         <div className="p-2 space-y-20">
           <Card className="p-4">
             <CardContent className="grid grid-cols-3 gap-y-10 gap-x-4">
-              <div className="col-span-2">
-                <h1 className={textTitle}>Account ID</h1>
-                <h1 className={textContent}>{bankInfo?.id}</h1>
+              <div className="col-span-3">
+                <h1 className={textTitle}>Account</h1>
+                <h1 className={textContent}>{bankInfo?.bankAccount}</h1>
               </div>
-              <div className="col-span-1">
+              {/* <div className="col-span-1">
                 <h1 className={textTitle}>Name</h1>
                 <h1
                   className={textContent}
                 >{`${bankInfo?.firstName} ${bankInfo?.lastName}`}</h1>
-              </div>
+              </div> */}
               <div className="">
-                <h1 className={textTitle}>Total Balance (THB)</h1>
+                <h1
+                  className={textTitle}
+                >{`Total Credits Balance (${bankInfo?.currency})`}</h1>
                 <h1 className={textContent}>
-                  {formatNumberToCommasFraction(bankInfo?.balance)}
+                  {formatNumberToCommasFraction(bankInfo?.totoalCredits)}
                 </h1>
               </div>
               <div className="">
-                <h1 className={textTitle}>Used (THB)</h1>
+                <h1 className={textTitle}>{`Used (${bankInfo?.currency})`}</h1>
                 <h1 className={textContent}>
-                  {formatNumberToCommasFraction(bankInfo?.used)}
+                  {formatNumberToCommasFraction(bankInfo?.use)}
                 </h1>
               </div>
               <div className="">
-                <h1 className={textTitle}>Available (THB)</h1>
+                <h1
+                  className={textTitle}
+                >{`Available (${bankInfo?.currency})`}</h1>
                 <h1 className={textContent}>
-                  {formatNumberToCommasFraction(bankInfo?.available)}
+                  {formatNumberToCommasFraction(bankInfo?.avaliable)}
                 </h1>
               </div>
             </CardContent>

@@ -1,7 +1,7 @@
 import { useRef, useEffect, useState, useCallback } from "react";
 import Webcam from "react-webcam";
 import * as faceapi from "face-api.js";
-import { consolelog, forceResetNameFavIcon } from "@/lib/utils";
+import { consolelog, resetTitleFavIcon } from "@/lib/utils";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setFaceImage } from "@/redux/Action";
@@ -16,7 +16,7 @@ type TActionMessage = {
 };
 
 export default function Liveness() {
-  forceResetNameFavIcon();
+  resetTitleFavIcon();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const webcamRef = useRef<Webcam>(null);

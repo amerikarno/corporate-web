@@ -18,7 +18,7 @@ import {
 import { basicInfoSchema, TBasicInfo } from "./constant/schemas";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { consolelog, forceResetNameFavIcon } from "@/lib/utils";
+import { consolelog, resetTitleFavIcon } from "@/lib/utils";
 import { getCookies } from "@/lib/cookies";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "@/api/axios";
@@ -27,7 +27,7 @@ import { TBasicinfoAddress, TBasicInfoBank } from "../types";
 import { IndividualData } from "@/redux/types";
 
 export default function BasicInfo() {
-  forceResetNameFavIcon();
+  resetTitleFavIcon();
   const responsiveClass =
     "flex flex-col space-y-2 lg:space-y-0 lg:flex-row lg:space-x-4";
 

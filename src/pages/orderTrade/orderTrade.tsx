@@ -11,9 +11,10 @@ import { IoReceiptOutline } from "react-icons/io5";
 import NavBar from "@/components/navbar";
 import {
   consolelog,
-  forceResetNameFavIcon,
+  resetTitleFavIcon,
   formatNumberToCommasFraction,
   getAllIcoData,
+  getAppName,
   getUser,
 } from "@/lib/utils";
 import axios from "@/api/axios";
@@ -32,7 +33,7 @@ type TCurrency = {
 };
 
 export default function OrderTrade() {
-  forceResetNameFavIcon();
+  resetTitleFavIcon();
   const {
     register,
     handleSubmit,
@@ -51,22 +52,23 @@ export default function OrderTrade() {
 
   const icoAll = useSelector((state: any) => state.icoAll);
 
-  const [selectedCurrency, setSelectedCurrency] = useState<TCurrency>({
-    name: "THB",
-    factor: 1,
-  });
   const [bankInfo, setBankInfo] = useState<TBankInfo | undefined>(undefined);
   const [user, setUser] = useState<TUser | undefined>();
   const [assetData, setAssetData] = useState<TAssetData | undefined>(undefined);
   const [unitPrice, setUnitPrice] = useState<number>(1);
-  const payCurrency = [
-    // factor is from xx curency = 1 thb. eg 35 usd= 1 thb
+  const [tokenUnit, setTokenUnit] = useState<string>("");
+  const payCurrency: TCurrency[] = [
+    // factor coming from 1 xxx = xx THB. // 1 USD = 35 THB
     { name: "", factor: 1 },
     { name: "THB", factor: 1 },
     { name: "USD", factor: 35 },
     { name: "EUR", factor: 30 },
     { name: "JPY", factor: 0.23 },
   ];
+  const [selectedCurrency, setSelectedCurrency] = useState<TCurrency>(
+    payCurrency[1]
+  );
+  const [errorMin, setErrorMin] = useState<string | undefined>(undefined);
 
   const handleTokenAmount = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -138,10 +140,14 @@ export default function OrderTrade() {
 
       if (data.length !== 0) {
         setAssetData(data[index]);
-        const unitPrice = data[index].info?.issueUnitPrice!.split(" ")[0];
+        const unitPrice = data[index].info?.issueUnitPrice?.split(" ")[0];
         const numUnitPrice = parseFloat(unitPrice || "0");
         if (!isNaN(numUnitPrice)) {
           setUnitPrice(numUnitPrice);
+
+          const unit =
+            data[index].info?.minimumInvestmentQuantity?.split(" ")[1];
+          setTokenUnit(unit || "");
         }
       }
     }
@@ -150,7 +156,7 @@ export default function OrderTrade() {
   const fetchUserBankInfo = async () => {
     try {
       const res = await axios.post(
-        "",
+        "/api/v1/customer/info/balance",
         {},
         {
           headers: {
@@ -209,6 +215,31 @@ export default function OrderTrade() {
     }
   };
 
+  const checkMinAmount = (qtn?: string): boolean => {
+    try {
+      const numValue = parseFloat(qtn || "0");
+      if (!isNaN(numValue)) {
+        const minQtn = assetData?.info?.minimumInvestmentQuantity || "0";
+        const min = minQtn.split(" ");
+        const numMin = parseFloat(min[0]);
+        if (numValue < numMin) {
+          setErrorMin(
+            `required minimum quantity ${assetData?.info?.minimumInvestmentQuantity}`
+          );
+          return true;
+        } else {
+          setErrorMin(undefined);
+          return false;
+        }
+      } else {
+        return false;
+      }
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  };
+
   const onsubmit = async (data: TOrderTrade) => {
     let body: TOrderTrade = {
       ...data,
@@ -216,26 +247,30 @@ export default function OrderTrade() {
       icoCode: assetData?.icoCode,
     };
     consolelog("data", body);
-    try {
-      const res = await axios.post(
-        "/api/v1/customer/product/investment",
-        body,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${getCookies()}`,
-          },
+
+    const isMin = checkMinAmount(body.amount);
+    if (isMin) {
+      try {
+        const res = await axios.post(
+          "/api/v1/customer/product/investment",
+          body,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${getCookies()}`,
+            },
+          }
+        );
+        if (res.status === 200) {
+          consolelog(res.data);
+          reset();
+          await fetchUserBankInfo();
+        } else {
+          consolelog(res.data);
         }
-      );
-      if (res.status === 200) {
-        consolelog(res.data);
-        reset();
-        await fetchUserBankInfo();
-      } else {
-        consolelog(res.data);
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
     }
   };
 
@@ -255,7 +290,7 @@ export default function OrderTrade() {
                       className="h-[17px] md:h-[34px]"
                     />
                     <h1 className={`font-bold text-xl text-gray-800`}>
-                      Finansia ICO
+                      {getAppName()}
                     </h1>
                   </div>
                   <div className="flex flex-row justify-between">
@@ -321,22 +356,26 @@ export default function OrderTrade() {
             <Card>
               <CardHeader>
                 <div className="flex flex-row justify-between">
-                  <div className={normalText}>Account Balance</div>
-                  <div className={darkText}>{bankInfo?.id}</div>
+                  <div className={normalText}>Account Information</div>
+                  <div className={darkText}>{bankInfo?.bankAccount}</div>
                 </div>
               </CardHeader>
               <CardContent>
                 <div className="flex flex-col justify-center space-y-4">
                   <div className="flex flex-row w-full justify-between">
-                    <p className={normalText}>Total credit</p>
+                    <p
+                      className={normalText}
+                    >{`Credit Balance (${bankInfo?.currency})`}</p>
                     <p className={darkText}>
-                      {formatNumberToCommasFraction(bankInfo?.balance)}
+                      {formatNumberToCommasFraction(bankInfo?.totoalCredits)}
                     </p>
                   </div>
                   <div className="flex flex-row w-full justify-between">
-                    <p className={normalText}>Avaliable</p>
+                    <p
+                      className={normalText}
+                    >{`Avaliable (${bankInfo?.currency})`}</p>
                     <p className={darkText}>
-                      {formatNumberToCommasFraction(bankInfo?.available)}
+                      {formatNumberToCommasFraction(bankInfo?.avaliable)}
                     </p>
                   </div>
                   <div className="flex flex-row w-full justify-between">
@@ -402,7 +441,7 @@ export default function OrderTrade() {
                             // value: tokenAmount,
                             onChange: handleTokenAmount,
                           })}
-                          label={`Token`}
+                          label={`Token (${tokenUnit})`}
                           data-testid="tokenAmount"
                           disabled={isSubmitting}
                           id="amount"
@@ -434,9 +473,12 @@ export default function OrderTrade() {
                           inputClassName="text-right"
                         />
                         {errors.value && (
-                          <p className="text-red-500 text-sm px-2">
+                          <p className="text-red-500 text-sm p-2">
                             {errors.value.message}
                           </p>
+                        )}
+                        {errorMin && (
+                          <p className="text-red-500 text-sm p-2">{errorMin}</p>
                         )}
                       </div>
                       <div className="w-full flex justify-center py-6">

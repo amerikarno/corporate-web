@@ -4,6 +4,7 @@ import { getCookies } from "./cookies";
 import { jwtDecode } from "jwt-decode";
 import { TUser } from "@/pages/authentication/login/types";
 import axios from "@/api/axios";
+import { mockAssetData } from "@/pages/assetDetails/__mock__/mockAsset";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -59,7 +60,8 @@ export const getAllIcoData = async () => {
     }
   } catch (error) {
     console.log(error);
-    // return mockAssetData;
+    // TODO: remove mock
+    return mockAssetData;
   }
 };
 
@@ -81,9 +83,10 @@ export const testApiInfo = async (url: string) => {
   }
 };
 
-export const forceResetNameFavIcon = () => {
-  const url = "./src/assets/fda.png";
-  document.title = "Finansia ICO";
+export const resetTitleFavIcon = () => {
+  const url = window.origin.includes("eliteconsulting") ? "e.png" : "fda.png";
+
+  document.title = getAppName();
 
   const link: HTMLLinkElement | null =
     document.querySelector("link[rel~='icon']");
@@ -96,4 +99,10 @@ export const forceResetNameFavIcon = () => {
   } else {
     link.href = url;
   }
+};
+
+export const getAppName = () => {
+  return window.origin.includes("eliteconsulting")
+    ? "Elite Consulting"
+    : "Finansia ICO";
 };

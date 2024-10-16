@@ -3,6 +3,7 @@ import { getCookies } from "@/lib/cookies";
 import { useNavigate } from "react-router-dom";
 import { Asset } from "@/pages/landing/types";
 import getImages from "@/common/imagesData";
+import { getAppName } from "@/lib/utils";
 
 type TCustomCardProps = {
   data: Asset | null | undefined;
@@ -30,7 +31,9 @@ export function CustomCard({ data, index, type }: TCustomCardProps) {
               alt=""
               className="h-[17px] md:h-[34px]"
             />
-            <h1 className={`font-bold text-xl text-gray-800`}>Finansia ICO</h1>
+            <h1 className={`font-bold text-xl text-gray-800`}>
+              {getAppName()}
+            </h1>
           </div>
           <div className="flex flex-row justify-between">
             <h2 className={`break-words ${normalText}`}>{data.issueBy}</h2>

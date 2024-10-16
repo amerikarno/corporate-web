@@ -10,12 +10,12 @@ import { ContentDetails } from "@/components/contentDetails";
 import { FaqAccordion } from "@/components/Faq";
 import { TAssetData } from "../landing/types";
 import { useSelector } from "react-redux";
-import { consolelog, forceResetNameFavIcon, getAllIcoData } from "@/lib/utils";
+import { consolelog, resetTitleFavIcon, getAllIcoData } from "@/lib/utils";
 import { getCookies } from "@/lib/cookies";
 import getImages from "@/common/imagesData";
 
 export function AssetDetails() {
-  forceResetNameFavIcon();
+  resetTitleFavIcon();
   const navigate = useNavigate();
   const assetId = useParams().id;
   const assetType = useParams().type;

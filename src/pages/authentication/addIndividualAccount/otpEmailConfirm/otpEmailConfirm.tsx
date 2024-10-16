@@ -11,7 +11,7 @@ import {
   AlertDialogAction,
   AlertDialogCancel,
 } from "@components/ui/alert-dialog";
-import { forceResetNameFavIcon, sleep } from "@/lib/utils";
+import { resetTitleFavIcon, sleep } from "@/lib/utils";
 import { setIndividualEmail, setIndividualMobile } from "@/redux/Action";
 import { useNavigate } from "react-router-dom";
 import getImages from "@/common/imagesData";
@@ -19,7 +19,7 @@ import { normalStyleInput } from "@/assets/css/normalStyleInput";
 import { consolelog } from "@/lib/utils";
 
 export function OtpEmailConfirm() {
-  forceResetNameFavIcon();
+  resetTitleFavIcon();
   const initialTime = 300;
   const userData = useSelector((state: any) => state.individualData);
   const dispatch = useDispatch();

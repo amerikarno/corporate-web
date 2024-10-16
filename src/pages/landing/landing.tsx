@@ -11,14 +11,14 @@ import example from "@assets/drawIcon/example.png";
 import { IcoListItem } from "@/components/icoListItem";
 import { MenuForDropdown } from "@/components/menuForDropdown";
 import { IcoType } from "./types";
-import { forceResetNameFavIcon, getAllIcoData } from "@/lib/utils";
+import { resetTitleFavIcon, getAllIcoData, getAppName } from "@/lib/utils";
 
 interface datatype {
   ThemeChanger: any;
 }
 
 const Landing = ({ ThemeChanger }: datatype) => {
-  forceResetNameFavIcon();
+  resetTitleFavIcon();
   const navigate = useNavigate();
   const token = getCookies();
   const [icoData, setIcoData] = useState<IcoType | undefined>(undefined);
@@ -86,7 +86,7 @@ const Landing = ({ ThemeChanger }: datatype) => {
               </div>
               <div className="hidden s3:flex s3:w-1/3 s3:items-center">
                 <p className="bg-gradient-to-r from-gold-light via-gold-mid to-gold-dark text-transparent bg-clip-text s2:text-3xl font-bold text-center">
-                  Finansia ICO
+                  {getAppName()}
                 </p>
               </div>
 
@@ -141,7 +141,7 @@ const Landing = ({ ThemeChanger }: datatype) => {
                       className="h-10 mb-2"
                       alt="img"
                     />
-                    <u className="text-lg text-white ">Finansia ICO</u>
+                    <u className="text-lg text-white ">{getAppName()}</u>
                     <p className="text-white text-xl font-bold pt-4">
                       Community
                     </p>
@@ -280,7 +280,7 @@ const Landing = ({ ThemeChanger }: datatype) => {
                             <Link to="#home">หน้าหลัก</Link>
                           </li>
                           <li>
-                            <Link to="/dashboards/stocks/">ซื้อ/ขาย</Link>
+                            <Link to="#invest">ลงทุน</Link>
                           </li>
                           <li>
                             <Link to="#services">ธุรกิจและบริการ</Link>
@@ -361,7 +361,7 @@ const Landing = ({ ThemeChanger }: datatype) => {
                 }}
                 className="text-primary hover:cursor-pointer"
               >
-                Finansia ICO
+                {getAppName()}
               </span>
             </p>
           </div>

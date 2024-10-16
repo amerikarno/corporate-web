@@ -9,6 +9,7 @@ import { getCookies, removeCookies } from "@/lib/cookies";
 import example from "@assets/drawIcon/example.png";
 import { Button } from "@/components/ui/Button";
 import { MenuForDropdown } from "./menuForDropdown";
+import { getAppName } from "@/lib/utils";
 
 interface datatype {
   ThemeChanger: any;
@@ -99,7 +100,7 @@ const NavBar = ({ ThemeChanger, children, isFullWidth, padding }: datatype) => {
             </div>
             <div className="hidden lg:block lg:w-1/3 lg:items-center">
               <p className="bg-gradient-to-r from-gold-light via-gold-mid to-gold-dark text-transparent bg-clip-text s2:text-3xl font-bold text-center">
-                Finansia ICO
+                {getAppName()}
               </p>
             </div>
             {token ? (

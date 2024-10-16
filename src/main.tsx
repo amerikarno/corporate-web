@@ -32,11 +32,6 @@ let helmetContext = {};
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <HelmetProvider context={helmetContext}>
-      {/* <Helmet>
-        <title>new title</title>
-        <meta name="description" content="This is my page description" />
-        <link rel="icon" type="image/png" href="./src/assets/e.png" />
-      </Helmet> */}
       <BrowserRouter>
         <ResetAppTitle />
         <ScrollToTop />
