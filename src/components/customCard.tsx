@@ -21,8 +21,22 @@ export function CustomCard({ data, index, type }: TCustomCardProps) {
     return;
   }
 
+  const handleCardClick = () => {
+    localStorage.setItem("asset", `${type}-${index}`);
+    navigate(`/asset/${type}/${index}`);
+  };
+
+  const handleButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation(); // Prevent the outer div's onClick event from being triggered
+    localStorage.setItem("asset", `${type}-${index}`);
+    navigate("/invest");
+  };
+
   return (
-    <div className="w-[380px] h-[520px] border border-gray-200 rounded-[30px] bg-white shadow-md flex justify-center">
+    <div
+      className="w-[380px] h-[520px] border border-gray-200 rounded-[30px] bg-white shadow-md flex justify-center hover:cursor-pointer"
+      onClick={handleCardClick}
+    >
       <div className="w-[360px] h-[500px] flex flex-col justify-evenly">
         <div className="w-full px-2 space-y-2 p-2 md:space-y-4">
           <div className="flex flex-row items-center space-x-4">
@@ -42,11 +56,10 @@ export function CustomCard({ data, index, type }: TCustomCardProps) {
             >{`Issue By ${data.issueBy}`}</h2>
             {type === "Active" && (
               <Button
-                className={`${token ? "" : "hidden"}`}
-                onClick={() => {
-                  localStorage.setItem("asset", `${type}-${index}`);
-                  navigate("/invest");
-                }}
+                className={`z-50 hover:font-bold hover:bg-primary-hover ${
+                  token ? "" : "hidden"
+                }`}
+                onClick={handleButtonClick}
               >
                 Invest
               </Button>
@@ -56,11 +69,11 @@ export function CustomCard({ data, index, type }: TCustomCardProps) {
         </div>
 
         <div
-          onClick={() => {
-            localStorage.setItem("asset", `${type}-${index}`);
-            navigate(`/asset/${type}/${index}`);
-          }}
-          className="hover:cursor-pointer"
+        // onClick={() => {
+        //   localStorage.setItem("asset", `${type}-${index}`);
+        //   navigate(`/asset/${type}/${index}`);
+        // }}
+        // className="hover:cursor-pointer"
         >
           <div className="w-full p-2 md:p-4">
             <div className="flex flex-row bg-gray-100 rounded-2xl space-x-4 border border-gray-100">

@@ -1,6 +1,6 @@
 import Cookies from "js-cookie";
 
-const TOKEN_KEY = "token";
+const TOKEN_KEY = "ico-token";
 
 export const setCookies = (token: string) => {
   Cookies.set(TOKEN_KEY, token, { expires: 1 });

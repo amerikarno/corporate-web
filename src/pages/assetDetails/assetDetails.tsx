@@ -116,6 +116,7 @@ export function AssetDetails() {
                         <div className="w1/4">
                           {token && assetType === "Active" && (
                             <Button
+                              className="hover:font-bold hover:bg-primary-hover"
                               onClick={() => {
                                 localStorage.setItem(
                                   "asset",

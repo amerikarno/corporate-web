@@ -25,6 +25,7 @@ import { OtpEmailConfirm } from "./pages/authentication/addIndividualAccount/otp
 import OrderTrade from "./pages/orderTrade/orderTrade.tsx";
 import BankOrder from "./pages/bankOrder/bankOrder.tsx";
 import Portfolio from "./pages/portfolio/portfolio.tsx";
+import HelmetLayout from "./components/helmetLayout.tsx";
 // import ResetAppTitle from "./components/resetAppTitle.tsx";
 
 let helmetContext = {};
@@ -33,108 +34,109 @@ createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <HelmetProvider context={helmetContext}>
       <BrowserRouter>
-        {/* <ResetAppTitle /> */}
         <ScrollToTop />
         <Provider store={store}>
           <Routes>
-            <Route path="*" element={<Landing />} />
-            <Route index element={<Landing />} />
-            <Route
-              path={`${import.meta.env.BASE_URL}authentication/login`}
-              element={<Login />}
-            />
-            <Route
-              path={`${import.meta.env.BASE_URL}authentication/signup/type`}
-              element={<SignUpType />}
-            />
-            <Route
-              path={`${
-                import.meta.env.BASE_URL
-              }authentication/signup/addcorporateaccount`}
-              element={<SignUpCorporate />}
-            />
-            <Route
-              path={`${
-                import.meta.env.BASE_URL
-              }authentication/signup/addindividualaccount`}
-              element={<AddIndividualAccount />}
-            />
-            <Route
-              path={`${
-                import.meta.env.BASE_URL
-              }authentication/signup/basicinfo`}
-              element={<BasicInfo />}
-            />
-            <Route
-              path={`${
-                import.meta.env.BASE_URL
-              }authentication/signup/suittestfatca`}
-              element={<SuitTestFatca />}
-            />
-            <Route
-              path={`${
-                import.meta.env.BASE_URL
-              }authentication/signup/otpemailconfirm`}
-              element={<OtpEmailConfirm />}
-            />
-            <Route
-              path={`${
-                import.meta.env.BASE_URL
-              }authentication/signup/livenessocr`}
-              element={<Liveness />}
-            />
-            <Route
-              path={`${
-                import.meta.env.BASE_URL
-              }authentication/signup/webcaminstructions`}
-              element={<CardWebcamInstructions />}
-            />
-            <Route
-              path={`${
-                import.meta.env.BASE_URL
-              }authentication/signup/webcaminstructions`}
-              element={<CardWebcamInstructions />}
-            />
-            <Route
-              path={`${
-                import.meta.env.BASE_URL
-              }authentication/signup/cardcapture`}
-              element={<IDCardCapture />}
-            />
-            <Route
-              path={`${
-                import.meta.env.BASE_URL
-              }authentication/signup/identityverification`}
-              element={<IdentityVerification />}
-            />
-            <Route
-              path={`${import.meta.env.BASE_URL}/portfolio`}
-              element={<Portfolio />}
-            />
-            <Route
-              path={`${import.meta.env.BASE_URL}asset/:type/:id`}
-              element={<AssetDetails />}
-            />
-            <Route
-              path={`${
-                import.meta.env.BASE_URL
-              }/authentication/login/google-authen/qr`}
-              element={<GoogleQr />}
-            />
-            <Route
-              path={`${
-                import.meta.env.BASE_URL
-              }/authentication/login/google-authen/verify`}
-              element={<QrVerification />}
-            />
-            <Route
-              path={`${import.meta.env.BASE_URL}/invest`}
-              element={<OrderTrade />}
-            />
-            <Route
-              path={`${import.meta.env.BASE_URL}/deposite-withdraw`}
-              element={<BankOrder />}
-            />
+            <Route element={<HelmetLayout />}>
+              <Route path="*" element={<Landing />} />
+              <Route index element={<Landing />} />
+              <Route
+                path={`${import.meta.env.BASE_URL}authentication/login`}
+                element={<Login />}
+              />
+              <Route
+                path={`${import.meta.env.BASE_URL}authentication/signup/type`}
+                element={<SignUpType />}
+              />
+              <Route
+                path={`${
+                  import.meta.env.BASE_URL
+                }authentication/signup/addcorporateaccount`}
+                element={<SignUpCorporate />}
+              />
+              <Route
+                path={`${
+                  import.meta.env.BASE_URL
+                }authentication/signup/addindividualaccount`}
+                element={<AddIndividualAccount />}
+              />
+              <Route
+                path={`${
+                  import.meta.env.BASE_URL
+                }authentication/signup/basicinfo`}
+                element={<BasicInfo />}
+              />
+              <Route
+                path={`${
+                  import.meta.env.BASE_URL
+                }authentication/signup/suittestfatca`}
+                element={<SuitTestFatca />}
+              />
+              <Route
+                path={`${
+                  import.meta.env.BASE_URL
+                }authentication/signup/otpemailconfirm`}
+                element={<OtpEmailConfirm />}
+              />
+              <Route
+                path={`${
+                  import.meta.env.BASE_URL
+                }authentication/signup/livenessocr`}
+                element={<Liveness />}
+              />
+              <Route
+                path={`${
+                  import.meta.env.BASE_URL
+                }authentication/signup/webcaminstructions`}
+                element={<CardWebcamInstructions />}
+              />
+              <Route
+                path={`${
+                  import.meta.env.BASE_URL
+                }authentication/signup/webcaminstructions`}
+                element={<CardWebcamInstructions />}
+              />
+              <Route
+                path={`${
+                  import.meta.env.BASE_URL
+                }authentication/signup/cardcapture`}
+                element={<IDCardCapture />}
+              />
+              <Route
+                path={`${
+                  import.meta.env.BASE_URL
+                }authentication/signup/identityverification`}
+                element={<IdentityVerification />}
+              />
+              <Route
+                path={`${import.meta.env.BASE_URL}/portfolio`}
+                element={<Portfolio />}
+              />
+              <Route
+                path={`${import.meta.env.BASE_URL}asset/:type/:id`}
+                element={<AssetDetails />}
+              />
+              <Route
+                path={`${
+                  import.meta.env.BASE_URL
+                }/authentication/login/google-authen/qr`}
+                element={<GoogleQr />}
+              />
+              <Route
+                path={`${
+                  import.meta.env.BASE_URL
+                }/authentication/login/google-authen/verify`}
+                element={<QrVerification />}
+              />
+              <Route
+                path={`${import.meta.env.BASE_URL}/invest`}
+                element={<OrderTrade />}
+              />
+              <Route
+                path={`${import.meta.env.BASE_URL}/deposite-withdraw`}
+                element={<BankOrder />}
+              />
+            </Route>
           </Routes>
         </Provider>
       </BrowserRouter>

@@ -3,12 +3,38 @@ import NavBar from "@/components/navbar";
 import DataTable, { TableColumn } from "react-data-table-component";
 import { useEffect, useState } from "react";
 import { TBankInfo } from "./types";
-import { bankMock } from "./__mock__/portMock";
+import { bankMock, transactionMock } from "./__mock__/portMock";
 import { formatNumberToCommasFraction } from "@/lib/utils";
-import { Button } from "@/components/ui/Button";
 import { Transaction } from "../orderTrade/constant/type";
 import axios from "@/api/axios";
 import { getCookies } from "@/lib/cookies";
+
+const customStyles = {
+  headCells: {
+    style: {
+      borderRight: "1px solid #e0e0e0",
+      "&:last-of-type": {
+        borderRight: "none",
+      },
+    },
+  },
+  rows: {
+    style: {
+      borderBottom: "1px solid #e0e0e0",
+      "&:last-of-type": {
+        borderBottom: "none",
+      },
+    },
+  },
+  cells: {
+    style: {
+      borderRight: "1px solid #e0e0e0",
+      "&:last-of-type": {
+        borderRight: "none",
+      },
+    },
+  },
+};
 
 export default function Portfolio() {
   //resetTitleFavIcon;
@@ -19,8 +45,79 @@ export default function Portfolio() {
   );
   const textTitle = "text-base text-gray-500 font-semibold";
   const textContent = "text-xl font-semibold";
+  const headerStyle = "w-full text-center";
+  const bodyStyle = "w-full text-center";
+  const numberStyle = "w-full text-right";
+  const columnsOrderTrade: TableColumn<Transaction>[] = [
+    {
+      name: <div className={headerStyle}>Date</div>,
+      cell: (row: Transaction) => (
+        <div className={bodyStyle}>{formatDate(row.investment?.CreatedAt)}</div>
+      ),
+    },
+    {
+      name: <div className={headerStyle}>Customer Code</div>,
+      cell: (row: Transaction) => (
+        <div className={bodyStyle}>
+          {row?.investment?.customerCode?.toString()}
+        </div>
+      ),
+    },
+    {
+      name: <div className={headerStyle}>ICO</div>,
+      cell: (row: Transaction) => (
+        <div className={bodyStyle}>{row?.asset?.name?.toString()}</div>
+      ),
+    },
+    {
+      name: <div className={headerStyle}>Amount (Unit)</div>,
+      cell: (row: Transaction) => (
+        <div className={numberStyle}>
+          {formatNumberToCommasFraction(row?.investment?.amount?.toString())}
+        </div>
+      ),
+    },
+    {
+      name: <div className={headerStyle}>Value (THB)</div>,
+      cell: (row: Transaction) => (
+        <div className={numberStyle}>
+          {formatNumberToCommasFraction(row?.investment?.value?.toString())}
+        </div>
+      ),
+    },
+    {
+      name: <div className={headerStyle}>Status</div>,
+      cell: (row: Transaction) => (
+        <div className={bodyStyle}>{row?.investment?.status}</div>
+      ),
+    },
+    {
+      cell: (row: Transaction) => (
+        <div className="flex w-full h-full justify-center items-center py-2 px-4">
+          {/* <Button
+            className="bg-slate-700 hover:bg-red-400 hover:border-none hover:text-white w-full h-full"
+            onClick={() => {
+              handleCancleTransaction(row);
+            }}
+            disabled={
+              row?.investment?.status === "1" || row?.investment?.status === "2"
+            }
+          >
+            cancle
+          </Button> */}
+          <p
+            onClick={() => handleCancleTransaction(row)}
+            className="text-red-500 text-md hover:underline hover:cursor-pointer hover:font-bold"
+          >
+            cancel
+          </p>
+        </div>
+      ),
+      ignoreRowClick: true,
+    },
+  ];
 
-  const getUserBankInfo = async () => {
+  const fetchBankBalance = async () => {
     try {
       const res = await axios.post(
         "/api/v1/customer/info/balance",
@@ -40,7 +137,6 @@ export default function Portfolio() {
       // TODO: remove mock
       setBankInfo(bankMock);
     }
-
     setIsLoading(false);
   };
 
@@ -63,12 +159,15 @@ export default function Portfolio() {
       }
     } catch (error) {
       console.log(error);
+      // TODO: remove mock
+      setInvestTransactions(transactionMock);
     }
   };
 
   const handleCancleTransaction = async (data: Transaction) => {
+    console.log(data);
     try {
-      const res = await axios.post(
+      await axios.post(
         "/api/v1/customer/product/transaction/delete",
         {
           id: data.investment?.id,
@@ -80,64 +179,26 @@ export default function Portfolio() {
           },
         }
       );
-      if (res.status === 200) {
-        await fetchTransactionList();
-      }
     } catch (error) {
       console.log(error);
     }
+    await fetchTransactionList();
+    await fetchBankBalance();
   };
 
-  const columnsOrderTrade: TableColumn<Transaction>[] = [
-    // {
-    //   name: "",
-    //   cell: (_, rowIndex) => <span>{rowIndex + 1}</span>,
-    //   width: "75px",
-    // },
-    {
-      name: "Customer Code",
-      selector: (row: Transaction) =>
-        row?.investment?.customerCode?.toString() || "",
-    },
-    {
-      name: "ICO",
-      selector: (row: Transaction) => row?.asset?.name?.toString() || "",
-    },
-    {
-      name: "Amount",
-      selector: (row: Transaction) => row?.investment?.amount?.toString() || "",
-    },
-    {
-      name: "value",
-      selector: (row: Transaction) => row?.investment?.value?.toString() || "",
-    },
-    {
-      name: "Status",
-      selector: (row: Transaction) => row?.investment?.status || "",
-    },
-    {
-      cell: (row: Transaction) => (
-        <div className="flex w-full h-full justify-center items-center py-2 px-4">
-          <Button
-            className="bg-slate-700 hover:bg-red-400 hover:border-none hover:text-white w-full h-full"
-            onClick={() => {
-              handleCancleTransaction(row);
-            }}
-            disabled={
-              row?.investment?.status === "1" || row?.investment?.status === "2"
-            }
-          >
-            cancle
-          </Button>
-        </div>
-      ),
-      ignoreRowClick: true,
-    },
-  ];
+  const formatDate = (date: string | null | undefined) => {
+    if (!date || date === "null") {
+      return "";
+    }
+    const dt = date.split("T");
+    const d = dt[0];
+    const t = dt[1].split("+")[0];
+    return `${d} ${t}`;
+  };
 
   useEffect(() => {
     fetchTransactionList();
-    getUserBankInfo();
+    fetchBankBalance();
   }, []);
 
   if (isLoading) {
@@ -186,8 +247,9 @@ export default function Portfolio() {
             </CardContent>
           </Card>
 
-          <Card className="p-4 w-full bg-white">
+          <div className="w-full bg-white">
             <DataTable
+              className="border-t border-r border-l border-gray-200"
               title="Reserved Transaction"
               columns={columnsOrderTrade}
               data={investTransactions || []}
@@ -200,8 +262,9 @@ export default function Portfolio() {
                 rangeSeparatorText: "from",
                 noRowsPerPage: false,
               }}
+              customStyles={customStyles}
             />
-          </Card>
+          </div>
         </div>
       }
     />

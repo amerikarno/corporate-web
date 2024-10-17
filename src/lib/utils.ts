@@ -4,7 +4,6 @@ import { getCookies } from "./cookies";
 import { jwtDecode } from "jwt-decode";
 import { TUser } from "@/pages/authentication/login/types";
 import axios from "@/api/axios";
-import { mockAssetData } from "@/pages/assetDetails/__mock__/mockAsset";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -60,8 +59,7 @@ export const getAllIcoData = async () => {
     }
   } catch (error) {
     console.log(error);
-    // TODO: remove mock
-    return mockAssetData;
+    // return mockAssetData;
   }
 };
 
@@ -84,34 +82,20 @@ export const testApiInfo = async (url: string) => {
 };
 
 export const getAppName = () => {
-  let appName = "ICO";
+  let name = "ICO";
   if (window.origin.includes("eliteconsulting")) {
-    appName = "Elite Consulting";
+    name = "ELITE CONSULTING";
   }
-  return appName;
-};
-
-export const base64ToFile = (base64: string, filename: string): File => {
-  const arr = base64.split(",");
-  const mime = arr[0].match(/:(.*?);/)![1];
-  const bstr = atob(arr[1]);
-  let n = bstr.length;
-  const u8arr = new Uint8Array(n);
-
-  while (n--) {
-    u8arr[n] = bstr.charCodeAt(n);
-  }
-
-  return new File([u8arr], filename, { type: mime });
+  return name;
 };
 
 // export const resetTitleFavIcon = () => {
 //   const url = "";
 //   document.title = "ICO Campaign Portal";
-//
+
 //   const link: HTMLLinkElement | null =
 //     document.querySelector("link[rel~='icon']");
-//
+
 //   if (!link) {
 //     const newLink = document.createElement("link");
 //     newLink.rel = "icon";

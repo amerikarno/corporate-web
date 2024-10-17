@@ -5,6 +5,7 @@ export default {
     extend: {
       colors: {
         primary: "rgb(90, 102, 241)",
+        "primary-hover": "rgb(79, 87, 238)",
         secondary: "rgb(96, 165, 250)",
         success: "rgb(34, 197, 94)",
         info: "rgb(76, 117, 207)",
