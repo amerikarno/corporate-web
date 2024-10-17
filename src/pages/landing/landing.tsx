@@ -18,7 +18,6 @@ interface datatype {
 }
 
 const Landing = ({ ThemeChanger }: datatype) => {
-  //resetTitleFavIcon;
   const navigate = useNavigate();
   const token = getCookies();
   const [icoData, setIcoData] = useState<IcoType | undefined>(undefined);

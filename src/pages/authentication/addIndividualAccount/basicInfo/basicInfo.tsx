@@ -27,7 +27,6 @@ import { TBasicinfoAddress, TBasicInfoBank } from "../types";
 import { IndividualData } from "@/redux/types";
 
 export default function BasicInfo() {
-  //resetTitleFavIcon;
   const responsiveClass =
     "flex flex-col space-y-2 lg:space-y-0 lg:flex-row lg:space-x-4";
 

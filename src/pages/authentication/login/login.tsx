@@ -2,7 +2,6 @@ import { Helmet } from "react-helmet-async";
 import LoginForm from "./loginForm";
 
 function login() {
-  //resetTitleFavIcon;
   return (
     <>
       <Helmet>

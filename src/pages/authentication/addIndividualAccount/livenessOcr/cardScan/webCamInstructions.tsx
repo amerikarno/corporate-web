@@ -14,7 +14,6 @@ import {
 import getImages from "@/common/imagesData";
 
 export function CardWebcamInstructions() {
-  //resetTitleFavIcon;
   const navigate = useNavigate();
 
   const CameraSetting = () => {

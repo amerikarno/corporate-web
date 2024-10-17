@@ -1,7 +1,7 @@
 import { useRef, useEffect, useState, useCallback } from "react";
 import Webcam from "react-webcam";
 import * as faceapi from "face-api.js";
-import { base64ToFile, consolelog } from "@/lib/utils";
+import { consolelog } from "@/lib/utils";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setFaceImage } from "@/redux/Action";
@@ -17,7 +17,6 @@ type TActionMessage = {
 };
 
 export default function Liveness() {
-  //resetTitleFavIcon;
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const webcamRef = useRef<Webcam>(null);
@@ -247,24 +246,23 @@ export default function Liveness() {
     if (isCenter && isMouthOpen && isTurnLeft && isTurnRight) {
       const srcImg = webcamRef.current?.getScreenshot();
       if (srcImg && srcImg !== null) {
-        const cid = localStorage.getItem("cid");
-        const file = base64ToFile(srcImg, `faceImage-${cid}.png`);
-        const body = {
-          registerId: cid,
-          file: file,
-          docType: "faceCompare",
-        };
+        const cid = localStorage.getItem("cid") || "";
+        const blob = await fetch(srcImg).then((res) => res.blob());
+        const formData = new FormData();
+        formData.append("file", blob);
+        formData.append("cid", cid);
+        formData.append("docType", "faceCompare");
 
         await axios
-          .post("api/v1/document/openaccount/upload", body, {
+          .post("api/v1/document/openaccount/upload", formData, {
             headers: {
               "Content-Type": "multipart/form-data",
             },
           })
           .then((res) => {
-            consolelog(res);
+            consolelog(res.data);
             dispatch(setFaceImage(srcImg));
-            // navigate("/authentication/signup/webcaminstructions");
+            navigate("/authentication/signup/webcaminstructions");
           })
           .catch((err) => {
             console.log(err);

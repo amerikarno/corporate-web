@@ -13,7 +13,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCookies } from "@/lib/cookies";
 
 export default function SuitTestFatca() {
-  //resetTitleFavIcon;
   const token = getCookies();
   const dispatch = useDispatch();
   const fetchIndividualData = async (AccountID: string) => {

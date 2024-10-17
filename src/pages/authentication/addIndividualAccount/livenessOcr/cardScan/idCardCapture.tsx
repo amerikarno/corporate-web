@@ -6,8 +6,8 @@ import { setIdCardImage } from "@/redux/Action";
 import { useNavigate } from "react-router-dom";
 import getImages from "@/common/imagesData";
 import { useWindowSize } from "@/lib/useWindowSize";
-import { sleep } from "@/lib/utils";
 import { consolelog } from "@/lib/utils";
+import axios from "@/api/axios";
 
 type TScreen = {
   width: number;
@@ -17,7 +17,6 @@ type TScreen = {
 type VideoConstraints = MediaTrackConstraints;
 
 export default function IDCardCapture() {
-  //resetTitleFavIcon;
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const webcamRef = useRef<Webcam>(null);
@@ -40,19 +39,30 @@ export default function IDCardCapture() {
     const srcImg = webcamRef.current?.getScreenshot();
     setImageSrc(srcImg);
     if (srcImg && srcImg !== null) {
-      dispatch(setIdCardImage(srcImg));
+      const cid = localStorage.getItem("cid") || "";
+      const blob = await fetch(srcImg).then((res) => res.blob());
+      const formData = new FormData();
+      formData.append("file", blob);
+      formData.append("cid", cid);
+      formData.append("docType", "idCard");
+      await axios
+        .post("api/v1/document/openaccount/upload", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then((res) => {
+          consolelog(res.data);
+          dispatch(setIdCardImage(srcImg));
+          navigate("/authentication/signup/identityverification");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
-    await sleep(500);
+    //TODO: remove link
     navigate("/authentication/signup/identityverification");
   };
-
-  // const handleSubmit = async () => {
-  //   // consolelog(imageSrc);
-  //   // consolelog("face image", livenessOcr.faceImage);
-  //   // consolelog("id image", livenessOcr.idCardImage);
-  //   // consolelog("sent image to server");
-  //   navigate("/authentication/signup/identityverification");
-  // };
 
   const getDeviceType = (): string => {
     const userAgent = navigator.userAgent;
@@ -88,13 +98,13 @@ export default function IDCardCapture() {
     } else {
       deviceType === "Mobile" || deviceType === "Tablet"
         ? setVideoConstraints({
-            width: 514,
-            height: 326,
+            width: 326,
+            height: 514,
             facingMode: { exact: "environment" },
           })
         : setVideoConstraints({
-            width: 514,
-            height: 326,
+            width: 326,
+            height: 514,
             facingMode: "user",
           });
       setScreenLayout({ width: 326, height: 514 });

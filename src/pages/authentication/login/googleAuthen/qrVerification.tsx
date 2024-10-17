@@ -11,7 +11,6 @@ import { TUser } from "../types";
 import { Input } from "@/components/ui/Input";
 
 export default function QrVerification() {
-  //resetTitleFavIcon;
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [otp, setOtp] = useState<string[]>(["", "", "", "", "", ""]);

@@ -37,7 +37,6 @@ const customStyles = {
 };
 
 export default function Portfolio() {
-  //resetTitleFavIcon;
   const [bankInfo, setBankInfo] = useState<TBankInfo | undefined>(undefined);
   const [isLoading, setIsLoading] = useState(true);
   const [investTransactions, setInvestTransactions] = useState<Transaction[]>(

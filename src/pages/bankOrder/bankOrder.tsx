@@ -17,7 +17,6 @@ import Navbar from "@/components/navbar";
 import { consolelog } from "@/lib/utils";
 
 export default function BankOrder() {
-  //resetTitleFavIcon;
   // const dispatch = useDispatch();
   const [buySell, setBuySell] = useState<string>("depostie");
   //   const [selectedCorporateCode, setSelectedCorporateCode] =

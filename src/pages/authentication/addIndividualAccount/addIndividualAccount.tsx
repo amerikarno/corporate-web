@@ -17,7 +17,6 @@ import { initIndividualData, setTestCorporateData } from "@/redux/Action";
 import { consolelog } from "@/lib/utils";
 
 export default function AddIndividualAccount() {
-  //resetTitleFavIcon;
   const {
     register,
     handleSubmit,

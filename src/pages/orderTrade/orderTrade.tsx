@@ -32,7 +32,6 @@ type TCurrency = {
 };
 
 export default function OrderTrade() {
-  //resetTitleFavIcon;
   const {
     register,
     handleSubmit,

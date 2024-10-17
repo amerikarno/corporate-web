@@ -19,7 +19,6 @@ import { normalStyleInput } from "@/assets/css/normalStyleInput";
 import { consolelog } from "@/lib/utils";
 
 export function OtpEmailConfirm() {
-  //resetTitleFavIcon;
   const initialTime = 300;
   const userData = useSelector((state: any) => state.individualData);
   const dispatch = useDispatch();

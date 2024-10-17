@@ -15,7 +15,6 @@ import { getCookies } from "@/lib/cookies";
 import getImages from "@/common/imagesData";
 
 export function AssetDetails() {
-  //resetTitleFavIcon;
   const navigate = useNavigate();
   const assetId = useParams().id;
   const assetType = useParams().type;

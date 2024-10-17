@@ -2,7 +2,6 @@ import { useNavigate } from "react-router-dom";
 import "./SignUpType.scss";
 
 const SignUpType = () => {
-  //resetTitleFavIcon;
   const navigate = useNavigate();
   const handleIndiividual = () => {
     navigate(

@@ -12,7 +12,6 @@ import { useNavigate } from "react-router-dom";
 import { consolelog } from "@/lib/utils";
 
 export default function GoogleQr() {
-  //resetTitleFavIcon;
   const [secret, setSecret] = useState("");
   const [message, setMessage] = useState("");
   const [secretError, setSecretError] = useState("");

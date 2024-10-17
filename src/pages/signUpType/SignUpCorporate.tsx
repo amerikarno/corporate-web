@@ -2,7 +2,6 @@ import "./SignUpCorporate.scss";
 import { IoIosInformationCircle } from "react-icons/io";
 
 const SignUpCorporate = () => {
-  //resetTitleFavIcon;
   return (
     <div className="flex items-center justify-center h-screen">
       <div className="flex flex-col text-center space-y-2 forCorporate-container bg-primary text-white relative">

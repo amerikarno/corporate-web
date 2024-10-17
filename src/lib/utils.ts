@@ -4,6 +4,7 @@ import { getCookies } from "./cookies";
 import { jwtDecode } from "jwt-decode";
 import { TUser } from "@/pages/authentication/login/types";
 import axios from "@/api/axios";
+import { mockAssetData } from "@/pages/assetDetails/__mock__/mockAsset";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -59,7 +60,7 @@ export const getAllIcoData = async () => {
     }
   } catch (error) {
     console.log(error);
-    // return mockAssetData;
+    return mockAssetData;
   }
 };
 
@@ -88,20 +89,3 @@ export const getAppName = () => {
   }
   return name;
 };
-
-// export const resetTitleFavIcon = () => {
-//   const url = "";
-//   document.title = "ICO Campaign Portal";
-
-//   const link: HTMLLinkElement | null =
-//     document.querySelector("link[rel~='icon']");
-
-//   if (!link) {
-//     const newLink = document.createElement("link");
-//     newLink.rel = "icon";
-//     newLink.href = url;
-//     document.head.appendChild(newLink);
-//   } else {
-//     link.href = url;
-//   }
-// };

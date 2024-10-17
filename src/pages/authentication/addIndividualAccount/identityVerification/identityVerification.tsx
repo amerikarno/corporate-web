@@ -28,7 +28,6 @@ import { useEffect, useState } from "react";
 import Alert from "@/components/alert/Alert";
 
 export default function IdentityVerification() {
-  //resetTitleFavIcon;
   const navigate = useNavigate();
   const token = getCookies();
   const dispatch = useDispatch();
