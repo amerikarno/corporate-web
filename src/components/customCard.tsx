@@ -27,16 +27,19 @@ export function CustomCard({ data, index, type }: TCustomCardProps) {
         <div className="w-full px-2 space-y-2 p-2 md:space-y-4">
           <div className="flex flex-row items-center space-x-4">
             <img
-              src={getImages("logo")}
+              src={data.logo}
               alt=""
               className="h-[17px] md:h-[34px]"
+              onError={(e) => (e.currentTarget.src = getImages("example"))}
             />
             <h1 className={`font-bold text-xl text-gray-800`}>
               {getAppName()}
             </h1>
           </div>
           <div className="flex flex-row justify-between">
-            <h2 className={`break-words ${normalText}`}>{data.issueBy}</h2>
+            <h2
+              className={`break-words ${normalText}`}
+            >{`Issue By ${data.issueBy}`}</h2>
             {type === "Active" && (
               <Button
                 className={`${token ? "" : "hidden"}`}
@@ -62,7 +65,12 @@ export function CustomCard({ data, index, type }: TCustomCardProps) {
           <div className="w-full p-2 md:p-4">
             <div className="flex flex-row bg-gray-100 rounded-2xl space-x-4 border border-gray-100">
               <div className="w-1/3 h-full">
-                <img src={data.image} alt="" className="rounded-2xl" />
+                <img
+                  src={data.image}
+                  alt=""
+                  className="rounded-2xl"
+                  onError={(e) => (e.currentTarget.src = getImages("example"))}
+                />
               </div>
               <div className="w-2/3 pt-2 space-y-2]">
                 <div className={`${darkText} break-words`}>{data.name}</div>

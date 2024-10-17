@@ -108,10 +108,10 @@ export const base64ToFile = (base64: string, filename: string): File => {
 // export const resetTitleFavIcon = () => {
 //   const url = "";
 //   document.title = "ICO Campaign Portal";
-
+//
 //   const link: HTMLLinkElement | null =
 //     document.querySelector("link[rel~='icon']");
-
+//
 //   if (!link) {
 //     const newLink = document.createElement("link");
 //     newLink.rel = "icon";

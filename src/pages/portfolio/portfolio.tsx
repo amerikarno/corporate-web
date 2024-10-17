@@ -23,7 +23,7 @@ export default function Portfolio() {
   const getUserBankInfo = async () => {
     try {
       const res = await axios.post(
-        "",
+        "/api/v1/customer/info/balance",
         {},
         {
           headers: {

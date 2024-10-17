@@ -10,7 +10,7 @@ import { ContentDetails } from "@/components/contentDetails";
 import { FaqAccordion } from "@/components/Faq";
 import { TAssetData } from "../landing/types";
 import { useSelector } from "react-redux";
-import { consolelog, getAllIcoData } from "@/lib/utils";
+import { getAllIcoData } from "@/lib/utils";
 import { getCookies } from "@/lib/cookies";
 import getImages from "@/common/imagesData";
 
