@@ -124,7 +124,8 @@ export default function SuitTestFatca() {
           console.log(res);
           if (res.status === 200) {
             console.log("suit test edit success", res.data);
-            navigate("/authentication/signup/otpemailconfirm");
+            navigate("/authentication/signup/livenessinstruction");
+            // navigate("/authentication/signup/otpemailconfirm");
           } else {
             console.log("suit test edit not success");
           }
@@ -141,7 +142,8 @@ export default function SuitTestFatca() {
           console.log(res);
           if (res.status === 200) {
             console.log("suit test save success", res.data);
-            navigate("/authentication/signup/otpemailconfirm");
+            navigate("/authentication/signup/livenessinstruction");
+            // navigate("/authentication/signup/otpemailconfirm");
           } else {
             console.log("suit test save not success");
           }

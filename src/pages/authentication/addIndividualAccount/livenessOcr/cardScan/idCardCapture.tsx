@@ -54,14 +54,16 @@ export default function IDCardCapture() {
         .then((res) => {
           consolelog(res.data);
           dispatch(setIdCardImage(srcImg));
-          navigate("/authentication/signup/identityverification");
+          navigate("/authentication/signup/otpemailconfirm");
+          // navigate("/authentication/signup/identityverification");
         })
         .catch((err) => {
           console.log(err);
         });
     }
     //TODO: remove link
-    navigate("/authentication/signup/identityverification");
+    navigate("/authentication/signup/otpemailconfirm");
+    // navigate("/authentication/signup/identityverification");
   };
 
   const getDeviceType = (): string => {

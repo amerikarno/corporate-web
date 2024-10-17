@@ -189,7 +189,9 @@ export function OtpEmailConfirm() {
         </Card>
         <div className="w-full lg:w-4/5 xl:w-1/2 flex justify-end mx-auto px-2 md:px-0">
           <Button
-            onClick={() => navigate("/authentication/signup/livenessocr")}
+            onClick={() =>
+              navigate("/authentication/signup/emailconfirmsucess")
+            }
           >
             Next
           </Button>
