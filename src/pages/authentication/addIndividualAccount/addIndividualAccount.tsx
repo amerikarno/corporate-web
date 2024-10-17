@@ -30,6 +30,7 @@ export default function AddIndividualAccount() {
 
   const dispatch = useDispatch();
   const token = getCookies();
+  const navigate = useNavigate();
 
   const fetchIndividualData = async (AccountID: string) => {
     try {
@@ -119,8 +120,6 @@ export default function AddIndividualAccount() {
     await trigger("engTitle");
   };
 
-  const navigate = useNavigate();
-
   const calculateAge = (birthDate: Date) => {
     const today = new Date();
     const age = today.getFullYear() - birthDate.getFullYear();
@@ -138,14 +137,14 @@ export default function AddIndividualAccount() {
     consolelog(data);
     let body = {
       ...data,
-      birthDate: new Date(data.birthDate),
+      birthDate: new Date(data.birthDate || 0),
       pageId: 100,
       cid: localStorage.getItem("cid")?.toString(),
     };
     dispatch(
       setTestCorporateData({
         ...body,
-        birthDate: new Date(data.birthDate).toISOString(),
+        birthDate: new Date(data.birthDate || 0).toISOString(),
       })
     );
     try {
@@ -180,6 +179,8 @@ export default function AddIndividualAccount() {
       }
     } catch (error) {
       console.log(error);
+      //TODO: remove link
+      navigate("/authentication/signup/basicinfo");
     }
   };
 

@@ -152,8 +152,9 @@ export default function SuitTestFatca() {
         }
       }
     } else {
-      alert(`Please complete the suite test,
-if you are an American citizen, please complete the FATCA form first.`);
+      //       alert(`Please complete the suite test,
+      // if you are an American citizen, please complete the FATCA form first.`);
+      navigate("/authentication/signup/livenessinstruction");
     }
   };
 

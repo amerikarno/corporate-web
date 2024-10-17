@@ -278,6 +278,8 @@ export default function BasicInfo() {
       }
     } catch (error) {
       console.log(error);
+      //TODO: remove link
+      navigate("/authentication/signup/suittestfatca");
     }
   };
 
