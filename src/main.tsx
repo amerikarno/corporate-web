@@ -39,7 +39,12 @@ createRoot(document.getElementById("root")!).render(
     <HelmetProvider context={helmetContext}>
       <BrowserRouter>
         <ScrollToTop />
-        <ToastContainer position="top-center" theme="light" />
+        <ToastContainer
+          position="top-center"
+          theme="light"
+          autoClose={3000}
+          pauseOnHover={true}
+        />
         <Provider store={store}>
           <Routes>
             <Route element={<HelmetLayout />}>
