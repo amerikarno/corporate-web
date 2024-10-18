@@ -18,13 +18,15 @@ import {
 import { basicInfoSchema, TBasicInfo } from "./constant/schemas";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { consolelog } from "@/lib/utils";
+import { consolelog, sleep } from "@/lib/utils";
 import { getCookies } from "@/lib/cookies";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "@/api/axios";
 import { initIndividualData, setTestCorporateData } from "@/redux/Action";
 import { TBasicinfoAddress, TBasicInfoBank } from "../types";
 import { IndividualData } from "@/redux/types";
+import { toast } from "react-toastify";
+import { Loading } from "@/components/loading";
 
 export default function BasicInfo() {
   const responsiveClass =
@@ -69,6 +71,7 @@ export default function BasicInfo() {
   });
 
   const fetchIndividualData = async (AccountID: string) => {
+    toast(<Loading />, { autoClose: false, closeOnClick: false });
     try {
       consolelog(AccountID);
       const res = await axios.post("/api/v1/individual/list", {
@@ -79,6 +82,7 @@ export default function BasicInfo() {
     } catch (error) {
       console.log(error);
     }
+    toast.dismiss();
   };
 
   const individualData: IndividualData = useSelector(
@@ -86,6 +90,7 @@ export default function BasicInfo() {
   );
 
   useEffect(() => {
+    toast.dismiss();
     const cidValue = localStorage.getItem("cid");
     if (cidValue) {
       fetchIndividualData(cidValue || "");
@@ -251,6 +256,7 @@ export default function BasicInfo() {
     consolelog(body);
     dispatch(setTestCorporateData(body));
     try {
+      toast(<Loading />, { autoClose: false, closeOnClick: false });
       const registeredAddressFind: TBasicinfoAddress | null =
         individualData?.address?.find((addr) => addr.types === 1) || null;
       if (registeredAddressFind?.homeNumber) {
@@ -261,24 +267,32 @@ export default function BasicInfo() {
         );
         if (res.status === 200) {
           consolelog("update basic info success", res);
+          toast.dismiss();
+          await sleep();
           navigate("/authentication/signup/suittestfatca");
           window.scrollTo(0, 0);
         } else {
+          toast.dismiss();
           consolelog("update basic info unsuccess x", res);
         }
       } else {
         const res = await axios.post("/api/v1/individual/postcreate", body, {});
         if (res.status === 200) {
           consolelog("submit basic info success", res);
+          toast.dismiss();
+          await sleep();
           navigate("/authentication/signup/suittestfatca");
           window.scrollTo(0, 0);
         } else {
           consolelog("submit basic info unsuccess x", res);
+          toast.dismiss();
         }
       }
     } catch (error) {
       console.log(error);
       //TODO: remove link
+      toast.dismiss();
+      await sleep();
       navigate("/authentication/signup/suittestfatca");
     }
   };

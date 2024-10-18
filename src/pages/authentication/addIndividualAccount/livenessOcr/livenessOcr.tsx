@@ -1,12 +1,14 @@
 import { useRef, useEffect, useState, useCallback } from "react";
 import Webcam from "react-webcam";
 import * as faceapi from "face-api.js";
-import { consolelog } from "@/lib/utils";
+import { consolelog, sleep } from "@/lib/utils";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setFaceImage } from "@/redux/Action";
 import { Camera } from "lucide-react";
 import axios from "@/api/axios";
+import { Loading } from "@/components/loading";
+import { toast } from "react-toastify";
 
 type VideoConstraints = MediaTrackConstraints;
 type TActionMessage = {
@@ -252,26 +254,30 @@ export default function Liveness() {
         formData.append("file", blob);
         formData.append("cid", cid);
         formData.append("docType", "faceCompare");
-
+        toast(<Loading />, { autoClose: false, closeOnClick: false });
         await axios
           .post("api/v1/document/openaccount/upload", formData, {
             headers: {
               "Content-Type": "multipart/form-data",
             },
           })
-          .then((res) => {
+          .then(async (res) => {
             consolelog(res.data);
             dispatch(setFaceImage(srcImg));
+            toast.dismiss();
+            await sleep();
             navigate("/authentication/signup/webcaminstructions");
           })
           .catch((err) => {
             console.log(err);
+            toast.dismiss();
           });
 
         consolelog(srcImg);
       }
     }
     //TODO: remove link
+    await sleep();
     navigate("/authentication/signup/webcaminstructions");
   };
 

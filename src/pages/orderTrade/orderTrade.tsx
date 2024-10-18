@@ -25,6 +25,8 @@ import getImages from "@/common/imagesData";
 import { useNavigate } from "react-router-dom";
 import { bankMock } from "../portfolio/__mock__/portMock";
 import { TBankInfo } from "../portfolio/types";
+import { Loading } from "@/components/loading";
+import { toast } from "react-toastify";
 
 type TCurrency = {
   name: string;
@@ -110,6 +112,10 @@ export default function OrderTrade() {
   };
 
   const fetchAssetData = async () => {
+    toast(<Loading message="Loading Asset Info..." />, {
+      autoClose: false,
+      closeOnClick: false,
+    });
     const store = localStorage.getItem("asset")?.split("-");
     let allIcoData;
     Object.keys(icoAll).length === 0
@@ -149,9 +155,14 @@ export default function OrderTrade() {
         }
       }
     }
+    toast.dismiss();
   };
 
   const fetchUserBankInfo = async () => {
+    toast(<Loading message="Loading Balance..." />, {
+      autoClose: false,
+      closeOnClick: false,
+    });
     try {
       const res = await axios.post(
         "/api/v1/customer/info/balance",
@@ -171,10 +182,12 @@ export default function OrderTrade() {
       // TODO: remove mock
       setBankInfo(bankMock);
     }
+    toast.dismiss();
   };
 
   useEffect(() => {
     if (!assetData) {
+      toast(<Loading />, { autoClose: false, closeOnClick: false });
       const user = getUser();
       setUser(user ? user : undefined);
       consolelog("user", user);
@@ -248,6 +261,7 @@ export default function OrderTrade() {
 
     const isMin = checkMinAmount(body.amount);
     if (isMin) {
+      toast(<Loading />, { autoClose: false, closeOnClick: false });
       try {
         const res = await axios.post(
           "/api/v1/customer/product/investment",
@@ -269,6 +283,7 @@ export default function OrderTrade() {
       } catch (error) {
         console.log(error);
       }
+      toast.dismiss();
     }
   };
 

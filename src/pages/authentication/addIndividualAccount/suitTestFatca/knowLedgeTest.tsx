@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCookies } from "@/lib/cookies";
 import axios from "@/api/axios";
 import { initIndividualData } from "@/redux/Action";
+import { Loading } from "@/components/loading";
+import { toast } from "react-toastify";
 
 const questionsData = {
   id: "1",
@@ -175,6 +177,7 @@ export default function KnowLedgeTest({ onTestSuccess }: KnowLedgeTestProps) {
   const token = getCookies();
 
   const fetchIndividualData = async (AccountID: string) => {
+    toast(<Loading />, { autoClose: false, closeOnClick: false });
     try {
       consolelog(AccountID);
       const res = await axios.post("/api/v1/individual/list", {
@@ -185,10 +188,12 @@ export default function KnowLedgeTest({ onTestSuccess }: KnowLedgeTestProps) {
     } catch (error) {
       console.log(error);
     }
+    toast.dismiss();
   };
   const individualData = useSelector((state: any) => state.individualData);
 
   useEffect(() => {
+    toast.dismiss();
     const cidValue = localStorage.getItem("cid");
     fetchIndividualData(cidValue || "");
   }, [token, dispatch]);

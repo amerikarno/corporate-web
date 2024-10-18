@@ -66,7 +66,7 @@ export function OtpEmailConfirm() {
     switch (type) {
       case "mobile":
         setDisableMobile(true);
-        await sleep(1000);
+        await sleep();
         refCode.current = "123456";
         startTimmer();
         break;

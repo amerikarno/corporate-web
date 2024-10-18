@@ -14,7 +14,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCookies } from "@/lib/cookies";
 import axios from "@/api/axios";
 import { initIndividualData, setTestCorporateData } from "@/redux/Action";
-import { consolelog } from "@/lib/utils";
+import { consolelog, sleep } from "@/lib/utils";
+import { toast } from "react-toastify";
+import { Loading } from "@/components/loading";
 
 export default function AddIndividualAccount() {
   const {
@@ -33,6 +35,7 @@ export default function AddIndividualAccount() {
   const navigate = useNavigate();
 
   const fetchIndividualData = async (AccountID: string) => {
+    toast(<Loading />, { autoClose: false, closeOnClick: false });
     try {
       consolelog({ accountId: AccountID });
       const res = await axios.post("/api/v1/individual/list", {
@@ -43,11 +46,13 @@ export default function AddIndividualAccount() {
     } catch (error) {
       console.log(error);
     }
+    toast.dismiss();
   };
 
   const individualData = useSelector((state: any) => state.individualData);
 
   useEffect(() => {
+    toast.dismiss();
     const cidValue = localStorage.getItem("cid");
     if (cidValue) {
       fetchIndividualData(cidValue || "");
@@ -149,6 +154,7 @@ export default function AddIndividualAccount() {
     );
     try {
       consolelog("body to send ", body);
+      toast(<Loading />, { autoClose: false, closeOnClick: false });
       if (individualData?.id) {
         consolelog("api : /api/v1/individual/update/pre");
         const res = await axios.post("/api/v1/individual/update/pre", body, {});
@@ -160,6 +166,8 @@ export default function AddIndividualAccount() {
           consolelog(age);
           consolelog("update success", res, data);
 
+          toast.dismiss();
+          await sleep();
           navigate("/authentication/signup/basicinfo");
           window.scrollTo(0, 0);
         }
@@ -173,6 +181,8 @@ export default function AddIndividualAccount() {
           localStorage.setItem("age", age.toString());
           consolelog("create success", res, data);
 
+          toast.dismiss();
+          await sleep();
           navigate("/authentication/signup/basicinfo");
           window.scrollTo(0, 0);
         }
@@ -180,6 +190,8 @@ export default function AddIndividualAccount() {
     } catch (error) {
       console.log(error);
       //TODO: remove link
+      toast.dismiss();
+      await sleep();
       navigate("/authentication/signup/basicinfo");
     }
   };

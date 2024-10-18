@@ -9,7 +9,9 @@ import { setCookies } from "@/lib/cookies";
 import { TUser } from "../types";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
-import { consolelog } from "@/lib/utils";
+import { consolelog, sleep } from "@/lib/utils";
+import { Loading } from "@/components/loading";
+import { toast } from "react-toastify";
 
 export default function GoogleQr() {
   const [secret, setSecret] = useState("");
@@ -75,6 +77,7 @@ export default function GoogleQr() {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    toast(<Loading />, { autoClose: false, closeOnClick: false });
     axios
       .post(
         "/api/v1/authen/customers/verify",
@@ -87,7 +90,7 @@ export default function GoogleQr() {
           },
         }
       )
-      .then((response) => {
+      .then(async (response) => {
         if (response.status === 200) {
           setMessage("totp is valid");
           dispatch(setAuthenToken(response.data.accessToken));
@@ -95,14 +98,18 @@ export default function GoogleQr() {
           const user: TUser = jwtDecode(response.data.accessToken);
           localStorage.clear();
           dispatch(setAuthenUser(user));
+          toast.dismiss();
+          await sleep();
           navigate(`${import.meta.env.BASE_URL}dashboard/personal`);
         } else {
           setMessage("totp is invalid");
+          toast.dismiss();
         }
       })
       .catch((error) => {
         console.error("Error verifying totp:", error);
         setMessage(error.response.data.message);
+        toast.dismiss();
       });
   };
 

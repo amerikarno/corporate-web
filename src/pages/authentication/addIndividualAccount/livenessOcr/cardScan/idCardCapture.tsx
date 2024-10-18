@@ -6,8 +6,10 @@ import { setIdCardImage } from "@/redux/Action";
 import { useNavigate } from "react-router-dom";
 import getImages from "@/common/imagesData";
 import { useWindowSize } from "@/lib/useWindowSize";
-import { consolelog } from "@/lib/utils";
+import { consolelog, sleep } from "@/lib/utils";
 import axios from "@/api/axios";
+import { Loading } from "@/components/loading";
+import { toast } from "react-toastify";
 
 type TScreen = {
   width: number;
@@ -45,23 +47,28 @@ export default function IDCardCapture() {
       formData.append("file", blob);
       formData.append("cid", cid);
       formData.append("docType", "idCard");
+      toast(<Loading />, { autoClose: false, closeOnClick: false });
       await axios
         .post("api/v1/document/openaccount/upload", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
         })
-        .then((res) => {
+        .then(async (res) => {
           consolelog(res.data);
           dispatch(setIdCardImage(srcImg));
+          toast.dismiss();
+          await sleep();
           navigate("/authentication/signup/otpemailconfirm");
           // navigate("/authentication/signup/identityverification");
         })
         .catch((err) => {
           console.log(err);
+          toast.dismiss();
         });
     }
     //TODO: remove link
+    await sleep();
     navigate("/authentication/signup/otpemailconfirm");
     // navigate("/authentication/signup/identityverification");
   };

@@ -5,17 +5,20 @@ import SubSuitTest from "./subSuitTest";
 import KnowLedgeTest from "./knowLedgeTest";
 import { TiTick } from "react-icons/ti";
 import "./suitTestFatca.css";
-import { consolelog } from "@/lib/utils";
+import { consolelog, sleep } from "@/lib/utils";
 import { useNavigate } from "react-router-dom";
 import axios from "@/api/axios";
 import { initIndividualData, setTestCorporateData } from "@/redux/Action";
 import { useDispatch, useSelector } from "react-redux";
 import { getCookies } from "@/lib/cookies";
+import { toast } from "react-toastify";
+import { Loading } from "@/components/loading";
 
 export default function SuitTestFatca() {
   const token = getCookies();
   const dispatch = useDispatch();
   const fetchIndividualData = async (AccountID: string) => {
+    toast(<Loading />, { autoClose: false, closeOnClick: false });
     try {
       console.log(AccountID);
       const res = await axios.post("/api/v1/individual/list", {
@@ -26,9 +29,13 @@ export default function SuitTestFatca() {
     } catch (error) {
       console.log(error);
     }
+    toast.dismiss();
   };
+
   const individualData = useSelector((state: any) => state.individualData);
+
   useEffect(() => {
+    toast.dismiss();
     const cidValue = localStorage.getItem("cid");
     if (cidValue) {
       fetchIndividualData(cidValue || "");
@@ -114,6 +121,7 @@ export default function SuitTestFatca() {
       };
       console.log(body);
       dispatch(setTestCorporateData(body));
+      toast(<Loading />, { autoClose: false, closeOnClick: false });
       if (individualData?.SuiteTestResult.suiteTestResult.totalScore) {
         console.log("suite test updating...");
         try {
@@ -124,12 +132,16 @@ export default function SuitTestFatca() {
           console.log(res);
           if (res.status === 200) {
             console.log("suit test edit success", res.data);
+            toast.dismiss();
+            await sleep();
             navigate("/authentication/signup/livenessinstruction");
             // navigate("/authentication/signup/otpemailconfirm");
           } else {
             console.log("suit test edit not success");
+            toast.dismiss();
           }
         } catch (error) {
+          toast.dismiss();
           console.log(error);
         }
       } else {
@@ -142,18 +154,24 @@ export default function SuitTestFatca() {
           console.log(res);
           if (res.status === 200) {
             console.log("suit test save success", res.data);
+            toast.dismiss();
+            await sleep();
             navigate("/authentication/signup/livenessinstruction");
             // navigate("/authentication/signup/otpemailconfirm");
           } else {
+            toast.dismiss();
             console.log("suit test save not success");
           }
         } catch (error) {
+          toast.dismiss();
           console.log(error);
         }
       }
     } else {
       //       alert(`Please complete the suite test,
       // if you are an American citizen, please complete the FATCA form first.`);
+      toast.dismiss();
+      await sleep();
       navigate("/authentication/signup/livenessinstruction");
     }
   };

@@ -26,6 +26,8 @@ import {
 } from "@/redux/Action";
 import { useEffect, useState } from "react";
 import Alert from "@/components/alert/Alert";
+import { Loading } from "@/components/loading";
+import { toast } from "react-toastify";
 
 export default function IdentityVerification() {
   const navigate = useNavigate();
@@ -35,6 +37,7 @@ export default function IdentityVerification() {
   const customerCode = new URLSearchParams(location.search).get("customerCode");
 
   const fetchIndividualData = async (AccountID: string) => {
+    toast(<Loading />, { autoClose: false, closeOnClick: false });
     try {
       console.log(AccountID);
       const res = await axios.post("/api/v1/individual/list", {
@@ -45,11 +48,13 @@ export default function IdentityVerification() {
     } catch (error) {
       console.log(error);
     }
+    toast.dismiss();
   };
 
   const individualData = useSelector((state: any) => state.individualData);
 
   useEffect(() => {
+    toast.dismiss();
     const cidValue = customerCode ? customerCode : localStorage.getItem("cid");
     if (cidValue) {
       fetchIndividualData(cidValue || "");
@@ -79,6 +84,7 @@ export default function IdentityVerification() {
     };
     dispatch(setTestCorporateData(body));
     console.log("ndid choosed : ", body);
+    toast(<Loading />, { autoClose: false, closeOnClick: false });
     try {
       if (individualData?.thaid || individualData?.ndid) {
         const res = await axios.post(
@@ -116,6 +122,7 @@ export default function IdentityVerification() {
       setAlertType("error");
       // setAlertMessage("please try again")
     }
+    toast.dismiss();
   };
   const handlethaiid = async () => {
     let body = {
@@ -124,6 +131,7 @@ export default function IdentityVerification() {
     };
     dispatch(setTestCorporateData(body));
     console.log("thaid choosed : ", body);
+    toast(<Loading />, { autoClose: false, closeOnClick: false });
     try {
       if (individualData?.thaid || individualData?.ndid) {
         const res = await axios.post(
@@ -161,6 +169,7 @@ export default function IdentityVerification() {
       setAlertType("error");
       // setAlertMessage("please try again")
     }
+    toast.dismiss();
   };
 
   const ConfirmNdidBtn = () => {

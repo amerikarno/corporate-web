@@ -4,10 +4,12 @@ import DataTable, { TableColumn } from "react-data-table-component";
 import { useEffect, useState } from "react";
 import { TBankInfo } from "./types";
 import { bankMock, transactionMock } from "./__mock__/portMock";
-import { formatNumberToCommasFraction } from "@/lib/utils";
+import { formatNumberToCommasFraction, sleep } from "@/lib/utils";
 import { Transaction } from "../orderTrade/constant/type";
 import axios from "@/api/axios";
 import { getCookies } from "@/lib/cookies";
+import { Loading } from "@/components/loading";
+import { toast } from "react-toastify";
 
 const customStyles = {
   headCells: {
@@ -117,6 +119,7 @@ export default function Portfolio() {
   ];
 
   const fetchBankBalance = async () => {
+    toast(<Loading />, { autoClose: false, closeOnClick: false });
     try {
       const res = await axios.post(
         "/api/v1/customer/info/balance",
@@ -137,9 +140,14 @@ export default function Portfolio() {
       setBankInfo(bankMock);
     }
     setIsLoading(false);
+    toast.dismiss();
   };
 
   const fetchTransactionList = async () => {
+    toast(<Loading message="Loading Transactions..." />, {
+      autoClose: false,
+      closeOnClick: false,
+    });
     try {
       const res = await axios.post(
         "/api/v1/customer/product/transaction",
@@ -165,6 +173,7 @@ export default function Portfolio() {
 
   const handleCancleTransaction = async (data: Transaction) => {
     console.log(data);
+    toast(<Loading />, { autoClose: false, closeOnClick: false });
     try {
       await axios.post(
         "/api/v1/customer/product/transaction/delete",
@@ -181,6 +190,8 @@ export default function Portfolio() {
     } catch (error) {
       console.log(error);
     }
+    toast.dismiss();
+    await sleep();
     await fetchTransactionList();
     await fetchBankBalance();
   };

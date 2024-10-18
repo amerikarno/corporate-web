@@ -3,7 +3,9 @@ import axios from "axios";
 import api from "@/api/axios";
 import { useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/Button";
-import { consolelog } from "@/lib/utils";
+import { consolelog, sleep } from "@/lib/utils";
+import { Loading } from "@/components/loading";
+import { toast } from "react-toastify";
 
 const AzureForm: React.FC = () => {
   const [accessToken, setAccessToken] = useState<string | null>(null);
@@ -21,6 +23,7 @@ const AzureForm: React.FC = () => {
   }, [location.search]);
 
   const handleLogin = async () => {
+    toast(<Loading />, { autoClose: false, closeOnClick: false });
     try {
       const res = await api.get("/api/v1/authen/login/azure", {
         headers: {
@@ -32,6 +35,8 @@ const AzureForm: React.FC = () => {
     } catch (error) {
       console.log(error);
     }
+    toast.dismiss();
+    await sleep();
     window.location.href = `${window.origin}/api/v1/authen/login/azure`;
   };
 

@@ -9,6 +9,9 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { TUser } from "../types";
 import { Input } from "@/components/ui/Input";
+import { Loading } from "@/components/loading";
+import { toast } from "react-toastify";
+import { sleep } from "@/lib/utils";
 
 export default function QrVerification() {
   const navigate = useNavigate();
@@ -71,7 +74,7 @@ export default function QrVerification() {
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
     const otpStr = otp.join("");
-
+    toast(<Loading />, { autoClose: false, closeOnClick: false });
     axios
       .post(
         "/api/v1/authen/customers/verify",
@@ -84,19 +87,23 @@ export default function QrVerification() {
           },
         }
       )
-      .then((response) => {
+      .then(async (response) => {
         if (response.status === 200) {
           dispatch(setAuthenToken(response.data.accessToken));
           setCookies(response.data.accessToken);
           const user: TUser = jwtDecode(response.data.accessToken);
           localStorage.clear();
           dispatch(setAuthenUser(user));
+          toast.dismiss();
+          await sleep();
           navigate(`/`);
         } else {
+          toast.dismiss();
           setError("Network Error");
         }
       })
       .catch((error) => {
+        toast.dismiss();
         console.error("Error verifying totp:", error);
         setError(error.response.data.message);
       });
