@@ -23,7 +23,7 @@ import { TAssetData } from "../landing/types";
 import { useSelector } from "react-redux";
 import getImages from "@/common/imagesData";
 import { useNavigate } from "react-router-dom";
-import { bankMock } from "../portfolio/__mock__/portMock";
+// import { bankMock } from "../portfolio/__mock__/portMock";
 import { TBankInfo } from "../portfolio/types";
 import { Loading } from "@/components/loading";
 import { toast } from "react-toastify";
@@ -180,7 +180,7 @@ export default function OrderTrade() {
     } catch (error) {
       console.log(error);
       // TODO: remove mock
-      setBankInfo(bankMock);
+      // setBankInfo(bankMock);
     }
     toast.dismiss();
   };

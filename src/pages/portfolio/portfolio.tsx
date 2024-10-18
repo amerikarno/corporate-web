@@ -3,7 +3,7 @@ import NavBar from "@/components/navbar";
 import DataTable, { TableColumn } from "react-data-table-component";
 import { useEffect, useState } from "react";
 import { TBankInfo, TPortfolio } from "./types";
-import { bankMock, portMock, transactionMock } from "./__mock__/portMock";
+// import { bankMock, portMock, transactionMock } from "./__mock__/portMock";
 import {
   formatNumberToCommasFraction,
   prepareDataForColumnChart,
@@ -151,7 +151,7 @@ export default function Portfolio() {
     } catch (error) {
       console.log(error);
       // TODO: remove mock
-      setBankInfo(bankMock);
+      // setBankInfo(bankMock);
     }
     setIsLoading(false);
     toast.dismiss();
@@ -181,7 +181,7 @@ export default function Portfolio() {
     } catch (error) {
       console.log(error);
       // TODO: remove mock
-      setInvestTransactions(transactionMock);
+      // setInvestTransactions(transactionMock);
     }
   };
 
@@ -204,9 +204,9 @@ export default function Portfolio() {
     } catch (error) {
       console.log(error);
       // TODO: remove mock
-      setPort(portMock);
-      setDataPieChart(prepareDataForPieChart(portMock));
-      setDataColumnChart(prepareDataForColumnChart(portMock));
+      // setPort(portMock);
+      // setDataPieChart(prepareDataForPieChart(portMock));
+      // setDataColumnChart(prepareDataForColumnChart(portMock));
     }
     toast.dismiss();
   };

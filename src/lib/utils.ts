@@ -4,7 +4,7 @@ import { getCookies } from "./cookies";
 import { jwtDecode } from "jwt-decode";
 import { TUser } from "@/pages/authentication/login/types";
 import axios from "@/api/axios";
-import { mockAssetData } from "@/pages/assetDetails/__mock__/mockAsset";
+// import { mockAssetData } from "@/pages/assetDetails/__mock__/mockAsset";
 import { TPortfolio } from "@/pages/portfolio/types";
 
 export function cn(...inputs: ClassValue[]) {
@@ -61,7 +61,8 @@ export const getAllIcoData = async () => {
     }
   } catch (error) {
     console.log(error);
-    return mockAssetData;
+    // TODO: remove mock
+    // return mockAssetData;
   }
 };
 
