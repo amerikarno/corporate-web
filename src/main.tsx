@@ -28,7 +28,8 @@ import Portfolio from "./pages/portfolio/portfolio.tsx";
 import HelmetLayout from "./components/helmetLayout.tsx";
 import { LivenessInstruction } from "./pages/authentication/addIndividualAccount/livenessOcr/cardScan/livenessInstruction.tsx";
 import { ConfirmSuccess } from "./pages/authentication/addIndividualAccount/otpEmailConfirm/confirmSuccess.tsx";
-// import ResetAppTitle from "./components/resetAppTitle.tsx";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 let helmetContext = {};
 
@@ -37,6 +38,7 @@ createRoot(document.getElementById("root")!).render(
     <HelmetProvider context={helmetContext}>
       <BrowserRouter>
         <ScrollToTop />
+        <ToastContainer position="top-center" theme="light" />
         <Provider store={store}>
           <Routes>
             <Route element={<HelmetLayout />}>

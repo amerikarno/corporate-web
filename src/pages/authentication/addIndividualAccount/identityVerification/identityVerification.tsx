@@ -34,8 +34,6 @@ export default function IdentityVerification() {
   const location = useLocation();
   const customerCode = new URLSearchParams(location.search).get("customerCode");
 
-  consolelog(customerCode);
-
   const fetchIndividualData = async (AccountID: string) => {
     try {
       console.log(AccountID);

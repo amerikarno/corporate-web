@@ -65,7 +65,7 @@ export function LivenessInstruction() {
                 <li>1.จัดใบหน้าให้อยู่ในกรอบ</li>
                 <li>2.อยู่ในพื้นที่ที่มีแสงสว่างเพียงพอ</li>
                 <li>3.ทำตามข้อความที่ปรากฏ หันซ้าย หันขวา อ้าปาก</li>
-                <li>3.ถ่ายรูปใบหน้า</li>
+                <li>4.ถ่ายรูปใบหน้า</li>
               </ol>
               <div className="my-6">
                 <ScanFace className="w-32 h-32" color="gray" />

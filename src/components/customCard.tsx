@@ -43,7 +43,7 @@ export function CustomCard({ data, index, type }: TCustomCardProps) {
             <img
               src={data.logo}
               alt=""
-              className="h-[17px] md:h-[34px]"
+              className="h-[34px]"
               onError={(e) => (e.currentTarget.src = getImages("example"))}
             />
             <h1 className={`font-bold text-xl text-gray-800`}>
@@ -68,13 +68,7 @@ export function CustomCard({ data, index, type }: TCustomCardProps) {
           <div className="border-b border-gray-200"></div>
         </div>
 
-        <div
-        // onClick={() => {
-        //   localStorage.setItem("asset", `${type}-${index}`);
-        //   navigate(`/asset/${type}/${index}`);
-        // }}
-        // className="hover:cursor-pointer"
-        >
+        <div>
           <div className="w-full p-2 md:p-4">
             <div className="flex flex-row bg-gray-100 rounded-2xl space-x-4 border border-gray-100">
               <div className="w-1/3 h-full">

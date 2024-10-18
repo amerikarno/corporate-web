@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { ThemeChanger } from "@/redux/Action";
 import store from "@/redux/store";
 import getImages from "@/common/imagesData";
-import { Helmet } from "react-helmet-async";
 import { getCookies, removeCookies } from "@/lib/cookies";
 import example from "@assets/drawIcon/example.png";
 import { Button } from "@/components/ui/Button";
@@ -56,32 +55,8 @@ const NavBar = ({ ThemeChanger, children, isFullWidth, padding }: datatype) => {
     navigate("/");
   };
 
-  // function toggleNavigation() {
-  //   if (window.innerWidth <= 992) {
-  //     const theme = store.getState();
-  //     ThemeChanger({ ...theme, toggled: "open", dataNavLayout: "horizontal" });
-  //   }
-  // }
-
-  //   function handleClick() {
-  //     const theme = store.getState();
-  //     ThemeChanger({ ...theme, toggled: "close", dataNavLayout: "horizontal" });
-  //   }
-
   return (
     <>
-      <Helmet
-        htmlAttributes={{
-          lang: "en",
-          "data-menu-styles": "dark",
-          dir: "ltr",
-          class: "light",
-          "data-nav-layout": "horizontal",
-          "data-header-styles": "light",
-          "data-vertical-style": "overlay",
-        }}
-      />
-
       <div id="header" className="border-b border-gray-300 shadow-sm">
         <div
           className={`w-full ${
@@ -91,7 +66,7 @@ const NavBar = ({ ThemeChanger, children, isFullWidth, padding }: datatype) => {
           <div className="w-full flex flex-row py-4">
             <div className="w-1/2 items-center lg:w-1/3">
               <img
-                src={getImages("logo")}
+                src={getImages("whiteBg")}
                 alt=""
                 className="h-12 hover:cursor-pointer"
                 onClick={() => navigate("/")}

@@ -18,6 +18,7 @@ import phoneIcon from "@/assets/images/otpPhone.svg";
 import mailIcon from "@/assets/images/otpMail.svg";
 import man from "@/assets/man.svg";
 import emptyImg from "@/assets/drawIcon/empty.svg";
+import waiting from "@/assets/wait.gif";
 
 export const randomImage = (): string => {
   const ran = Math.floor(Math.random() * 10);
@@ -26,6 +27,7 @@ export const randomImage = (): string => {
 
 const getImages = (img: string) => {
   const i: any = {
+    waiting,
     emptyImg,
     phoneIcon,
     mailIcon,

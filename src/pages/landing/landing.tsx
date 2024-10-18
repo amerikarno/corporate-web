@@ -12,6 +12,8 @@ import { IcoListItem } from "@/components/icoListItem";
 import { MenuForDropdown } from "@/components/menuForDropdown";
 import { IcoType } from "./types";
 import { getAllIcoData, getAppName } from "@/lib/utils";
+import { toast } from "react-toastify";
+import { Loading } from "@/components/loading";
 
 interface datatype {
   ThemeChanger: any;
@@ -21,6 +23,7 @@ const Landing = ({ ThemeChanger }: datatype) => {
   const navigate = useNavigate();
   const token = getCookies();
   const [icoData, setIcoData] = useState<IcoType | undefined>(undefined);
+  const [msg, setMsg] = useState<string>("Loading ...");
 
   function handleResize() {
     if (window.innerWidth <= 992) {
@@ -41,6 +44,10 @@ const Landing = ({ ThemeChanger }: datatype) => {
   }
 
   const fetchIcoData = async () => {
+    toast(<Loading />, {
+      autoClose: false,
+      closeOnClick: false,
+    });
     const data = await getAllIcoData();
     if (data) {
       setIcoData(data);
@@ -48,7 +55,10 @@ const Landing = ({ ThemeChanger }: datatype) => {
         type: "setAllIcoStore",
         payload: data,
       });
+    } else {
+      setMsg("No data found");
     }
+    toast.dismiss();
   };
 
   useEffect(() => {
@@ -113,6 +123,7 @@ const Landing = ({ ThemeChanger }: datatype) => {
             </div>
           </div>
         </div>
+
         {icoData ? (
           <div id="content" className="w-full space-y-6">
             {icoData.active && (
@@ -127,7 +138,7 @@ const Landing = ({ ThemeChanger }: datatype) => {
           </div>
         ) : (
           <div className="w-full h-[400px] flex items-center justify-center">
-            Loading ...
+            {msg}
           </div>
         )}
         <footer id="footer" className="bg-dark-bg">

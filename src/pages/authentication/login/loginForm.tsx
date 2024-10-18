@@ -10,6 +10,8 @@ import axios from "@/api/axios";
 import { AxiosError } from "axios";
 import { consolelog } from "@/lib/utils";
 import { setCookies } from "@/lib/cookies";
+import { toast } from "react-toastify";
+import { Loading } from "@/components/loading";
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -32,6 +34,7 @@ const LoginForm = () => {
 
   const onSubmit: SubmitHandler<AuthForm> = async (data) => {
     if (data.email && data.password) {
+      toast(<Loading />, { autoClose: false, closeOnClick: false });
       const dataStr = `${data.email},${data.password}`;
       const base64 = btoa(dataStr);
       try {
@@ -46,6 +49,7 @@ const LoginForm = () => {
         );
 
         if (res.status === 200) {
+          toast.dismiss();
           consolelog(res.data);
           localStorage.setItem("basic", base64);
           if (res.data.secret !== "") {
@@ -61,10 +65,12 @@ const LoginForm = () => {
             );
           }
         } else {
+          toast.dismiss();
           setError("root", { message: res.data.message });
           consolelog("error", { message: res.data });
         }
       } catch (error) {
+        toast.dismiss();
         if (error instanceof AxiosError) {
           setError("root", { message: error.response?.data.message });
         }

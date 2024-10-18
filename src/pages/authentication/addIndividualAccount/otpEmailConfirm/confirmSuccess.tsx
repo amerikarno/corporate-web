@@ -31,11 +31,11 @@ export function ConfirmSuccess() {
           </div>
           <div className="flex flex-row space-x-4">
             <Phone />
-            <p>02 088 4666</p>
+            <p>02 xxx xxxx</p>
           </div>
           <div className="flex flex-row space-x-4">
             <Mail />
-            <p>callcenter@finansiada.com</p>
+            <p>csinfo@ICOPortal.com</p>
           </div>
         </div>
 
