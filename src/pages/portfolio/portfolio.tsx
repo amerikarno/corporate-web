@@ -1,15 +1,22 @@
-import { Card, CardContent } from "@/components/ui/Card";
+import { Card, CardContent, CardHeader } from "@/components/ui/Card";
 import NavBar from "@/components/navbar";
 import DataTable, { TableColumn } from "react-data-table-component";
 import { useEffect, useState } from "react";
-import { TBankInfo } from "./types";
-import { bankMock, transactionMock } from "./__mock__/portMock";
-import { formatNumberToCommasFraction, sleep } from "@/lib/utils";
+import { TBankInfo, TPortfolio } from "./types";
+import { bankMock, portMock, transactionMock } from "./__mock__/portMock";
+import {
+  formatNumberToCommasFraction,
+  prepareDataForColumnChart,
+  prepareDataForPieChart,
+  sleep,
+} from "@/lib/utils";
 import { Transaction } from "../orderTrade/constant/type";
 import axios from "@/api/axios";
 import { getCookies } from "@/lib/cookies";
 import { Loading } from "@/components/loading";
 import { toast } from "react-toastify";
+import PieChart from "@/components/chart/pieChart";
+import ColumnChart from "@/components/chart/columnChart";
 
 const customStyles = {
   headCells: {
@@ -44,6 +51,13 @@ export default function Portfolio() {
   const [investTransactions, setInvestTransactions] = useState<Transaction[]>(
     []
   );
+  // const port: TPortfolio[] = portMock;
+  const [port, setPort] = useState<TPortfolio[]>([]);
+  const dataPieInitial = prepareDataForPieChart(port);
+  const dataColumnInitial = prepareDataForColumnChart(port);
+  const [dataPieChart, setDataPieChart] = useState(dataPieInitial);
+  const [dataColumnChart, setDataColumnChart] = useState(dataColumnInitial);
+
   const textTitle = "text-base text-gray-500 font-semibold";
   const textContent = "text-xl font-semibold";
   const headerStyle = "w-full text-center";
@@ -171,6 +185,32 @@ export default function Portfolio() {
     }
   };
 
+  const fetchPortfolioData = async () => {
+    toast(<Loading message="Loading Portfolio Data..." />, {
+      autoClose: false,
+      closeOnClick: false,
+    });
+    try {
+      const res = await axios.post(
+        "/api/v1/customer/product/asset",
+        {},
+        { headers: { Authorization: `Bearer ${getCookies()}` } }
+      );
+      if (res.status === 200) {
+        setPort(res.data);
+        setDataPieChart(prepareDataForPieChart(res.data));
+        setDataColumnChart(prepareDataForColumnChart(res.data));
+      }
+    } catch (error) {
+      console.log(error);
+      // TODO: remove mock
+      setPort(portMock);
+      setDataPieChart(prepareDataForPieChart(portMock));
+      setDataColumnChart(prepareDataForColumnChart(portMock));
+    }
+    toast.dismiss();
+  };
+
   const handleCancleTransaction = async (data: Transaction) => {
     console.log(data);
     toast(<Loading />, { autoClose: false, closeOnClick: false });
@@ -207,8 +247,9 @@ export default function Portfolio() {
   };
 
   useEffect(() => {
-    fetchTransactionList();
     fetchBankBalance();
+    fetchPortfolioData();
+    fetchTransactionList();
   }, []);
 
   if (isLoading) {
@@ -219,8 +260,11 @@ export default function Portfolio() {
     <NavBar
       isFullWidth
       children={
-        <div className="p-2 space-y-20">
+        <div className="px-2 pt-10 space-y-10">
           <Card className="p-4">
+            {/* <CardHeader className="text-2xl text-gray-800">
+              Account Balance
+            </CardHeader> */}
             <CardContent className="grid grid-cols-3 gap-y-10 gap-x-4">
               <div className="col-span-3">
                 <h1 className={textTitle}>Account</h1>
@@ -257,7 +301,28 @@ export default function Portfolio() {
             </CardContent>
           </Card>
 
+          <Card className="p-4 space-y-6">
+            <CardHeader className="text-2xl text-gray-800">
+              Portfolio
+            </CardHeader>
+            <CardContent>
+              <PieChart
+                series={dataPieChart.series}
+                colors={dataPieChart.colors}
+                labels={dataPieChart.labels}
+                width={300}
+                height={240}
+              />
+              <ColumnChart
+                categories={dataColumnChart?.categories}
+                height={160}
+                series={dataColumnChart?.series}
+              />
+            </CardContent>
+          </Card>
+
           <div className="w-full bg-white">
+            {/* <h1 className="text-2xl font-bold">Transaction</h1> */}
             <DataTable
               className="border-t border-r border-l border-gray-200"
               title="Reserved Transaction"

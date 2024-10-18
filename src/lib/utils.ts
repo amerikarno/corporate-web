@@ -5,6 +5,7 @@ import { jwtDecode } from "jwt-decode";
 import { TUser } from "@/pages/authentication/login/types";
 import axios from "@/api/axios";
 import { mockAssetData } from "@/pages/assetDetails/__mock__/mockAsset";
+import { TPortfolio } from "@/pages/portfolio/types";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -89,3 +90,83 @@ export const getAppName = () => {
   }
   return name;
 };
+
+export function generateDistinctHexColorSet(length: number): string[] {
+  const colors: string[] = [];
+
+  for (let i = 0; i < length; i++) {
+    const hue = Math.floor((i * 360) / length);
+    const color = hslToHex(hue, 70, 50); // You can adjust saturation and lightness as needed
+    colors.push(color);
+  }
+
+  return colors;
+}
+
+export function hslToHex(h: number, s: number, l: number): string {
+  s /= 100;
+  l /= 100;
+
+  const k = (n: number) => (n + h / 30) % 12;
+  const a = s * Math.min(l, 1 - l);
+  const f = (n: number) =>
+    l - a * Math.max(-1, Math.min(k(n) - 3, Math.min(9 - k(n), 1)));
+
+  return (
+    "#" +
+    Math.round(f(0) * 255)
+      .toString(16)
+      .padStart(2, "0") +
+    Math.round(f(8) * 255)
+      .toString(16)
+      .padStart(2, "0") +
+    Math.round(f(4) * 255)
+      .toString(16)
+      .padStart(2, "0")
+  );
+}
+
+export function prepareDataForPieChart(port: TPortfolio[]) {
+  if (port.length > 0) {
+    let series: number[] = [];
+    let labels: string[] = [];
+    for (let i = 0; i < port.length; i++) {
+      series.push(port[i].investment?.value || 0);
+      labels.push(port[i].asset?.name || "null");
+    }
+    const colorSet = generateDistinctHexColorSet(labels.length);
+    return {
+      series: series,
+      colors: colorSet,
+      labels: labels,
+    };
+  }
+  return {
+    series: [100],
+    colors: ["#D3D3D3"],
+    labels: ["asset"],
+  };
+}
+
+export function prepareDataForColumnChart(port: TPortfolio[]) {
+  if (port.length > 0) {
+    // let seriesObj = {
+    //   name: "value",
+    //   data: [],
+    // };
+    let seriesValue: number[] = [];
+    let categories: string[] = [];
+    for (let i = 0; i < port.length; i++) {
+      seriesValue.push(port[i].investment?.value || 0);
+      categories.push(port[i].asset?.name || "null");
+    }
+    return {
+      series: [{ name: "value", data: seriesValue }],
+      categories: categories,
+    };
+  }
+  return {
+    series: [{ name: "value", data: [] }],
+    categories: ["ICO"],
+  };
+}

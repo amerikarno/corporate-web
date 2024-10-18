@@ -22,6 +22,7 @@
     "@types/js-cookie": "^3.0.6",
     "@types/react-datepicker": "^4.19.0",
     "@types/react-tag-autocomplete": "^6.3.3",
+    "apexcharts": "^3.54.1",
     "axios": "^1.7.7",
     "chart.js": "^4.4.4",
     "class-variance-authority": "^0.7.0",
