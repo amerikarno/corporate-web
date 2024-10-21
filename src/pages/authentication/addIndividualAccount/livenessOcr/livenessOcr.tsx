@@ -307,7 +307,7 @@ export default function Liveness() {
   useEffect(() => {
     const intervalId = setInterval(() => {
       detectFaces();
-    }, 1000);
+    }, 200);
 
     return () => clearInterval(intervalId);
   }, [detectFaces, isModelLoaded]);

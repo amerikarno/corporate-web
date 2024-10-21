@@ -5,16 +5,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { setIdCardImage } from "@/redux/Action";
 import { useNavigate } from "react-router-dom";
 import getImages from "@/common/imagesData";
-import { useWindowSize } from "@/lib/useWindowSize";
 import { consolelog, sleep } from "@/lib/utils";
 import axios from "@/api/axios";
 import { Loading } from "@/components/loading";
 import { toast } from "react-toastify";
-
-type TScreen = {
-  width: number;
-  height: number;
-};
 
 type VideoConstraints = MediaTrackConstraints;
 
@@ -24,12 +18,9 @@ export default function IDCardCapture() {
   const webcamRef = useRef<Webcam>(null);
   const [_, setImageSrc] = useState<string | null | undefined>();
   const livenessOcr = useSelector((state: any) => state.livenessOcr);
-  const [screenLayout, setScreenLayout] = useState<TScreen>({
-    width: 326,
-    height: 514,
-  });
-  const { width, height } = useWindowSize();
   const [videoConstraints, setVideoConstraints] = useState<VideoConstraints>();
+  const width = window.innerWidth;
+  const height = window.innerHeight;
 
   useEffect(() => {
     if (livenessOcr.idCardImage && livenessOcr.idCardImage !== null) {
@@ -88,92 +79,46 @@ export default function IDCardCapture() {
   useEffect(() => {
     const deviceType = getDeviceType();
     consolelog(deviceType);
-    if (width >= 600) {
-      deviceType === "Mobile" || deviceType === "Tablet"
-        ? setVideoConstraints({
-            width: 514,
-            height: 326,
-            facingMode: { exact: "environment" },
-          })
-        : setVideoConstraints({
-            width: 514,
-            height: 326,
-            facingMode: "user",
-          });
-      setScreenLayout({
-        width: 514,
-        height: 326,
-      });
-    } else {
-      deviceType === "Mobile" || deviceType === "Tablet"
-        ? setVideoConstraints({
-            width: 326,
-            height: 514,
-            facingMode: { exact: "environment" },
-          })
-        : setVideoConstraints({
-            width: 326,
-            height: 514,
-            facingMode: "user",
-          });
-      setScreenLayout({ width: 326, height: 514 });
-    }
-    consolelog(width, height);
+    setVideoConstraints({
+      width: 480,
+      height: 480,
+      aspectRatio: 1,
+    });
   }, [width, height]);
 
   return (
-    <div className="flex justify-center h-screen w-full">
-      <div className="max-w-[525px]">
-        <div className="lg:p-10 lg:space-y-8">
-          <h1
-            className={height >= 768 ? "py-4 w-[326px] md:w-[514px]" : "hidden"}
-          >
+    <div className="h-full w-full">
+      <div className="w-[360px] h-[667px] mx-auto">
+        <div className="py-4 md:py-10 md:space-y-8">
+          <h1 className={height > 667 ? "py-2" : "hidden"}>
             โปรดอยู่ในที่แสงสว่างเพียงพอ หรือไม่มีแสงสะท้อน
           </h1>
 
-          <div
-            className={`relative ${
-              width >= 600 ? "w-[514px] h-[326px]" : "w-[326px] h-[514px]"
-            }`}
-          >
+          <div className={`relative w-[360px] h-[480px]`}>
             <Webcam
               audio={false}
-              width={screenLayout.width}
-              height={screenLayout.height}
               ref={webcamRef}
               screenshotFormat="image/png"
               videoConstraints={videoConstraints}
+              className="w-full h-full absolute top-0 object-cover"
             />
             <img
-              src={
-                width >= 600
-                  ? getImages("idOverLay")
-                  : getImages("verticalIdOvleray")
-              }
+              src={getImages("verticalIdOvleray")}
               alt="ID Card Overlay"
-              width={screenLayout.width}
-              height={screenLayout.height}
-              className="absolute top-0"
+              className="w-full h-full absolute top-0 object-contain"
             />
           </div>
-          <h2
-            className={height >= 768 ? "py-4 w-[326px] md:w-[514px]" : "hidden"}
-          >
+          <h2 className={height > 667 ? "py-2" : "hidden"}>
             วางด้านหน้าบัตรประชาชนให้อยู่ในกรอบที่กำหนด และหลีกเลี่ยงแสงสะท้อน
             เห็นข้อมูลบนบัตรชัดเจน
           </h2>
-          <div className="flex justify-center py-2">
+          <div className="w-[360px] flex justify-center py-4">
             <Camera
               className="w-10 h-10 p-2 bg-gray-400 rounded-full hover:bg-gray-800 cursor-pointer"
               onClick={() => handleCapture()}
               color="white"
             />
           </div>
-          {/* <div className="flex justify-center">
-            <Button className="text-white" onClick={() => handleSubmit()}>
-              Next
-            </Button>
-          </div> */}
         </div>
       </div>
     </div>
