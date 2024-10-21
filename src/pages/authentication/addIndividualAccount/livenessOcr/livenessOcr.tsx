@@ -115,8 +115,8 @@ export default function Liveness() {
             // Draw a circle in the center
             const centerX = dims.width / 2;
             const centerY = dims.height / 2;
-            const radiusX = 100; // Horizontal radius for the ellipse
-            const radiusY = 150; // Vertical radius for the ellipse
+            const radiusX = dims.width / 5; // Horizontal radius for the ellipse
+            const radiusY = dims.height / 3; // Vertical radius for the ellipse
             // consolelog(dims);
 
             // Calculate circle's bounding box
@@ -336,7 +336,7 @@ export default function Liveness() {
           className="w-full h-full absolute top-0 left-0 object-cover"
         />
         <div className="absolute bottom-0 left-0 w-full flex flex-col space-y-6 justify-center items-center pb-8">
-          <h1 className="text-xl font-bold text-blue-500">{getMessage()}</h1>
+          <h1 className="text-xl font-bold text-black">{getMessage()}</h1>
           <Camera
             className="w-10 h-10 p-2 bg-gray-400 rounded-full hover:bg-gray-800 cursor-pointer"
             onClick={() => handleNext()}
