@@ -117,7 +117,7 @@ export default function Liveness() {
             const centerX = dims.width / 2;
             const centerY = dims.height / 2;
             const radiusX = dims.width * 0.2; // Horizontal radius for the ellipse
-            const radiusY = dims.height * 0.25; // Vertical radius for the ellipse
+            const radiusY = dims.height * 0.3; // Vertical radius for the ellipse
             setDim([dims.width, dims.height]);
             // consolelog(dims);
 
@@ -287,9 +287,9 @@ export default function Liveness() {
   useEffect(() => {
     loadModels();
     setVideoConstraints({
-      width: 360,
+      width: 480,
       height: 480,
-      aspectRatio: 3 / 4,
+      aspectRatio: 1,
     });
   }, []);
 
@@ -321,7 +321,7 @@ export default function Liveness() {
   }, [webcamRef]);
 
   return (
-    <div className="w-full h-full flex justify-center items-start bg-blue-200">
+    <div className="w-full h-full flex flex-col justify-center items-center space-y-4 py-4 bg-blue-200">
       <div className="relative w-[360px] h-[480px] bg-green-200">
         {!webcamInitialized && <p>Loading webcam...</p>}
         <Webcam
@@ -337,15 +337,24 @@ export default function Liveness() {
           ref={canvasRef}
           className="w-full h-full absolute top-0 left-0 object-cover"
         />
-        <div className="absolute bottom-0 left-0 w-full flex flex-col space-y-6 justify-center items-center pb-8">
-          <h1 className="text-xl font-bold text-black">{`deimentions (w x h) : ${dim[0]} x ${dim[1]}`}</h1>
+        {/* <div className="absolute bottom-0 left-0 w-full flex flex-col space-y-6 justify-center items-center pb-8">
+          <h1 className="text-xl font-bold text-black">{`dimension (w x h) : ${dim[0]} x ${dim[1]}`}</h1>
           <h1 className="text-xl font-bold text-black">{getMessage()}</h1>
           <Camera
             className="w-10 h-10 p-2 bg-gray-400 rounded-full hover:bg-gray-800 cursor-pointer"
             onClick={() => handleNext()}
             color="white"
           />
-        </div>
+        </div> */}
+      </div>
+      <h1 className="text-xl font-bold text-black">{`dimension (w x h) : ${dim[0]} x ${dim[1]}`}</h1>
+      <h1 className="text-xl font-bold text-black">{getMessage()}</h1>
+      <div className="p-4">
+        <Camera
+          className="w-10 h-10 p-2 bg-gray-400 rounded-full hover:bg-gray-800 cursor-pointer"
+          onClick={() => handleNext()}
+          color="white"
+        />
       </div>
     </div>
   );
