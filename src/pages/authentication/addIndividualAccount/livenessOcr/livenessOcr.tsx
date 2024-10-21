@@ -148,12 +148,12 @@ export default function Liveness() {
 
           if (result) {
             const { x, y, width, height } = result.detection.box;
-            if (ctx) {
-              ctx.strokeStyle = "blue";
-              ctx.lineWidth = 2;
-              ctx.strokeRect(x, y, width, height);
-            }
-            // consolelog(x, y, width, height);
+            // if (ctx) {
+            //   ctx.strokeStyle = "blue";
+            //   ctx.lineWidth = 2;
+            //   ctx.strokeRect(x, y, width, height);
+            // }
+            consolelog(x, y, width, height);
             if (circleBox) {
               const slippageX = 15;
               const slippageY = 20;
@@ -283,13 +283,6 @@ export default function Liveness() {
 
   useEffect(() => {
     loadModels();
-    //aspect = w/h
-    // consolelog(window.innerWidth, window.innerHeight);
-    // setVideoConstraints({
-    //   width: 375,
-    //   height: 667,
-    //   facingMode: "user",
-    // });
     setVideoConstraints({
       height: 667,
       width: 375,
@@ -324,11 +317,11 @@ export default function Liveness() {
   }, [webcamRef]);
 
   return (
-    <div className="w-full h-full flex justify-center items-start">
-      <div className="relative w-[375px] h-[667px]">
+    <div className="w-full h-full flex justify-center items-start bg-blue-200">
+      <div className="relative w-[375px] h-[667px] bg-green-200">
         {!webcamInitialized && <p>Loading webcam...</p>}
         <Webcam
-          className="w-full h-full absolute top-0 left-0"
+          className="w-full h-full absolute top-0 left-0 object-fill"
           ref={webcamRef}
           videoConstraints={videoConstraints}
           screenshotFormat="image/png"
@@ -338,7 +331,7 @@ export default function Liveness() {
         />
         <canvas
           ref={canvasRef}
-          className="w-full h-full absolute top-0 left-0"
+          className="w-full h-full absolute top-0 left-0 object-fill"
         />
         <div className="absolute bottom-0 left-0 w-full flex flex-col space-y-6 justify-center items-center pb-8">
           <h1 className="text-xl font-bold text-blue-500">{getMessage()}</h1>
