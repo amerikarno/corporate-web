@@ -115,8 +115,8 @@ export default function Liveness() {
             // Draw a circle in the center
             const centerX = dims.width / 2;
             const centerY = dims.height / 2;
-            const radiusX = dims.width / 5; // Horizontal radius for the ellipse
-            const radiusY = dims.height / 3; // Vertical radius for the ellipse
+            const radiusX = dims.width * 0.15; // Horizontal radius for the ellipse
+            const radiusY = dims.height * 0.25; // Vertical radius for the ellipse
             // consolelog(dims);
 
             // Calculate circle's bounding box
