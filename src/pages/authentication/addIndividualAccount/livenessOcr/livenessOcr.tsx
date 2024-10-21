@@ -287,8 +287,8 @@ export default function Liveness() {
   useEffect(() => {
     loadModels();
     setVideoConstraints({
-      // height: 960,
-      // width: 1280,
+      width: 360,
+      height: 480,
       aspectRatio: 3 / 4,
     });
   }, []);
@@ -321,8 +321,8 @@ export default function Liveness() {
   }, [webcamRef]);
 
   return (
-    <div className="w-full h-full flex justify-center items-start">
-      <div className="relative w-[360px] h-[480px]">
+    <div className="w-full h-full flex justify-center items-start bg-blue-200">
+      <div className="relative w-[360px] h-[480px] bg-green-200">
         {!webcamInitialized && <p>Loading webcam...</p>}
         <Webcam
           className="w-full h-full absolute top-0 left-0 object-cover"
