@@ -27,6 +27,7 @@ import { TBasicinfoAddress, TBasicInfoBank } from "../types";
 import { IndividualData } from "@/redux/types";
 import { toast } from "react-toastify";
 import { Loading } from "@/components/loading";
+import { normalStyleInput } from "@/assets/css/normalStyleInput";
 
 export default function BasicInfo() {
   const responsiveClass =
@@ -642,8 +643,7 @@ export default function BasicInfo() {
                 <div className="lg:w-1/2">
                   <select
                     {...register("occupation.education")}
-                    className="border border-gray-200 px-2.5 pb-2.5 pt-4 cursor-pointer text-gray-600 pl-2 hover:bg-slate-100
-                                text-sm rounded-lg focus:ring-gray-700 focus:border-blue-700 block w-full h-full"
+                    className={`${normalStyleInput}`}
                   >
                     <option value="">ระดับการศึกษาสูงสุด</option>
                     {educationTypes.map((status) => (
@@ -656,8 +656,7 @@ export default function BasicInfo() {
                 <div className="lg:w-1/2">
                   <select
                     {...register("occupation.sourceOfIncome")}
-                    className="border border-gray-200 px-2.5 pb-2.5 pt-4 cursor-pointer text-gray-600 pl-2 hover:bg-slate-100
-                                text-sm rounded-lg focus:ring-gray-700 focus:border-blue-700 block w-full h-full"
+                    className={`${normalStyleInput}`}
                   >
                     <option value="">แหล่งที่มาของเงินลงทุน</option>
                     {sourceOfIncome.map((status) => (
@@ -672,8 +671,7 @@ export default function BasicInfo() {
                 <div className="lg:w-1/2">
                   <select
                     {...register("occupation.currentOccupation")}
-                    className="border border-gray-200 px-2.5 pb-2.5 pt-4 cursor-pointer text-gray-600 pl-2 hover:bg-slate-100
-                                    text-sm rounded-lg focus:ring-gray-700 focus:border-blue-700 block w-full h-full"
+                    className={`${normalStyleInput}`}
                   >
                     <option value="">อาชีพปัจจุบัน</option>
                     {careerTypes.map((status) => (
@@ -705,8 +703,7 @@ export default function BasicInfo() {
                   <div className="lg:w-1/2">
                     <select
                       {...register("occupation.salaryRange")}
-                      className="border border-gray-200 px-2.5 pb-2.5 pt-4 cursor-pointer text-gray-600 pl-2 hover:bg-slate-100
-                                        text-sm rounded-lg focus:ring-gray-700 focus:border-blue-700 block w-full h-full"
+                      className={`${normalStyleInput}`}
                     >
                       <option value="">รายได้ต่อเดือน</option>
                       {salaryRange.map((status) => (
@@ -723,8 +720,7 @@ export default function BasicInfo() {
                   <div className="lg:w-1/2">
                     <select
                       {...register("occupation.typeOfBusiness")}
-                      className="border border-gray-200 px-2.5 pb-2.5 pt-4 cursor-pointer text-gray-600 pl-2 hover:bg-slate-100
-                                        text-sm rounded-lg focus:ring-gray-700 focus:border-blue-700 block w-full h-full "
+                      className={`${normalStyleInput}`}
                     >
                       <option value="">ประเภทธุระกิจ</option>
                       {businessTypes.map((status) => (
@@ -740,8 +736,7 @@ export default function BasicInfo() {
                   <div className="lg:w-1/2">
                     <select
                       {...register("occupation.salaryRange")}
-                      className="border border-gray-200 px-2.5 pb-2.5 pt-4 cursor-pointer text-gray-600 pl-2 hover:bg-slate-100
-                                        text-sm rounded-lg focus:ring-gray-700 focus:border-blue-700 block w-full h-full"
+                      className={`${normalStyleInput}`}
                     >
                       <option value="">รายได้ต่อเดือน</option>
                       {salaryRange.map((status) => (
@@ -770,8 +765,7 @@ export default function BasicInfo() {
                   <div className="lg:w-1/2">
                     <select
                       {...register("occupation.salaryRange")}
-                      className="border border-gray-200 px-2.5 pb-2.5 pt-4 cursor-pointer text-gray-600 pl-2 hover:bg-slate-100
-                                        text-sm rounded-lg focus:ring-gray-700 focus:border-blue-700 block w-full h-full"
+                      className={`${normalStyleInput}`}
                     >
                       <option value="">รายได้ต่อเดือน</option>
                       {salaryRange.map((status) => (
@@ -1037,8 +1031,7 @@ export default function BasicInfo() {
                 <div className={responsiveClass}>
                   <select
                     {...register("firstBankAccount.bankName")}
-                    className="border border-gray-200 px-2.5 pb-2.5 pt-4 cursor-pointer text-gray-600 pl-2 hover:bg-slate-100
-                                            text-sm rounded-lg focus:ring-gray-700 focus:border-blue-700 block w-full h-full"
+                    className={`${normalStyleInput}`}
                   >
                     <option value="">กรุณาเลือกธนาคาร</option>
                     {bank.map((status) => (
@@ -1104,8 +1097,7 @@ export default function BasicInfo() {
                     <div className="flex space-x-4">
                       <select
                         {...register("secondBankAccountBody.bankName")}
-                        className="border border-gray-200 px-2.5 pb-2.5 pt-4 cursor-pointer  text-gray-600 pl-2 hover:bg-slate-100
-                                            text-sm rounded-lg focus:ring-gray-700 focus:border-blue-700 block w-full h-full"
+                        className={`${normalStyleInput}`}
                       >
                         <option value="">กรุณาเลือกธนาคาร</option>
                         {bank.map((status) => (

@@ -159,13 +159,12 @@ export default function Liveness() {
             // consolelog(x, y, width, height);
             // consolelog(ellipseBox);
             if (ellipseBox) {
-              const slippageX = 15;
-              const slippageW = 20;
+              const slippage = 20;
               if (
-                ellipseBox[0] + slippageX > x &&
-                ellipseBox[0] - slippageX < x &&
-                ellipseBox[2] + slippageW > width &&
-                ellipseBox[2] - slippageW < width
+                ellipseBox[0] + slippage > x &&
+                ellipseBox[0] - slippage < x &&
+                ellipseBox[2] + slippage > width &&
+                ellipseBox[2] - slippage < width
               ) {
                 // consolelog("Center");
                 color.current = "green";
