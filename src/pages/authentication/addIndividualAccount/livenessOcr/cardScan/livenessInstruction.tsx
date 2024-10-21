@@ -2,9 +2,7 @@ import {
   AlertDialog,
   AlertDialogAction,
   AlertDialogContent,
-  AlertDialogDescription,
   AlertDialogFooter,
-  AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
@@ -20,30 +18,25 @@ export function LivenessInstruction() {
       <AlertDialog>
         <AlertDialogTrigger>ที่นี่</AlertDialogTrigger>
         <AlertDialogContent className="bg-white">
-          <AlertDialogHeader>
-            <AlertDialogTitle>วิธีการตั้งค่าเปิดกล้อง</AlertDialogTitle>
-            <AlertDialogDescription>
-              <div className="space-y-6">
-                <div>
-                  <h1>ㆍสำหรับ IOS (IPhone/iPad)</h1>
-                  <p>
-                    &nbsp;&nbsp;โดยเข้าไปที่การตั้งค่า (Settings) เลือก Safari
-                    &gt; การเข้าถึงกล้องและไมโครโฟน (Camera &amp; Microphone)
-                    &gt; เลือก อนุญาต (Allow)
-                  </p>
-                </div>
-                <div>
-                  <h1>ㆍสำหรับ Android (Google Chrome)</h1>
-                  <p>
-                    &nbsp;&nbsp;ไปที่ Google Chrome คลิกที่ สัญลักษณ์ ...
-                    มุมขวาบน/ล่าง &gt; เลือกการตั้งค่า (Settings) &gt;
-                    การตั้งค่าเว็บไซต์ (Site Setting) &gt; กล้องถ่ายรูป (Camera)
-                    &gt; เลือก อนุญาต (Allow)
-                  </p>
-                </div>
-              </div>
-            </AlertDialogDescription>
-          </AlertDialogHeader>
+          <AlertDialogTitle>วิธีการตั้งค่าเปิดกล้อง</AlertDialogTitle>
+          <div className="space-y-6">
+            <div>
+              <p>ㆍสำหรับ IOS (IPhone/iPad)</p>
+              <p>
+                โดยเข้าไปที่การตั้งค่า (Settings) เลือก Safari &gt;
+                การเข้าถึงกล้องและไมโครโฟน (Camera &amp; Microphone) &gt; เลือก
+                อนุญาต (Allow)
+              </p>
+            </div>
+            <div>
+              <p>ㆍสำหรับ Android (Google Chrome)</p>
+              <p>
+                ไปที่ Google Chrome คลิกที่ สัญลักษณ์ ... มุมขวาบน/ล่าง &gt;
+                เลือกการตั้งค่า (Settings) &gt; การตั้งค่าเว็บไซต์ (Site
+                Setting) &gt; กล้องถ่ายรูป (Camera) &gt; เลือก อนุญาต (Allow)
+              </p>
+            </div>
+          </div>
           <AlertDialogFooter>
             <AlertDialogAction>Close</AlertDialogAction>
           </AlertDialogFooter>

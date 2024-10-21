@@ -285,8 +285,9 @@ export default function Liveness() {
   useEffect(() => {
     loadModels();
     setVideoConstraints({
-      height: 667,
-      width: 375,
+      height: 960,
+      width: 1280,
+      aspectRatio: 4 / 3,
     });
   }, []);
 
@@ -322,7 +323,7 @@ export default function Liveness() {
       <div className="relative w-[375px] h-[667px] bg-green-200">
         {!webcamInitialized && <p>Loading webcam...</p>}
         <Webcam
-          className="w-full h-full absolute top-0 left-0 object-contain"
+          className="w-full h-full absolute top-0 left-0 object-cover"
           ref={webcamRef}
           videoConstraints={videoConstraints}
           screenshotFormat="image/png"
@@ -332,7 +333,7 @@ export default function Liveness() {
         />
         <canvas
           ref={canvasRef}
-          className="w-full h-full absolute top-0 left-0 object-contain"
+          className="w-full h-full absolute top-0 left-0 object-cover"
         />
         <div className="absolute bottom-0 left-0 w-full flex flex-col space-y-6 justify-center items-center pb-8">
           <h1 className="text-xl font-bold text-blue-500">{getMessage()}</h1>
