@@ -38,6 +38,7 @@ export default function Liveness() {
   const [isTurnLeft, setIsTurnLeft] = useState<boolean>(false);
   const [isTurnRight, setIsTurnRight] = useState<boolean>(false);
   const [isMouthOpen, setIsMouthOpen] = useState<boolean>(false);
+  const [dim, setDim] = useState([0, 0]);
 
   const loadModels = async () => {
     // consolelog("Loading face-api.js models...");
@@ -115,8 +116,9 @@ export default function Liveness() {
             // Draw a circle in the center
             const centerX = dims.width / 2;
             const centerY = dims.height / 2;
-            const radiusX = dims.width * 0.15; // Horizontal radius for the ellipse
+            const radiusX = dims.width * 0.2; // Horizontal radius for the ellipse
             const radiusY = dims.height * 0.25; // Vertical radius for the ellipse
+            setDim([dims.width, dims.height]);
             // consolelog(dims);
 
             // Calculate circle's bounding box
@@ -149,11 +151,11 @@ export default function Liveness() {
 
           if (result) {
             const { x, y, width, height } = result.detection.box;
-            // if (ctx) {
-            //   ctx.strokeStyle = "blue";
-            //   ctx.lineWidth = 2;
-            //   ctx.strokeRect(x, y, width, height);
-            // }
+            if (ctx) {
+              ctx.strokeStyle = "blue";
+              ctx.lineWidth = 2;
+              ctx.strokeRect(x, y, width, height);
+            }
             consolelog(x, y, width, height);
             if (ellipseBox) {
               const slippageX = 15;
@@ -285,9 +287,9 @@ export default function Liveness() {
   useEffect(() => {
     loadModels();
     setVideoConstraints({
-      height: 960,
-      width: 1280,
-      aspectRatio: 4 / 3,
+      // height: 960,
+      // width: 1280,
+      aspectRatio: 3 / 4,
     });
   }, []);
 
@@ -319,8 +321,8 @@ export default function Liveness() {
   }, [webcamRef]);
 
   return (
-    <div className="w-full h-full flex justify-center items-start bg-blue-200">
-      <div className="relative w-[375px] h-[667px] bg-green-200">
+    <div className="w-full h-full flex justify-center items-start">
+      <div className="relative w-[360px] h-[480px]">
         {!webcamInitialized && <p>Loading webcam...</p>}
         <Webcam
           className="w-full h-full absolute top-0 left-0 object-cover"
@@ -336,6 +338,7 @@ export default function Liveness() {
           className="w-full h-full absolute top-0 left-0 object-cover"
         />
         <div className="absolute bottom-0 left-0 w-full flex flex-col space-y-6 justify-center items-center pb-8">
+          <h1 className="text-xl font-bold text-black">{`deimentions (w x h) : ${dim[0]} x ${dim[1]}`}</h1>
           <h1 className="text-xl font-bold text-black">{getMessage()}</h1>
           <Camera
             className="w-10 h-10 p-2 bg-gray-400 rounded-full hover:bg-gray-800 cursor-pointer"
