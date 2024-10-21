@@ -72,7 +72,7 @@ export default function IDCardCapture() {
       height: 480,
       aspectRatio: 1,
       facingMode: {
-        exact: facingMode,
+        ideal: facingMode,
       },
     });
   }, [width, height]);
