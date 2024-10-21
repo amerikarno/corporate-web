@@ -97,7 +97,7 @@ export default function Liveness() {
         if (canvasRef.current) {
           const canvas = canvasRef.current;
           const dims = faceapi.matchDimensions(canvas, video, true);
-          let circleBox = undefined;
+          let ellipseBox = undefined;
 
           // Clear the canvas before drawing
           const ctx = canvas.getContext("2d");
@@ -115,18 +115,19 @@ export default function Liveness() {
             // Draw a circle in the center
             const centerX = dims.width / 2;
             const centerY = dims.height / 2;
-            const radius = 100; // Static radius for the circle
+            const radiusX = 100; // Horizontal radius for the ellipse
+            const radiusY = 150; // Vertical radius for the ellipse
             // consolelog(dims);
 
             // Calculate circle's bounding box
-            const circleWidth = radius * 2;
-            const circleHeight = radius * 2;
-            const circleX = centerX - radius;
-            const circleY = centerY - radius;
-            circleBox = [circleX, circleY, circleWidth, circleHeight];
+            const ellipseWidth = radiusX * 2;
+            const ellipseHeight = radiusY * 2;
+            const ellipseX = centerX - radiusX;
+            const ellipseY = centerY - radiusY;
+            ellipseBox = [ellipseX, ellipseY, ellipseWidth, ellipseHeight];
 
             ctx.beginPath();
-            ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
+            ctx.ellipse(centerX, centerY, radiusX, radiusY, 0, 0, 2 * Math.PI);
             ctx.fill(); // Fill the circle to create the hole
 
             // Reset the composite operation to default
@@ -136,7 +137,7 @@ export default function Liveness() {
             ctx.strokeStyle = color.current;
             ctx.lineWidth = 4;
             ctx.beginPath();
-            ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
+            ctx.ellipse(centerX, centerY, radiusX, radiusY, 0, 0, 2 * Math.PI);
             ctx.stroke();
           }
 
@@ -154,14 +155,14 @@ export default function Liveness() {
             //   ctx.strokeRect(x, y, width, height);
             // }
             consolelog(x, y, width, height);
-            if (circleBox) {
+            if (ellipseBox) {
               const slippageX = 15;
               const slippageY = 20;
               if (
-                circleBox[0] + slippageX > x &&
-                circleBox[0] - slippageX < x &&
-                circleBox[1] + slippageY > y &&
-                circleBox[1] - slippageY < y
+                ellipseBox[0] + slippageX > x &&
+                ellipseBox[0] - slippageX < x &&
+                ellipseBox[1] + slippageY > y &&
+                ellipseBox[1] - slippageY < y
               ) {
                 // consolelog("Center");
                 color.current = "green";
@@ -321,7 +322,7 @@ export default function Liveness() {
       <div className="relative w-[375px] h-[667px] bg-green-200">
         {!webcamInitialized && <p>Loading webcam...</p>}
         <Webcam
-          className="w-full h-full absolute top-0 left-0 object-fill"
+          className="w-full h-full absolute top-0 left-0 object-contain"
           ref={webcamRef}
           videoConstraints={videoConstraints}
           screenshotFormat="image/png"
@@ -331,7 +332,7 @@ export default function Liveness() {
         />
         <canvas
           ref={canvasRef}
-          className="w-full h-full absolute top-0 left-0 object-fill"
+          className="w-full h-full absolute top-0 left-0 object-contain"
         />
         <div className="absolute bottom-0 left-0 w-full flex flex-col space-y-6 justify-center items-center pb-8">
           <h1 className="text-xl font-bold text-blue-500">{getMessage()}</h1>
