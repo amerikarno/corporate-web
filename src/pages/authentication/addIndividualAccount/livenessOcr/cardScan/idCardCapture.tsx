@@ -9,6 +9,7 @@ import { consolelog, sleep } from "@/lib/utils";
 import axios from "@/api/axios";
 import { Loading } from "@/components/loading";
 import { toast } from "react-toastify";
+import { isMobile } from "react-device-detect";
 
 type VideoConstraints = MediaTrackConstraints;
 
@@ -64,25 +65,15 @@ export default function IDCardCapture() {
     // navigate("/authentication/signup/identityverification");
   };
 
-  const getDeviceType = (): string => {
-    const userAgent = navigator.userAgent;
-
-    if (/Mobi|Android/i.test(userAgent)) {
-      return "Mobile";
-    } else if (/Tablet|iPad/i.test(userAgent)) {
-      return "Tablet";
-    } else {
-      return "Desktop";
-    }
-  };
-
   useEffect(() => {
-    const deviceType = getDeviceType();
-    consolelog(deviceType);
+    const facingMode = isMobile ? "environment" : "user";
     setVideoConstraints({
       width: 480,
       height: 480,
       aspectRatio: 1,
+      facingMode: {
+        exact: facingMode,
+      },
     });
   }, [width, height]);
 
