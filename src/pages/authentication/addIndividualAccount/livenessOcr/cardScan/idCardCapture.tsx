@@ -67,7 +67,7 @@ export default function IDCardCapture() {
   };
   const FACING_MODE_USER = "user";
   const FACING_MODE_ENVIRONMENT = "environment";
-  const [facingMode, setFacingMode] = useState(FACING_MODE_USER);
+  const [facingMode, setFacingMode] = useState(FACING_MODE_ENVIRONMENT);
   const handleClick = useCallback(() => {
     setFacingMode((prevState) =>
       prevState === FACING_MODE_USER
@@ -77,8 +77,8 @@ export default function IDCardCapture() {
   }, []);
   let videoConstraints: MediaTrackConstraints = {
     facingMode: facingMode,
-    width: 270,
-    height: 480,
+    width: 480,
+    height: 640,
   };
   useEffect(() => {
     // const facingMode = isMobile ? "environment" : "user";
