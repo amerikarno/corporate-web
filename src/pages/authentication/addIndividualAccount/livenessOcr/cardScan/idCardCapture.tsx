@@ -66,19 +66,14 @@ export default function IDCardCapture() {
   };
 
   useEffect(() => {
-    const facingMode = isMobile
-      ? "FACING_MODE_ENVIRONMENT"
-      : "FACING_MODE_USER";
+    const facingMode = isMobile ? "environment" : "user";
 
-    const videoConstraints = {
+    setVideoConstraints({
       width: 480,
       height: 480,
       aspectRatio: 1,
       facingMode: facingMode,
-      audio: false,
-    };
-
-    setVideoConstraints(videoConstraints);
+    });
   }, []);
 
   return (
