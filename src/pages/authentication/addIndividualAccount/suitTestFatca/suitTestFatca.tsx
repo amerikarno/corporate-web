@@ -18,7 +18,10 @@ export default function SuitTestFatca() {
   const token = getCookies();
   const dispatch = useDispatch();
   const fetchIndividualData = async (AccountID: string) => {
-    toast(<Loading />, { autoClose: false, closeOnClick: false });
+    const loadingToast = toast(<Loading />, {
+      autoClose: false,
+      closeOnClick: false,
+    });
     try {
       console.log(AccountID);
       const res = await axios.post("/api/v1/individual/list", {
@@ -28,8 +31,9 @@ export default function SuitTestFatca() {
       console.log(res);
     } catch (error) {
       console.log(error);
+      toast.error("Network Error while fetching Individual data");
     }
-    toast.dismiss();
+    toast.dismiss(loadingToast);
   };
 
   const individualData = useSelector((state: any) => state.individualData);
@@ -121,7 +125,10 @@ export default function SuitTestFatca() {
       };
       console.log(body);
       dispatch(setTestCorporateData(body));
-      toast(<Loading />, { autoClose: false, closeOnClick: false });
+      const loadingToast = toast(<Loading />, {
+        autoClose: false,
+        closeOnClick: false,
+      });
       if (individualData?.SuiteTestResult.suiteTestResult.totalScore) {
         console.log("suite test updating...");
         try {
@@ -138,7 +145,8 @@ export default function SuitTestFatca() {
             // navigate("/authentication/signup/otpemailconfirm");
           } else {
             console.log("suit test edit not success");
-            toast.dismiss();
+            toast.dismiss(loadingToast);
+            toast.error("Network Error while updating Individual data");
           }
         } catch (error) {
           toast.dismiss();
@@ -159,18 +167,20 @@ export default function SuitTestFatca() {
             navigate("/authentication/signup/livenessinstruction");
             // navigate("/authentication/signup/otpemailconfirm");
           } else {
-            toast.dismiss();
+            toast.dismiss(loadingToast);
+            toast.error("Network Error while saving Individual data");
             console.log("suit test save not success");
           }
         } catch (error) {
-          toast.dismiss();
+          toast.dismiss(loadingToast);
+          toast.error("Network Error while saving Individual data");
           console.log(error);
         }
       }
     } else {
       //       alert(`Please complete the suite test,
       // if you are an American citizen, please complete the FATCA form first.`);
-      toast.dismiss();
+      toast.info("Please complete the suite test first");
       await sleep();
       navigate("/authentication/signup/livenessinstruction");
     }

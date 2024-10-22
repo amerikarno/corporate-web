@@ -37,7 +37,10 @@ export default function IdentityVerification() {
   const customerCode = new URLSearchParams(location.search).get("customerCode");
 
   const fetchIndividualData = async (AccountID: string) => {
-    toast(<Loading />, { autoClose: false, closeOnClick: false });
+    const loadingToast = toast(<Loading />, {
+      autoClose: false,
+      closeOnClick: false,
+    });
     try {
       console.log(AccountID);
       const res = await axios.post("/api/v1/individual/list", {
@@ -47,8 +50,9 @@ export default function IdentityVerification() {
       console.log(res);
     } catch (error) {
       console.log(error);
+      toast.error("Network Error while fetching Individual data");
     }
-    toast.dismiss();
+    toast.dismiss(loadingToast);
   };
 
   const individualData = useSelector((state: any) => state.individualData);
@@ -84,7 +88,10 @@ export default function IdentityVerification() {
     };
     dispatch(setTestCorporateData(body));
     console.log("ndid choosed : ", body);
-    toast(<Loading />, { autoClose: false, closeOnClick: false });
+    const loadingToast = toast(<Loading />, {
+      autoClose: false,
+      closeOnClick: false,
+    });
     try {
       if (individualData?.thaid || individualData?.ndid) {
         const res = await axios.post(
@@ -100,6 +107,7 @@ export default function IdentityVerification() {
           console.log("update ndid not success :", res);
           setAlertVisible(true);
           setAlertType("error");
+          toast.error("Network Error while updating Individual data");
           // setAlertMessage("please try again")
         }
       } else {
@@ -113,6 +121,7 @@ export default function IdentityVerification() {
           console.log("save ndid not success :", res);
           setAlertVisible(true);
           setAlertType("error");
+          toast.error("Network Error while saving Individual data");
           // setAlertMessage("please try again")
         }
       }
@@ -120,9 +129,10 @@ export default function IdentityVerification() {
       console.log("save ndid not success :", error);
       setAlertVisible(true);
       setAlertType("error");
+      toast.error("Network Error while saving Individual data");
       // setAlertMessage("please try again")
     }
-    toast.dismiss();
+    toast.dismiss(loadingToast);
   };
   const handlethaiid = async () => {
     let body = {
@@ -131,7 +141,10 @@ export default function IdentityVerification() {
     };
     dispatch(setTestCorporateData(body));
     console.log("thaid choosed : ", body);
-    toast(<Loading />, { autoClose: false, closeOnClick: false });
+    const loadingToast = toast(<Loading />, {
+      autoClose: false,
+      closeOnClick: false,
+    });
     try {
       if (individualData?.thaid || individualData?.ndid) {
         const res = await axios.post(
@@ -147,6 +160,7 @@ export default function IdentityVerification() {
           console.log("update thaid not success :", res);
           setAlertVisible(true);
           setAlertType("error");
+          toast.error("Network Error while updating Individual data");
           // setAlertMessage("please try again")
         }
       } else {
@@ -160,6 +174,7 @@ export default function IdentityVerification() {
           console.log("save thaid not success :", res);
           setAlertVisible(true);
           setAlertType("error");
+          toast.error("Network Error while saving Individual data");
           // setAlertMessage("please try again")
         }
       }
@@ -168,8 +183,9 @@ export default function IdentityVerification() {
       setAlertVisible(true);
       setAlertType("error");
       // setAlertMessage("please try again")
+      toast.error("Network Error while saving Individual data");
     }
-    toast.dismiss();
+    toast.dismiss(loadingToast);
   };
 
   const ConfirmNdidBtn = () => {

@@ -133,7 +133,10 @@ export default function Portfolio() {
   ];
 
   const fetchBankBalance = async () => {
-    toast(<Loading />, { autoClose: false, closeOnClick: false });
+    const loadingToast = toast(<Loading />, {
+      autoClose: false,
+      closeOnClick: false,
+    });
     try {
       const res = await axios.post(
         "/api/v1/customer/info/balance",
@@ -150,15 +153,16 @@ export default function Portfolio() {
       }
     } catch (error) {
       console.log(error);
+      toast.error("Network Error while fetching balance");
       // TODO: remove mock
       // setBankInfo(bankMock);
     }
     setIsLoading(false);
-    toast.dismiss();
+    toast.dismiss(loadingToast);
   };
 
   const fetchTransactionList = async () => {
-    toast(<Loading message="Loading Transactions..." />, {
+    const loadingToast = toast(<Loading message="Loading Transactions..." />, {
       autoClose: false,
       closeOnClick: false,
     });
@@ -180,16 +184,21 @@ export default function Portfolio() {
       }
     } catch (error) {
       console.log(error);
+      toast.error("Network Error while fetching Transactions");
       // TODO: remove mock
       // setInvestTransactions(transactionMock);
     }
+    toast.dismiss(loadingToast);
   };
 
   const fetchPortfolioData = async () => {
-    toast(<Loading message="Loading Portfolio Data..." />, {
-      autoClose: false,
-      closeOnClick: false,
-    });
+    const loadingToast = toast(
+      <Loading message="Loading Portfolio Data..." />,
+      {
+        autoClose: false,
+        closeOnClick: false,
+      }
+    );
     try {
       const res = await axios.post(
         "/api/v1/customer/product/asset",
@@ -203,12 +212,13 @@ export default function Portfolio() {
       }
     } catch (error) {
       console.log(error);
+      toast.error("Network Error while fetching Portfolio");
       // TODO: remove mock
       // setPort(portMock);
       // setDataPieChart(prepareDataForPieChart(portMock));
       // setDataColumnChart(prepareDataForColumnChart(portMock));
     }
-    toast.dismiss();
+    toast.dismiss(loadingToast);
   };
 
   const handleCancleTransaction = async (data: Transaction) => {

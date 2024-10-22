@@ -112,7 +112,7 @@ export default function OrderTrade() {
   };
 
   const fetchAssetData = async () => {
-    toast(<Loading message="Loading Asset Info..." />, {
+    const loadingToast = toast(<Loading message="Loading Asset Info..." />, {
       autoClose: false,
       closeOnClick: false,
     });
@@ -155,11 +155,11 @@ export default function OrderTrade() {
         }
       }
     }
-    toast.dismiss();
+    toast.dismiss(loadingToast);
   };
 
   const fetchUserBankInfo = async () => {
-    toast(<Loading message="Loading Balance..." />, {
+    const loadingToast = toast(<Loading message="Loading Balance..." />, {
       autoClose: false,
       closeOnClick: false,
     });
@@ -179,15 +179,15 @@ export default function OrderTrade() {
       }
     } catch (error) {
       console.log(error);
+      toast.error("Network Error while fetching balance");
       // TODO: remove mock
       // setBankInfo(bankMock);
     }
-    toast.dismiss();
+    toast.dismiss(loadingToast);
   };
 
   useEffect(() => {
     if (!assetData) {
-      toast(<Loading />, { autoClose: false, closeOnClick: false });
       const user = getUser();
       setUser(user ? user : undefined);
       consolelog("user", user);

@@ -35,7 +35,10 @@ export default function AddIndividualAccount() {
   const navigate = useNavigate();
 
   const fetchIndividualData = async (AccountID: string) => {
-    toast(<Loading />, { autoClose: false, closeOnClick: false });
+    const lodingToast = toast(<Loading />, {
+      autoClose: false,
+      closeOnClick: false,
+    });
     try {
       consolelog({ accountId: AccountID });
       const res = await axios.post("/api/v1/individual/list", {
@@ -45,8 +48,9 @@ export default function AddIndividualAccount() {
       consolelog(res);
     } catch (error) {
       console.log(error);
+      toast.error("Network Error while fetching Individual data");
     }
-    toast.dismiss();
+    toast.dismiss(lodingToast);
   };
 
   const individualData = useSelector((state: any) => state.individualData);
@@ -152,9 +156,12 @@ export default function AddIndividualAccount() {
         birthDate: new Date(data.birthDate || 0).toISOString(),
       })
     );
+    const lodingToast = toast(<Loading />, {
+      autoClose: false,
+      closeOnClick: false,
+    });
     try {
       consolelog("body to send ", body);
-      toast(<Loading />, { autoClose: false, closeOnClick: false });
       if (individualData?.id) {
         consolelog("api : /api/v1/individual/update/pre");
         const res = await axios.post("/api/v1/individual/update/pre", body, {});
@@ -189,8 +196,9 @@ export default function AddIndividualAccount() {
       }
     } catch (error) {
       console.log(error);
+      toast.error("Network Error while creating Individual account");
       //TODO: remove link
-      toast.dismiss();
+      toast.dismiss(lodingToast);
       await sleep();
       navigate("/authentication/signup/basicinfo");
     }

@@ -77,7 +77,10 @@ export default function GoogleQr() {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    toast(<Loading />, { autoClose: false, closeOnClick: false });
+    const loadingToast = toast(<Loading />, {
+      autoClose: false,
+      closeOnClick: false,
+    });
     axios
       .post(
         "/api/v1/authen/customers/verify",
@@ -100,16 +103,18 @@ export default function GoogleQr() {
           dispatch(setAuthenUser(user));
           toast.dismiss();
           await sleep();
-          navigate(`${import.meta.env.BASE_URL}dashboard/personal`);
+          navigate("/");
         } else {
           setMessage("totp is invalid");
-          toast.dismiss();
+          toast.dismiss(loadingToast);
+          toast.error("totp is invalid");
         }
       })
       .catch((error) => {
         console.error("Error verifying totp:", error);
         setMessage(error.response.data.message);
-        toast.dismiss();
+        toast.dismiss(loadingToast);
+        toast.error(error.response.data.message);
       });
   };
 

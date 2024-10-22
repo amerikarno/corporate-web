@@ -44,7 +44,7 @@ const Landing = ({ ThemeChanger }: datatype) => {
   }
 
   const fetchIcoData = async () => {
-    toast(<Loading />, {
+    const lodingToast = toast(<Loading />, {
       autoClose: false,
       closeOnClick: false,
     });
@@ -58,7 +58,7 @@ const Landing = ({ ThemeChanger }: datatype) => {
     } else {
       setMsg("No data found");
     }
-    toast.dismiss();
+    toast.dismiss(lodingToast);
   };
 
   useEffect(() => {

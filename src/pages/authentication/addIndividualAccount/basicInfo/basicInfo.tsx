@@ -72,7 +72,10 @@ export default function BasicInfo() {
   });
 
   const fetchIndividualData = async (AccountID: string) => {
-    toast(<Loading />, { autoClose: false, closeOnClick: false });
+    const lodingToast = toast(<Loading />, {
+      autoClose: false,
+      closeOnClick: false,
+    });
     try {
       consolelog(AccountID);
       const res = await axios.post("/api/v1/individual/list", {
@@ -82,8 +85,9 @@ export default function BasicInfo() {
       consolelog(res);
     } catch (error) {
       console.log(error);
+      toast.error("Network Error while fetching Individual data");
     }
-    toast.dismiss();
+    toast.dismiss(lodingToast);
   };
 
   const individualData: IndividualData = useSelector(
@@ -256,8 +260,11 @@ export default function BasicInfo() {
     };
     consolelog(body);
     dispatch(setTestCorporateData(body));
+    const lodingToast = toast(<Loading />, {
+      autoClose: false,
+      closeOnClick: false,
+    });
     try {
-      toast(<Loading />, { autoClose: false, closeOnClick: false });
       const registeredAddressFind: TBasicinfoAddress | null =
         individualData?.address?.find((addr) => addr.types === 1) || null;
       if (registeredAddressFind?.homeNumber) {
@@ -273,8 +280,9 @@ export default function BasicInfo() {
           navigate("/authentication/signup/suittestfatca");
           window.scrollTo(0, 0);
         } else {
-          toast.dismiss();
-          consolelog("update basic info unsuccess x", res);
+          toast.error("update basic info unsuccess");
+          toast.dismiss(lodingToast);
+          consolelog("update basic info unsuccess", res);
         }
       } else {
         const res = await axios.post("/api/v1/individual/postcreate", body, {});
@@ -286,13 +294,15 @@ export default function BasicInfo() {
           window.scrollTo(0, 0);
         } else {
           consolelog("submit basic info unsuccess x", res);
-          toast.dismiss();
+          toast.error("submit basic info unsuccess");
+          toast.dismiss(lodingToast);
         }
       }
     } catch (error) {
       console.log(error);
       //TODO: remove link
-      toast.dismiss();
+      toast.error("Network Error while submitting basic info");
+      toast.dismiss(lodingToast);
       await sleep();
       navigate("/authentication/signup/suittestfatca");
     }

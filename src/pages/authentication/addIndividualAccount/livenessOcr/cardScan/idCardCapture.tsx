@@ -35,7 +35,10 @@ export default function IDCardCapture() {
       formData.append("file", blob);
       formData.append("cid", cid);
       formData.append("docType", "idCard");
-      toast(<Loading />, { autoClose: false, closeOnClick: false });
+      const loadingToast = toast(<Loading />, {
+        autoClose: false,
+        closeOnClick: false,
+      });
       await axios
         .post("api/v1/document/openaccount/upload", formData, {
           headers: {
@@ -52,7 +55,8 @@ export default function IDCardCapture() {
         })
         .catch((err) => {
           console.log(err);
-          toast.dismiss();
+          toast.dismiss(loadingToast);
+          toast.error("Network Error while uploading ID Card");
         });
     }
     //TODO: remove link

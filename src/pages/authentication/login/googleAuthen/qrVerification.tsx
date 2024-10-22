@@ -74,7 +74,10 @@ export default function QrVerification() {
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
     const otpStr = otp.join("");
-    toast(<Loading />, { autoClose: false, closeOnClick: false });
+    const loadingToast = toast(<Loading />, {
+      autoClose: false,
+      closeOnClick: false,
+    });
     axios
       .post(
         "/api/v1/authen/customers/verify",
@@ -98,12 +101,14 @@ export default function QrVerification() {
           await sleep();
           navigate(`/`);
         } else {
-          toast.dismiss();
+          toast.dismiss(loadingToast);
+          toast.error("Failed to verifying totp");
           setError("Network Error");
         }
       })
       .catch((error) => {
-        toast.dismiss();
+        toast.dismiss(loadingToast);
+        toast.error("Network Error while verifying totp");
         console.error("Error verifying totp:", error);
         setError(error.response.data.message);
       });

@@ -261,7 +261,10 @@ export default function Liveness() {
         formData.append("file", blob);
         formData.append("cid", cid);
         formData.append("docType", "faceCompare");
-        toast(<Loading />, { autoClose: false, closeOnClick: false });
+        const loadingToast = toast(<Loading />, {
+          autoClose: false,
+          closeOnClick: false,
+        });
         await axios
           .post("api/v1/document/openaccount/upload", formData, {
             headers: {
@@ -277,7 +280,8 @@ export default function Liveness() {
           })
           .catch((err) => {
             console.log(err);
-            toast.dismiss();
+            toast.dismiss(loadingToast);
+            toast.error("Network Error while uploading image");
           });
 
         consolelog(srcImg);

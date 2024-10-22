@@ -6,6 +6,7 @@ import { TUser } from "@/pages/authentication/login/types";
 import axios from "@/api/axios";
 // import { mockAssetData } from "@/pages/assetDetails/__mock__/mockAsset";
 import { TPortfolio } from "@/pages/portfolio/types";
+import { toast } from "react-toastify";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -61,6 +62,7 @@ export const getAllIcoData = async () => {
     }
   } catch (error) {
     console.log(error);
+    toast.error("Network Error while fetching Ico data");
     // TODO: remove mock
     // return mockAssetData;
   }
