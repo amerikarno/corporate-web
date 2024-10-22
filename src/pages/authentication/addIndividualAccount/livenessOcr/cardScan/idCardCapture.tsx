@@ -20,7 +20,7 @@ export default function IDCardCapture() {
   const [_, setImageSrc] = useState<string | null | undefined>();
   const livenessOcr = useSelector((state: any) => state.livenessOcr);
   const [videoConstraints, setVideoConstraints] = useState<VideoConstraints>();
-  const width = window.innerWidth;
+  // const width = window.innerWidth;
   const height = window.innerHeight;
 
   useEffect(() => {
@@ -70,13 +70,16 @@ export default function IDCardCapture() {
       ? "FACING_MODE_ENVIRONMENT"
       : "FACING_MODE_USER";
 
-    setVideoConstraints({
+    const videoConstraints = {
       width: 480,
       height: 480,
       aspectRatio: 1,
       facingMode: facingMode,
-    });
-  }, [width, height]);
+      audio: false,
+    };
+
+    setVideoConstraints(videoConstraints);
+  }, []);
 
   return (
     <div className="h-full w-full">

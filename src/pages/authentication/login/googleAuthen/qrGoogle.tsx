@@ -136,7 +136,8 @@ export default function GoogleQr() {
               Scan this QR code with your authenticator app:
             </p>
             <QRCode
-              value={`otpauth://totp/MyApp:user@example.com?secret=${secret}&issuer=MyApp`}
+              value={secret}
+              // value={`otpauth://totp/MyApp:user@example.com?secret=${secret}&issuer=MyApp`}
             />
           </div>
         ) : (

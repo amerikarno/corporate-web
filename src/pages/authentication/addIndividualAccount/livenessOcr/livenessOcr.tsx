@@ -106,9 +106,14 @@ export default function Liveness() {
             // consolelog("Clearing canvas...");
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+            // Set the opacity for the white filter
+            ctx.globalAlpha = 0.9; // Set opacity between 0 (completely transparent) and 1 (completely opaque)
             // Draw a white rectangle covering the entire canvas
             ctx.fillStyle = "white";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Reset the opacity to full for the hole effect
+            ctx.globalAlpha = 1.0;
 
             // Set the composite operation to 'destination-out' to create a hole effect
             ctx.globalCompositeOperation = "destination-out";
@@ -119,7 +124,7 @@ export default function Liveness() {
             const radiusX = dims.width * 0.2; // Horizontal radius for the ellipse
             const radiusY = dims.height * 0.3; // Vertical radius for the ellipse
             // setDim([dims.width, dims.height]);
-            // consolelog(dims);
+            consolelog(dims);
 
             // Calculate circle's bounding box
             const ellipseWidth = radiusX * 2;

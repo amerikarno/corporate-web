@@ -30,7 +30,7 @@ import { LivenessInstruction } from "./pages/authentication/addIndividualAccount
 import { ConfirmSuccess } from "./pages/authentication/addIndividualAccount/otpEmailConfirm/confirmSuccess.tsx";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import TestChart from "./test.tsx";
+import Test from "./test.tsx";
 
 let helmetContext = {};
 
@@ -52,7 +52,7 @@ createRoot(document.getElementById("root")!).render(
               <Route index element={<Landing />} />
               <Route
                 path={`${import.meta.env.BASE_URL}test`}
-                element={<TestChart />}
+                element={<Test />}
               />
               <Route
                 path={`${import.meta.env.BASE_URL}authentication/login`}
