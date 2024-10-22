@@ -34,7 +34,10 @@ const LoginForm = () => {
 
   const onSubmit: SubmitHandler<AuthForm> = async (data) => {
     if (data.email && data.password) {
-      toast(<Loading />, { autoClose: false, closeOnClick: false });
+      const loadingToast = toast(<Loading />, {
+        autoClose: false,
+        closeOnClick: false,
+      });
       const dataStr = `${data.email},${data.password}`;
       const base64 = btoa(dataStr);
       try {
@@ -66,17 +69,18 @@ const LoginForm = () => {
             );
           }
         } else {
-          toast.dismiss();
+          toast.dismiss(loadingToast);
+          toast.error("Failed to login");
           setError("root", { message: res.data.message });
           consolelog("error", { message: res.data });
         }
       } catch (error) {
         console.log(error);
-        toast.dismiss();
+        toast.dismiss(loadingToast);
+        toast.error("Network Error");
         if (error instanceof AxiosError) {
           setError("root", { message: error.response?.data.message });
         }
-        toast.error("Network Error");
         //TODO: remove mock
         // await sleep();
         // setCookies(

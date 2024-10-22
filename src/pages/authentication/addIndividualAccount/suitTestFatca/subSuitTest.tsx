@@ -128,7 +128,10 @@ export default function SubSuitTest({
   const token = getCookies();
   const dispatch = useDispatch();
   const fetchIndividualData = async (AccountID: string) => {
-    toast(<Loading />, { autoClose: false, closeOnClick: false });
+    const loadingToast = toast(<Loading />, {
+      autoClose: false,
+      closeOnClick: false,
+    });
     try {
       console.log(AccountID);
       const res = await axios.post("/api/v1/individual/list", {
@@ -138,8 +141,9 @@ export default function SubSuitTest({
       console.log(res);
     } catch (error) {
       console.log(error);
+      toast.error("Network Error while fetching Individual data");
     }
-    toast.dismiss();
+    toast.dismiss(loadingToast);
   };
   const individualData = useSelector((state: any) => state.individualData);
 

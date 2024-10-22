@@ -23,7 +23,10 @@ const AzureForm: React.FC = () => {
   }, [location.search]);
 
   const handleLogin = async () => {
-    toast(<Loading />, { autoClose: false, closeOnClick: false });
+    const loadingToast = toast(<Loading />, {
+      autoClose: false,
+      closeOnClick: false,
+    });
     try {
       const res = await api.get("/api/v1/authen/login/azure", {
         headers: {
@@ -34,8 +37,9 @@ const AzureForm: React.FC = () => {
       consolelog(res);
     } catch (error) {
       console.log(error);
+      toast.error("Network Error while fetching Individual data");
     }
-    toast.dismiss();
+    toast.dismiss(loadingToast);
     await sleep();
     window.location.href = `${window.origin}/api/v1/authen/login/azure`;
   };

@@ -223,7 +223,10 @@ export default function Portfolio() {
 
   const handleCancleTransaction = async (data: Transaction) => {
     console.log(data);
-    toast(<Loading />, { autoClose: false, closeOnClick: false });
+    const loadingToast = toast(<Loading />, {
+      autoClose: false,
+      closeOnClick: false,
+    });
     try {
       await axios.post(
         "/api/v1/customer/product/transaction/delete",
@@ -239,8 +242,9 @@ export default function Portfolio() {
       );
     } catch (error) {
       console.log(error);
+      toast.error("Network Error while Cancle Transaction");
     }
-    toast.dismiss();
+    toast.dismiss(loadingToast);
     await sleep();
     await fetchTransactionList();
     await fetchBankBalance();
