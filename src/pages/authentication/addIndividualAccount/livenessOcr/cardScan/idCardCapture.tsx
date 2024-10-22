@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Webcam from "react-webcam";
 import { Camera } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,10 +9,7 @@ import { consolelog, sleep } from "@/lib/utils";
 import axios from "@/api/axios";
 import { Loading } from "@/components/loading";
 import { toast } from "react-toastify";
-// import { isMobile } from "react-device-detect";
-import { Button } from "@/components/ui/Button";
-
-// type VideoConstraints = MediaTrackConstraints;
+import { isMobile } from "react-device-detect";
 
 export default function IDCardCapture() {
   const dispatch = useDispatch();
@@ -20,8 +17,6 @@ export default function IDCardCapture() {
   const webcamRef = useRef<Webcam>(null);
   const [_, setImageSrc] = useState<string | null | undefined>();
   const livenessOcr = useSelector((state: any) => state.livenessOcr);
-  // const [videoConstraints, setVideoConstraints] = useState<VideoConstraints>();
-  // const width = window.innerWidth;
   const height = window.innerHeight;
 
   useEffect(() => {
@@ -65,30 +60,17 @@ export default function IDCardCapture() {
     navigate("/authentication/signup/otpemailconfirm");
     // navigate("/authentication/signup/identityverification");
   };
-  const FACING_MODE_USER = "user";
-  const FACING_MODE_ENVIRONMENT = "environment";
-  const [facingMode, setFacingMode] = useState(FACING_MODE_ENVIRONMENT);
-  const handleClick = useCallback(() => {
-    setFacingMode((prevState) =>
-      prevState === FACING_MODE_USER
-        ? FACING_MODE_ENVIRONMENT
-        : FACING_MODE_USER
-    );
-  }, []);
-  let videoConstraints: MediaTrackConstraints = {
-    facingMode: facingMode,
+
+  const videoConstraintsMobile: MediaTrackConstraints = {
+    facingMode: "environment",
     width: 480,
     height: 640,
   };
-  useEffect(() => {
-    // const facingMode = isMobile ? "environment" : "user";
-    // setVideoConstraints({
-    //   width: 480,
-    //   height: 480,
-    //   aspectRatio: 1,
-    //   facingMode: facingMode,
-    // });
-  }, []);
+  const videoConstraintsDestop: MediaTrackConstraints = {
+    facingMode: "user",
+    width: 480,
+    height: 640,
+  };
 
   return (
     <div className="h-full w-full">
@@ -103,7 +85,9 @@ export default function IDCardCapture() {
               audio={false}
               ref={webcamRef}
               screenshotFormat="image/png"
-              videoConstraints={videoConstraints}
+              videoConstraints={
+                isMobile ? videoConstraintsMobile : videoConstraintsDestop
+              }
               className="w-full h-full absolute top-0 object-cover"
             />
             <img
@@ -112,7 +96,6 @@ export default function IDCardCapture() {
               className="w-full h-full absolute top-0 object-contain"
             />
           </div>
-          <Button onClick={handleClick}>Switch camera</Button>
           <h2 className={height > 667 ? "py-2" : "hidden"}>
             วางด้านหน้าบัตรประชาชนให้อยู่ในกรอบที่กำหนด และหลีกเลี่ยงแสงสะท้อน
             เห็นข้อมูลบนบัตรชัดเจน

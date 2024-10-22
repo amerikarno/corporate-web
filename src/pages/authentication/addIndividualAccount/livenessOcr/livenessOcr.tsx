@@ -124,7 +124,6 @@ export default function Liveness() {
             const radiusX = dims.width * 0.2; // Horizontal radius for the ellipse
             const radiusY = dims.height * 0.3; // Vertical radius for the ellipse
             // setDim([dims.width, dims.height]);
-            consolelog(dims);
 
             // Calculate circle's bounding box
             const ellipseWidth = radiusX * 2;
