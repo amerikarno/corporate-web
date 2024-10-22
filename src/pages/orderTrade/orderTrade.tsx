@@ -261,7 +261,10 @@ export default function OrderTrade() {
 
     const isMin = checkMinAmount(body.amount);
     if (isMin) {
-      toast(<Loading />, { autoClose: false, closeOnClick: false });
+      const loadingToast = toast(<Loading />, {
+        autoClose: false,
+        closeOnClick: false,
+      });
       try {
         const res = await axios.post(
           "/api/v1/customer/product/investment",
@@ -279,11 +282,16 @@ export default function OrderTrade() {
           await fetchUserBankInfo();
         } else {
           consolelog(res.data);
+          toast.error("Failed to placing order");
         }
       } catch (error) {
         console.log(error);
+        toast.error("Network Error while placing order");
       }
-      toast.dismiss();
+      toast.dismiss(loadingToast);
+    } else {
+      consolelog("min error");
+      toast.error("Could not matched minimum quantity");
     }
   };
 
