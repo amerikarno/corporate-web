@@ -321,10 +321,12 @@ export default function Portfolio() {
             </CardContent>
           </Card>
 
-          <div className="w-full bg-white">
+          <div className="w-full bg-white pb-10">
             {/* <h1 className="text-2xl font-bold">Transaction</h1> */}
             <DataTable
-              className="border-t border-r border-l border-gray-200"
+              className={`border-t border-r border-l ${
+                investTransactions?.length === 0 ? "border-b" : ""
+              } border-gray-200`}
               title="Reserved Transaction"
               columns={columnsOrderTrade}
               data={investTransactions || []}
