@@ -115,8 +115,8 @@ export default function QrVerification() {
 
   return (
     <div className="w-full flex justify-center">
-      <div className="w-1/2">
-        <Card className="mt-10 py-10 bg-white rounded-md shadow-sm">
+      <div className="w-full px-2 md:px-0 md:w-1/2">
+        <Card className="mt-10 py-10 bg-white">
           <div className="p-4 sm:p-7">
             <div className="text-center">
               <h1 className="block text-2xl font-bold text-gray-800">
