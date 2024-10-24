@@ -99,7 +99,9 @@ export default function QrVerification() {
           dispatch(setAuthenUser(user));
           toast.dismiss();
           await sleep();
-          navigate(`/`);
+          user.status === 0
+            ? navigate("authentication/reset-password")
+            : navigate("/");
         } else {
           toast.dismiss(loadingToast);
           toast.error("Failed to verifying totp");
