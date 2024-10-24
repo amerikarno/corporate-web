@@ -10,9 +10,9 @@ type TPages = {
 export const pages: TPages = {
   1: { page: "pre info", id: 100 },
   2: { page: "basic info", id: 200 },
-  3: { page: "suit-fatca-knoladge", id: 300 },
-  4: { page: "liveness", id: 400 },
-  5: { page: "id card", id: 500 },
+  3: { page: "suit fatca knoladge", id: 300 },
+  4: { page: "face scan", id: 400 },
+  5: { page: "id card scan", id: 500 },
   6: { page: "confirm email", id: 600 },
   7: { page: "select ndid thaid", id: 700 },
 };
