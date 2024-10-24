@@ -13,20 +13,30 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCookies } from "@/lib/cookies";
 import { toast } from "react-toastify";
 import { Loading } from "@/components/loading";
+import { pages } from "@/lib/constantVariables";
 
 export default function SuitTestFatca() {
   const token = getCookies();
   const dispatch = useDispatch();
-  const fetchIndividualData = async (AccountID: string) => {
+
+  const fetchIndividualData = async (registerId: string) => {
     const loadingToast = toast(<Loading />, {
       autoClose: false,
       closeOnClick: false,
     });
     try {
-      console.log(AccountID);
-      const res = await axios.post("/api/v1/individual/list", {
-        accountId: AccountID,
-      });
+      console.log(registerId);
+      const res = await axios.post(
+        "/api/v1/individual/list",
+        {
+          registerId: registerId,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       dispatch(initIndividualData(res.data[0]));
       console.log(res);
     } catch (error) {
@@ -40,11 +50,11 @@ export default function SuitTestFatca() {
 
   useEffect(() => {
     toast.dismiss();
-    const cidValue = localStorage.getItem("cid");
+    const cidValue = localStorage.getItem("registerId");
     if (cidValue) {
       fetchIndividualData(cidValue || "");
     } else {
-      console.log("cid not found");
+      console.log("registerId not found");
     }
   }, [token, dispatch]);
 
@@ -115,13 +125,13 @@ export default function SuitTestFatca() {
         JSON.stringify(fatcaInfo) !== JSON.stringify([0, 0, 0, 0, 0, 0, 0, 0]))
     ) {
       let body = {
-        id: localStorage.getItem("cid"),
+        registerId: localStorage.getItem("registerId"),
         suiteTestResult: suitTestResult,
         isFatca: fatcaradio === "fatcaradio-1",
         fatcaInfo: fatcaInfo === "" ? [] : fatcaInfo,
         isKnowLedgeDone: knowLedgeTestSuccess,
         knowLedgeTestResult: knowLedgeTestSuccess ? 15 : 0,
-        pageID: 400,
+        pageId: pages[3].id,
       };
       console.log(body);
       dispatch(setTestCorporateData(body));
@@ -134,7 +144,12 @@ export default function SuitTestFatca() {
         try {
           const res = await axios.post(
             "/api/v1/suitetest/result/individual/edit",
-            body
+            body,
+            {
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
           );
           console.log(res);
           if (res.status === 200) {
@@ -157,7 +172,12 @@ export default function SuitTestFatca() {
         try {
           const res = await axios.post(
             "/api/v1/suitetest/result/individual/save",
-            body
+            body,
+            {
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
           );
           console.log(res);
           if (res.status === 200) {

@@ -59,7 +59,9 @@ export default function IdentityVerification() {
 
   useEffect(() => {
     toast.dismiss();
-    const cidValue = customerCode ? customerCode : localStorage.getItem("cid");
+    const cidValue = customerCode
+      ? customerCode
+      : localStorage.getItem("registerId");
     if (cidValue) {
       fetchIndividualData(cidValue || "");
     } else {
@@ -84,7 +86,7 @@ export default function IdentityVerification() {
   const handleNdid = async () => {
     let body = {
       ndid: true,
-      cid: localStorage.getItem("cid"),
+      cid: localStorage.getItem("registerId"),
     };
     dispatch(setTestCorporateData(body));
     console.log("ndid choosed : ", body);
@@ -137,7 +139,7 @@ export default function IdentityVerification() {
   const handlethaiid = async () => {
     let body = {
       thaid: true,
-      cid: localStorage.getItem("cid"),
+      cid: localStorage.getItem("registerId"),
     };
     dispatch(setTestCorporateData(body));
     console.log("thaid choosed : ", body);

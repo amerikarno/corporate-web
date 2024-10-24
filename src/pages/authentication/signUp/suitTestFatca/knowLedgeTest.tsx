@@ -176,16 +176,24 @@ export default function KnowLedgeTest({ onTestSuccess }: KnowLedgeTestProps) {
   const dispatch = useDispatch();
   const token = getCookies();
 
-  const fetchIndividualData = async (AccountID: string) => {
+  const fetchIndividualData = async (registerId: string) => {
     const loadingToast = toast(<Loading />, {
       autoClose: false,
       closeOnClick: false,
     });
     try {
-      consolelog(AccountID);
-      const res = await axios.post("/api/v1/individual/list", {
-        accountId: AccountID,
-      });
+      consolelog(registerId);
+      const res = await axios.post(
+        "/api/v1/individual/list",
+        {
+          registerId: registerId,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       dispatch(initIndividualData(res.data[0]));
       consolelog(res);
     } catch (error) {
@@ -198,8 +206,8 @@ export default function KnowLedgeTest({ onTestSuccess }: KnowLedgeTestProps) {
 
   useEffect(() => {
     toast.dismiss();
-    const cidValue = localStorage.getItem("cid");
-    fetchIndividualData(cidValue || "");
+    const registerIdValue = localStorage.getItem("registerId");
+    fetchIndividualData(registerIdValue || "");
   }, [token, dispatch]);
 
   useEffect(() => {

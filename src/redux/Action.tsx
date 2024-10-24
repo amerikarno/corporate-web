@@ -1,4 +1,4 @@
-import { TIndividualData } from "@/pages/authentication/addIndividualAccount/types";
+import { TIndividualData } from "@/pages/authentication/signUp/types";
 import { IcoType } from "@/pages/landing/types";
 import { Dispatch } from "redux";
 

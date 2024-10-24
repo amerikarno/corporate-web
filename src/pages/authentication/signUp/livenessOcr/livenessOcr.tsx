@@ -9,6 +9,7 @@ import { Camera } from "lucide-react";
 import axios from "@/api/axios";
 import { Loading } from "@/components/loading";
 import { toast } from "react-toastify";
+import { pages } from "@/lib/constantVariables";
 
 type VideoConstraints = MediaTrackConstraints;
 type TActionMessage = {
@@ -255,12 +256,13 @@ export default function Liveness() {
     if (isCenter && isMouthOpen && isTurnLeft && isTurnRight) {
       const srcImg = webcamRef.current?.getScreenshot();
       if (srcImg && srcImg !== null) {
-        const cid = localStorage.getItem("cid") || "";
+        const registerId = localStorage.getItem("registerId") || "";
         const blob = await fetch(srcImg).then((res) => res.blob());
         const formData = new FormData();
         formData.append("file", blob);
-        formData.append("cid", cid);
+        formData.append("registerId", registerId);
         formData.append("docType", "faceCompare");
+        formData.append("pageId", pages[4].id.toString());
         const loadingToast = toast(<Loading />, {
           autoClose: false,
           closeOnClick: false,

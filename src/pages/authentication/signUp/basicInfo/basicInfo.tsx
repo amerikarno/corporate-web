@@ -28,6 +28,7 @@ import { IndividualData } from "@/redux/types";
 import { toast } from "react-toastify";
 import { Loading } from "@/components/loading";
 import { normalStyleInput } from "@/assets/css/normalStyleInput";
+import { pages } from "@/lib/constantVariables";
 
 export default function BasicInfo() {
   const responsiveClass =
@@ -71,15 +72,15 @@ export default function BasicInfo() {
     resolver: zodResolver(basicInfoSchema),
   });
 
-  const fetchIndividualData = async (AccountID: string) => {
+  const fetchIndividualData = async (registerId: string) => {
     const lodingToast = toast(<Loading />, {
       autoClose: false,
       closeOnClick: false,
     });
     try {
-      consolelog(AccountID);
+      consolelog(registerId);
       const res = await axios.post("/api/v1/individual/list", {
-        accountId: AccountID,
+        registerId: registerId,
       });
       dispatch(initIndividualData(res.data[0]));
       consolelog(res);
@@ -96,7 +97,7 @@ export default function BasicInfo() {
 
   useEffect(() => {
     toast.dismiss();
-    const cidValue = localStorage.getItem("cid");
+    const cidValue = localStorage.getItem("registerId");
     if (cidValue) {
       fetchIndividualData(cidValue || "");
     } else {
@@ -240,14 +241,16 @@ export default function BasicInfo() {
         types: 1,
         is_default: true,
       },
-      secondBankAccountBody: {
-        ...data.secondBankAccountBody,
-        types: 2,
-        is_default: false,
-      },
+      ...((data.secondBankAccountBody.bankName && {
+        secondBankAccountBody: {
+          ...data.secondBankAccountBody,
+          types: 2,
+          is_default: false,
+        },
+      }) || { secondBankAccountBody: undefined }),
     };
     let body = {
-      cid: localStorage.getItem("cid"),
+      registerId: localStorage.getItem("registerId"),
       investment: prebody.investment,
       occupation: prebody.occupation,
       addresses: [
@@ -256,7 +259,7 @@ export default function BasicInfo() {
         prebody.officeAddress,
       ],
       banks: [prebody.firstBankAccount, prebody.secondBankAccountBody],
-      pageID: 300,
+      pageId: pages[2].id,
     };
     consolelog(body);
     dispatch(setTestCorporateData(body));
@@ -268,30 +271,32 @@ export default function BasicInfo() {
       const registeredAddressFind: TBasicinfoAddress | null =
         individualData?.address?.find((addr) => addr.types === 1) || null;
       if (registeredAddressFind?.homeNumber) {
-        const res = await axios.post(
-          "/api/v1/individual/update/post",
-          body,
-          {}
-        );
+        const res = await axios.post("/api/v1/individual/update/post", body, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
         if (res.status === 200) {
           consolelog("update basic info success", res);
           toast.dismiss();
           await sleep();
           navigate("/authentication/signup/suittestfatca");
-          window.scrollTo(0, 0);
         } else {
           toast.error("update basic info unsuccess");
           toast.dismiss(lodingToast);
           consolelog("update basic info unsuccess", res);
         }
       } else {
-        const res = await axios.post("/api/v1/individual/postcreate", body, {});
+        const res = await axios.post("/api/v1/individual/postcreate", body, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
         if (res.status === 200) {
           consolelog("submit basic info success", res);
           toast.dismiss();
           await sleep();
           navigate("/authentication/signup/suittestfatca");
-          window.scrollTo(0, 0);
         } else {
           consolelog("submit basic info unsuccess x", res);
           toast.error("submit basic info unsuccess");

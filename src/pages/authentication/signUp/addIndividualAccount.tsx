@@ -17,6 +17,7 @@ import { initIndividualData, setTestCorporateData } from "@/redux/Action";
 import { consolelog, sleep } from "@/lib/utils";
 import { toast } from "react-toastify";
 import { Loading } from "@/components/loading";
+import { pages } from "@/lib/constantVariables";
 
 export default function AddIndividualAccount() {
   const {
@@ -34,15 +35,15 @@ export default function AddIndividualAccount() {
   const token = getCookies();
   const navigate = useNavigate();
 
-  const fetchIndividualData = async (AccountID: string) => {
+  const fetchIndividualData = async (registerId: string) => {
     const lodingToast = toast(<Loading />, {
       autoClose: false,
       closeOnClick: false,
     });
     try {
-      consolelog({ accountId: AccountID });
+      consolelog({ accountId: registerId });
       const res = await axios.post("/api/v1/individual/list", {
-        accountId: AccountID,
+        registerId: registerId,
       });
       dispatch(initIndividualData(res.data[0]));
       consolelog(res);
@@ -57,7 +58,7 @@ export default function AddIndividualAccount() {
 
   useEffect(() => {
     toast.dismiss();
-    const cidValue = localStorage.getItem("cid");
+    const cidValue = localStorage.getItem("registerId");
     if (cidValue) {
       fetchIndividualData(cidValue || "");
     }
@@ -147,7 +148,8 @@ export default function AddIndividualAccount() {
     let body = {
       ...data,
       birthDate: new Date(data.birthDate || 0),
-      pageId: 100,
+      registerId: localStorage.getItem("registerId")?.toString(),
+      pageId: pages[1].id,
     };
     dispatch(
       setTestCorporateData({
@@ -160,29 +162,46 @@ export default function AddIndividualAccount() {
       closeOnClick: false,
     });
     try {
-      consolelog("body to send ", body);
-      const res = await axios.post("/api/v1/individual/precreate", body, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      consolelog(res);
-      if (res.status === 200) {
-        const age = calculateAge(body.birthDate);
-        localStorage.setItem("registerId", res.data.registerId);
-        localStorage.setItem("age", age.toString());
-        consolelog("create success", res, data);
-
-        toast.dismiss();
-        await sleep();
-        navigate("/authentication/signup/basicinfo");
-        window.scrollTo(0, 0);
+      console.log("body to send ", body);
+      if (localStorage.getItem("registerId")?.toString()) {
+        const res = await axios.post("/api/v1/individual/update/pre", body, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        console.log(res);
+        if (res.status === 200) {
+          const age = calculateAge(body.birthDate);
+          localStorage.setItem("registerId", res.data.registerId);
+          localStorage.setItem("age", age.toString());
+          console.log(age);
+          console.log("update success", res, data);
+          toast.dismiss(lodingToast);
+          await sleep();
+          navigate("/authentication/signup/basicinfo");
+        }
+      } else {
+        const res = await axios.post("/api/v1/individual/precreate", body, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        console.log(res);
+        if (res.status === 200) {
+          const age = calculateAge(body.birthDate);
+          localStorage.setItem("registerId", res.data.registerId);
+          localStorage.setItem("age", age.toString());
+          console.log("create success", res, data);
+          toast.dismiss(lodingToast);
+          await sleep();
+          navigate("/authentication/signup/basicinfo");
+        }
       }
     } catch (error) {
       console.log(error);
+      toast.dismiss(lodingToast);
       toast.error("Network Error while creating Individual account");
       //TODO: remove link
-      toast.dismiss(lodingToast);
       await sleep();
       navigate("/authentication/signup/basicinfo");
     }

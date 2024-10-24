@@ -127,16 +127,24 @@ export default function SubSuitTest({
   ];
   const token = getCookies();
   const dispatch = useDispatch();
-  const fetchIndividualData = async (AccountID: string) => {
+  const fetchIndividualData = async (registerId: string) => {
     const loadingToast = toast(<Loading />, {
       autoClose: false,
       closeOnClick: false,
     });
     try {
-      console.log(AccountID);
-      const res = await axios.post("/api/v1/individual/list", {
-        accountId: AccountID,
-      });
+      console.log(registerId);
+      const res = await axios.post(
+        "/api/v1/individual/list",
+        {
+          registerId: registerId,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       dispatch(initIndividualData(res.data[0]));
       console.log(res);
     } catch (error) {
@@ -192,11 +200,11 @@ export default function SubSuitTest({
   const [answers, setAnswers] = useState<Answer[]>(initialAnswers);
 
   useEffect(() => {
-    const cidValue = localStorage.getItem("cid");
+    const cidValue = localStorage.getItem("registerId");
     if (cidValue) {
       fetchIndividualData(cidValue || "");
     } else {
-      console.log("cid not found");
+      console.log("registerId not found");
     }
   }, [token, dispatch]);
 
@@ -377,7 +385,7 @@ export default function SubSuitTest({
         // quiz: 1,
       }));
       let body = {
-        cid: localStorage.getItem("cid"),
+        registerId: localStorage.getItem("registerId"),
         investorTypeRisk: investorTypeTemp,
         level: giveGrade(scoreCalculator),
         totalScore: scoreCalculator,

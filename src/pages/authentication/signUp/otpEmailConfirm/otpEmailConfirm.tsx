@@ -12,15 +12,26 @@ import {
   AlertDialogCancel,
 } from "@components/ui/alert-dialog";
 import { sleep } from "@/lib/utils";
-import { setIndividualEmail, setIndividualMobile } from "@/redux/Action";
+import {
+  initIndividualData,
+  setIndividualEmail,
+  setIndividualMobile,
+} from "@/redux/Action";
 import { useNavigate } from "react-router-dom";
 import getImages from "@/common/imagesData";
 import { normalStyleInput } from "@/assets/css/normalStyleInput";
 import { consolelog } from "@/lib/utils";
+import { toast } from "react-toastify";
+import { Loading } from "@/components/loading";
+import axios from "@/api/axios";
+import { IndividualData } from "@/redux/types";
+import { pages } from "@/lib/constantVariables";
 
 export function OtpEmailConfirm() {
   const initialTime = 300;
-  const userData = useSelector((state: any) => state.individualData);
+  const userData: IndividualData = useSelector(
+    (state: any) => state.individualData
+  );
   const dispatch = useDispatch();
   const [disableMobile, setDisableMobile] = useState(true);
   const [disableEmail, setDisableEmail] = useState(true);
@@ -62,6 +73,38 @@ export function OtpEmailConfirm() {
     }, 1000);
   };
 
+  const confirmEmail = async () => {
+    const lodingToast = toast(<Loading />, {
+      autoClose: false,
+      closeOnClick: false,
+    });
+    await axios
+      .post(
+        "/api/v1/verify/email",
+        {
+          registerId: localStorage.getItem("registerId"),
+          email: userData.email,
+          pageId: pages[6].id,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then(async (res) => {
+        if (res.status === 200) {
+          toast.dismiss();
+          await sleep();
+          navigate("/authentication/signup/emailconfirmsucess");
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+        toast.dismiss(lodingToast);
+        toast.error("Network Error while confirming email");
+      });
+  };
   const handleConfirm = async (type: string) => {
     switch (type) {
       case "mobile":
@@ -73,6 +116,7 @@ export function OtpEmailConfirm() {
 
       case "email":
         setDisableEmail(true);
+        await confirmEmail();
         break;
 
       default:
@@ -106,6 +150,32 @@ export function OtpEmailConfirm() {
   const resentOtp = async () => {
     startTimmer();
   };
+
+  const fetchIndividualData = async (registerId: string) => {
+    const lodingToast = toast(<Loading />, {
+      autoClose: false,
+      closeOnClick: false,
+    });
+    try {
+      consolelog(registerId);
+      const res = await axios.post("/api/v1/individual/list", {
+        registerId: registerId,
+      });
+      dispatch(initIndividualData(res.data[0]));
+      consolelog(res);
+    } catch (error) {
+      console.log(error);
+      toast.error("Network Error while fetching Individual data");
+    }
+    toast.dismiss(lodingToast);
+  };
+
+  useEffect(() => {
+    if (userData.email === "" && userData.mobile === "") {
+      const registerId = localStorage.getItem("registerId");
+      registerId && fetchIndividualData(registerId);
+    }
+  }, []);
 
   useEffect(() => {
     if (count <= 0) {

@@ -10,6 +10,7 @@ import axios from "@/api/axios";
 import { Loading } from "@/components/loading";
 import { toast } from "react-toastify";
 import { isMobile } from "react-device-detect";
+import { pages } from "@/lib/constantVariables";
 
 export default function IDCardCapture() {
   const dispatch = useDispatch();
@@ -29,12 +30,13 @@ export default function IDCardCapture() {
     const srcImg = webcamRef.current?.getScreenshot();
     setImageSrc(srcImg);
     if (srcImg && srcImg !== null) {
-      const cid = localStorage.getItem("cid") || "";
+      const registerId = localStorage.getItem("registerId") || "";
       const blob = await fetch(srcImg).then((res) => res.blob());
       const formData = new FormData();
       formData.append("file", blob);
-      formData.append("cid", cid);
+      formData.append("registerId", registerId);
       formData.append("docType", "idCard");
+      formData.append("pageId", pages[5].id.toString());
       const loadingToast = toast(<Loading />, {
         autoClose: false,
         closeOnClick: false,
