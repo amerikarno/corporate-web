@@ -43,7 +43,7 @@ createRoot(document.getElementById("root")!).render(
         <ToastContainer
           position="top-center"
           theme="light"
-          autoClose={3000}
+          autoClose={2000}
           pauseOnHover={true}
         />
         <Provider store={store}>

@@ -226,23 +226,25 @@ export default function OrderTrade() {
     }
   };
 
-  const checkMinAmount = (qtn?: string): boolean => {
+  const isMatchedMinAmount = (qtn?: string): boolean => {
     try {
       const numValue = parseFloat(qtn || "0");
       if (!isNaN(numValue)) {
         const minQtn = assetData?.info?.minimumInvestmentQuantity || "0";
         const min = minQtn.split(" ");
         const numMin = parseFloat(min[0]);
+        consolelog(numMin, numValue);
         if (numValue < numMin) {
           setErrorMin(
             `required minimum quantity ${assetData?.info?.minimumInvestmentQuantity}`
           );
-          return true;
+          return false;
         } else {
           setErrorMin(undefined);
-          return false;
+          return true;
         }
       } else {
+        toast.error("Invalid amount");
         return false;
       }
     } catch (error) {
@@ -259,7 +261,7 @@ export default function OrderTrade() {
     };
     consolelog("data", body);
 
-    const isMin = checkMinAmount(body.amount);
+    const isMin = isMatchedMinAmount(body.amount);
     if (isMin) {
       const loadingToast = toast(<Loading />, {
         autoClose: false,
@@ -289,9 +291,6 @@ export default function OrderTrade() {
         toast.error("Network Error while placing order");
       }
       toast.dismiss(loadingToast);
-    } else {
-      consolelog("min error");
-      toast.error("Could not matched minimum quantity");
     }
   };
 
