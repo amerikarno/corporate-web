@@ -11,6 +11,7 @@ import axios from "@/api/axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Loading } from "@/components/loading";
+import CryptoJs from "crypto-js";
 
 const ResetPasswordSchema = z
   .object({
@@ -53,7 +54,7 @@ export function ResetPassword() {
       await axios
         .post("/api/v1/user/change/password", {
           customerCode: user.customerCode,
-          password: CryptoJS.SHA256(password).toString(),
+          password: CryptoJs.SHA256(password).toString(),
         })
         .then(async (res) => {
           toast.dismiss(loadingToast);

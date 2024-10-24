@@ -100,7 +100,7 @@ export default function QrVerification() {
           toast.dismiss();
           await sleep();
           user.status === 0
-            ? navigate("authentication/reset-password")
+            ? navigate("/authentication/reset-password")
             : navigate("/");
         } else {
           toast.dismiss(loadingToast);

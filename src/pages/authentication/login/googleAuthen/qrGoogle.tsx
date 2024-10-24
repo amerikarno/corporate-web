@@ -104,7 +104,7 @@ export default function GoogleQr() {
           toast.dismiss();
           await sleep();
           user.status === 0
-            ? navigate("authentication/reset-password")
+            ? navigate("/authentication/reset-password")
             : navigate("/");
         } else {
           setMessage("totp is invalid");

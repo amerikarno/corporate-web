@@ -148,7 +148,6 @@ export default function AddIndividualAccount() {
       ...data,
       birthDate: new Date(data.birthDate || 0),
       pageId: 100,
-      cid: localStorage.getItem("cid")?.toString(),
     };
     dispatch(
       setTestCorporateData({
@@ -162,37 +161,22 @@ export default function AddIndividualAccount() {
     });
     try {
       consolelog("body to send ", body);
-      if (individualData?.id) {
-        consolelog("api : /api/v1/individual/update/pre");
-        const res = await axios.post("/api/v1/individual/update/pre", body, {});
-        consolelog(res);
-        if (res.status === 200) {
-          const age = calculateAge(body.birthDate);
-          localStorage.setItem("cid", res.data.id);
-          localStorage.setItem("age", age.toString());
-          consolelog(age);
-          consolelog("update success", res, data);
+      const res = await axios.post("/api/v1/individual/precreate", body, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      consolelog(res);
+      if (res.status === 200) {
+        const age = calculateAge(body.birthDate);
+        localStorage.setItem("registerId", res.data.registerId);
+        localStorage.setItem("age", age.toString());
+        consolelog("create success", res, data);
 
-          toast.dismiss();
-          await sleep();
-          navigate("/authentication/signup/basicinfo");
-          window.scrollTo(0, 0);
-        }
-      } else {
-        consolelog("api : /api/v1/individual/precreate ", body);
-        const res = await axios.post("/api/v1/individual/precreate", body, {});
-        consolelog(res);
-        if (res.status === 200) {
-          const age = calculateAge(body.birthDate);
-          localStorage.setItem("cid", res.data.id);
-          localStorage.setItem("age", age.toString());
-          consolelog("create success", res, data);
-
-          toast.dismiss();
-          await sleep();
-          navigate("/authentication/signup/basicinfo");
-          window.scrollTo(0, 0);
-        }
+        toast.dismiss();
+        await sleep();
+        navigate("/authentication/signup/basicinfo");
+        window.scrollTo(0, 0);
       }
     } catch (error) {
       console.log(error);
