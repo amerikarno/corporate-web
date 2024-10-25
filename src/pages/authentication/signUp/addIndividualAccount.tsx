@@ -213,8 +213,6 @@ export default function AddIndividualAccount() {
       toast.dismiss(lodingToast);
       toast.error("Network Error while creating Individual account");
       //TODO: remove link
-      localStorage.setItem("registerId", "90000001");
-      localStorage.setItem("age", "40");
       await sleep();
       navigate("/authentication/signup/basicinfo");
     }

@@ -27,7 +27,7 @@ import {
   setBasicInfo,
   setTestCorporateData,
 } from "@/redux/Action";
-import { TBasicinfoAddress, TBasicInfoBank } from "../types";
+import { TBasicinfoAddress, TBasicInfoBank } from "../constant/types";
 import { toast } from "react-toastify";
 import { Loading } from "@/components/loading";
 import { normalStyleInput } from "@/assets/css/normalStyleInput";

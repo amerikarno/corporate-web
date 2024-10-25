@@ -3,6 +3,8 @@ import "./SignUpType.scss";
 
 const SignUpType = () => {
   const navigate = useNavigate();
+  localStorage.clear();
+
   const handleIndiividual = () => {
     navigate(
       `${import.meta.env.BASE_URL}authentication/signup/addindividualaccount`

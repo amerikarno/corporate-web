@@ -1,5 +1,5 @@
 import { TIndividualAccount } from "@/pages/authentication/signUp/constant/schemas";
-import { TIndividualData } from "@/pages/authentication/signUp/types";
+import { TIndividualData } from "@/pages/authentication/signUp/constant/types";
 import { IcoType } from "@/pages/landing/types";
 import { Dispatch } from "redux";
 

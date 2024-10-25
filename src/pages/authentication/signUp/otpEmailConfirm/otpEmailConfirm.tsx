@@ -7,16 +7,10 @@ import {
   AlertDialog,
   AlertDialogContent,
   AlertDialogTitle,
-  AlertDialogDescription,
   AlertDialogAction,
   AlertDialogCancel,
 } from "@components/ui/alert-dialog";
 import { sleep } from "@/lib/utils";
-import {
-  initIndividualData,
-  setIndividualEmail,
-  setIndividualMobile,
-} from "@/redux/Action";
 import { useNavigate } from "react-router-dom";
 import getImages from "@/common/imagesData";
 import { normalStyleInput } from "@/assets/css/normalStyleInput";
@@ -26,12 +20,17 @@ import { Loading } from "@/components/loading";
 import axios from "@/api/axios";
 import { pages } from "@/lib/constantVariables";
 import { mockFetchData } from "../__mock__/mockFetchData";
-import { TIndividualData } from "../types";
+import { RootState } from "@/redux/store";
+import {
+  setEmailIndividualData,
+  setIndividualData,
+  setMobileIndividualData,
+} from "@/redux/slice/fetchIndividualDataSlice";
 
 export function OtpEmailConfirm() {
   const initialTime = 300;
-  const userData: TIndividualData = useSelector(
-    (state: any) => state.individualData
+  const individualData = useSelector(
+    (state: RootState) => state.individualData.individualDatas
   );
   const dispatch = useDispatch();
   const [disableMobile, setDisableMobile] = useState(true);
@@ -48,11 +47,11 @@ export function OtpEmailConfirm() {
     const { name, value } = e.target;
     switch (name) {
       case "mobile":
-        dispatch(setIndividualMobile(value));
+        dispatch(setMobileIndividualData(value));
         break;
 
       case "email":
-        dispatch(setIndividualEmail(value));
+        dispatch(setEmailIndividualData(value));
         break;
 
       case "otp":
@@ -84,7 +83,7 @@ export function OtpEmailConfirm() {
         "/api/v1/verify/email",
         {
           registerId: localStorage.getItem("registerId"),
-          email: userData.email,
+          email: individualData?.email,
           pageId: pages[6].id,
         },
         {
@@ -162,24 +161,23 @@ export function OtpEmailConfirm() {
       const res = await axios.post("/api/v1/individual/list", {
         registerId: registerId,
       });
-      dispatch(initIndividualData(res.data[0]));
+      dispatch(setIndividualData(res.data[0]));
       console.log(res);
     } catch (error) {
       console.log(error);
       toast.error("Network Error while fetching Individual data");
       //TODO: remove mock data
-      dispatch(initIndividualData(mockFetchData[0]));
+      dispatch(setIndividualData(mockFetchData[0]));
     }
     toast.dismiss(lodingToast);
   };
 
   useEffect(() => {
-    console.log(userData.email, userData.mobile);
-    if (userData.email === "" && userData.mobile === "") {
-      const registerId = localStorage.getItem("registerId");
-      registerId && fetchIndividualData(registerId);
+    const registerId = localStorage.getItem("registerId");
+    if (registerId) {
+      fetchIndividualData(registerId);
     }
-  }, [dispatch, userData]);
+  }, [dispatch, individualData]);
 
   useEffect(() => {
     if (count <= 0) {
@@ -208,7 +206,7 @@ export function OtpEmailConfirm() {
                 <div className="md:w-2/3">
                   <Input
                     name="mobile"
-                    value={userData.mobile}
+                    value={individualData?.mobile}
                     onChange={handleInput}
                     label="หมายเลขโทรศัพท์"
                     className={normalStyleInput}
@@ -241,7 +239,7 @@ export function OtpEmailConfirm() {
                 <div className="md:w-2/3">
                   <Input
                     name="email"
-                    value={userData.email}
+                    value={individualData?.email}
                     onChange={handleInput}
                     label="อีเมล"
                     className={normalStyleInput}
@@ -263,9 +261,10 @@ export function OtpEmailConfirm() {
         </Card>
         <div className="w-full lg:w-4/5 xl:w-1/2 flex justify-end mx-auto px-2 md:px-0">
           <Button
-            onClick={() =>
-              navigate("/authentication/signup/emailconfirmsucess")
-            }
+            onClick={() => {
+              localStorage.clear();
+              navigate("/authentication/signup/emailconfirmsucess");
+            }}
           >
             Next
           </Button>
@@ -275,34 +274,32 @@ export function OtpEmailConfirm() {
           <AlertDialogContent className="bg-white">
             <AlertDialogTitle>
               กรุณายืนยันรหัส OTP 6 หลัก ระบบได้ทำการส่งรหัส OTP ไปยังหมายเลข{" "}
-              {hideOtpNumber(userData.mobile)} แล้ว
+              {hideOtpNumber(individualData?.mobile)} แล้ว
             </AlertDialogTitle>{" "}
             <AlertDialogTitle className="bg-white">
               ref code : {refCode.current}
             </AlertDialogTitle>
-            <AlertDialogDescription className="bg-white">
-              <div>
-                <div className="pb-10 space-y-4">
-                  <p>
-                    รหัส OTP 6 หลัก<span className="text-red-500"> * </span>
-                  </p>
-                  <Input name="otp" onChange={handleInput} />
-                </div>
-                <div>
-                  กรุณาตรวจสอบรหัส OTP บนโทรศัพย์มือถือของท่านภายใน 5 นาที
-                </div>
-                <div>
-                  หากท่านไม่ได้รับรหัส OTP{" "}
-                  {isCountDone ? (
-                    <u className="hover:cursor-pointer" onClick={resentOtp}>
-                      คลิก
-                    </u>
-                  ) : (
-                    <u>กรุณารอ {convertTimeToString(count)} นาที</u>
-                  )}
-                </div>
+            <div>
+              <div className="pb-10 space-y-4">
+                <p>
+                  รหัส OTP 6 หลัก<span className="text-red-500"> * </span>
+                </p>
+                <Input name="otp" onChange={handleInput} />
               </div>
-            </AlertDialogDescription>
+              <div>
+                กรุณาตรวจสอบรหัส OTP บนโทรศัพย์มือถือของท่านภายใน 5 นาที
+              </div>
+              <div>
+                หากท่านไม่ได้รับรหัส OTP{" "}
+                {isCountDone ? (
+                  <u className="hover:cursor-pointer" onClick={resentOtp}>
+                    คลิก
+                  </u>
+                ) : (
+                  <u>กรุณารอ {convertTimeToString(count)} นาที</u>
+                )}
+              </div>
+            </div>
             <AlertDialogAction
               className="w-full"
               onClick={() => {

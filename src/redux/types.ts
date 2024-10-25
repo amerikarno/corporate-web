@@ -1,4 +1,4 @@
-import { TIndividualData } from "@/pages/authentication/signUp/types";
+import { TIndividualData } from "@/pages/authentication/signUp/constant/types";
 import { IcoType } from "@/pages/landing/types";
 
 export interface LivenessOcr {

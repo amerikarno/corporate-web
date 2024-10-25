@@ -1,4 +1,4 @@
-import { TIndividualData } from "../types";
+import { TIndividualData } from "../constant/types";
 
 export const mockFetchData: TIndividualData[] = [
   {

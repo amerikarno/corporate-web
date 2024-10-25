@@ -1,4 +1,4 @@
-import { TIndividualData } from "@/pages/authentication/signUp/types";
+import { TIndividualData } from "@/pages/authentication/signUp/constant/types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type SuitState = {
@@ -19,8 +19,23 @@ const suitSlice = createSlice({
     clearIndividualData: (state) => {
       state.individualDatas = null;
     },
+    setEmailIndividualData: (state, action: PayloadAction<string>) => {
+      if (state.individualDatas) {
+        state.individualDatas.email = action.payload;
+      }
+    },
+    setMobileIndividualData: (state, action: PayloadAction<string>) => {
+      if (state.individualDatas) {
+        state.individualDatas.mobile = action.payload;
+      }
+    },
   },
 });
 
-export const { setIndividualData, clearIndividualData } = suitSlice.actions;
+export const {
+  setIndividualData,
+  clearIndividualData,
+  setEmailIndividualData,
+  setMobileIndividualData,
+} = suitSlice.actions;
 export default suitSlice.reducer;

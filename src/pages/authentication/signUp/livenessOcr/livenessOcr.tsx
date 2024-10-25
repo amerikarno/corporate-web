@@ -2,9 +2,9 @@ import { useRef, useEffect, useState, useCallback } from "react";
 import Webcam from "react-webcam";
 import * as faceapi from "face-api.js";
 import { sleep } from "@/lib/utils";
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { setFaceImage } from "@/redux/Action";
+// import { setFaceImage } from "@/redux/Action";
 import { Camera } from "lucide-react";
 import axios from "@/api/axios";
 import { Loading } from "@/components/loading";
@@ -20,7 +20,7 @@ type TActionMessage = {
 };
 
 export default function Liveness() {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const navigate = useNavigate();
   const webcamRef = useRef<Webcam>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -275,7 +275,7 @@ export default function Liveness() {
           })
           .then(async (res) => {
             console.log(res.data);
-            dispatch(setFaceImage(srcImg));
+            // dispatch(setFaceImage(srcImg));
             toast.dismiss();
             await sleep();
             navigate("/authentication/signup/webcaminstructions");

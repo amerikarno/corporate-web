@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import Webcam from "react-webcam";
 import { Camera } from "lucide-react";
-import { useDispatch, useSelector } from "react-redux";
-import { setIdCardImage } from "@/redux/Action";
+// import { useDispatch, useSelector } from "react-redux";
+// import { setIdCardImage } from "@/redux/Action";
 import { useNavigate } from "react-router-dom";
 import getImages from "@/common/imagesData";
 import { sleep } from "@/lib/utils";
@@ -13,22 +13,22 @@ import { isMobile } from "react-device-detect";
 import { pages } from "@/lib/constantVariables";
 
 export default function IDCardCapture() {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const navigate = useNavigate();
   const webcamRef = useRef<Webcam>(null);
-  const [_, setImageSrc] = useState<string | null | undefined>();
-  const livenessOcr = useSelector((state: any) => state.livenessOcr);
+  // const [_, setImageSrc] = useState<string | null | undefined>();
+  // const livenessOcr = useSelector((state: any) => state.livenessOcr);
   const height = window.innerHeight;
 
-  useEffect(() => {
-    if (livenessOcr.idCardImage && livenessOcr.idCardImage !== null) {
-      setImageSrc(livenessOcr.idCardImage);
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (livenessOcr.idCardImage && livenessOcr.idCardImage !== null) {
+  //     setImageSrc(livenessOcr.idCardImage);
+  //   }
+  // }, []);
 
   const handleCapture = async () => {
     const srcImg = webcamRef.current?.getScreenshot();
-    setImageSrc(srcImg);
+    // setImageSrc(srcImg);
     if (srcImg && srcImg !== null) {
       const registerId = localStorage.getItem("registerId") || "";
       const blob = await fetch(srcImg).then((res) => res.blob());
@@ -49,7 +49,7 @@ export default function IDCardCapture() {
         })
         .then(async (res) => {
           console.log(res.data);
-          dispatch(setIdCardImage(srcImg));
+          // dispatch(setIdCardImage(srcImg));
           toast.dismiss();
           await sleep();
           navigate("/authentication/signup/otpemailconfirm");
