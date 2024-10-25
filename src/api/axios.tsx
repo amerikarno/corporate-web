@@ -5,7 +5,7 @@ import axios from "axios";
 const BASE_URL = window.origin;
 const BASE_URL2 = "https://admin.eliteconsulting.io";
 
-// consolelog("base url:", BASE_URL);
+// console.log("base url:", BASE_URL);
 
 const checkBase = () => {
   let baseTmp = BASE_URL;

@@ -14,7 +14,6 @@ import { bank } from "@/lib/constantVariables";
 import { BsBank2 } from "react-icons/bs";
 import { BiMoneyWithdraw } from "react-icons/bi";
 import Navbar from "@/components/navbar";
-import { consolelog } from "@/lib/utils";
 
 export default function BankOrder() {
   // const dispatch = useDispatch();
@@ -32,7 +31,7 @@ export default function BankOrder() {
   const [bankRemove, setBankRemove] = useState(false);
 
   const handleBankChange = (e: any) => {
-    consolelog(e.target.value);
+    console.log(e.target.value);
     if (e.target.value === "") {
       setBankRemove(false);
     } else {
@@ -88,10 +87,10 @@ export default function BankOrder() {
       //   }));
       //   setFetchedCorporateCodes(corporateCodes);
       // } else {
-      //   consolelog("Failed to fetch corporate codes");
+      //   console.log("Failed to fetch corporate codes");
       // }
     } catch (error) {
-      consolelog("Error fetching corporate codes:", error);
+      console.log("Error fetching corporate codes:", error);
     }
   };
 
@@ -101,7 +100,7 @@ export default function BankOrder() {
       // const res = await axios.get("/api/v1/transaction/bank/get/individual", {
       // });
       // if (res.status === 200) {
-      //   consolelog(res.data);
+      //   console.log(res.data);
       //   const orderTrades = res.data || [];
       //   const uniqueOrderTrades = orderTrades.filter(
       //     (order: any, index: any, self: any) =>
@@ -114,12 +113,12 @@ export default function BankOrder() {
       //   //   })
       //   // );
       //   // dispatch(setBankOrder(adjustedBankOrders));
-      //   consolelog("OrderTrade data fetched successfully.", uniqueOrderTrades);
+      //   console.log("OrderTrade data fetched successfully.", uniqueOrderTrades);
       // } else {
-      //   consolelog("Failed to fetch orderTrade");
+      //   console.log("Failed to fetch orderTrade");
       // }
     } catch (error) {
-      consolelog("Fetching order list of this role error!", error);
+      console.log("Fetching order list of this role error!", error);
     }
   };
 
@@ -177,7 +176,7 @@ export default function BankOrder() {
     }
     reset(orderListDatatoInputField);
     setBuySell(choosedEditData?.operations || "deposite");
-    consolelog("use effect", orderListDatatoInputField);
+    console.log("use effect", orderListDatatoInputField);
   }, [choosedEditData]);
 
   const handleBuySell = (value: string) => {
@@ -205,8 +204,8 @@ export default function BankOrder() {
       id: choosedEditData?.id || "",
       orderValue: handleFloatValue(Number(data.orderValue)),
     };
-    consolelog(choosedEditData);
-    consolelog(body);
+    console.log(choosedEditData);
+    console.log(body);
     try {
       if (body.id && body.id !== "") {
         const res = await axios.post("/api/v1/transaction/bank/edit", body, {});
@@ -215,10 +214,10 @@ export default function BankOrder() {
           setBankRemove(false);
           clearChoosedEditData();
           //   setSelectedCorporateCode("");
-          consolelog("edit successful");
+          console.log("edit successful");
           fetchOrderList();
         } else {
-          consolelog("edit failed");
+          console.log("edit failed");
         }
       } else {
         const res = await axios.post(
@@ -231,10 +230,10 @@ export default function BankOrder() {
           setBankRemove(false);
           clearChoosedEditData();
           //   setSelectedCorporateCode("");
-          consolelog("save successful");
+          console.log("save successful");
           fetchOrderList();
         } else {
-          consolelog("save failed");
+          console.log("save failed");
         }
       }
     } catch (error) {

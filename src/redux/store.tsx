@@ -6,14 +6,16 @@
 
 // export default store;
 
-import reducer from "./reducer";
-
 import { configureStore } from "@reduxjs/toolkit";
-// import { logger } from "redux-logger";
+import reducer from "./reducer";
+import individualDataReducer from "./slice/fetchIndividualDataSlice";
 
-const store = configureStore({
-  reducer: reducer,
-  // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
+export const store = configureStore({
+  reducer: {
+    reducer: reducer,
+    individualData: individualDataReducer,
+  },
 });
 
-export default store;
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;

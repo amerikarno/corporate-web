@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setIdCardImage } from "@/redux/Action";
 import { useNavigate } from "react-router-dom";
 import getImages from "@/common/imagesData";
-import { consolelog, sleep } from "@/lib/utils";
+import { sleep } from "@/lib/utils";
 import axios from "@/api/axios";
 import { Loading } from "@/components/loading";
 import { toast } from "react-toastify";
@@ -48,7 +48,7 @@ export default function IDCardCapture() {
           },
         })
         .then(async (res) => {
-          consolelog(res.data);
+          console.log(res.data);
           dispatch(setIdCardImage(srcImg));
           toast.dismiss();
           await sleep();

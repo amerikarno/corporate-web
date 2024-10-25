@@ -1,4 +1,3 @@
-import { consolelog } from "@/lib/utils";
 import { InitialState } from "./types";
 
 let initialState: InitialState = {
@@ -29,84 +28,49 @@ let initialState: InitialState = {
     class: "",
   },
 
-  individualData: {
-    CreatedAt: "",
-    DeletedAt: "",
-    id: "",
-    thTitle: "",
-    thName: "",
-    thSurname: "",
-    engTitle: "",
-    engName: "",
-    engSurname: "",
-    email: "",
-    mobile: "",
-    birthDate: "",
-    marriageStatus: "",
-    citizenId: "",
-    laserCode: "",
-    education: "",
-    sourceOfIncome: "",
-    currentOccupation: "",
-    officeName: "",
-    typeOfBusiness: "",
-    positionName: "",
-    salaryRange: "",
-    shortTermInvestment: false,
-    taxesInvestment: false,
-    longTermInvestment: false,
-    retireInvestment: false,
-    pageId: "",
-    update: "",
-    SuiteTestResult: {
-      createBy: "",
-      id: "",
-      suiteTestResult: {
-        cid: "",
-        investorTypeRisk: "",
-        level: 0,
-        totalScore: 0,
-        suitTestResult: {
-          answer: {},
-        },
-      },
-      isFatca: "",
-      fatcaInfo: "",
-      isKnowLedgeDone: "",
-      knowLedgeTestResult: 0,
-    },
-    address: [
-      {
-        CreatedAt: "",
-        DeletedAt: "",
-        id: "",
-        homeNumber: "",
-        villageNumber: "",
-        villageName: "",
-        subStreetName: "",
-        streetName: "",
-        subDistrictName: "",
-        districtName: "",
-        provinceName: "",
-        zipCode: "",
-        countryName: "",
-        types: 0,
-      },
-    ],
-    bank: [
-      {
-        CreatedAt: "",
-        DeletedAt: "",
-        id: "",
-        bankName: "",
-        bankBranchName: "",
-        bankAccountNumber: "",
-        types: 0,
-      },
-    ],
-    ndid: "",
-    thaid: "",
-  },
+  // individualData: {
+  //   id: "",
+  //   createBy: "",
+  //   CreatedAt: "",
+  //   DeletedAt: null,
+  //   registerId: "",
+  //   thTitle: "",
+  //   thName: "",
+  //   thSurname: "",
+  //   engTitle: "",
+  //   engName: "",
+  //   engSurname: "",
+  //   email: "",
+  //   mobile: "",
+  //   agreement: true,
+  //   birthDate: "",
+  //   marriageStatus: "",
+  //   citizenId: "",
+  //   laserCode: "",
+  //   address: [],
+  //   bank: [],
+  //   SuiteTestResult: {
+  //     createBy: "",
+  //     deletedBy: "",
+  //     registerId: "",
+  //     suiteTestResult: {
+  //       registerId: "",
+  //       investorTypeRisk: "",
+  //       level: 0,
+  //       totalScore: 0,
+  //       suiteTestResult: {
+  //         answer: {},
+  //       },
+  //     },
+  //     isFatca: false,
+  //     fatcaInfo: null,
+  //     isKnowLedgeDone: false,
+  //     knowLedgeTestResult: 0,
+  //   },
+  //   ndid: false,
+  //   thaid: false,
+  // },
+  individualData: undefined,
 
   livenessOcr: {
     faceImage: null,
@@ -157,7 +121,7 @@ export default function reducer(state = initialState, action: any) {
     case "initIndividualData":
       return {
         ...state,
-        individualDatas: { ...state.individualData, ...payload },
+        individualDatas: payload,
       };
     case "clearAddIndividual":
       return { ...state, addIndividual: initialState.individualData };
@@ -203,11 +167,6 @@ export default function reducer(state = initialState, action: any) {
     //////////////////////////////////////////////////////////
 
     //////////////////////// create account /////////////////////////
-    case "setFetchedUserAccountData":
-      return {
-        ...state,
-        individualData: payload,
-      };
     case "setPreInfo":
       return {
         ...state,
@@ -215,7 +174,7 @@ export default function reducer(state = initialState, action: any) {
       };
 
     case "setBasicInfo":
-      consolelog("setBasicInfo", payload);
+      console.log("setBasicInfo", payload);
       const st = { ...state };
       let basicInfo = { ...st.individualData };
       basicInfo.address = payload.addresses;
@@ -232,10 +191,18 @@ export default function reducer(state = initialState, action: any) {
       basicInfo.typeOfBusiness = payload.occupation.typeOfBusiness;
       basicInfo.positionName = payload.occupation.positionName;
       basicInfo.salaryRange = payload.occupation.salaryRange;
-      consolelog("basicInfo state", basicInfo);
+      console.log("basicInfo state", basicInfo);
       return {
         ...state,
         individualData: basicInfo,
+      };
+
+    case "setSuitFatca":
+      const suit = { ...state.individualData, ...payload };
+      console.log("setSuitFatca", suit);
+      return {
+        ...state,
+        individualData: { ...state.individualData, ...payload },
       };
     //////////////////////////////////////////////////////////
     default:

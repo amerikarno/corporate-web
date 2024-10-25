@@ -1,91 +1,12 @@
-export type TFetchdata = {
-  createBy?: string;
-  CreatedAt?: string;
-  DeletedAt?: null;
-  id?: number;
-  thTitle?: string;
-  thName?: string;
-  thSurname?: string;
-  engTitle?: string;
-  engName?: string;
-  engSurname?: string;
-  email?: string;
-  mobile?: string;
-  agreement?: boolean;
-  birthDate?: string;
-  marriageStatus?: string;
-  citizenId?: string;
-  laserCode?: string;
-  education?: string;
-  sourceOfIncome?: string;
-  currentOccupation?: string;
-  officeName?: string;
-  typeOfBusiness?: string;
-  positionName?: string;
-  salaryRange?: string;
-  shortTermInvestment?: boolean;
-  taxesInvestment?: boolean;
-  address?: Address[];
-  bank?: Bank[];
-  SuiteTestResult?: SuiteTestResult;
-  ndid?: boolean;
-  thaid?: boolean;
-};
+import { TIndividualData } from "../types";
 
-export type SuiteTestResult = {
-  createBy?: string;
-  deletedBy?: string;
-  id?: string;
-  suiteTestResult?: SuiteTestResultClass;
-  isFatca?: boolean;
-  fatcaInfo?: null;
-  isKnowLedgeDone?: boolean;
-  knowLedgeTestResult?: number;
-};
-
-export type SuiteTestResultClass = {
-  cid?: string;
-  investorTypeRisk?: string;
-  level?: number;
-  totalScore?: number;
-  suitTestResult?: SuitTestResult;
-};
-
-export type SuitTestResult = {
-  answer?: Answer;
-};
-
-export type Answer = {};
-
-export type Address = {
-  CreatedAt?: string;
-  DeletedAt?: null;
-  id?: number;
-  homeNumber?: string;
-  subDistrictName?: string;
-  districtName?: string;
-  provinceName?: string;
-  zipCode?: string;
-  countryName?: string;
-  types?: number;
-};
-
-export type Bank = {
-  CreatedAt?: string;
-  DeletedAt?: null;
-  id?: number;
-  bankName?: string;
-  bankBranchName?: string;
-  bankAccountNumber?: string;
-  types?: number;
-};
-
-export const mockFetchData: TFetchdata[] = [
+export const mockFetchData: TIndividualData[] = [
   {
+    id: "3ff09bed-744b-41fb-ac6f-1b055f327ca3",
     createBy: "9b84c76d-fe84-4113-ba30-17014a02b6b5",
     CreatedAt: "2024-10-16T01:57:14Z",
     DeletedAt: null,
-    id: 90000001,
+    registerId: "90000001",
     thTitle: "นาย",
     thName: "เกตเต้อ-ชื่อ",
     thSurname: "เกตเต้อ-นามสกุล",
@@ -110,9 +31,10 @@ export const mockFetchData: TFetchdata[] = [
     taxesInvestment: true,
     address: [
       {
+        id: "05632c82-f39e-4dda-a1cf-ad6cf5c83406",
         CreatedAt: "2024-09-10T03:53:27Z",
         DeletedAt: null,
-        id: 90000001,
+        registerId: "90000001",
         homeNumber: "70/178 ramintra65 yak 2-4",
         subDistrictName: "บ้านพานถม",
         districtName: "เขตลาดกระบัง",
@@ -122,9 +44,10 @@ export const mockFetchData: TFetchdata[] = [
         types: 1,
       },
       {
+        id: "0fe4d578-be45-45e1-ac5d-43ce9178681a",
         CreatedAt: "2024-09-10T03:53:27Z",
         DeletedAt: null,
-        id: 90000001,
+        registerId: "90000001",
         homeNumber: "70/178 ramintra65 yak 2-4",
         subDistrictName: "บ้านพานถม",
         districtName: "เขตลาดกระบัง",
@@ -134,9 +57,10 @@ export const mockFetchData: TFetchdata[] = [
         types: 2,
       },
       {
+        id: "738c4219-d196-491f-9971-83c71c7c4d63",
         CreatedAt: "2024-09-10T03:53:27Z",
         DeletedAt: null,
-        id: 90000001,
+        registerId: "90000001",
         homeNumber: "70/178 ramintra65 yak 2-4",
         subDistrictName: "บ้านพานถม",
         districtName: "เขตลาดกระบัง",
@@ -148,45 +72,50 @@ export const mockFetchData: TFetchdata[] = [
     ],
     bank: [
       {
+        id: "1c0fb6bf-6aa0-4266-aaae-64a0fbf76a0a",
         CreatedAt: "2024-09-10T03:51:49Z",
         DeletedAt: null,
-        id: 90000001,
+        registerId: "90000001",
         bankName: "ธนาคารอาร์ เอช บี จำกัด",
         bankBranchName: "1",
         bankAccountNumber: "bankaccountid1",
         types: 0,
       },
       {
+        id: "1dae223d-eba4-4519-8fc2-fc1b4a1d07e4",
         CreatedAt: "2024-09-10T03:53:12Z",
         DeletedAt: null,
-        id: 90000001,
+        registerId: "90000001",
         bankName: "ธนาคารอาร์ เอช บี จำกัด",
         bankBranchName: "1",
         bankAccountNumber: "bankaccountid1",
         types: 0,
       },
       {
+        id: "62e618e8-0531-4eb8-a84c-370f9d1744de",
         CreatedAt: "2024-09-10T03:53:27Z",
         DeletedAt: null,
-        id: 90000001,
+        registerId: "90000001",
         bankName: "ธนาคารอาร์ เอช บี จำกัด",
         bankBranchName: "1",
         bankAccountNumber: "bankaccountid1",
         types: 0,
       },
       {
+        id: "73e4b57d-f811-4a1a-948b-ed4ddc60ba31",
         CreatedAt: "2024-09-10T03:51:04Z",
         DeletedAt: null,
-        id: 90000001,
+        registerId: "90000001",
         bankName: "ธนาคารอาร์ เอช บี จำกัด",
         bankBranchName: "1",
         bankAccountNumber: "bankaccountid1",
         types: 0,
       },
       {
+        id: "d227a3a6-8411-46a2-b1d9-35822fad08ca",
         CreatedAt: "2024-09-10T01:58:12Z",
         DeletedAt: null,
-        id: 90000001,
+        registerId: "90000001",
         bankName: "ธนาคารอาร์ เอช บี จำกัด",
         bankBranchName: "1",
         bankAccountNumber: "bankaccountid1",
@@ -196,14 +125,24 @@ export const mockFetchData: TFetchdata[] = [
     SuiteTestResult: {
       createBy: "",
       deletedBy: "",
-      id: "90000001",
+      registerId: "90000001",
       suiteTestResult: {
-        cid: "",
+        registerId: "",
         investorTypeRisk: "",
         level: 0,
         totalScore: 0,
-        suitTestResult: {
-          answer: {},
+        suiteTestResult: {
+          answer: {
+            "0": { ans: [1, 0, 0, 0] },
+            "1": { ans: [1, 0, 0, 0] },
+            "2": { ans: [1, 0, 0, 0] },
+            "3": { ans: [1, 0, 0, 0] },
+            "4": { ans: [1, 0, 0, 0] },
+            "5": { ans: [1, 0, 0, 0] },
+            "6": { ans: [1, 0, 0, 0] },
+            "7": { ans: [1, 0, 0, 0] },
+            "8": { ans: [1, 0, 0, 0] },
+          },
         },
       },
       isFatca: false,

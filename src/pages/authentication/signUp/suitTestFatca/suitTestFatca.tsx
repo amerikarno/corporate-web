@@ -5,19 +5,36 @@ import SubSuitTest from "./subSuitTest";
 import KnowLedgeTest from "./knowLedgeTest";
 import { TiTick } from "react-icons/ti";
 import "./suitTestFatca.css";
-import { consolelog, sleep } from "@/lib/utils";
+import { sleep } from "@/lib/utils";
 import { useNavigate } from "react-router-dom";
 import axios from "@/api/axios";
-import { initIndividualData, setTestCorporateData } from "@/redux/Action";
+import { setSuitFatca, setTestCorporateData } from "@/redux/Action";
 import { useDispatch, useSelector } from "react-redux";
 import { getCookies } from "@/lib/cookies";
 import { toast } from "react-toastify";
 import { Loading } from "@/components/loading";
 import { pages } from "@/lib/constantVariables";
+import { mockFetchData } from "../__mock__/mockFetchData";
+import { RootState } from "@/redux/store";
+import { setIndividualData } from "@/redux/slice/fetchIndividualDataSlice";
 
 export default function SuitTestFatca() {
   const token = getCookies();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const individualData = useSelector(
+    (state: RootState) => state.individualData.individualDatas
+  );
+  const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(false);
+  const [knowLedgeTestSuccess, setKnowLedgeTestSuccess] = useState(false);
+  const [suitTestSuccess, setSuitTestSuccess] = useState(false);
+  const [suitTestResult, setSuitTestResult] = useState();
+  const [fatcaradio, setFatcaRadio] = useState("fatcaradio-2");
+  const [knowLedgeTest, setKnowLedgeTest] = useState("knowLedgeTest-2");
+  const [fatcaInfo, setFatcaInfo] = useState<string | number[]>(``);
+  const [checkboxStates, setCheckboxStates] = useState<boolean[]>(
+    new Array(8).fill(false)
+  );
 
   const fetchIndividualData = async (registerId: string) => {
     const loadingToast = toast(<Loading />, {
@@ -37,33 +54,26 @@ export default function SuitTestFatca() {
           },
         }
       );
-      dispatch(initIndividualData(res.data[0]));
+      dispatch(setIndividualData(res.data[0]));
       console.log(res);
     } catch (error) {
       console.log(error);
       toast.error("Network Error while fetching Individual data");
+      //TODO: remove mock data
+      dispatch(setIndividualData(mockFetchData[0]));
     }
     toast.dismiss(loadingToast);
   };
 
-  const individualData = useSelector((state: any) => state.individualData);
-
   useEffect(() => {
     toast.dismiss();
-    const cidValue = localStorage.getItem("registerId");
-    if (cidValue) {
-      fetchIndividualData(cidValue || "");
+    const registerId = localStorage.getItem("registerId");
+    if (registerId) {
+      fetchIndividualData(registerId || "");
     } else {
       console.log("registerId not found");
     }
   }, [token, dispatch]);
-
-  const [fatcaradio, setFatcaRadio] = useState("fatcaradio-2");
-  const [knowLedgeTest, setKnowLedgeTest] = useState("knowLedgeTest-2");
-  const [fatcaInfo, setFatcaInfo] = useState<string | number[]>("");
-  const [checkboxStates, setCheckboxStates] = useState<boolean[]>(
-    new Array(8).fill(false)
-  );
 
   useEffect(() => {
     if (individualData?.SuiteTestResult.isFatca) {
@@ -73,7 +83,6 @@ export default function SuitTestFatca() {
         setCheckboxStates(initialCheckboxStates);
       }
       setFatcaRadio("fatcaradio-1");
-    } else {
     }
 
     if (individualData?.SuiteTestResult.isKnowLedgeDone) {
@@ -94,11 +103,6 @@ export default function SuitTestFatca() {
     setCheckboxStates(updatedCheckboxStates);
     setFatcaInfo(numericCheckboxStates);
   };
-  const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(false);
-  const [knowLedgeTestSuccess, setKnowLedgeTestSuccess] = useState(false);
-  const [suitTestSuccess, setSuitTestSuccess] = useState(false);
-  const [suitTestResult, setSuitTestResult] = useState();
-  const navigate = useNavigate();
 
   const handleKnowLedgeTestSuccess = (success: boolean) => {
     setKnowLedgeTestSuccess(success);
@@ -135,11 +139,12 @@ export default function SuitTestFatca() {
       };
       console.log(body);
       dispatch(setTestCorporateData(body));
+      dispatch(setSuitFatca(body));
       const loadingToast = toast(<Loading />, {
         autoClose: false,
         closeOnClick: false,
       });
-      if (individualData?.SuiteTestResult.suiteTestResult.totalScore) {
+      if (individualData?.SuiteTestResult?.suiteTestResult?.totalScore) {
         console.log("suite test updating...");
         try {
           const res = await axios.post(
@@ -292,7 +297,7 @@ export default function SuitTestFatca() {
                           // disabled={isButtonDisabled}
                           onClick={() => {
                             setIsButtonDisabled(true);
-                            consolelog("fatcaInfo : ", fatcaInfo);
+                            console.log("fatcaInfo : ", fatcaInfo);
                           }}
                         >
                           {isButtonDisabled ? (

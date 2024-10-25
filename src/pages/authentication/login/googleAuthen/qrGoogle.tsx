@@ -9,7 +9,7 @@ import { setCookies } from "@/lib/cookies";
 import { TUser } from "../types";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
-import { consolelog, sleep } from "@/lib/utils";
+import { sleep } from "@/lib/utils";
 import { Loading } from "@/components/loading";
 import { toast } from "react-toastify";
 
@@ -24,7 +24,7 @@ export default function GoogleQr() {
 
   const handleOtp = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
-    consolelog(value, name);
+    console.log(value, name);
     let tmp: string[] = [];
     if (message !== "") setMessage("");
     switch (name) {

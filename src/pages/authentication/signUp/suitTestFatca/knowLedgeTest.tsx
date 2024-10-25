@@ -1,4 +1,3 @@
-import { consolelog } from "@/lib/utils";
 import { Button } from "../../../../components/ui/Button";
 import { Card, CardContent } from "../../../../components/ui/Card";
 import { useEffect, useState } from "react";
@@ -182,7 +181,7 @@ export default function KnowLedgeTest({ onTestSuccess }: KnowLedgeTestProps) {
       closeOnClick: false,
     });
     try {
-      consolelog(registerId);
+      console.log(registerId);
       const res = await axios.post(
         "/api/v1/individual/list",
         {
@@ -195,7 +194,7 @@ export default function KnowLedgeTest({ onTestSuccess }: KnowLedgeTestProps) {
         }
       );
       dispatch(initIndividualData(res.data[0]));
-      consolelog(res);
+      console.log(res);
     } catch (error) {
       console.log(error);
       toast.error("Network Error while fetching Individual data");
@@ -266,7 +265,7 @@ export default function KnowLedgeTest({ onTestSuccess }: KnowLedgeTestProps) {
     } else {
       setAllTestSuccess(true);
       onTestSuccess(true);
-      consolelog("All Answer Corrected!");
+      console.log("All Answer Corrected!");
     }
   };
 

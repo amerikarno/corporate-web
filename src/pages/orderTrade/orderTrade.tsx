@@ -10,7 +10,6 @@ import { MdCurrencyExchange } from "react-icons/md";
 import { IoReceiptOutline } from "react-icons/io5";
 import NavBar from "@/components/navbar";
 import {
-  consolelog,
   formatNumberToCommasFraction,
   getAllIcoData,
   getAppName,
@@ -194,7 +193,7 @@ export default function OrderTrade() {
     if (!assetData) {
       // const user = getUser();
       // setUser(user ? user : undefined);
-      // consolelog("user", user);
+      // console.log("user", user);
       fetchAssetData();
       fetchUserBankInfo();
     }
@@ -237,7 +236,7 @@ export default function OrderTrade() {
         const minQtn = assetData?.info?.minimumInvestmentQuantity || "0";
         const min = minQtn.split(" ");
         const numMin = parseFloat(min[0]);
-        consolelog(numMin, numValue);
+        console.log(numMin, numValue);
         if (numValue < numMin) {
           setErrorMin(
             `required minimum quantity ${assetData?.info?.minimumInvestmentQuantity}`
@@ -263,7 +262,7 @@ export default function OrderTrade() {
       customerCode: user?.customerCode,
       icoCode: assetData?.icoCode,
     };
-    consolelog("data", body);
+    console.log("data", body);
 
     const isMin = isMatchedMinAmount(body.amount);
     if (isMin) {
@@ -283,11 +282,11 @@ export default function OrderTrade() {
           }
         );
         if (res.status === 200) {
-          consolelog(res.data);
+          console.log(res.data);
           reset();
           await fetchUserBankInfo();
         } else {
-          consolelog(res.data);
+          console.log(res.data);
           toast.error("Failed to placing order");
         }
       } catch (error) {

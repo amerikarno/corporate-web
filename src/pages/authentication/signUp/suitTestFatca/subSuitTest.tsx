@@ -3,10 +3,12 @@ import { Button } from "../../../../components/ui/Button";
 import { Card } from "../../../../components/ui/Card";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { initIndividualData } from "@/redux/Action";
-import { getCookies } from "@/lib/cookies";
+// import { getCookies } from "@/lib/cookies";
 import { Loading } from "@/components/loading";
 import { toast } from "react-toastify";
+import { mockFetchData } from "../__mock__/mockFetchData";
+import { RootState } from "@/redux/store";
+import { setIndividualData } from "@/redux/slice/fetchIndividualDataSlice";
 
 interface Answer {
   questionIndex: number;
@@ -20,17 +22,11 @@ type SubSuitTestProps = {
   onSuitTestDone: (done: boolean) => void;
 };
 
-type TQuestion = {
-  type: string;
-  question: string;
-  choices: string[];
-};
-
 export default function SubSuitTest({
   onSuitTestDone,
   suitTestResult,
 }: SubSuitTestProps) {
-  const questions: TQuestion[] = [
+  const questions = [
     {
       question: "ท่านมีภาระค่าใช้จ่ายประจำดือนเป็นสัดส่วนเท่าใดของรายได้",
       choices: [
@@ -39,7 +35,6 @@ export default function SubSuitTest({
         "25% - 50% ของรายได้",
         "น้อยกว่า 25% ของรายได้",
       ],
-      type: "1",
     },
     {
       question: "ในปัจจุบัน ข้อใดต่อไปนี้ตรงกับสภาวะของท่านมากที่สุด",
@@ -49,7 +44,6 @@ export default function SubSuitTest({
         "ทรัพย์สินมากกว่าหนี้สิน",
         "เงินออมเพียงพอสำหรับวิยเกษียณอายุ",
       ],
-      type: "1",
     },
     {
       question: "ท่านมีประสบการณ์/ความรู้เกี่ยวกับการลงทุนในด้านใดมาบ้างแล้ว",
@@ -59,7 +53,6 @@ export default function SubSuitTest({
         "เพื่อสิทธิประโยชน์ทางภาษี",
         "เพื่อการเกษียณ",
       ],
-      type: "2",
     },
     {
       question: "ท่านคาดว่ายังไม่ต้องใช้เงินที่จะนำมาลงทุนอีกนานเท่าใด",
@@ -69,7 +62,6 @@ export default function SubSuitTest({
         "ทรัพย์สินมากกว่าหนี้สิน",
         "เงินออมเพียงพอสำหรับวิยเกษียณอายุ",
       ],
-      type: "1",
     },
     {
       question: "วัตถุประสงค์ในการลงทุน/เป้าหมายหลักในการลงทุนของท่าน คือ",
@@ -79,7 +71,6 @@ export default function SubSuitTest({
         "ได้รับผลตอบแทนที่สูงขึ้น ยอมเสี่ยงที่จะสูญเสียเงินต้นมากขึ้น",
         "ได้ผลตอบแทนสูงสุดในระยะยาว ยอมเสี่ยงที่จะสูญเงินต้น",
       ],
-      type: "1",
     },
     {
       question: "ความเสี่ยงจากการลงทุนข้อใดที่ท่านยอมรับได้",
@@ -89,7 +80,6 @@ export default function SubSuitTest({
         "โอกาสกำไรสูงสุด 20% แต่อาจขาดทุนถึง 15%",
         "โอกาสกำไรสูงสุด 50% แต่อาจขาดทุนถึง 100%",
       ],
-      type: "1",
     },
     {
       question:
@@ -100,7 +90,6 @@ export default function SubSuitTest({
         "เข้าใจและรับความผันผวนได้ในระดับหนึ่ง",
         "ไม่กังวลกับโอกาสขาดทุนสูง ยังหวังว่าอาจมีโอกาสปรับสูงขึ้น",
       ],
-      type: "1",
     },
     {
       question:
@@ -111,7 +100,6 @@ export default function SubSuitTest({
         "มากกว่า 10% - 20%",
         "มากกว่า 20% ขึ้นไป",
       ],
-      type: "1",
     },
     {
       question:
@@ -122,47 +110,22 @@ export default function SubSuitTest({
         "อดทนถือต่อไป และรอพลตอบแทนปริบตัวกลับมา",
         "มั่นใจ เพราะตั้งใจลงทุนระยะยาว และจะเพิ่มเงินลงทุน",
       ],
-      type: "1",
     },
   ];
-  const token = getCookies();
   const dispatch = useDispatch();
-  const fetchIndividualData = async (registerId: string) => {
-    const loadingToast = toast(<Loading />, {
-      autoClose: false,
-      closeOnClick: false,
-    });
-    try {
-      console.log(registerId);
-      const res = await axios.post(
-        "/api/v1/individual/list",
-        {
-          registerId: registerId,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      dispatch(initIndividualData(res.data[0]));
-      console.log(res);
-    } catch (error) {
-      console.log(error);
-      toast.error("Network Error while fetching Individual data");
-    }
-    toast.dismiss(loadingToast);
-  };
-  const individualData = useSelector((state: any) => state.individualData);
+  const individualData = useSelector(
+    (state: RootState) => state.individualData.individualDatas
+  );
 
   const fetchSuitTestResult =
-    individualData?.SuiteTestResult.suiteTestResult.suitTestResult.answer;
-  const fetchedData = Object.keys(fetchSuitTestResult || []).map(
+    individualData?.SuiteTestResult?.suiteTestResult?.suiteTestResult?.answer;
+
+  const fetchedData = Object.keys(fetchSuitTestResult || {}).map(
     (key) => fetchSuitTestResult?.[key].ans
   );
-  console.log(fetchedData);
 
   const initialAnswers = questions.map((_, index) => {
+    console.log("fetchedData", fetchedData);
     if (fetchedData) {
       const answerFromData = fetchedData[index];
       let answerValue: string | number[] = "";
@@ -198,66 +161,6 @@ export default function SubSuitTest({
     }
   });
   const [answers, setAnswers] = useState<Answer[]>(initialAnswers);
-
-  useEffect(() => {
-    const cidValue = localStorage.getItem("registerId");
-    if (cidValue) {
-      fetchIndividualData(cidValue || "");
-    } else {
-      console.log("registerId not found");
-    }
-  }, [token, dispatch]);
-
-  useEffect(() => {
-    if (individualData) {
-      const fetchSuitTestResult =
-        individualData?.SuiteTestResult.suiteTestResult.suitTestResult.answer;
-      const fetchedData = Object.keys(fetchSuitTestResult || []).map(
-        (key) => fetchSuitTestResult?.[key].ans
-      );
-      console.log(fetchedData);
-
-      const initialAnswers = questions.map((_, index) => {
-        if (fetchedData) {
-          const answerFromData = fetchedData[index];
-          let answerValue: string | number[] = "";
-          let score = 0;
-
-          if (Array.isArray(answerFromData) && index === 2) {
-            answerValue = answerFromData;
-            const selectedChoices = answerFromData
-              .map((val, idx) => (val === 1 ? idx + 1 : 0))
-              .filter((val) => val !== 0);
-            score = Math.max(...selectedChoices);
-          } else if (Array.isArray(answerFromData)) {
-            const selectedChoiceIndex = answerFromData.findIndex(
-              (choice) => choice === 1
-            );
-            if (selectedChoiceIndex !== -1) {
-              score = selectedChoiceIndex + 1;
-              answerValue = questions[index].choices[selectedChoiceIndex];
-            }
-          }
-
-          return {
-            questionIndex: index,
-            answer: answerValue,
-            score,
-          };
-        } else {
-          return {
-            questionIndex: index,
-            answer: index === 2 ? [0, 0, 0, 0] : "",
-            score: 0,
-          };
-        }
-      });
-
-      setAnswers(initialAnswers);
-      handleSubmit();
-    }
-  }, [individualData]);
-
   const [totalScore, setTotalScore] = useState(0);
   const [investorType, setInvestorType] = useState("");
   const [suitTestDone, setSuitTestDone] = useState(false);
@@ -315,6 +218,7 @@ export default function SubSuitTest({
 
     return ageScore;
   };
+
   const giveGrade = (score: number) => {
     if (score <= 15) {
       return 1;
@@ -396,11 +300,102 @@ export default function SubSuitTest({
     }
   };
 
+  const fetchIndividualData = async (registerId: string) => {
+    const loadingToast = toast(<Loading />, {
+      autoClose: false,
+      closeOnClick: false,
+    });
+    try {
+      console.log(registerId);
+      const res = await axios.post(
+        "/api/v1/individual/list",
+        {
+          registerId: registerId,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      dispatch(setIndividualData(res.data[0]));
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+      toast.error("Network Error while fetching Individual data");
+      //TODO: remove mock data
+      dispatch(setIndividualData(mockFetchData[0]));
+    }
+    toast.dismiss(loadingToast);
+  };
+
+  useEffect(() => {
+    const cidValue = localStorage.getItem("registerId");
+    if (cidValue) {
+      fetchIndividualData(cidValue || "");
+    } else {
+      console.log("registerId not found");
+    }
+  }, []);
+
+  useEffect(() => {
+    if (individualData) {
+      const fetchSuitTestResult =
+        individualData.SuiteTestResult?.suiteTestResult?.suiteTestResult
+          ?.answer;
+
+      const fetchedData = Object.keys(fetchSuitTestResult || []).map(
+        (key) => fetchSuitTestResult?.[key].ans
+      );
+
+      const initialAnswers = questions.map((_, index) => {
+        if (fetchedData) {
+          const answerFromData = fetchedData[index];
+          let answerValue: string | number[] = "";
+          let score = 0;
+
+          if (Array.isArray(answerFromData) && index === 2) {
+            answerValue = answerFromData;
+            const selectedChoices = answerFromData
+              .map((val, idx) => (val === 1 ? idx + 1 : 0))
+              .filter((val) => val !== 0);
+            score = Math.max(...selectedChoices);
+          } else if (Array.isArray(answerFromData)) {
+            const selectedChoiceIndex = answerFromData.findIndex(
+              (choice) => choice === 1
+            );
+            if (selectedChoiceIndex !== -1) {
+              score = selectedChoiceIndex + 1;
+              answerValue = questions[index].choices[selectedChoiceIndex];
+            }
+          }
+
+          return {
+            questionIndex: index,
+            answer: answerValue,
+            score,
+          };
+        } else {
+          return {
+            questionIndex: index,
+            answer: index === 2 ? [0, 0, 0, 0] : "",
+            score: 0,
+          };
+        }
+      });
+
+      setAnswers(initialAnswers);
+      handleSubmit();
+    } else {
+      console.log("individualData not found");
+    }
+  }, [individualData]);
+
   return (
     <div className="">
       <div className="flex flex-col space-y-8">
         {questions.map((question, questionIndex) =>
-          question.type === "2" ? (
+          questionIndex + 1 === 3 ? (
             <Card className="bg-white" key={questionIndex}>
               <div className="flex flex-col space-y-4 p-4 lg:p-8">
                 <p className="font-bold">

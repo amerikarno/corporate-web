@@ -1,7 +1,7 @@
 import { useRef, useEffect, useState, useCallback } from "react";
 import Webcam from "react-webcam";
 import * as faceapi from "face-api.js";
-import { consolelog, sleep } from "@/lib/utils";
+import { sleep } from "@/lib/utils";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setFaceImage } from "@/redux/Action";
@@ -42,13 +42,13 @@ export default function Liveness() {
   // const [dim, setDim] = useState([0, 0]);
 
   const loadModels = async () => {
-    // consolelog("Loading face-api.js models...");
+    // console.log("Loading face-api.js models...");
     const MODEL_URL = "/models";
     await faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL);
     await faceapi.nets.faceLandmark68Net.loadFromUri(MODEL_URL);
     await faceapi.nets.faceRecognitionNet.loadFromUri(MODEL_URL);
     setIsModelLoaded(true);
-    // consolelog("Models loaded");
+    // console.log("Models loaded");
   };
 
   const getMessage = () => {
@@ -104,7 +104,7 @@ export default function Liveness() {
           // Clear the canvas before drawing
           const ctx = canvas.getContext("2d");
           if (ctx) {
-            // consolelog("Clearing canvas...");
+            // console.log("Clearing canvas...");
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
             // Set the opacity for the white filter
@@ -148,7 +148,7 @@ export default function Liveness() {
             ctx.stroke();
           }
 
-          // consolelog("Detecting faces...");
+          // console.log("Detecting faces...");
           const options = new faceapi.TinyFaceDetectorOptions();
           const result = await faceapi
             .detectSingleFace(video, options)
@@ -161,8 +161,8 @@ export default function Liveness() {
             //   ctx.lineWidth = 2;
             //   ctx.strokeRect(x, y, width, height);
             // }
-            // consolelog(x, y, width, height);
-            // consolelog(ellipseBox);
+            // console.log(x, y, width, height);
+            // console.log(ellipseBox);
             if (ellipseBox) {
               const slippage = 20;
               if (
@@ -171,18 +171,18 @@ export default function Liveness() {
                 ellipseBox[2] + slippage > width &&
                 ellipseBox[2] - slippage < width
               ) {
-                // consolelog("Center");
+                // console.log("Center");
                 color.current = "green";
                 trackIsCenter = true;
                 setIsCenter(true);
               } else {
-                // consolelog("Not center");
+                // console.log("Not center");
                 color.current = "gray";
                 trackIsCenter = false;
                 setIsCenter(false);
               }
-              // consolelog(circleBox[0] + slippageX, circleBox[0] - slippageX, x);
-              // consolelog(circleBox[1] + slippageY, circleBox[1] - slippageY, y);
+              // console.log(circleBox[0] + slippageX, circleBox[0] - slippageX, x);
+              // console.log(circleBox[1] + slippageY, circleBox[1] - slippageY, y);
             }
 
             const leftEye = result.landmarks.getLeftEye();
@@ -190,11 +190,11 @@ export default function Liveness() {
             const leftEAR = calculateEAR(leftEye);
             const rightEAR = calculateEAR(rightEye);
             if (rightEAR > 0.35 && trackIsCenter) {
-              consolelog("Turned left");
+              console.log("Turned left");
               setIsTurnLeft(true);
             }
             if (leftEAR > 0.35 && trackIsCenter) {
-              consolelog("Turned right");
+              console.log("Turned right");
               setIsTurnRight(true);
             }
 
@@ -208,18 +208,18 @@ export default function Liveness() {
               mouth[19],
             ]);
             if (mouthDist > 20 && trackIsCenter) {
-              consolelog("Mouth opened");
+              console.log("Mouth opened");
               setIsMouthOpen(true);
             }
           } else {
-            // consolelog("No face detected");
+            // console.log("No face detected");
           }
         }
       } else {
-        consolelog("Video not ready, state:", video.readyState);
+        console.log("Video not ready, state:", video.readyState);
       }
     } else {
-      consolelog("Webcam or video not found, or model not loaded");
+      console.log("Webcam or video not found, or model not loaded");
     }
   }, [isModelLoaded]);
 
@@ -274,7 +274,7 @@ export default function Liveness() {
             },
           })
           .then(async (res) => {
-            consolelog(res.data);
+            console.log(res.data);
             dispatch(setFaceImage(srcImg));
             toast.dismiss();
             await sleep();
@@ -286,7 +286,7 @@ export default function Liveness() {
             toast.error("Network Error while uploading image");
           });
 
-        consolelog(srcImg);
+        console.log(srcImg);
       }
     }
     //TODO: remove link
@@ -307,7 +307,7 @@ export default function Liveness() {
     if (webcamRef.current) {
       const video = webcamRef.current.video as HTMLVideoElement;
       video.onloadeddata = () => {
-        // consolelog("Webcam initialized");
+        // console.log("Webcam initialized");
         setWebcamInitialized(true);
       };
     }
@@ -340,8 +340,8 @@ export default function Liveness() {
           videoConstraints={videoConstraints}
           screenshotFormat="image/png"
           audio={false}
-          // onUserMedia={() => consolelog("Webcam stream started")}
-          // onUserMediaError={(err) => consolelog("Webcam error", err)}
+          // onUserMedia={() => console.log("Webcam stream started")}
+          // onUserMediaError={(err) => console.log("Webcam error", err)}
         />
         <canvas
           ref={canvasRef}

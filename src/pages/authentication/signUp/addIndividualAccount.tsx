@@ -13,18 +13,19 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCookies } from "@/lib/cookies";
 import axios from "@/api/axios";
-import {
-  initIndividualData,
-  setPreInfo,
-  setTestCorporateData,
-} from "@/redux/Action";
-import { consolelog, sleep } from "@/lib/utils";
+import { setPreInfo, setTestCorporateData } from "@/redux/Action";
+import { sleep } from "@/lib/utils";
 import { toast } from "react-toastify";
 import { Loading } from "@/components/loading";
 import { pages } from "@/lib/constantVariables";
+import { mockFetchData } from "./__mock__/mockFetchData";
+import { setIndividualData } from "@/redux/slice/fetchIndividualDataSlice";
+import { RootState } from "@/redux/store";
 
 export default function AddIndividualAccount() {
-  const individualData = useSelector((state: any) => state.individualData);
+  const individualData = useSelector(
+    (state: RootState) => state.individualData.individualDatas
+  );
   const dispatch = useDispatch();
   const token = getCookies();
   const navigate = useNavigate();
@@ -52,15 +53,17 @@ export default function AddIndividualAccount() {
       closeOnClick: false,
     });
     try {
-      consolelog({ accountId: registerId });
+      console.log({ accountId: registerId });
       const res = await axios.post("/api/v1/individual/list", {
         registerId: registerId,
       });
-      dispatch(initIndividualData(res.data[0]));
-      consolelog(res);
+      dispatch(setIndividualData(res.data[0]));
+      console.log(res);
     } catch (error) {
       console.log(error);
       toast.error("Network Error while fetching Individual data");
+      //TODO: remove mock data
+      dispatch(setIndividualData(mockFetchData[0]));
     }
     toast.dismiss(lodingToast);
   };
@@ -74,9 +77,8 @@ export default function AddIndividualAccount() {
   }, [token, dispatch]);
 
   useEffect(() => {
-    consolelog(individualData);
     if (individualData) {
-      consolelog(individualData);
+      console.log(individualData);
       const dateFormatted = individualData?.birthDate?.split("T")[0];
       const fillData: TIndividualAccount = {
         email: individualData.email || "",
@@ -93,7 +95,7 @@ export default function AddIndividualAccount() {
         laserCode: individualData.laserCode || "",
         agreement: true,
       };
-      consolelog(fillData);
+      console.log(fillData);
       setInitial(fillData);
       reset(fillData);
     }
@@ -101,7 +103,7 @@ export default function AddIndividualAccount() {
 
   const handleTitleChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
     const choosedTitle = e.target.value;
-    consolelog(choosedTitle);
+    console.log(choosedTitle);
     if (choosedTitle === "นาย") {
       setThTitle("นาย");
       setEngTitle("Mr.");
@@ -113,7 +115,7 @@ export default function AddIndividualAccount() {
       setValue("thTitle", "นาง");
       setValue("engTitle", "Mrs.");
     } else if (choosedTitle === "นางสาว") {
-      consolelog("go to this");
+      console.log("go to this");
       setThTitle("นางสาว");
       setEngTitle("Miss.");
       setValue("thTitle", "นางสาว");
@@ -152,7 +154,7 @@ export default function AddIndividualAccount() {
   };
 
   const onSubmit = async (data: TIndividualAccount) => {
-    consolelog(data);
+    console.log(data);
     let body = {
       ...data,
       birthDate: new Date(data.birthDate || 0),
@@ -211,6 +213,8 @@ export default function AddIndividualAccount() {
       toast.dismiss(lodingToast);
       toast.error("Network Error while creating Individual account");
       //TODO: remove link
+      localStorage.setItem("registerId", "90000001");
+      localStorage.setItem("age", "40");
       await sleep();
       navigate("/authentication/signup/basicinfo");
     }

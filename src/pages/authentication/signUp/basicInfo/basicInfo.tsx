@@ -18,21 +18,23 @@ import {
 import { basicInfoSchema, TBasicInfo } from "./constant/schemas";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { consolelog, sleep } from "@/lib/utils";
+import { sleep } from "@/lib/utils";
 // import { getCookies } from "@/lib/cookies";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "@/api/axios";
 import {
-  initIndividualData,
+  // initIndividualData,
   setBasicInfo,
   setTestCorporateData,
 } from "@/redux/Action";
 import { TBasicinfoAddress, TBasicInfoBank } from "../types";
-import { IndividualData } from "@/redux/types";
 import { toast } from "react-toastify";
 import { Loading } from "@/components/loading";
 import { normalStyleInput } from "@/assets/css/normalStyleInput";
 import { pages } from "@/lib/constantVariables";
+import { mockFetchData } from "../__mock__/mockFetchData";
+import { RootState } from "@/redux/store";
+import { setIndividualData } from "@/redux/slice/fetchIndividualDataSlice";
 
 export default function BasicInfo() {
   const responsiveClass =
@@ -47,6 +49,9 @@ export default function BasicInfo() {
   const [addBankValue, setAddBankValue] = useState("radio-6");
   const [basicInfoData, setBasicInfoData] = useState<TBasicInfo | undefined>(
     undefined
+  );
+  const individualData = useSelector(
+    (state: RootState) => state.individualData.individualDatas
   );
 
   const uniqueGeographyTypes = [
@@ -87,23 +92,20 @@ export default function BasicInfo() {
       closeOnClick: false,
     });
     try {
-      consolelog(registerId);
+      console.log(registerId);
       const res = await axios.post("/api/v1/individual/list", {
         registerId: registerId,
       });
-      dispatch(initIndividualData(res.data[0]));
-      consolelog(res);
+      dispatch(setIndividualData(res.data[0]));
+      console.log(res);
     } catch (error) {
       console.log(error);
       toast.error("Network Error while fetching Individual data");
-      // dispatch(setFetchedUserAccountData(mockFetchData[0]));
+      //TODO: remove mock data
+      dispatch(setIndividualData(mockFetchData[0]));
     }
     toast.dismiss(lodingToast);
   };
-
-  const individualData: IndividualData = useSelector(
-    (state: any) => state.individualData
-  );
 
   useEffect(() => {
     toast.dismiss();
@@ -111,13 +113,13 @@ export default function BasicInfo() {
     if (registerId) {
       fetchIndividualData(registerId || "");
     } else {
-      consolelog("registerId not found");
+      console.log("registerId not found");
     }
   }, []);
 
   useEffect(() => {
     if (individualData) {
-      consolelog(individualData);
+      console.log(individualData);
 
       const registeredAddressFind: TBasicinfoAddress | null =
         individualData?.address?.find((addr) => addr.types === 1) || null;
@@ -126,10 +128,10 @@ export default function BasicInfo() {
       const officeAddressFind: TBasicinfoAddress | null =
         individualData?.address?.find((addr) => addr.types === 3) || null;
 
-      const firstBank: TBasicInfoBank | null =
-        individualData?.bank?.find((addr) => addr.types === 1) || null;
-      const secondBank: TBasicInfoBank | null =
-        individualData?.bank?.find((addr) => addr.types === 2) || null;
+      const firstBank: TBasicInfoBank | null | undefined =
+        individualData?.bank?.find((addr) => addr && addr.types === 1) || null;
+      const secondBank: TBasicInfoBank | null | undefined =
+        individualData?.bank?.find((addr) => addr && addr.types === 2) || null;
 
       let fillData: TBasicInfo = {
         registeredAddress: {
@@ -194,8 +196,8 @@ export default function BasicInfo() {
           retireInvestment: individualData?.retireInvestment || false,
         },
       };
-      consolelog(firstBank);
-      consolelog(fillData);
+      console.log(firstBank);
+      console.log(fillData);
       setBasicInfoData(fillData);
       reset(fillData);
     }
@@ -205,6 +207,7 @@ export default function BasicInfo() {
   const [showBusinessType, setShowBusinessType] = useState(true);
   const [showWorkplace, setShowWorkplace] = useState(true);
   const [showWorkPosition, setShowWorkPosition] = useState(true);
+
   useEffect(() => {
     const selectedCareer = careerTypes.find(
       (career) => career.id === Number(currentOccupation)
@@ -272,7 +275,7 @@ export default function BasicInfo() {
       banks: [prebody.firstBankAccount, prebody.secondBankAccountBody],
       pageId: pages[2].id,
     };
-    consolelog(body);
+    console.log(body);
     dispatch(setTestCorporateData(body));
     dispatch(setBasicInfo(body));
     const lodingToast = toast(<Loading />, {
@@ -289,14 +292,14 @@ export default function BasicInfo() {
           },
         });
         if (res.status === 200) {
-          consolelog("update basic info success", res);
+          console.log("update basic info success", res);
           toast.dismiss();
           await sleep();
           navigate("/authentication/signup/suittestfatca");
         } else {
           toast.error("update basic info unsuccess");
           toast.dismiss(lodingToast);
-          consolelog("update basic info unsuccess", res);
+          console.log("update basic info unsuccess", res);
         }
       } else {
         const res = await axios.post("/api/v1/individual/postcreate", body, {
@@ -305,12 +308,12 @@ export default function BasicInfo() {
           },
         });
         if (res.status === 200) {
-          consolelog("submit basic info success", res);
+          console.log("submit basic info success", res);
           toast.dismiss();
           await sleep();
           navigate("/authentication/signup/suittestfatca");
         } else {
-          consolelog("submit basic info unsuccess x", res);
+          console.log("submit basic info unsuccess x", res);
           toast.error("submit basic info unsuccess");
           toast.dismiss(lodingToast);
         }
@@ -326,16 +329,16 @@ export default function BasicInfo() {
   };
 
   const handleAddressRadioChange = (value: string) => {
-    consolelog(value);
+    console.log(value);
     setRadioAddressValue(value);
   };
   const handleWorkRadioChange = (value: string) => {
-    consolelog(value);
+    console.log(value);
     setRadioWorkValue(value);
   };
 
   const handleBankRadioChange = (value: string) => {
-    consolelog(value);
+    console.log(value);
     setAddBankValue(value);
   };
 

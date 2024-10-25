@@ -3,7 +3,7 @@ import axios from "axios";
 import api from "@/api/axios";
 import { useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/Button";
-import { consolelog, sleep } from "@/lib/utils";
+import { sleep } from "@/lib/utils";
 import { Loading } from "@/components/loading";
 import { toast } from "react-toastify";
 
@@ -17,7 +17,7 @@ const AzureForm: React.FC = () => {
     const token = query.get("access_token");
 
     if (token) {
-      consolelog("Token:", token);
+      console.log("Token:", token);
       setAccessToken(token);
     }
   }, [location.search]);
@@ -34,7 +34,7 @@ const AzureForm: React.FC = () => {
         },
         withCredentials: true,
       });
-      consolelog(res);
+      console.log(res);
     } catch (error) {
       console.log(error);
       toast.error("Network Error while fetching Individual data");
@@ -46,7 +46,7 @@ const AzureForm: React.FC = () => {
 
   useEffect(() => {
     if (accessToken) {
-      consolelog("Access Token:", accessToken);
+      console.log("Access Token:", accessToken);
       axios
         .get("https://graph.microsoft.com/v1.0/me", {
           headers: {
@@ -54,7 +54,7 @@ const AzureForm: React.FC = () => {
           },
         })
         .then((response) => {
-          consolelog("User Data:", response.data);
+          console.log("User Data:", response.data);
           setUserData(response.data);
         })
         .catch((error) => {

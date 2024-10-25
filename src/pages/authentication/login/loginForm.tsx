@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { normalStyleInput } from "@/assets/css/normalStyleInput";
 import axios from "@/api/axios";
 import { AxiosError } from "axios";
-import { consolelog, sleep } from "@/lib/utils";
+import { sleep } from "@/lib/utils";
 // import { setCookies } from "@/lib/cookies";
 import { toast } from "react-toastify";
 import { Loading } from "@/components/loading";
@@ -55,7 +55,7 @@ const LoginForm = () => {
         if (res.status === 200) {
           toast.dismiss();
           await sleep();
-          consolelog(res.data);
+          console.log(res.data);
           localStorage.setItem("basic", base64);
           if (res.data.secret !== "") {
             localStorage.setItem("secret", res.data.secret);
@@ -73,7 +73,7 @@ const LoginForm = () => {
           toast.dismiss(loadingToast);
           toast.error("Failed to login");
           setError("root", { message: res.data.message });
-          consolelog("error", { message: res.data });
+          console.log("error", { message: res.data });
         }
       } catch (error) {
         console.log(error);

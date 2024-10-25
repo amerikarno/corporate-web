@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 import { ThemeChanger } from "@/redux/Action";
-import store from "@/redux/store";
+import { store } from "@/redux/store";
 import { Collapsis } from "@/components/collapse/collapse";
 import getImages from "@/common/imagesData";
 import { getCookies, removeCookies } from "@/lib/cookies";

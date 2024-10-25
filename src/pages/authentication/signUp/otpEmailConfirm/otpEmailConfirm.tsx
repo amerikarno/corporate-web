@@ -20,16 +20,17 @@ import {
 import { useNavigate } from "react-router-dom";
 import getImages from "@/common/imagesData";
 import { normalStyleInput } from "@/assets/css/normalStyleInput";
-import { consolelog } from "@/lib/utils";
+
 import { toast } from "react-toastify";
 import { Loading } from "@/components/loading";
 import axios from "@/api/axios";
-import { IndividualData } from "@/redux/types";
 import { pages } from "@/lib/constantVariables";
+import { mockFetchData } from "../__mock__/mockFetchData";
+import { TIndividualData } from "../types";
 
 export function OtpEmailConfirm() {
   const initialTime = 300;
-  const userData: IndividualData = useSelector(
+  const userData: TIndividualData = useSelector(
     (state: any) => state.individualData
   );
   const dispatch = useDispatch();
@@ -122,7 +123,7 @@ export function OtpEmailConfirm() {
       default:
         break;
     }
-    consolelog("click", type);
+    console.log("click", type);
   };
 
   const hideOtpNumber = (number?: string) => {
@@ -157,25 +158,28 @@ export function OtpEmailConfirm() {
       closeOnClick: false,
     });
     try {
-      consolelog(registerId);
+      console.log(registerId);
       const res = await axios.post("/api/v1/individual/list", {
         registerId: registerId,
       });
       dispatch(initIndividualData(res.data[0]));
-      consolelog(res);
+      console.log(res);
     } catch (error) {
       console.log(error);
       toast.error("Network Error while fetching Individual data");
+      //TODO: remove mock data
+      dispatch(initIndividualData(mockFetchData[0]));
     }
     toast.dismiss(lodingToast);
   };
 
   useEffect(() => {
+    console.log(userData.email, userData.mobile);
     if (userData.email === "" && userData.mobile === "") {
       const registerId = localStorage.getItem("registerId");
       registerId && fetchIndividualData(registerId);
     }
-  }, []);
+  }, [dispatch, userData]);
 
   useEffect(() => {
     if (count <= 0) {

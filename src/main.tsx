@@ -6,7 +6,7 @@ import { HelmetProvider } from "react-helmet-async";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Landing from "./pages/landing/landing.tsx";
 import { Provider } from "react-redux";
-import store from "./redux/store.tsx";
+import { store } from "./redux/store.tsx";
 import AddIndividualAccount from "./pages/authentication/signUp/addIndividualAccount.tsx";
 import BasicInfo from "./pages/authentication/signUp/basicInfo/basicInfo.tsx";
 import SuitTestFatca from "./pages/authentication/signUp/suitTestFatca/suitTestFatca.tsx";

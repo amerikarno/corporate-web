@@ -36,12 +36,12 @@ export function formatNumberToCommasFraction(
   });
 }
 
-export function consolelog(...args: any[]) {
-  const error = new Error();
-  const stack = error.stack?.split("\n")[2].trim();
-  console.log(stack, ...args);
-  // return [args, stack];
-}
+// export function console.log(...args: any[]) {
+//   const error = new Error();
+//   const stack = error.stack?.split("\n")[2].trim();
+//   console.log(stack, ...args);
+//   // return [args, stack];
+// }
 
 export const getUser = () => {
   const token = getCookies();
@@ -90,7 +90,7 @@ export const testApiInfo = async (url: string) => {
         },
       }
     );
-    consolelog(res);
+    console.log(res);
   } catch (error) {
     console.log(error);
   }
