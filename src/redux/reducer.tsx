@@ -1,4 +1,6 @@
+import { consolelog } from "@/lib/utils";
 import { InitialState } from "./types";
+
 let initialState: InitialState = {
   lang: "en",
   dir: "ltr",
@@ -151,7 +153,7 @@ export default function reducer(state = initialState, action: any) {
       };
     /////////////////////////////////////////////////////////
 
-    ////////////////////AddIndividual//////////////////////
+    ////////////////////AddIndividual///////////////////////
     case "initIndividualData":
       return {
         ...state,
@@ -161,7 +163,7 @@ export default function reducer(state = initialState, action: any) {
       return { ...state, addIndividual: initialState.individualData };
     /////////////////////////////////////////////////////////
 
-    ////////////////////livenessOcr//////////////////////
+    ////////////////////livenessOcr/////////////////////////
     case "setFaceImage":
       return {
         ...state,
@@ -174,7 +176,7 @@ export default function reducer(state = initialState, action: any) {
       };
     /////////////////////////////////////////////////////
 
-    //////////////////// login //////////////////////
+    //////////////////// login /////////////////////////
     case "setAuthenToken":
       return {
         ...state,
@@ -190,7 +192,7 @@ export default function reducer(state = initialState, action: any) {
         ...state,
         user: { ...state.user, email: payload },
       };
-    /////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////
 
     //////////////////////// ico /////////////////////////////
     case "setAllIcoStore":
@@ -198,8 +200,44 @@ export default function reducer(state = initialState, action: any) {
         ...state,
         icoAll: payload,
       };
-    /////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////
 
+    //////////////////////// create account /////////////////////////
+    case "setFetchedUserAccountData":
+      return {
+        ...state,
+        individualData: payload,
+      };
+    case "setPreInfo":
+      return {
+        ...state,
+        individualData: { ...state.individualData, ...payload },
+      };
+
+    case "setBasicInfo":
+      consolelog("setBasicInfo", payload);
+      const st = { ...state };
+      let basicInfo = { ...st.individualData };
+      basicInfo.address = payload.addresses;
+      basicInfo.bank = payload.banks;
+      basicInfo.pageId = payload.pageId;
+      basicInfo.shortTermInvestment = payload.investment.shortTermInvestment;
+      basicInfo.taxesInvestment = payload.investment.taxesInvestment;
+      basicInfo.longTermInvestment = payload.investment.longTermInvestment;
+      basicInfo.retireInvestment = payload.investment.retireInvestment;
+      basicInfo.education = payload.occupation.education;
+      basicInfo.sourceOfIncome = payload.occupation.sourceOfIncome;
+      basicInfo.currentOccupation = payload.occupation.currentOccupation;
+      basicInfo.officeName = payload.occupation.officeName;
+      basicInfo.typeOfBusiness = payload.occupation.typeOfBusiness;
+      basicInfo.positionName = payload.occupation.positionName;
+      basicInfo.salaryRange = payload.occupation.salaryRange;
+      consolelog("basicInfo state", basicInfo);
+      return {
+        ...state,
+        individualData: basicInfo,
+      };
+    //////////////////////////////////////////////////////////
     default:
       return state;
   }

@@ -7,6 +7,7 @@ import axios from "@/api/axios";
 // import { mockAssetData } from "@/pages/assetDetails/__mock__/mockAsset";
 import { TPortfolio } from "@/pages/portfolio/types";
 import { toast } from "react-toastify";
+import { mockAssetData } from "@/pages/assetDetails/__mock__/mockAsset";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -39,6 +40,7 @@ export function consolelog(...args: any[]) {
   const error = new Error();
   const stack = error.stack?.split("\n")[2].trim();
   console.log(stack, ...args);
+  // return [args, stack];
 }
 
 export const getUser = () => {
@@ -48,6 +50,14 @@ export const getUser = () => {
     return user;
   }
   return null;
+};
+
+export const isExpiredToken = () => {
+  const user = getUser();
+  if (user && user.exp) {
+    return !(user.exp < Date.now() / 1000);
+  }
+  return true;
 };
 
 export const getAllIcoData = async () => {
@@ -64,7 +74,7 @@ export const getAllIcoData = async () => {
     console.log(error);
     toast.error("Network Error while fetching Ico data");
     // TODO: remove mock
-    // return mockAssetData;
+    return mockAssetData;
   }
 };
 

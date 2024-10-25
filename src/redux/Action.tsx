@@ -1,3 +1,5 @@
+import { TFetchdata } from "@/pages/authentication/signUp/__mock__/mockFetchData";
+import { TIndividualAccount } from "@/pages/authentication/signUp/constant/schemas";
 import { TIndividualData } from "@/pages/authentication/signUp/types";
 import { IcoType } from "@/pages/landing/types";
 import { Dispatch } from "redux";
@@ -102,6 +104,27 @@ export const clearIndividualData = () => {
 export const setAllIcoStore = (data: IcoType) => {
   return {
     type: "setAllIcoStore",
+    payload: data,
+  };
+};
+
+export const setFetchedUserAccountData = (data: TFetchdata) => {
+  return {
+    type: "setFetchedUserAccountData",
+    payload: data,
+  };
+};
+
+export const setPreInfo = (data: TIndividualAccount) => {
+  return {
+    type: "setPreInfo",
+    payload: data,
+  };
+};
+
+export const setBasicInfo = (data: any) => {
+  return {
+    type: "setBasicInfo",
     payload: data,
   };
 };

@@ -12,6 +12,7 @@ import { consolelog, sleep } from "@/lib/utils";
 // import { setCookies } from "@/lib/cookies";
 import { toast } from "react-toastify";
 import { Loading } from "@/components/loading";
+import { setCookies } from "@/lib/cookies";
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -82,11 +83,11 @@ const LoginForm = () => {
           setError("root", { message: error.response?.data.message });
         }
         //TODO: remove mock
-        // await sleep();
-        // setCookies(
-        //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVlMDgyY2I1LTAwYWUtNGM1NC1hMTg0LTQ3MzhmNTYyYmM5MiIsImN1c3RvbWVyQ29kZSI6IjkwMDAwMDAxIiwiZW1haWwiOiJmZWIzNmJjZTQzZDkxYjYwZTU4NWUxNDI4NTQ3ZmNmZGZkMjVlZWZiODgzZGQwYmI1MzllY2E5ZGRkM2IxYzc1IiwibmFtZSI6IiIsImxhc3ROYW1lIjoiIiwiaW1hZ2UiOiIiLCJncm91cHMiOm51bGwsInBlcm1pc3Npb25zIjpudWxsLCJyb2xlcyI6bnVsbCwidXNlcklkIjoiIiwibG9naW5TdGF0dXMiOiIiLCJleHBpcmVzRGF0ZSI6IjIwMjQtMTAtMTVUMjA6MDE6MzguMzQzNDUyMzAxWiIsIkVycm9yIjpudWxsLCJleHAiOjE3MjkwMjI0OTh9.aTVdjvvHQiMgtY8_LmTfmz-m1gLstgcdeNJGndornVE"
-        // );
-        // navigate("/");
+        await sleep();
+        setCookies(
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjliODRjNzZkLWZlODQtNDExMy1iYTMwLTE3MDE0YTAyYjZiNSIsImN1c3RvbWVyQ29kZSI6IiIsImVtYWlsIjoiYWEyYzY5NjYzNDg2NDdmMzhjYmZiN2YyOWFiNDU5YzE3Zjc0MGZiNTdjYTJmZWIzODQwNDdhNTAzYmIxZTRmNiIsIm5hbWUiOiIiLCJsYXN0TmFtZSI6IiIsImltYWdlIjoiIiwiZ3JvdXBzIjpbMTAwMSwxMDAyLDEwMDMsMTAwNCwxMDA1LDEwMDYsMTAwNywxMDA4LDEwMDksMTAxMCwyMDAxLDIwMDIsMjAwMywyMDA0LDIwMDUsMjAwNiwyMDA3LDIwMDgsMjAwOSwyMDEwLDIwMTEsMjAxMiwyMDEzLDIwMTQsMjAxNSwyMDE2LDIwMTcsMjAxOCwyMDE5LDIwMjAsMjAyMSwyMDIyLDMwMDEsMzAwMiwzMDAzLDMwMDQsMzAwNSwzMDA2LDMwMDcsMzAwOCwzMDA5LDMwMTAsMzAxMSwzMDEyLDMwMTMsMzAxNCw0MDAxLDQwMDIsNDAwMyw0MDA0LDQwMDUsNDAwNiw1MDAxLDUwMDIsNTAwMyw1MDA0LDUwMDUsNTAwNiw1MDA3LDUwMDgsNTAwOSw1MDEwLDUwMTEsNTAxMiw1MDEzLDUwMTQsNTAxNSw1MDE2LDUwMTcsNTAxOCw1MDE5LDUwMjAsNTAyMSw1MDIyLDUwMjMsNTAyNCw1MDI1LDUwMjYsNTAyNyw1MDI4LDUwMjksNTAzMCw1MDMxLDUwMzIsNTAzMyw1MDM0LDUwMzUsNTAzNiw1MDM3LDYwMDEsNjAwMiw2MDAzLDYwMDQsNjAwNSw2MDA2LDYwMDcsNjAwOCw3MDAxLDcwMDIsNzAwMyw3MDA0LDcwMDUsNzAwNl0sInBlcm1pc3Npb25zIjpbMTAxLDEwMiwxMDMsMjAxLDIwMiwyMDNdLCJyb2xlcyI6WzExLDEyLDEzLDIxLDIyLDIzLDMxLDMyLDMzXSwidXNlcklkIjoiIiwibG9naW5TdGF0dXMiOiIiLCJleHBpcmVzRGF0ZSI6IjAwMDEtMDEtMDFUMDA6MDA6MDBaIiwiRXJyb3IiOm51bGwsImV4cCI6MTcyOTkxMjI2NywiaWF0IjoxNzI5ODI1ODY3fQ.YxvZ9etZ-igTybFuGSblbUB9u0OzP593r_1DrCK-QvY"
+        );
+        navigate("/");
       }
     }
   };

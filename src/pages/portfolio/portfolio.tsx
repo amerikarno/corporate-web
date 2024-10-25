@@ -6,6 +6,7 @@ import { TBankInfo, TPortfolio } from "./types";
 // import { bankMock, portMock, transactionMock } from "./__mock__/portMock";
 import {
   formatNumberToCommasFraction,
+  getUser,
   prepareDataForColumnChart,
   prepareDataForPieChart,
   sleep,
@@ -17,6 +18,9 @@ import { Loading } from "@/components/loading";
 import { toast } from "react-toastify";
 import PieChart from "@/components/chart/pieChart";
 import ColumnChart from "@/components/chart/columnChart";
+import { bankMock, portMock, transactionMock } from "./__mock__/portMock";
+import ReloginTokenExpired from "@/components/reloginTokenExpired/reloginTokenExpired";
+import TokenCheck from "@/components/tokenCheck/tokenCheck";
 
 const customStyles = {
   headCells: {
@@ -109,17 +113,6 @@ export default function Portfolio() {
     {
       cell: (row: Transaction) => (
         <div className="flex w-full h-full justify-center items-center py-2 px-4">
-          {/* <Button
-            className="bg-slate-700 hover:bg-red-400 hover:border-none hover:text-white w-full h-full"
-            onClick={() => {
-              handleCancleTransaction(row);
-            }}
-            disabled={
-              row?.investment?.status === "1" || row?.investment?.status === "2"
-            }
-          >
-            cancle
-          </Button> */}
           <p
             onClick={() => handleCancleTransaction(row)}
             className="text-red-500 text-md hover:underline hover:cursor-pointer hover:font-bold"
@@ -155,7 +148,7 @@ export default function Portfolio() {
       console.log(error);
       toast.error("Network Error while fetching balance");
       // TODO: remove mock
-      // setBankInfo(bankMock);
+      setBankInfo(bankMock);
     }
     setIsLoading(false);
     toast.dismiss(loadingToast);
@@ -186,7 +179,7 @@ export default function Portfolio() {
       console.log(error);
       toast.error("Network Error while fetching Transactions");
       // TODO: remove mock
-      // setInvestTransactions(transactionMock);
+      setInvestTransactions(transactionMock);
     }
     toast.dismiss(loadingToast);
   };
@@ -214,9 +207,9 @@ export default function Portfolio() {
       console.log(error);
       toast.error("Network Error while fetching Portfolio");
       // TODO: remove mock
-      // setPort(portMock);
-      // setDataPieChart(prepareDataForPieChart(portMock));
-      // setDataColumnChart(prepareDataForColumnChart(portMock));
+      setPort(portMock);
+      setDataPieChart(prepareDataForPieChart(portMock));
+      setDataColumnChart(prepareDataForColumnChart(portMock));
     }
     toast.dismiss(loadingToast);
   };
@@ -270,94 +263,95 @@ export default function Portfolio() {
     return <div>Loading...</div>;
   }
 
+  const user = getUser();
+  if (!user) {
+    return <ReloginTokenExpired />;
+  }
+
   return (
-    <NavBar
-      isFullWidth
-      children={
-        <div className="px-2 pt-10 space-y-10">
-          <Card className="p-4">
-            {/* <CardHeader className="text-2xl text-gray-800">
-              Account Balance
-            </CardHeader> */}
-            <CardContent className="grid grid-cols-3 gap-y-10 gap-x-4">
-              <div className="col-span-3">
-                <h1 className={textTitle}>Account</h1>
-                <h1 className={textContent}>{bankInfo?.bankAccount}</h1>
-              </div>
-              {/* <div className="col-span-1">
-                <h1 className={textTitle}>Name</h1>
-                <h1
-                  className={textContent}
-                >{`${bankInfo?.firstName} ${bankInfo?.lastName}`}</h1>
-              </div> */}
-              <div className="">
-                <h1
-                  className={textTitle}
-                >{`Total Credits Balance (${bankInfo?.currency})`}</h1>
-                <h1 className={textContent}>
-                  {formatNumberToCommasFraction(bankInfo?.totoalCredits)}
-                </h1>
-              </div>
-              <div className="">
-                <h1 className={textTitle}>{`Used (${bankInfo?.currency})`}</h1>
-                <h1 className={textContent}>
-                  {formatNumberToCommasFraction(bankInfo?.use)}
-                </h1>
-              </div>
-              <div className="">
-                <h1
-                  className={textTitle}
-                >{`Available (${bankInfo?.currency})`}</h1>
-                <h1 className={textContent}>
-                  {formatNumberToCommasFraction(bankInfo?.avaliable)}
-                </h1>
-              </div>
-            </CardContent>
-          </Card>
+    <>
+      <TokenCheck />
+      <NavBar
+        isFullWidth
+        children={
+          <div className="px-2 pt-10 space-y-10">
+            <Card className="p-4">
+              <CardContent className="grid grid-cols-3 gap-y-10 gap-x-4">
+                <div className="col-span-3">
+                  <h1 className={textTitle}>Account</h1>
+                  <h1 className={textContent}>{bankInfo?.bankAccount}</h1>
+                </div>
+                <div className="">
+                  <h1
+                    className={textTitle}
+                  >{`Total Credits Balance (${bankInfo?.currency})`}</h1>
+                  <h1 className={textContent}>
+                    {formatNumberToCommasFraction(bankInfo?.totoalCredits)}
+                  </h1>
+                </div>
+                <div className="">
+                  <h1
+                    className={textTitle}
+                  >{`Used (${bankInfo?.currency})`}</h1>
+                  <h1 className={textContent}>
+                    {formatNumberToCommasFraction(bankInfo?.use)}
+                  </h1>
+                </div>
+                <div className="">
+                  <h1
+                    className={textTitle}
+                  >{`Available (${bankInfo?.currency})`}</h1>
+                  <h1 className={textContent}>
+                    {formatNumberToCommasFraction(bankInfo?.avaliable)}
+                  </h1>
+                </div>
+              </CardContent>
+            </Card>
 
-          <Card className="p-4 space-y-6">
-            <CardHeader className="text-2xl text-gray-800">
-              Portfolio
-            </CardHeader>
-            <CardContent>
-              <PieChart
-                series={dataPieChart.series}
-                colors={dataPieChart.colors}
-                labels={dataPieChart.labels}
-                width={300}
-                height={240}
-              />
-              <ColumnChart
-                categories={dataColumnChart?.categories}
-                height={160}
-                series={dataColumnChart?.series}
-              />
-            </CardContent>
-          </Card>
+            <Card className="p-4 space-y-6">
+              <CardHeader className="text-2xl text-gray-800">
+                Portfolio
+              </CardHeader>
+              <CardContent>
+                <PieChart
+                  series={dataPieChart.series}
+                  colors={dataPieChart.colors}
+                  labels={dataPieChart.labels}
+                  width={300}
+                  height={240}
+                />
+                <ColumnChart
+                  categories={dataColumnChart?.categories}
+                  height={160}
+                  series={dataColumnChart?.series}
+                />
+              </CardContent>
+            </Card>
 
-          <div className="w-full bg-white pb-10">
-            {/* <h1 className="text-2xl font-bold">Transaction</h1> */}
-            <DataTable
-              className={`border-t border-r border-l ${
-                investTransactions?.length === 0 ? "border-b" : ""
-              } border-gray-200`}
-              title="Reserved Transaction"
-              columns={columnsOrderTrade}
-              data={investTransactions || []}
-              clearSelectedRows
-              pagination
-              paginationPerPage={5}
-              paginationRowsPerPageOptions={[5, 10, 15]}
-              paginationComponentOptions={{
-                rowsPerPageText: "Rows per page:",
-                rangeSeparatorText: "from",
-                noRowsPerPage: false,
-              }}
-              customStyles={customStyles}
-            />
+            <div className="w-full bg-white pb-10">
+              {/* <h1 className="text-2xl font-bold">Transaction</h1> */}
+              <DataTable
+                className={`border-t border-r border-l ${
+                  investTransactions?.length === 0 ? "border-b" : ""
+                } border-gray-200`}
+                title="Reserved Transaction"
+                columns={columnsOrderTrade}
+                data={investTransactions || []}
+                clearSelectedRows
+                pagination
+                paginationPerPage={5}
+                paginationRowsPerPageOptions={[5, 10, 15]}
+                paginationComponentOptions={{
+                  rowsPerPageText: "Rows per page:",
+                  rangeSeparatorText: "from",
+                  noRowsPerPage: false,
+                }}
+                customStyles={customStyles}
+              />
+            </div>
           </div>
-        </div>
-      }
-    />
+        }
+      />
+    </>
   );
 }

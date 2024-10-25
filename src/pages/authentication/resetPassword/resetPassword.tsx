@@ -70,7 +70,7 @@ export function ResetPassword() {
           toast.error("Network Error while resetting password");
           console.log(err);
           //TODO: remove link
-          // navigate("/");
+          navigate("/");
         });
     } else {
       toast.error("Missing user data");

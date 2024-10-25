@@ -13,13 +13,27 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCookies } from "@/lib/cookies";
 import axios from "@/api/axios";
-import { initIndividualData, setTestCorporateData } from "@/redux/Action";
+import {
+  initIndividualData,
+  setPreInfo,
+  setTestCorporateData,
+} from "@/redux/Action";
 import { consolelog, sleep } from "@/lib/utils";
 import { toast } from "react-toastify";
 import { Loading } from "@/components/loading";
 import { pages } from "@/lib/constantVariables";
 
 export default function AddIndividualAccount() {
+  const individualData = useSelector((state: any) => state.individualData);
+  const dispatch = useDispatch();
+  const token = getCookies();
+  const navigate = useNavigate();
+  const [thTitle, setThTitle] = useState("");
+  const [engTitle, setEngTitle] = useState("");
+  const [initial, setInitial] = useState<TIndividualAccount | undefined>(
+    undefined
+  );
+
   const {
     register,
     handleSubmit,
@@ -29,11 +43,8 @@ export default function AddIndividualAccount() {
     formState: { errors },
   } = useForm<TIndividualAccount>({
     resolver: zodResolver(individualAccountSchema),
+    defaultValues: initial,
   });
-
-  const dispatch = useDispatch();
-  const token = getCookies();
-  const navigate = useNavigate();
 
   const fetchIndividualData = async (registerId: string) => {
     const lodingToast = toast(<Loading />, {
@@ -54,8 +65,6 @@ export default function AddIndividualAccount() {
     toast.dismiss(lodingToast);
   };
 
-  const individualData = useSelector((state: any) => state.individualData);
-
   useEffect(() => {
     toast.dismiss();
     const cidValue = localStorage.getItem("registerId");
@@ -65,6 +74,7 @@ export default function AddIndividualAccount() {
   }, [token, dispatch]);
 
   useEffect(() => {
+    consolelog(individualData);
     if (individualData) {
       consolelog(individualData);
       const dateFormatted = individualData?.birthDate?.split("T")[0];
@@ -84,12 +94,10 @@ export default function AddIndividualAccount() {
         agreement: true,
       };
       consolelog(fillData);
+      setInitial(fillData);
       reset(fillData);
     }
   }, [individualData, reset]);
-
-  const [thTitle, setThTitle] = useState("");
-  const [engTitle, setEngTitle] = useState("");
 
   const handleTitleChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
     const choosedTitle = e.target.value;
@@ -161,6 +169,7 @@ export default function AddIndividualAccount() {
       autoClose: false,
       closeOnClick: false,
     });
+    dispatch(setPreInfo(data));
     try {
       console.log("body to send ", body);
       if (localStorage.getItem("registerId")?.toString()) {

@@ -19,10 +19,14 @@ import { basicInfoSchema, TBasicInfo } from "./constant/schemas";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { consolelog, sleep } from "@/lib/utils";
-import { getCookies } from "@/lib/cookies";
+// import { getCookies } from "@/lib/cookies";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "@/api/axios";
-import { initIndividualData, setTestCorporateData } from "@/redux/Action";
+import {
+  initIndividualData,
+  setBasicInfo,
+  setTestCorporateData,
+} from "@/redux/Action";
 import { TBasicinfoAddress, TBasicInfoBank } from "../types";
 import { IndividualData } from "@/redux/types";
 import { toast } from "react-toastify";
@@ -36,11 +40,15 @@ export default function BasicInfo() {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const token = getCookies();
+  // const token = getCookies();
 
   const [radioAddressValue, setRadioAddressValue] = useState("radio-2");
   const [radioWorkValue, setRadioWorkValue] = useState("radio-5");
   const [addBankValue, setAddBankValue] = useState("radio-6");
+  const [basicInfoData, setBasicInfoData] = useState<TBasicInfo | undefined>(
+    undefined
+  );
+
   const uniqueGeographyTypes = [
     //unique ตัวที่ชื่อซํ้าใน list
     ...new Set(
@@ -70,6 +78,7 @@ export default function BasicInfo() {
     formState: { errors },
   } = useForm<TBasicInfo>({
     resolver: zodResolver(basicInfoSchema),
+    defaultValues: basicInfoData,
   });
 
   const fetchIndividualData = async (registerId: string) => {
@@ -87,6 +96,7 @@ export default function BasicInfo() {
     } catch (error) {
       console.log(error);
       toast.error("Network Error while fetching Individual data");
+      // dispatch(setFetchedUserAccountData(mockFetchData[0]));
     }
     toast.dismiss(lodingToast);
   };
@@ -97,13 +107,13 @@ export default function BasicInfo() {
 
   useEffect(() => {
     toast.dismiss();
-    const cidValue = localStorage.getItem("registerId");
-    if (cidValue) {
-      fetchIndividualData(cidValue || "");
+    const registerId = localStorage.getItem("registerId");
+    if (registerId) {
+      fetchIndividualData(registerId || "");
     } else {
-      consolelog("cid not found");
+      consolelog("registerId not found");
     }
-  }, [token, dispatch]);
+  }, []);
 
   useEffect(() => {
     if (individualData) {
@@ -186,6 +196,7 @@ export default function BasicInfo() {
       };
       consolelog(firstBank);
       consolelog(fillData);
+      setBasicInfoData(fillData);
       reset(fillData);
     }
   }, [individualData, reset]);
@@ -263,6 +274,7 @@ export default function BasicInfo() {
     };
     consolelog(body);
     dispatch(setTestCorporateData(body));
+    dispatch(setBasicInfo(body));
     const lodingToast = toast(<Loading />, {
       autoClose: false,
       closeOnClick: false,

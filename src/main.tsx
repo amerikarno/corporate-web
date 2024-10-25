@@ -142,10 +142,6 @@ createRoot(document.getElementById("root")!).render(
                 element={<IdentityVerification />}
               />
               <Route
-                path={`${import.meta.env.BASE_URL}/portfolio`}
-                element={<Portfolio />}
-              />
-              <Route
                 path={`${import.meta.env.BASE_URL}asset/:type/:id`}
                 element={<AssetDetails />}
               />
@@ -164,6 +160,10 @@ createRoot(document.getElementById("root")!).render(
               <Route
                 path={`${import.meta.env.BASE_URL}/invest`}
                 element={<OrderTrade />}
+              />
+              <Route
+                path={`${import.meta.env.BASE_URL}/portfolio`}
+                element={<Portfolio />}
               />
               <Route
                 path={`${import.meta.env.BASE_URL}/deposite-withdraw`}
