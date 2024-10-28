@@ -8,7 +8,7 @@ import {
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
 import { useNavigate } from "react-router-dom";
-import { normalStyleInput } from "@assets/css/normalStyleInput";
+import { normalStyleInput } from "@/assets/css/normalStyleInput";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCookies } from "@/lib/cookies";
@@ -18,7 +18,7 @@ import { sleep } from "@/lib/utils";
 import { toast } from "react-toastify";
 import { Loading } from "@/components/loading";
 import { pages } from "@/lib/constantVariables";
-import { mockFetchData } from "./__mock__/mockFetchData";
+// import { mockFetchData } from "./__mock__/mockFetchData";
 import { setIndividualData } from "@/redux/slice/fetchIndividualDataSlice";
 import { RootState } from "@/redux/store";
 
@@ -63,7 +63,7 @@ export default function AddIndividualAccount() {
       console.log(error);
       toast.error("Network Error while fetching Individual data");
       //TODO: remove mock data
-      dispatch(setIndividualData(mockFetchData[0]));
+      // dispatch(setIndividualData(mockFetchData[0]));
     }
     toast.dismiss(lodingToast);
   };

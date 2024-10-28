@@ -26,7 +26,7 @@ import { useNavigate } from "react-router-dom";
 import { TBankInfo } from "../portfolio/types";
 import { Loading } from "@/components/loading";
 import { toast } from "react-toastify";
-import { bankMock } from "../portfolio/__mock__/portMock";
+// import { bankMock } from "../portfolio/__mock__/portMock";
 import TokenCheck from "@/components/tokenCheck/tokenCheck";
 import ReloginTokenExpired from "@/components/reloginTokenExpired/reloginTokenExpired";
 
@@ -184,7 +184,7 @@ export default function OrderTrade() {
       console.log(error);
       toast.error("Network Error while fetching balance");
       // TODO: remove mock
-      setBankInfo(bankMock);
+      // setBankInfo(bankMock);
     }
     toast.dismiss(loadingToast);
   };

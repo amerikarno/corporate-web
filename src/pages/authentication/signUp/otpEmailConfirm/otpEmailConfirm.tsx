@@ -9,7 +9,7 @@ import {
   AlertDialogTitle,
   AlertDialogAction,
   AlertDialogCancel,
-} from "@components/ui/alert-dialog";
+} from "@/components/ui/alert-dialog";
 import { sleep } from "@/lib/utils";
 import { useNavigate } from "react-router-dom";
 import getImages from "@/common/imagesData";
@@ -19,7 +19,7 @@ import { toast } from "react-toastify";
 import { Loading } from "@/components/loading";
 import axios from "@/api/axios";
 import { pages } from "@/lib/constantVariables";
-import { mockFetchData } from "../__mock__/mockFetchData";
+// import { mockFetchData } from "../__mock__/mockFetchData";
 import { RootState } from "@/redux/store";
 import {
   setEmailIndividualData,
@@ -168,7 +168,7 @@ export function OtpEmailConfirm() {
       console.log(error);
       toast.error("Network Error while fetching Individual data");
       //TODO: remove mock data
-      dispatch(setIndividualData(mockFetchData[0]));
+      // dispatch(setIndividualData(mockFetchData[0]));
     }
     toast.dismiss(lodingToast);
   };

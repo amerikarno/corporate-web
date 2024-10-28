@@ -18,7 +18,7 @@ import { Loading } from "@/components/loading";
 import { toast } from "react-toastify";
 import PieChart from "@/components/chart/pieChart";
 import ColumnChart from "@/components/chart/columnChart";
-import { bankMock, portMock, transactionMock } from "./__mock__/portMock";
+// import { bankMock, portMock, transactionMock } from "./__mock__/portMock";
 import ReloginTokenExpired from "@/components/reloginTokenExpired/reloginTokenExpired";
 import TokenCheck from "@/components/tokenCheck/tokenCheck";
 
@@ -148,7 +148,7 @@ export default function Portfolio() {
       console.log(error);
       toast.error("Network Error while fetching balance");
       // TODO: remove mock
-      setBankInfo(bankMock);
+      // setBankInfo(bankMock);
     }
     setIsLoading(false);
     toast.dismiss(loadingToast);
@@ -179,7 +179,7 @@ export default function Portfolio() {
       console.log(error);
       toast.error("Network Error while fetching Transactions");
       // TODO: remove mock
-      setInvestTransactions(transactionMock);
+      // setInvestTransactions(transactionMock);
     }
     toast.dismiss(loadingToast);
   };
@@ -207,9 +207,9 @@ export default function Portfolio() {
       console.log(error);
       toast.error("Network Error while fetching Portfolio");
       // TODO: remove mock
-      setPort(portMock);
-      setDataPieChart(prepareDataForPieChart(portMock));
-      setDataColumnChart(prepareDataForColumnChart(portMock));
+      // setPort(portMock);
+      // setDataPieChart(prepareDataForPieChart(portMock));
+      // setDataColumnChart(prepareDataForColumnChart(portMock));
     }
     toast.dismiss(loadingToast);
   };

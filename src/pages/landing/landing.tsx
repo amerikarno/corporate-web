@@ -7,7 +7,6 @@ import { Collapsis } from "@/components/collapse/collapse";
 import getImages from "@/common/imagesData";
 import { getCookies, removeCookies } from "@/lib/cookies";
 import { Button } from "@/components/ui/Button";
-import example from "@assets/drawIcon/example.png";
 import { IcoListItem } from "@/components/icoListItem";
 import { MenuForDropdown } from "@/components/menuForDropdown";
 import { IcoType } from "./types";
@@ -102,7 +101,10 @@ const Landing = ({ ThemeChanger }: datatype) => {
 
               {token ? (
                 <div className="w-1/2 s3:w-1/3 flex justify-end">
-                  <MenuForDropdown avatar={example} logout={handleLogout} />
+                  <MenuForDropdown
+                    avatar={getImages("example")}
+                    logout={handleLogout}
+                  />
                 </div>
               ) : (
                 <div className="w-1/2 s3:w-1/3 flex justify-end items-center space-x-4">

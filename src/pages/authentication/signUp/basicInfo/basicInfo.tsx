@@ -32,7 +32,7 @@ import { toast } from "react-toastify";
 import { Loading } from "@/components/loading";
 import { normalStyleInput } from "@/assets/css/normalStyleInput";
 import { pages } from "@/lib/constantVariables";
-import { mockFetchData } from "../__mock__/mockFetchData";
+// import { mockFetchData } from "../__mock__/mockFetchData";
 import { RootState } from "@/redux/store";
 import { setIndividualData } from "@/redux/slice/fetchIndividualDataSlice";
 
@@ -102,7 +102,7 @@ export default function BasicInfo() {
       console.log(error);
       toast.error("Network Error while fetching Individual data");
       //TODO: remove mock data
-      dispatch(setIndividualData(mockFetchData[0]));
+      // dispatch(setIndividualData(mockFetchData[0]));
     }
     toast.dismiss(lodingToast);
   };

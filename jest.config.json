@@ -2,7 +2,8 @@
     "preset": "ts-jest",
     "testEnvironment": "jsdom",
     "transform": {
-        "^.+\\.(ts|tsx)$": "ts-jest"
+        "^.+\\.(ts|tsx)$": "ts-jest",
+        "^.+\\.(js|jsx)$": "babel-jest"
     },
     "moduleFileExtensions": [
         "ts",
@@ -14,7 +15,7 @@
     ],
     "moduleNameMapper": {
         "^@/(.*)$": "<rootDir>/src/$1",
-        "\\.(css|less|sass|scss)$": "<rootDir>/src/__Test__/styleMock.js",
-        "\\.(jpg|jpeg|png|gif|webp|svg)$": "<rootDir>/src/__Test__/fileMock.js"
+        "\\.(css|less|sass|scss)$": "<rootDir>/src/__Tests__/styleMock.js",
+        "\\.(jpg|jpeg|png|gif|webp|svg)$": "<rootDir>/src/__Tests__/fileMock.js"
     }
 }
