@@ -96,6 +96,7 @@ export function OtpEmailConfirm() {
         if (res.status === 200) {
           toast.dismiss();
           await sleep();
+          localStorage.clear();
           navigate("/authentication/signup/emailconfirmsucess");
         }
       })
