@@ -5,7 +5,7 @@ import { ThemeChanger } from "@/redux/Action";
 import { store } from "@/redux/store";
 import getImages from "@/common/imagesData";
 import { getCookies, removeCookies } from "@/lib/cookies";
-import example from "@assets/drawIcon/example.png";
+import example from "@/assets/drawIcon/example.png";
 import { Button } from "@/components/ui/Button";
 import { MenuForDropdown } from "./menuForDropdown";
 

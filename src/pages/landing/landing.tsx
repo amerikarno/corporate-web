@@ -109,12 +109,17 @@ const Landing = ({ ThemeChanger }: datatype) => {
               ) : (
                 <div className="w-1/2 s3:w-1/3 flex justify-end items-center space-x-4">
                   <Button
+                    data-testid="signup-btn"
                     className="bg-[rgba(90,102,241,1)] min-w-24 max-w-24"
-                    onClick={() => navigate("/authentication/signup/type/")}
+                    onClick={() => {
+                      console.log("Hello, world!");
+                      navigate("/authentication/signup/type/");
+                    }}
                   >
                     Sign Up
                   </Button>
                   <Button
+                    data-testid="login-btn"
                     className="min-w-24 max-w-24 bg-slate-900"
                     onClick={() => navigate("/authentication/login")}
                   >
@@ -143,6 +148,7 @@ const Landing = ({ ThemeChanger }: datatype) => {
             {msg}
           </div>
         )}
+
         <footer id="footer" className="bg-dark-bg">
           <div className="border-b border-white/10  pb-8">
             <div className="container mx-auto pt-10">

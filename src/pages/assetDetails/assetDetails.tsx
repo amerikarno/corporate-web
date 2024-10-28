@@ -27,9 +27,13 @@ export function AssetDetails() {
   const fetchAssetData = async () => {
     const store = localStorage.getItem("asset")?.split("-");
     let allIcoData;
-    Object.keys(icoAll).length === 0
-      ? (allIcoData = await getAllIcoData())
-      : (allIcoData = icoAll);
+    if (icoAll && icoAll !== null) {
+      Object.keys(icoAll).length === 0
+        ? (allIcoData = await getAllIcoData())
+        : (allIcoData = icoAll);
+    } else {
+      allIcoData = await getAllIcoData();
+    }
 
     if (store && allIcoData) {
       const index = parseInt(store[1] || "0");

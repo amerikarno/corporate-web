@@ -34,6 +34,7 @@ export function CustomCard({ data, index, type }: TCustomCardProps) {
 
   return (
     <div
+      data-testid={`asset-card-${type}-${index}`}
       className="w-[380px] h-[520px] border border-gray-200 rounded-[30px] bg-white shadow-md flex justify-center hover:cursor-pointer"
       onClick={handleCardClick}
     >

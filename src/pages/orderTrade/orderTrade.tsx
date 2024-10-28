@@ -17,16 +17,14 @@ import {
 } from "@/lib/utils";
 import axios from "@/api/axios";
 import { getCookies } from "@/lib/cookies";
-// import { TUser } from "../authentication/login/types";
 import { TAssetData } from "../landing/types";
 import { useSelector } from "react-redux";
 import getImages from "@/common/imagesData";
 import { useNavigate } from "react-router-dom";
-// import { bankMock } from "../portfolio/__mock__/portMock";
+import { bankMock } from "../portfolio/__mock__/portMock";
 import { TBankInfo } from "../portfolio/types";
 import { Loading } from "@/components/loading";
 import { toast } from "react-toastify";
-// import { bankMock } from "../portfolio/__mock__/portMock";
 import TokenCheck from "@/components/tokenCheck/tokenCheck";
 import ReloginTokenExpired from "@/components/reloginTokenExpired/reloginTokenExpired";
 
@@ -184,7 +182,7 @@ export default function OrderTrade() {
       console.log(error);
       toast.error("Network Error while fetching balance");
       // TODO: remove mock
-      // setBankInfo(bankMock);
+      setBankInfo(bankMock);
     }
     toast.dismiss(loadingToast);
   };

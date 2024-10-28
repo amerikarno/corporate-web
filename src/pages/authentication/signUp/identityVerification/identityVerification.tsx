@@ -1,5 +1,5 @@
-import thaiid from "@assets/identityVerification/thaiid.png";
-import ndid from "@assets/identityVerification/ndid.png";
+import thaiid from "@/assets/identityVerification/thaiid.png";
+import ndid from "@/assets/identityVerification/ndid.png";
 import { Card } from "@/components/ui/Card";
 import { FaPhoneAlt } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
