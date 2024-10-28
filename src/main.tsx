@@ -30,7 +30,7 @@ import { LivenessInstruction } from "./pages/authentication/signUp/livenessOcr/c
 import { ConfirmSuccess } from "./pages/authentication/signUp/otpEmailConfirm/confirmSuccess.tsx";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Test from "./test.tsx";
+import Test from "./forTest.tsx";
 import { ResetPassword } from "./pages/authentication/resetPassword/resetPassword.tsx";
 
 let helmetContext = {};
