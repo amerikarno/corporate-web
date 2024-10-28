@@ -15,6 +15,7 @@ export default defineConfig({
     chunkSizeWarningLimit: 3500,
   },
   plugins: [react()],
+
   server: {
     host: true,
   },
