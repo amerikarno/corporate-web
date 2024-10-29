@@ -51,124 +51,76 @@ createRoot(document.getElementById("root")!).render(
             <Route element={<HelmetLayout />}>
               <Route path="*" element={<Landing />} />
               <Route index element={<Landing />} />
+              <Route path={`/test`} element={<Test />} />
               <Route
-                path={`${import.meta.env.BASE_URL}test`}
-                element={<Test />}
-              />
-              <Route
-                path={`${
-                  import.meta.env.BASE_URL
-                }authentication/reset-password`}
+                path={`/authentication/reset-password`}
                 element={<ResetPassword />}
               />
+              <Route path={`/authentication/login`} element={<Login />} />
               <Route
-                path={`${import.meta.env.BASE_URL}authentication/login`}
-                element={<Login />}
-              />
-              <Route
-                path={`${import.meta.env.BASE_URL}authentication/signup/type`}
+                path={`/authentication/signup/type`}
                 element={<SignUpType />}
               />
               <Route
-                path={`${
-                  import.meta.env.BASE_URL
-                }authentication/signup/addcorporateaccount`}
+                path={`/authentication/signup/addcorporateaccount`}
                 element={<SignUpCorporate />}
               />
               <Route
-                path={`${
-                  import.meta.env.BASE_URL
-                }authentication/signup/addindividualaccount`}
+                path={`/authentication/signup/addindividualaccount`}
                 element={<AddIndividualAccount />}
               />
               <Route
-                path={`${
-                  import.meta.env.BASE_URL
-                }authentication/signup/basicinfo`}
+                path={`/authentication/signup/basicinfo`}
                 element={<BasicInfo />}
               />
               <Route
-                path={`${
-                  import.meta.env.BASE_URL
-                }authentication/signup/suittestfatca`}
+                path={`/authentication/signup/suittestfatca`}
                 element={<SuitTestFatca />}
               />
               <Route
-                path={`${
-                  import.meta.env.BASE_URL
-                }authentication/signup/otpemailconfirm`}
+                path={`/authentication/signup/otpemailconfirm`}
                 element={<OtpEmailConfirm />}
               />
               <Route
-                path={`${
-                  import.meta.env.BASE_URL
-                }authentication/signup/emailconfirmsucess`}
+                path={`/authentication/signup/emailconfirmsucess`}
                 element={<ConfirmSuccess />}
               />
               <Route
-                path={`${
-                  import.meta.env.BASE_URL
-                }authentication/signup/livenessinstruction`}
+                path={`/authentication/signup/livenessinstruction`}
                 element={<LivenessInstruction />}
               />
               <Route
-                path={`${
-                  import.meta.env.BASE_URL
-                }authentication/signup/livenessocr`}
+                path={`/authentication/signup/livenessocr`}
                 element={<Liveness />}
               />
               <Route
-                path={`${
-                  import.meta.env.BASE_URL
-                }authentication/signup/webcaminstructions`}
+                path={`/authentication/signup/webcaminstructions`}
                 element={<CardWebcamInstructions />}
               />
               <Route
-                path={`${
-                  import.meta.env.BASE_URL
-                }authentication/signup/webcaminstructions`}
+                path={`/authentication/signup/webcaminstructions`}
                 element={<CardWebcamInstructions />}
               />
               <Route
-                path={`${
-                  import.meta.env.BASE_URL
-                }authentication/signup/cardcapture`}
+                path={`/authentication/signup/cardcapture`}
                 element={<IDCardCapture />}
               />
               <Route
-                path={`${
-                  import.meta.env.BASE_URL
-                }authentication/signup/identityverification`}
+                path={`/authentication/signup/identityverification`}
                 element={<IdentityVerification />}
               />
+              <Route path={`/asset/:type/:id`} element={<AssetDetails />} />
               <Route
-                path={`${import.meta.env.BASE_URL}asset/:type/:id`}
-                element={<AssetDetails />}
-              />
-              <Route
-                path={`${
-                  import.meta.env.BASE_URL
-                }/authentication/login/google-authen/qr`}
+                path={`/authentication/login/google-authen/qr`}
                 element={<GoogleQr />}
               />
               <Route
-                path={`${
-                  import.meta.env.BASE_URL
-                }/authentication/login/google-authen/verify`}
+                path={`/authentication/login/google-authen/verify`}
                 element={<QrVerification />}
               />
-              <Route
-                path={`${import.meta.env.BASE_URL}/invest`}
-                element={<OrderTrade />}
-              />
-              <Route
-                path={`${import.meta.env.BASE_URL}/portfolio`}
-                element={<Portfolio />}
-              />
-              <Route
-                path={`${import.meta.env.BASE_URL}/deposite-withdraw`}
-                element={<BankOrder />}
-              />
+              <Route path={`/invest`} element={<OrderTrade />} />
+              <Route path={`/portfolio`} element={<Portfolio />} />
+              <Route path={`/deposite-withdraw`} element={<BankOrder />} />
             </Route>
           </Routes>
         </Provider>

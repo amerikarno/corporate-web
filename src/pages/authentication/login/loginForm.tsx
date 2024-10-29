@@ -58,15 +58,9 @@ const LoginForm = () => {
           localStorage.setItem("basic", base64);
           if (res.data.secret !== "") {
             localStorage.setItem("secret", res.data.secret);
-            navigate(
-              `${import.meta.env.BASE_URL}authentication/login/google-authen/qr`
-            );
+            navigate(`/authentication/login/google-authen/qr`);
           } else {
-            navigate(
-              `${
-                import.meta.env.BASE_URL
-              }authentication/login/google-authen/verify`
-            );
+            navigate(`/authentication/login/google-authen/verify`);
           }
         } else {
           toast.dismiss(loadingToast);

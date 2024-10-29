@@ -6,14 +6,10 @@ const SignUpType = () => {
   localStorage.clear();
 
   const handleIndiividual = () => {
-    navigate(
-      `${import.meta.env.BASE_URL}authentication/signup/addindividualaccount`
-    );
+    navigate(`/authentication/signup/addindividualaccount`);
   };
   const handleCorporate = () => {
-    navigate(
-      `${import.meta.env.BASE_URL}authentication/signup/addcorporateaccount`
-    );
+    navigate(`/authentication/signup/addcorporateaccount`);
   };
   return (
     <div className="flex flex-col h-screen justify-center items-center">

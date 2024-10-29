@@ -5,7 +5,6 @@ import { ThemeChanger } from "@/redux/Action";
 import { store } from "@/redux/store";
 import getImages from "@/common/imagesData";
 import { getCookies, removeCookies } from "@/lib/cookies";
-import example from "@/assets/drawIcon/example.png";
 import { Button } from "@/components/ui/Button";
 import { MenuForDropdown } from "./menuForDropdown";
 
@@ -79,7 +78,10 @@ const NavBar = ({ ThemeChanger, children, isFullWidth, padding }: datatype) => {
             </div>
             {token ? (
               <div className="w-1/2 lg:w-1/3 flex justify-end">
-                <MenuForDropdown avatar={example} logout={handleLogout} />
+                <MenuForDropdown
+                  avatar={getImages("example")}
+                  logout={handleLogout}
+                />
               </div>
             ) : (
               <div className="w-1/2 lg:w-1/3 flex justify-end items-center space-x-4">

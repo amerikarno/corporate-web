@@ -112,7 +112,6 @@ const Landing = ({ ThemeChanger }: datatype) => {
                     data-testid="signup-btn"
                     className="bg-[rgba(90,102,241,1)] min-w-24 max-w-24"
                     onClick={() => {
-                      console.log("Hello, world!");
                       navigate("/authentication/signup/type/");
                     }}
                   >

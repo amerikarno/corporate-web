@@ -27,7 +27,7 @@ export function CustomCard({ data, index, type }: TCustomCardProps) {
   };
 
   const handleButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.stopPropagation(); // Prevent the outer div's onClick event from being triggered
+    event.stopPropagation();
     localStorage.setItem("asset", `${type}-${index}`);
     navigate("/invest");
   };
@@ -57,6 +57,7 @@ export function CustomCard({ data, index, type }: TCustomCardProps) {
             >{`Issue By ${data.issueBy}`}</h2>
             {type === "Active" && (
               <Button
+                data-testid={`invest-button-landing-${type}-${index}`}
                 className={`z-50 hover:font-bold hover:bg-primary-hover ${
                   token ? "" : "hidden"
                 }`}
