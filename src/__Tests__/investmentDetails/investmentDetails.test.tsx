@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
-import { AssetDetails } from "../../pages/assetDetails/assetDetails";
 import { store } from "@/redux/store";
 import { waitFor, screen, render } from "@testing-library/react";
+import { AssetDetails } from "../../pages/assetDetails/assetDetails";
 import { Provider } from "react-redux";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import Cookies from "js-cookie";

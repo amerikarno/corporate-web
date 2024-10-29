@@ -55,7 +55,7 @@ export const getUser = () => {
 export const isExpiredToken = () => {
   const user = getUser();
   if (user && user.exp) {
-    return !(user.exp < Date.now() / 1000);
+    return user.exp < Date.now() / 1000;
   }
   return true;
 };

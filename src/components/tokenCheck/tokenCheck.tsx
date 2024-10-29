@@ -18,7 +18,7 @@ export default function TokenCheck() {
   const checkToken = useCallback(() => {
     const isExp = isExpiredToken();
     console.log("is token expired", isExp);
-    if (!isExp) {
+    if (isExp) {
       removeCookies();
       navigate("/authentication/login");
     }
