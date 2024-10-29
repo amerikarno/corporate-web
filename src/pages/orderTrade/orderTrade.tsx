@@ -112,6 +112,104 @@ export default function OrderTrade() {
     }
   };
 
+  const handleCurrencyChange = async (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    const currency = payCurrency.find(
+      (item) => item.name === event.target.value
+    );
+    if (currency) {
+      setSelectedCurrency(currency);
+      const tokenUnit = document.getElementById("amount") as HTMLInputElement;
+      let token = "0";
+      if (tokenUnit) {
+        token = tokenUnit.value;
+      }
+      const numCurrencyAmount =
+        (parseFloat(token) * unitPrice) / currency.factor;
+      setValue(
+        "value",
+        numCurrencyAmount.toLocaleString("en-us", {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        })
+      );
+    } else {
+      setSelectedCurrency({
+        name: "",
+        factor: 1,
+      });
+    }
+  };
+
+  const isMatchedMinAmount = (qtn?: string): boolean => {
+    try {
+      const numValue = parseFloat(qtn || "0");
+      if (!isNaN(numValue)) {
+        const minQtn = assetData?.info?.minimumInvestmentQuantity || "0";
+        const min = minQtn.split(" ");
+        const numMin = parseFloat(min[0]);
+        console.log(numMin, numValue);
+        if (numValue < numMin) {
+          setErrorMin(
+            `required minimum quantity ${assetData?.info?.minimumInvestmentQuantity}`
+          );
+          return false;
+        } else {
+          setErrorMin(undefined);
+          return true;
+        }
+      } else {
+        toast.error("Invalid amount");
+        return false;
+      }
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  };
+
+  const onSubmit = async (data: TOrderTrade) => {
+    let body: TOrderTrade = {
+      ...data,
+      customerCode: user?.customerCode,
+      icoCode: assetData?.icoCode,
+    };
+    console.log("data", body);
+
+    const isMin = isMatchedMinAmount(body.amount);
+    if (isMin) {
+      const loadingToast = toast(<Loading />, {
+        autoClose: false,
+        closeOnClick: false,
+      });
+      try {
+        const res = await axios.post(
+          "/api/v1/customer/product/investment",
+          body,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${getCookies()}`,
+            },
+          }
+        );
+        if (res.status === 200) {
+          console.log(res.data);
+          reset();
+          await fetchUserBankInfo();
+        } else {
+          console.log(res.data);
+          toast.error("Failed to placing order");
+        }
+      } catch (error) {
+        console.log(error);
+        toast.error("Network Error while placing order");
+      }
+      toast.dismiss(loadingToast);
+    }
+  };
+
   const fetchAssetData = async () => {
     const loadingToast = toast(<Loading message="Loading Asset Info..." />, {
       autoClose: false,
@@ -200,104 +298,6 @@ export default function OrderTrade() {
       fetchUserBankInfo();
     }
   }, [reset]);
-
-  const handleCurrencyChange = async (
-    event: React.ChangeEvent<HTMLSelectElement>
-  ) => {
-    const currency = payCurrency.find(
-      (item) => item.name === event.target.value
-    );
-    if (currency) {
-      setSelectedCurrency(currency);
-      const tokenUnit = document.getElementById("amount") as HTMLInputElement;
-      let token = "0";
-      if (tokenUnit) {
-        token = tokenUnit.value;
-      }
-      const numCurrencyAmount =
-        (parseFloat(token) * unitPrice) / currency.factor;
-      setValue(
-        "value",
-        numCurrencyAmount.toLocaleString("en-us", {
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2,
-        })
-      );
-    } else {
-      setSelectedCurrency({
-        name: "",
-        factor: 1,
-      });
-    }
-  };
-
-  const isMatchedMinAmount = (qtn?: string): boolean => {
-    try {
-      const numValue = parseFloat(qtn || "0");
-      if (!isNaN(numValue)) {
-        const minQtn = assetData?.info?.minimumInvestmentQuantity || "0";
-        const min = minQtn.split(" ");
-        const numMin = parseFloat(min[0]);
-        console.log(numMin, numValue);
-        if (numValue < numMin) {
-          setErrorMin(
-            `required minimum quantity ${assetData?.info?.minimumInvestmentQuantity}`
-          );
-          return false;
-        } else {
-          setErrorMin(undefined);
-          return true;
-        }
-      } else {
-        toast.error("Invalid amount");
-        return false;
-      }
-    } catch (error) {
-      console.log(error);
-      return false;
-    }
-  };
-
-  const onsubmit = async (data: TOrderTrade) => {
-    let body: TOrderTrade = {
-      ...data,
-      customerCode: user?.customerCode,
-      icoCode: assetData?.icoCode,
-    };
-    console.log("data", body);
-
-    const isMin = isMatchedMinAmount(body.amount);
-    if (isMin) {
-      const loadingToast = toast(<Loading />, {
-        autoClose: false,
-        closeOnClick: false,
-      });
-      try {
-        const res = await axios.post(
-          "/api/v1/customer/product/investment",
-          body,
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${getCookies()}`,
-            },
-          }
-        );
-        if (res.status === 200) {
-          console.log(res.data);
-          reset();
-          await fetchUserBankInfo();
-        } else {
-          console.log(res.data);
-          toast.error("Failed to placing order");
-        }
-      } catch (error) {
-        console.log(error);
-        toast.error("Network Error while placing order");
-      }
-      toast.dismiss(loadingToast);
-    }
-  };
 
   if (!user) {
     return <ReloginTokenExpired />;
@@ -422,12 +422,12 @@ export default function OrderTrade() {
                 </CardContent>
               </Card>
 
-              <form className="space-y-4" onSubmit={handleSubmit(onsubmit)}>
+              <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
                 <div className="w-full flex justify-center">
                   <Card className="bg-white w-full md:space-y-4 p-6">
                     <div className="flex flex-row justify-between">
                       <span className="flex justify-start items-center font-bold md:text-xl py-2 gap-2">
-                        Orders / Invest
+                        Reserve / Invest
                         <span>
                           <IoReceiptOutline />
                         </span>
