@@ -4,10 +4,9 @@ import { getCookies } from "./cookies";
 import { jwtDecode } from "jwt-decode";
 import { TUser } from "@/pages/authentication/login/types";
 import axios from "@/api/axios";
-// import { mockAssetData } from "@/pages/assetDetails/__mock__/mockAsset";
 import { TPortfolio } from "@/pages/portfolio/types";
 import { toast } from "react-toastify";
-// import { mockAssetData } from "@/pages/assetDetails/__mock__/mockAsset";
+import { mockAssetData } from "@/pages/assetDetails/__mock__/mockAsset";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -74,7 +73,7 @@ export const getAllIcoData = async () => {
     console.log(error);
     toast.error("Network Error while fetching Ico data");
     // TODO: remove mock
-    // return mockAssetData;
+    return mockAssetData;
   }
 };
 
