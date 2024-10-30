@@ -52,7 +52,7 @@ export function ResetPassword() {
         closeOnClick: false,
       });
       await axios
-        .post("/api/v1/user/change/password", {
+        .post("/api/v1/user/individual/change/password", {
           customerCode: user.customerCode,
           password: CryptoJs.SHA256(password).toString(),
         })
