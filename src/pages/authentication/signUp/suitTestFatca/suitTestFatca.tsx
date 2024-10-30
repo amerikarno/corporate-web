@@ -148,7 +148,7 @@ export default function SuitTestFatca() {
         console.log("suite test updating...");
         try {
           const res = await axios.post(
-            "/api/v1/suitetest/result/individual/edit",
+            "/api/v1/suitetest/ico/result/individual/edit",
             body,
             {
               headers: {
@@ -176,7 +176,7 @@ export default function SuitTestFatca() {
         console.log("suite test saving...");
         try {
           const res = await axios.post(
-            "/api/v1/suitetest/result/individual/save",
+            "/api/v1/suitetest/ico/result/individual/save",
             body,
             {
               headers: {
