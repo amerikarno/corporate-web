@@ -64,7 +64,6 @@ export default function IDCardCapture() {
     //TODO: remove link
     await sleep();
     navigate("/authentication/signup/otpemailconfirm");
-    // navigate("/authentication/signup/identityverification");
   };
 
   const videoConstraintsMobile: MediaTrackConstraints = {
