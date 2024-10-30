@@ -174,7 +174,7 @@ export default function AddIndividualAccount() {
     dispatch(setPreInfo(data));
     try {
       console.log("body to send ", body);
-      if (!body.registerId || body.registerId === null) {
+      if (!body.registerId && body.registerId !== null) {
         const res = await axios.post(
           "/api/v1/individual/ico/update/pre",
           body,
