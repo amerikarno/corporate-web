@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Loading } from "@/components/loading";
 import CryptoJs from "crypto-js";
+import { getCookies } from "@/lib/cookies";
 
 const ResetPasswordSchema = z
   .object({
@@ -52,10 +53,19 @@ export function ResetPassword() {
         closeOnClick: false,
       });
       await axios
-        .post("/api/v1/user/individual/change/password", {
-          customerCode: user.customerCode,
-          password: CryptoJs.SHA256(password).toString(),
-        })
+        .post(
+          "/api/v1/user/individual/change/password",
+          {
+            customerCode: user.customerCode,
+            password: CryptoJs.SHA256(password).toString(),
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${getCookies()}`,
+              "Content-Type": "application/json",
+            },
+          }
+        )
         .then(async (res) => {
           toast.dismiss(loadingToast);
           if (res.status === 200) {
