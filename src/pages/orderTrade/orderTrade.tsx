@@ -374,6 +374,7 @@ export default function OrderTrade() {
                     <div className="flex justify-between">
                       <p className={normalText}> </p>
                       <u
+                        data-testid="invest-moreDetail-btn"
                         className="text-blue-500 hover:cursor-pointer hover:font-semibold"
                         onClick={() => handleMoreDetail()}
                       >
@@ -412,6 +413,7 @@ export default function OrderTrade() {
                     <div className="flex flex-row w-full justify-between">
                       <p className={normalText}> </p>
                       <u
+                        data-testid="invest-portfolio-btn"
                         className={`text-blue-500 hover:cursor-pointer hover:font-semibold`}
                         onClick={() => navigate("/portfolio")}
                       >
@@ -433,6 +435,7 @@ export default function OrderTrade() {
                         </span>
                       </span>
                       <u
+                        data-testid="invest-changeAsset-btn"
                         className="text-blue-500 hover:cursor-pointer hover:font-semibold"
                         onClick={() => navigate("/")}
                       >

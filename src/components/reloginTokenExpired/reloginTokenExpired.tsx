@@ -13,7 +13,12 @@ export default function ReloginTokenExpired() {
         <p className="text-center font-bold text-lg text-gray-600">
           Session not found
         </p>
-        <Button onClick={() => navigate("/authentication/login")}>Login</Button>
+        <Button
+          data-testid="login-button-no-session"
+          onClick={() => navigate("/authentication/login")}
+        >
+          Login
+        </Button>
       </Card>
     </div>
   );
