@@ -3,10 +3,9 @@ import { Button } from "../../../../components/ui/Button";
 import { Card } from "../../../../components/ui/Card";
 import { useEffect, useState } from "react";
 import axios from "axios";
-// import { getCookies } from "@/lib/cookies";
 import { Loading } from "@/components/loading";
 import { toast } from "react-toastify";
-// import { mockFetchData } from "../__mock__/mockFetchData";
+import { mockFetchData } from "../__mock__/mockFetchData";
 import { RootState } from "@/redux/store";
 import { setIndividualData } from "@/redux/slice/fetchIndividualDataSlice";
 
@@ -324,7 +323,7 @@ export default function SubSuitTest({
       console.log(error);
       toast.error("Network Error while fetching Individual data");
       //TODO: remove mock data
-      // dispatch(setIndividualData(mockFetchData[0]));
+      dispatch(setIndividualData(mockFetchData[0]));
     }
     toast.dismiss(loadingToast);
   };

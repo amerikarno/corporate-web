@@ -14,7 +14,7 @@ import { getCookies } from "@/lib/cookies";
 import { toast } from "react-toastify";
 import { Loading } from "@/components/loading";
 import { pages } from "@/lib/constantVariables";
-// import { mockFetchData } from "../__mock__/mockFetchData";
+import { mockFetchData } from "../__mock__/mockFetchData";
 import { RootState } from "@/redux/store";
 import { setIndividualData } from "@/redux/slice/fetchIndividualDataSlice";
 
@@ -60,7 +60,7 @@ export default function SuitTestFatca() {
       console.log(error);
       toast.error("Network Error while fetching Individual data");
       //TODO: remove mock data
-      // dispatch(setIndividualData(mockFetchData[0]));
+      dispatch(setIndividualData(mockFetchData[0]));
     }
     toast.dismiss(loadingToast);
   };
@@ -206,6 +206,7 @@ export default function SuitTestFatca() {
       //       alert(`Please complete the suite test,
       // if you are an American citizen, please complete the FATCA form first.`);
       toast.info("Please complete the suite test first");
+      //TODO: remove mock data
       await sleep();
       navigate("/authentication/signup/livenessinstruction");
     }

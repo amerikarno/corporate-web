@@ -19,20 +19,15 @@ import { basicInfoSchema, TBasicInfo } from "./constant/schemas";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { sleep } from "@/lib/utils";
-// import { getCookies } from "@/lib/cookies";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "@/api/axios";
-import {
-  // initIndividualData,
-  setBasicInfo,
-  setTestCorporateData,
-} from "@/redux/Action";
+import { setBasicInfo, setTestCorporateData } from "@/redux/Action";
 import { TBasicinfoAddress, TBasicInfoBank } from "../constant/types";
 import { toast } from "react-toastify";
 import { Loading } from "@/components/loading";
 import { normalStyleInput } from "@/assets/css/normalStyleInput";
 import { pages } from "@/lib/constantVariables";
-// import { mockFetchData } from "../__mock__/mockFetchData";
+import { mockFetchData } from "../__mock__/mockFetchData";
 import { RootState } from "@/redux/store";
 import { setIndividualData } from "@/redux/slice/fetchIndividualDataSlice";
 
@@ -102,7 +97,7 @@ export default function BasicInfo() {
       console.log(error);
       toast.error("Network Error while fetching Individual data");
       //TODO: remove mock data
-      // dispatch(setIndividualData(mockFetchData[0]));
+      dispatch(setIndividualData(mockFetchData[0]));
     }
     toast.dismiss(lodingToast);
   };
@@ -328,11 +323,11 @@ export default function BasicInfo() {
       }
     } catch (error) {
       console.log(error);
+      toast.error("Network Error while submitting basic info");
+      toast.dismiss(lodingToast);
       //TODO: remove link
-      // toast.error("Network Error while submitting basic info");
-      // toast.dismiss(lodingToast);
-      // await sleep();
-      // navigate("/authentication/signup/suittestfatca");
+      await sleep();
+      navigate("/authentication/signup/suittestfatca");
     }
   };
 
