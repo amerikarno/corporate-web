@@ -130,16 +130,12 @@ export default function Portfolio() {
       closeOnClick: false,
     });
     try {
-      const res = await axios.post(
-        "/api/v1/customer/info/balance",
-        {},
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${getCookies()}`,
-          },
-        }
-      );
+      const res = await axios.get("/api/v1/customer/info/balance", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${getCookies()}`,
+        },
+      });
       if (res.status === 200) {
         setBankInfo(res.data);
       }
