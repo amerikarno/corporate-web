@@ -44,7 +44,7 @@ export default function SuitTestFatca() {
     try {
       console.log(registerId);
       const res = await axios.post(
-        "/api/v1/individual/list",
+        "/api/v1/individual/ico/list",
         {
           registerId: registerId,
         },

@@ -159,7 +159,7 @@ export function OtpEmailConfirm() {
     });
     try {
       console.log(registerId);
-      const res = await axios.post("/api/v1/individual/list", {
+      const res = await axios.post("/api/v1/individual/ico/list", {
         registerId: registerId,
       });
       dispatch(setIndividualData(res.data[0]));

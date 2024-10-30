@@ -54,7 +54,7 @@ export default function AddIndividualAccount() {
     });
     try {
       console.log({ accountId: registerId });
-      const res = await axios.post("/api/v1/individual/list", {
+      const res = await axios.post("/api/v1/individual/ico/list", {
         registerId: registerId,
       });
       dispatch(setIndividualData(res.data[0]));
@@ -158,7 +158,7 @@ export default function AddIndividualAccount() {
     let body = {
       ...data,
       birthDate: new Date(data.birthDate || 0),
-      registerId: localStorage.getItem("registerId")?.toString(),
+      registerId: localStorage.getItem("registerId"),
       pageId: pages[1].id,
     };
     dispatch(
@@ -174,12 +174,16 @@ export default function AddIndividualAccount() {
     dispatch(setPreInfo(data));
     try {
       console.log("body to send ", body);
-      if (localStorage.getItem("registerId")?.toString()) {
-        const res = await axios.post("/api/v1/individual/update/pre", body, {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
+      if (!body.registerId || body.registerId === null) {
+        const res = await axios.post(
+          "/api/v1/individual/ico/update/pre",
+          body,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
         console.log(res);
         if (res.status === 200) {
           const age = calculateAge(body.birthDate);
@@ -192,7 +196,7 @@ export default function AddIndividualAccount() {
           navigate("/authentication/signup/basicinfo");
         }
       } else {
-        const res = await axios.post("/api/v1/individual/precreate", body, {
+        const res = await axios.post("/api/v1/individual/ico/precreate", body, {
           headers: {
             "Content-Type": "application/json",
           },

@@ -93,7 +93,7 @@ export default function BasicInfo() {
     });
     try {
       console.log(registerId);
-      const res = await axios.post("/api/v1/individual/list", {
+      const res = await axios.post("/api/v1/individual/ico/list", {
         registerId: registerId,
       });
       dispatch(setIndividualData(res.data[0]));
@@ -286,11 +286,15 @@ export default function BasicInfo() {
       const registeredAddressFind: TBasicinfoAddress | null =
         individualData?.address?.find((addr) => addr.types === 1) || null;
       if (registeredAddressFind?.homeNumber) {
-        const res = await axios.post("/api/v1/individual/update/post", body, {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
+        const res = await axios.post(
+          "/api/v1/individual/ico/update/post",
+          body,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
         if (res.status === 200) {
           console.log("update basic info success", res);
           toast.dismiss();
@@ -302,11 +306,15 @@ export default function BasicInfo() {
           console.log("update basic info unsuccess", res);
         }
       } else {
-        const res = await axios.post("/api/v1/individual/postcreate", body, {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
+        const res = await axios.post(
+          "/api/v1/individual/ico/postcreate",
+          body,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
         if (res.status === 200) {
           console.log("submit basic info success", res);
           toast.dismiss();

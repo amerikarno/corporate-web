@@ -43,7 +43,7 @@ export default function IdentityVerification() {
     });
     try {
       console.log(AccountID);
-      const res = await axios.post("/api/v1/individual/list", {
+      const res = await axios.post("/api/v1/individual/ico/list", {
         accountId: AccountID,
       });
       dispatch(initIndividualData(res.data[0]));
@@ -97,7 +97,7 @@ export default function IdentityVerification() {
     try {
       if (individualData?.thaid || individualData?.ndid) {
         const res = await axios.post(
-          "/api/v1/individual/update/ndidthaid",
+          "/api/v1/individual/ico/update/ndidthaid",
           body
         );
         if (res.status === 200) {
@@ -113,7 +113,11 @@ export default function IdentityVerification() {
           // setAlertMessage("please try again")
         }
       } else {
-        const res = await axios.post("/api/v1/individual/ndidthaid", body, {});
+        const res = await axios.post(
+          "/api/v1/individual/ico/ndidthaid",
+          body,
+          {}
+        );
         if (res.status === 200) {
           console.log("save ndid success :", res);
           setAlertVisible(true);
@@ -150,7 +154,7 @@ export default function IdentityVerification() {
     try {
       if (individualData?.thaid || individualData?.ndid) {
         const res = await axios.post(
-          "/api/v1/individual/update/ndidthaid",
+          "/api/v1/individual/ico/update/ndidthaid",
           body
         );
         if (res.status === 200) {
@@ -166,7 +170,11 @@ export default function IdentityVerification() {
           // setAlertMessage("please try again")
         }
       } else {
-        const res = await axios.post("/api/v1/individual/ndidthaid", body, {});
+        const res = await axios.post(
+          "/api/v1/individual/ico/ndidthaid",
+          body,
+          {}
+        );
         if (res.status === 200) {
           console.log("save thaid success :", res);
           setAlertVisible(true);
