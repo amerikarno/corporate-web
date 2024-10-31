@@ -32,6 +32,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Test from "./forTest.tsx";
 import { ResetPassword } from "./pages/authentication/resetPassword/resetPassword.tsx";
+import { VerifyHighNetwork } from "./pages/orderTrade/verifyHighNetwork.tsx";
 
 let helmetContext = {};
 
@@ -119,6 +120,10 @@ createRoot(document.getElementById("root")!).render(
                 element={<QrVerification />}
               />
               <Route path={`/invest`} element={<OrderTrade />} />
+              <Route
+                path={`/high-network-verification`}
+                element={<VerifyHighNetwork />}
+              />
               <Route path={`/portfolio`} element={<Portfolio />} />
               <Route path={`/deposite-withdraw`} element={<BankOrder />} />
             </Route>

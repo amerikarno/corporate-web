@@ -62,9 +62,9 @@ export default function OrderTrade() {
     // factor coming from 1 xxx = xx THB. // 1 USD = 35 THB
     { name: "", factor: 1 },
     { name: "THB", factor: 1 },
-    { name: "USD", factor: 35 },
-    { name: "EUR", factor: 30 },
-    { name: "JPY", factor: 0.23 },
+    // { name: "USD", factor: 35 },
+    // { name: "EUR", factor: 30 },
+    // { name: "JPY", factor: 0.23 },
   ];
   const [selectedCurrency, setSelectedCurrency] = useState<TCurrency>(
     payCurrency[1]
@@ -177,6 +177,13 @@ export default function OrderTrade() {
     };
     console.log("data", body);
 
+    const priceValue = parseFloat(body.value.replace(/,/g, "") || "0");
+    console.log(priceValue, !isNaN(priceValue));
+    if (!isNaN(priceValue) && priceValue > 300000) {
+      navigate("/high-network-verification");
+      return;
+    }
+
     const isMin = isMatchedMinAmount(body.amount);
     if (isMin) {
       const loadingToast = toast(<Loading />, {
@@ -287,9 +294,6 @@ export default function OrderTrade() {
 
   useEffect(() => {
     if (!assetData) {
-      // const user = getUser();
-      // setUser(user ? user : undefined);
-      // console.log("user", user);
       fetchAssetData();
       fetchUserBankInfo();
     }

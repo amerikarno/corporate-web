@@ -9,11 +9,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import reducer from "./reducer";
 import individualDataReducer from "./slice/fetchIndividualDataSlice";
+import uploadFileReducer from "./slice/uploadFileSlice";
 
 export const store = configureStore({
   reducer: {
     reducer: reducer,
     individualData: individualDataReducer,
+    uploadfile: uploadFileReducer,
   },
 });
 
