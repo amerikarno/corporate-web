@@ -178,7 +178,7 @@ export function OtpEmailConfirm() {
     if (registerId) {
       fetchIndividualData(registerId);
     }
-  }, [dispatch, individualData]);
+  }, []);
 
   useEffect(() => {
     if (count <= 0) {
