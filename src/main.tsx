@@ -17,8 +17,8 @@ import IdentityVerification from "./pages/authentication/signUp/identityVerifica
 import ScrollToTop from "./components/ScrollToTop/ScrolltoTop.tsx";
 import Login from "./pages/authentication/login/login.tsx";
 import { AssetDetails } from "./pages/assetDetails/assetDetails.tsx";
-import SignUpType from "./pages/signUpType/SignUpType.tsx";
-import SignUpCorporate from "./pages/signUpType/SignUpCorporate.tsx";
+import SignUpType from "./pages/authentication/signUp/signUpType/SignUpType.tsx";
+import SignUpCorporate from "./pages/authentication/signUp/signUpType/SignUpCorporate.tsx";
 import GoogleQr from "./pages/authentication/login/googleAuthen/qrGoogle.tsx";
 import QrVerification from "./pages/authentication/login/googleAuthen/qrVerification.tsx";
 import { OtpEmailConfirm } from "./pages/authentication/signUp/otpEmailConfirm/otpEmailConfirm.tsx";
